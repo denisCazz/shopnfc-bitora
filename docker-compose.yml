@@ -36,8 +36,6 @@
       - "${PORT:-3100}:3000"
     env_file:
       - .env.local
-    volumes:
-      - ./data:/app/data
     healthcheck:
       test:
         [

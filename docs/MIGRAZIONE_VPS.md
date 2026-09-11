@@ -43,7 +43,7 @@ psql "$DATABASE_URL" -f db/migrations/0000_vps_standalone.sql
 npm run db:seed
 ```
 
-Tabelle: `app_users`, `profiles`, `dealer_profiles`, `categories`, `products`, `product_images`, `chips`, `product_chips`, `orders`, `order_items`, `cart_items`, `app_settings`, `announcements`, log Danea.
+Tabelle: `app_users`, `profiles`, `dealer_profiles`, `categories`, `products`, `product_images`, `chips`, `product_chips`, `orders`, `order_items`, `cart_items`, `app_settings`, `announcements`.
 
 Admin seed: `admin@bitora.it` / `BitoraNfc2026!`
 

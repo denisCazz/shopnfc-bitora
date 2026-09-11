@@ -25,10 +25,10 @@ export default function RegisterPage() {
           <h1 className="text-3xl sm:text-4xl font-bold text-foreground mt-4 mb-3 tracking-tight">
             {t("register.title")}
           </h1>
-          <p className="text-foreground/50 text-base max-w-xs">
+          <p className="text-muted text-base max-w-xs">
             {t("register.choose_subtitle")}
           </p>
-          <p className="mt-2 text-sm text-foreground/50">
+          <p className="mt-2 text-sm text-muted">
             {t("register.has_account")}{" "}
             <Link href="/login" className="text-accent hover:underline font-medium">
               {t("login.submit")}
@@ -48,21 +48,21 @@ export default function RegisterPage() {
 
             <div className="flex flex-col flex-1 p-7 gap-5">
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-sky-100 dark:bg-sky-950/50 flex items-center justify-center shrink-0">
+                <div className="w-14 h-14 rounded-2xl bg-sky-100 dark:bg-accent/15 flex items-center justify-center shrink-0">
                   <User className="w-7 h-7 text-accent" />
                 </div>
                 <div>
                   <h2 className="text-xl font-bold text-foreground leading-tight">{t("register.private_title")}</h2>
-                  <p className="text-xs text-foreground/50 mt-0.5">{t("register.private_subtitle")}</p>
+                  <p className="text-xs text-muted mt-0.5">{t("register.private_subtitle")}</p>
                 </div>
               </div>
 
-              <p className="text-sm text-foreground/60 leading-relaxed">
+              <p className="text-sm text-muted leading-relaxed">
                 {t("register.private_desc")}
               </p>
 
               <div className="mt-auto">
-                <div className="w-full py-3 px-5 rounded-xl bg-accent group-hover:bg-accent-hover text-white font-semibold text-sm text-center transition-colors duration-200">
+                <div className="w-full py-3 px-5 rounded-xl bg-accent group-hover:bg-accent-hover text-accent-foreground font-semibold text-sm text-center transition-colors duration-200">
                   {t("register.private_cta")}
                 </div>
               </div>
@@ -72,7 +72,7 @@ export default function RegisterPage() {
           {/* ── Azienda ── */}
           <Link
             href="/register/dealer"
-            className="group relative flex flex-col rounded-3xl overflow-hidden border-2 border-blue-200 dark:border-blue-800 hover:border-blue-500 bg-gradient-to-br from-blue-50/80 to-indigo-50/80 dark:from-blue-950/50 dark:to-indigo-950/50 shadow-md hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1"
+            className="group relative flex flex-col rounded-3xl overflow-hidden border-2 border-border hover:border-blue-500 bg-surface shadow-md hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1"
           >
             <div className="h-2 w-full bg-gradient-to-r from-blue-600 to-indigo-500" />
 
@@ -85,16 +85,16 @@ export default function RegisterPage() {
               </div>
 
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-blue-100 dark:bg-blue-900/60 flex items-center justify-center shrink-0">
-                  <Building2 className="w-7 h-7 text-blue-600 dark:text-blue-400" />
+                <div className="w-14 h-14 rounded-2xl bg-blue-100 dark:bg-blue-400/15 flex items-center justify-center shrink-0">
+                  <Building2 className="w-7 h-7 text-blue-600 dark:text-blue-300" />
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold text-blue-900 dark:text-blue-200 leading-tight">{t("register.company_title")}</h2>
-                  <p className="text-xs text-blue-600/60 dark:text-blue-400/60 mt-0.5">{t("register.company_subtitle")}</p>
+                  <h2 className="text-xl font-bold text-foreground leading-tight">{t("register.company_title")}</h2>
+                  <p className="text-xs text-muted mt-0.5">{t("register.company_subtitle")}</p>
                 </div>
               </div>
 
-              <p className="text-sm text-blue-800/60 dark:text-blue-200/60 leading-relaxed">
+              <p className="text-sm text-muted leading-relaxed">
                 {t("register.company_desc")}
               </p>
 

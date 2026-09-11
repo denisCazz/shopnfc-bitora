@@ -343,7 +343,7 @@ async function main() {
     for (const p of PRODUCTS) {
       const categoryId = catId[p.category];
       if (!categoryId) throw new Error(`Missing category ${p.category}`);
-      const imageUrl = `/products/${p.slug}.svg`;
+      const imageUrl = `/products/${p.slug}.png`;
       const [row] = await db
         .insert(products)
         .values({

@@ -64,7 +64,6 @@ export async function GET(request: Request) {
         .filter(Boolean)
         .join(", "),
       "Note": o.notes ?? "",
-      "Esportato Danea": o.daneaExported ? "Sì" : "No",
     };
   });
 

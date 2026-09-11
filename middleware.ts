@@ -99,6 +99,6 @@ export default auth((request) => {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|api/auth|api/danea|api/health|api/stripe|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|api/auth|api/health|api/stripe|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };

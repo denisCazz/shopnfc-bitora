@@ -25,7 +25,7 @@ export async function GET() {
     "Nome ES": s.nameEs || "",
     Slug: s.slug,
     Categoria: s.categoria || "",
-    Potenza: s.potenza || "",
+    Storage: s.potenza || "",
     Dimensioni: s.dimensioni || "",
     Peso: s.peso || "",
     Attivo: s.active ? "Sì" : "No",

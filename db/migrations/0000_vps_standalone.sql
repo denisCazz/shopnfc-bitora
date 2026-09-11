@@ -175,14 +175,12 @@ CREATE TABLE orders (
   tracking_number TEXT,
   bank_transfer_receipt_url TEXT,
   notes TEXT,
-  danea_exported BOOLEAN NOT NULL DEFAULT false,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
 CREATE INDEX idx_orders_user ON orders(user_id);
 CREATE INDEX idx_orders_status ON orders(status);
-CREATE INDEX idx_orders_danea ON orders(danea_exported) WHERE NOT danea_exported;
 
 CREATE TRIGGER orders_updated_at
   BEFORE UPDATE ON orders
@@ -261,35 +259,6 @@ CREATE TABLE product_chips (
 
 CREATE INDEX idx_product_chips_product ON product_chips(product_id);
 CREATE INDEX idx_product_chips_chip ON product_chips(chip_id);
-
--- ============================================================
--- DANEA LOGS
--- ============================================================
-CREATE TABLE danea_import_logs (
-  id SERIAL PRIMARY KEY,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-  success BOOLEAN NOT NULL,
-  source TEXT NOT NULL DEFAULT 'catalog',
-  mode TEXT,
-  message TEXT,
-  stats JSONB,
-  xml_bytes INTEGER
-);
-
-CREATE INDEX idx_danea_import_logs_created ON danea_import_logs (created_at DESC);
-
-CREATE TABLE danea_orders_export_logs (
-  id SERIAL PRIMARY KEY,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-  success BOOLEAN NOT NULL,
-  order_count INTEGER NOT NULL DEFAULT 0,
-  order_ids JSONB,
-  firstdate TEXT,
-  lastdate TEXT,
-  message TEXT
-);
-
-CREATE INDEX idx_danea_orders_export_logs_created ON danea_orders_export_logs (created_at DESC);
 
 -- ============================================================
 -- SETTINGS

@@ -40,9 +40,6 @@ COPY --from=build /app/.next/standalone ./
 COPY --from=build /app/.next/static ./.next/static
 COPY --from=build /app/public ./public
 
-# Persistent runtime data (log import Danea, ecc.) — montato via volume
-RUN mkdir -p /app/data/danea-import-logs && chown -R nextjs:nodejs /app/data
-
 USER nextjs
 EXPOSE 3000
 

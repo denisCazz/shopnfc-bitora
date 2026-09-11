@@ -190,7 +190,6 @@ export const orders = pgTable(
     trackingNumber: text("tracking_number"),
     bankTransferReceiptUrl: text("bank_transfer_receipt_url"),
     notes: text("notes"),
-    daneaExported: boolean("danea_exported").notNull().default(false),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
   },
@@ -259,44 +258,6 @@ export const productImages = pgTable("product_images", {
   altText: text("alt_text"),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
-
-/** Log export ordini Easyfatt (GET /api/danea/orders). */
-export const daneaOrdersExportLogs = pgTable(
-  "danea_orders_export_logs",
-  {
-    id: serial("id").primaryKey(),
-    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
-    success: boolean("success").notNull(),
-    orderCount: integer("order_count").notNull().default(0),
-    orderIds: jsonb("order_ids").$type<number[]>(),
-    firstdate: text("firstdate"),
-    lastdate: text("lastdate"),
-    message: text("message"),
-  },
-  (t) => [index("idx_danea_orders_export_logs_created").on(t.createdAt)]
-);
-
-/** Log import catalogo Easyfatt (POST /api/danea/products). */
-export const daneaImportLogs = pgTable(
-  "danea_import_logs",
-  {
-    id: serial("id").primaryKey(),
-    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
-    success: boolean("success").notNull(),
-    source: text("source").notNull().default("catalog"),
-    mode: text("mode"),
-    message: text("message"),
-    stats: jsonb("stats").$type<{
-      created: number;
-      updated: number;
-      deactivatedFull: number;
-      deactivatedDeleted: number;
-      skipped: number;
-    } | null>(),
-    xmlBytes: integer("xml_bytes"),
-  },
-  (t) => [index("idx_danea_import_logs_created").on(t.createdAt)]
-);
 
 export const appSettings = pgTable("app_settings", {
   key: text("key").primaryKey(),

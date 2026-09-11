@@ -10,7 +10,6 @@ import { sendOrderStatusUpdateEmail } from "@/lib/email";
 
 export async function getOrders(filters?: {
   status?: string;
-  daneaExported?: boolean;
 }) {
   const user = await getUser();
   if (!user || user.role !== "admin") throw new Error("Unauthorized");
@@ -19,9 +18,6 @@ export async function getOrders(filters?: {
   const conds: SQL[] = [];
   if (filters?.status && filters.status !== "all") {
     conds.push(eq(orders.status, filters.status as OrderStatus));
-  }
-  if (filters?.daneaExported !== undefined) {
-    conds.push(eq(orders.daneaExported, filters.daneaExported));
   }
   const whereClause = conds.length ? and(...conds) : undefined;
 
@@ -94,7 +90,6 @@ export async function getOrders(filters?: {
     guest_email: o.guestEmail,
     user_id: o.userId,
     notes: o.notes,
-    danea_exported: o.daneaExported,
     tracking_number: o.trackingNumber,
     bank_transfer_receipt_url: o.bankTransferReceiptUrl,
     order_items: (itemsByOrder.get(o.id) || []).map((it) => ({
@@ -183,18 +178,6 @@ export async function updateTrackingNumber(
   await db
     .update(orders)
     .set({ trackingNumber, updatedAt: new Date() })
-    .where(eq(orders.id, orderId));
-  revalidatePath("/admin/orders");
-}
-
-export async function resetDaneaExport(orderId: number) {
-  const user = await getUser();
-  if (!user || user.role !== "admin") throw new Error("Unauthorized");
-
-  const db = getDb();
-  await db
-    .update(orders)
-    .set({ daneaExported: false, updatedAt: new Date() })
     .where(eq(orders.id, orderId));
   revalidatePath("/admin/orders");
 }

@@ -174,14 +174,12 @@ CREATE TABLE orders (
   billing_address JSONB NOT NULL DEFAULT '{}',
   tracking_number TEXT,
   notes TEXT,
-  danea_exported BOOLEAN NOT NULL DEFAULT false,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
 CREATE INDEX idx_orders_user ON orders(user_id);
 CREATE INDEX idx_orders_status ON orders(status);
-CREATE INDEX idx_orders_danea ON orders(danea_exported) WHERE NOT danea_exported;
 
 CREATE TRIGGER orders_updated_at
   BEFORE UPDATE ON orders

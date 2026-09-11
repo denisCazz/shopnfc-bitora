@@ -13,6 +13,7 @@
   --color-border-hover: #c6d2e3;
   --color-accent: #0369a1;
   --color-accent-hover: #075985;
+  --color-accent-foreground: #ffffff;
   --color-accent-glow: rgba(3, 105, 161, 0.22);
   --font-sans: var(--font-jakarta);
 }
@@ -44,6 +45,7 @@
   --color-border-hover: rgba(241, 245, 249, 0.28);
   --color-accent: #38bdf8;
   --color-accent-hover: #0ea5e9;
+  --color-accent-foreground: #0f172a;
   --color-accent-glow: rgba(56, 189, 248, 0.22);
 }
 

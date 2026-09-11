@@ -6,10 +6,6 @@ import {
   ChevronDown,
   ChevronUp,
   Truck,
-  Download,
-  RotateCcw,
-  CheckCircle,
-  Clock,
   XCircle,
   FileText,
 } from "lucide-react";
@@ -17,7 +13,6 @@ import ExportExcelButton from "@/components/admin/ExportExcelButton";
 import {
   updateOrderStatus,
   updateTrackingNumber,
-  resetDaneaExport,
   deleteOrder,
 } from "@/app/admin/actions/orders";
 import { formatOrderNumber } from "@/lib/order-number";
@@ -54,7 +49,6 @@ interface Order {
   guest_email: string | null;
   user_id: string | null;
   notes: string | null;
-  danea_exported: boolean;
   tracking_number: string | null;
   bank_transfer_receipt_url: string | null;
   order_items: OrderItem[];
@@ -95,13 +89,10 @@ export default function OrdersClient({
   const [orders, setOrders] = useState(initialOrders);
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [filterStatus, setFilterStatus] = useState("all");
-  const [filterDanea, setFilterDanea] = useState("all");
   const [isPending, startTransition] = useTransition();
 
   const filtered = orders.filter((o) => {
     if (filterStatus !== "all" && o.status !== filterStatus) return false;
-    if (filterDanea === "exported" && !o.danea_exported) return false;
-    if (filterDanea === "pending" && o.danea_exported) return false;
     return true;
   });
 
@@ -118,17 +109,6 @@ export default function OrdersClient({
     startTransition(async () => {
       await deleteOrder(orderId);
       setOrders((prev) => prev.filter((o) => o.id !== orderId));
-    });
-  }
-
-  function handleResetDanea(orderId: number) {
-    startTransition(async () => {
-      await resetDaneaExport(orderId);
-      setOrders((prev) =>
-        prev.map((o) =>
-          o.id === orderId ? { ...o, danea_exported: false } : o
-        )
-      );
     });
   }
 
@@ -190,15 +170,6 @@ export default function OrdersClient({
             </option>
           ))}
         </select>
-        <select
-          value={filterDanea}
-          onChange={(e) => setFilterDanea(e.target.value)}
-          className="rounded-lg border border-border bg-surface px-3 py-2 text-sm"
-        >
-          <option value="all">Danea: tutti</option>
-          <option value="pending">Da esportare</option>
-          <option value="exported">Già esportati</option>
-        </select>
       </div>
 
       {/* Orders list */}
@@ -246,11 +217,6 @@ export default function OrdersClient({
                       >
                         {st.label}
                       </span>
-                      {order.danea_exported ? (
-                        <CheckCircle className="w-4 h-4 text-green-500" />
-                      ) : (
-                        <Clock className="w-4 h-4 text-yellow-500" />
-                      )}
                     </div>
                   </div>
                   {isExpanded ? (
@@ -440,24 +406,6 @@ export default function OrdersClient({
                       onSave={(t) => handleTrackingSave(order.id, t)}
                       disabled={isPending}
                     />
-
-                    {/* Danea export status */}
-                    {order.danea_exported ? (
-                      <button
-                        onClick={() => handleResetDanea(order.id)}
-                        disabled={isPending}
-                        className="flex items-center gap-1.5 text-sm text-muted hover:text-foreground transition-colors"
-                        title="Resetta per ri-esportare in Danea"
-                      >
-                        <RotateCcw className="w-4 h-4" />
-                        Re-esporta
-                      </button>
-                    ) : (
-                      <span className="flex items-center gap-1.5 text-sm text-yellow-600 dark:text-yellow-400">
-                        <Download className="w-4 h-4" />
-                        Da esportare in Danea
-                      </span>
-                    )}
                   </div>
                 </div>
               )}

@@ -83,7 +83,7 @@ function StoveRow({
                   className="w-full px-2 py-1.5 rounded-lg border border-border bg-background text-sm focus:outline-none focus:border-accent/50" />
               </div>
               <div>
-                <label className="block text-xs text-muted mb-1">Potenza</label>
+                <label className="block text-xs text-muted mb-1">Storage</label>
                 <input name="potenza" defaultValue={stove.potenza ?? ""}
                   placeholder="es. 144 byte"
                   className="w-full px-2 py-1.5 rounded-lg border border-border bg-background text-sm focus:outline-none focus:border-accent/50" />
@@ -171,7 +171,7 @@ function StoveRow({
               )}
               {stove.potenza && (
                 <div>
-                  <dt className="text-xs text-muted mb-0.5">Potenza</dt>
+                  <dt className="text-xs text-muted mb-0.5">Storage</dt>
                   <dd className="font-medium text-foreground">{stove.potenza}</dd>
                 </div>
               )}
@@ -261,7 +261,7 @@ function AddRow({ onAdded }: { onAdded: (s: Stove) => void }) {
               className="w-full px-2 py-1.5 rounded-lg border border-border bg-background text-sm focus:outline-none focus:border-accent/50" />
           </div>
           <div>
-            <label className="block text-xs text-muted mb-1">Potenza</label>
+            <label className="block text-xs text-muted mb-1">Storage</label>
             <input name="potenza" placeholder="es. 144 byte"
               className="w-full px-2 py-1.5 rounded-lg border border-border bg-background text-sm focus:outline-none focus:border-accent/50" />
           </div>
@@ -324,7 +324,7 @@ export default function ChipsClient({ initialChips }: { initialChips: Stove[] })
             <tr className="border-b border-border bg-background">
               <th className="px-4 py-3 text-left text-xs font-semibold text-muted uppercase tracking-wide">Modello</th>
               <th className="px-4 py-3 text-left text-xs font-semibold text-muted uppercase tracking-wide">Categoria</th>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-muted uppercase tracking-wide">Potenza</th>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-muted uppercase tracking-wide">Storage</th>
               <th className="px-4 py-3 text-left text-xs font-semibold text-muted uppercase tracking-wide">Peso</th>
               <th className="px-4 py-3 text-left text-xs font-semibold text-muted uppercase tracking-wide">Stato</th>
               <th className="px-4 py-3 text-left text-xs font-semibold text-muted uppercase tracking-wide">Azioni</th>
