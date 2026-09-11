@@ -1,0 +1,3 @@
+id,company_name,vat_number,status,discount_percent,rejection_reason,approved_by,approved_at,created_at
+7a974cb3-ed3a-4a58-b2e3-636193c56c84,Denis cazz,03771060260,approved,50,,42ced3f0-b60f-42cd-a2f2-d1fc6e3cce9a,2026-03-27 14:34:59.322+00,2026-03-27 14:31:36.591941+00
+ad2158e2-d29f-4444-a9af-c996d7519062,Tropini Service di Tropini Gianfranco,03474870049,approved,50,,42ced3f0-b60f-42cd-a2f2-d1fc6e3cce9a,2026-03-27 17:43:06.652+00,2026-03-27 17:41:15.039264+00

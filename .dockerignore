@@ -1,0 +1,35 @@
+# deps & build output (rebuilt in the image)
+node_modules
+.next
+out
+build
+coverage
+*.tsbuildinfo
+
+# git / editor
+.git
+.gitignore
+.cursor
+.vscode
+.idea
+.DS_Store
+
+# secrets — runtime uses env_file / Coolify, not image layers
+.env
+.env.*
+!.env.example
+
+# not needed to build the Next.js image
+docs
+*.md
+nginx
+ex_supabase
+supabase
+scripts
+data/danea-import-logs
+
+# dumps
+prestashop_dump.sql
+*.sql.gz
+*.pem
+*.log

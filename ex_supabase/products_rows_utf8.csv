@@ -1,0 +1,1624 @@
+﻿id,category_id,sku,ean13,name_it,name_en,name_fr,name_es,description_it,description_en,description_fr,description_es,description_short_it,description_short_en,description_short_fr,description_short_es,slug,price,wholesale_price,weight,width,height,depth,stock_quantity,active,brand,meta_title,meta_description,meta_keywords,image_url,created_at,updated_at,search_vector
+10,6,NULL,NULL,MOTORIDUTTORE MELLOR T14 â€“ 5 RPM,MELLOR T14 AUGER MOTORâ€“ 5 RPM,MOTORÃ‰DUCTEUR MELLOR T14 â€“ 5 RPM,MOTOR SINFIN MELLOR T14 â€“ 5 RPM,"Pacco magnetico: 32 mm
+PuÃ² sostituire il Kenta
+Rot. oraria","Hollow shaft without spindle.
+Magnetic pack: 32mm
+Can replace the Kenta.
+Clockwise rotation.","Arbre creux sans groupille.
+TÃ´les magnÃ©tiques: 32mm
+Peut remplacer le Kenta.
+Rot. horaire",,"Albero cavo senza perno
+
+Pacco magnetico: 32 mm
+PuÃ² sostituire il Kenta
+Rot. oraria","Hollow shaft without spindle.
+Magnetic pack: 32mm
+Can replace the Kenta.
+Clockwise rotation.","Arbre creux sans groupille.
+TÃ´les magnÃ©tiques: 32mm
+Peut remplacer le Kenta
+Rot. horaire","Arbol sin perno
+
+paque magnetico: 32 mm
+
+Puede substituir el kenta
+
+RotaciÃ²n horaria",motoriduttore-mellor-t14-5-rpm,140.00,29.67,,,,,0,true,,Motoriduttore Mellor,"Motoriduttore Mellor, albero cavo senza perno",,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/motoriduttori/motoriduttore-mellor-t14-5-rpm-2.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:35.747367+00,"'32':13B,23C '5':4A 'alber':7B 'cav':8B 'kent':18B,28C 'magnet':12B,22C 'mellor':2A 'mm':14B,24C 'motoriduttor':1A 'null':6A 'orar':20B,30C 'pacc':11B,21C 'pern':10B 'puÃ²':15B,25C 'rot':19B,29C 'rpm':5A 'senz':9B 'sostitu':16B,26C 't14':3A"
+11,6,NULL,NULL,"MOTORE COCLEA  PER STUFE A PELLET 1,26 RPM","AUGER MOTOR FOR PELLET STOVES 1.26 RPM ",MOTORÃ‰DUCTEUR POUR POÃŠLE Ã€ PELLET - MELLOR,MOTOREDUCTOR PARA ESTUFAS DE PELLET MELLOR,,,"DiamÃ¨tre de la goupille:Â Â 8,5 mm 1,26 rpm",,"MOTORE COCLEAÂ  PER STUFE A PELLET 1,26 RPM
+
+Diametro perno 9,5 mmÂ 
+
+MELLOR","AUGER MOTOR FOR PELLET STOVES 1.26 RPM
+ Pin diameter 9.5 mm
+MELLOR","DiamÃ¨tre de la goupille: 9,5 mm 1,26 rpm","Diametro arbol 9,5 mm 1,26 rpm
+
+MELLOR",motoriduttore-per-stufe-a-pellet-mellor,130.78,27.95,,,,,0,true,,motoriduttore per stufe a pellet,motoriduttore per stufe a pellet mellor,,https://www.ricambixstufe.it/ricambixstufe/489-home_default/motoriduttore-per-stufe-a-pellet-mellor.jpg,2026-03-27 11:34:24.346804+00,2026-03-27 11:34:24.346804+00,"'1':7A,17B '26':8A,18B '5':23B '9':22B 'cocle':2A,12B 'diametr':20B 'mellor':25B 'mm':24B 'motor':1A,11B 'null':10A 'pellet':6A,16B 'pern':21B 'rpm':9A,19B 'stuf':4A,14B"
+12,6,NULL,NULL,MOTORE COCLEA  PER STUFE A PELLET 2 RPM," AUGER MOTOR FOR PELLET STOVES 2 RPM  ",MOTORÃ‰DUCTEUR POUR POÃŠLE Ã€ PELLET - MELLOR 2 RPM,MOTOREDUCTOR PARA ESTUFAS DE PELLETS MELLOR 2RPM,,"Pivot's diameter: 8,5 mm 2 rpm","DiamÃ¨tre de la goupille: 8,5 mm 2 rpm",,"MOTORE COCLEAÂ  PER STUFE A PELLET 2 RPM
+
+Diametro perno 9,5 mmÂ 
+
+MELLOR","AUGER MOTOR FOR PELLET STOVES 2 RPM
+
+ Pin diameter 9.5 mm
+
+MELLOR","DiamÃ¨tre de la goupille: 9,5 mm 2 rpm","Diametro arbol 9,5 mm 2 rpm
+
+MELLOR",motoriduttore-per-stufe-a-pellet-mellor-2,130.78,29.81,,,,,0,true,,motoriduttore per stufe a pellet,motoriduttore per stufe a pellet mellor,,https://www.ricambixstufe.it/ricambixstufe/491-home_default/motoriduttore-per-stufe-a-pellet-mellor-2.jpg,2026-03-27 11:34:24.346804+00,2026-03-27 11:34:24.346804+00,"'2':7A,16B '5':21B '9':20B 'cocle':2A,11B 'diametr':18B 'mellor':23B 'mm':22B 'motor':1A,10B 'null':9A 'pellet':6A,15B 'pern':19B 'rpm':8A,17B 'stuf':4A,13B"
+13,6,NULL,NULL,MOTORE COCLEA  PER STUFE A PELLET 3 RPM," AUGER MOTOR FOR PELLET STOVES 3 RPM  ",MOTORÃ‰DUCTEUR POUR POÃŠLE Ã€ PELLET - MELLOR 3 RPM,MOTORREDUCTOR PARA ESTUFAS DE PELLETS MELLOR 3 RPM,,"Pivot's diameter: 8,5 mm 3 rpm","DiamÃ¨tre de la goupille: 8,5 mm 3 rpm",,"MOTORE COCLEAÂ  PER STUFE A PELLET 3 RPM
+
+Diametro perno 8,5 mmÂ 
+
+MELLOR","AUGER MOTOR FOR PELLET STOVES 3 RPMÂ  
+
+Pin diameter 8.5 mm
+
+MELLOR","DiamÃ¨tre de la goupille: 9,5 mm 3 rpm","Diametro arbol 8,5 mm 3 RPM
+
+MELLOR",motoriduttore-per-stufe-a-pellet-mellor-3,137.74,31.60,,,,,0,true,,motoriduttore per stufe a pellet,motoriduttore per stufe a pellet mellor,,https://www.ricambixstufe.it/ricambixstufe/493-home_default/motoriduttore-per-stufe-a-pellet-mellor-3.jpg,2026-03-27 11:34:24.346804+00,2026-03-27 11:34:24.346804+00,"'3':7A,16B '5':21B '8':20B 'cocle':2A,11B 'diametr':18B 'mellor':23B 'mm':22B 'motor':1A,10B 'null':9A 'pellet':6A,15B 'pern':19B 'rpm':8A,17B 'stuf':4A,13B"
+14,6,NULL,NULL,MOTORIDUTTORE PER STUFE A PELLET MELLOR 4 RPM,MELLOR AUGER MOTOR FOR PELLET STOVES 4 RPM,MOTORÃ‰DUCTEUR POUR POÃŠLE Ã€ PELLET - MELLOR 4 RPM,MOTORREDUCTOR PARA ESTUFAS DE PELLETS MELLOR 4 RPM,"Pivot's diameter: 8,5 mm 4 rpm",,"DiamÃ¨tre de la goupille: 8,5 mm 4 rpm",,"Diametro perno 8,5 mm 4 rpm","Pivot's diameter: 9,5 mm 4 rpm","DiamÃ¨tre de la goupille: 9,5 mm 4 rpm","Diametro arbol 9,5 mm 4RPM
+
+MELLOR",motoriduttore-per-stufe-a-pellet-mellor-4,137.74,31.60,,,,,0,true,,motoriduttore per stufe a pellet,motoriduttore per stufe a pellet mellor,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/motoriduttori/motoriduttore-per-stufe-a-pellet-mellor-4-rpm.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:36.128919+00,"'4':7A,15B,23C '5':13B,21C '8':12B,20C 'diameter':19C 'diametr':10B 'mellor':6A 'mm':14B,22C 'motoriduttor':1A 'null':9A 'pellet':5A 'pern':11B 'pivot':17C 'rpm':8A,16B,24C 's':18C 'stuf':3A"
+15,7,NULL,NULL,VENTILATORE FUMI CON ENCODER,SMOKES FAN WITH RPM CONTROL,VENTILATEUR FUMÃ‰ES AVEC LE CONTRÃ”LE GIRI,VENTILADOR HUMOS CON CONTROL DE VELOCIDAD,,,,,"PUO' SOSTITUIRE EBM
+230V 50Hz 32W 2400 G/MIN
+Ã¸Vent.15cm
+Ã¸Tot. 17cm
+
+MARCA: ITC","IT CAN REPLACE EBM
+230V 50Hz 32W 2400 RPM
+Ã¸Vent.15cm
+Ã¸Tot. 17cm","IL PEUT REMPLACER EBM
+230V 50Hz 32W 2400 RPM
+Ã¸Vent.15cm
+Ã¸Tot. 17cm","PUEDE REEMPLAZAR EBM
+230V 50 Hz 32W 2400 G/MIN
+Ã¸Vent.15cm
+Ã¸Tot. 17cm
+MARCA: ITC",ventilatore-fumi-ebm-senza-encoder,158.93,,,,,,0,true,,ventilatore-fumi-ebm-senza-encoder,ventilatore-fumi-ebm-senza-encoder,,https://www.ricambixstufe.it/ricambixstufe/368-home_default/ventilatore-fumi-ebm-senza-encoder.jpg,2026-03-27 11:34:24.346804+00,2026-03-27 11:34:24.346804+00,'15cm':15B '17cm':17B '230v':9B '2400':12B '32w':11B '50hz':10B 'ebm':8B 'encoder':4A 'fum':2A 'g/min':13B 'itc':19B 'marc':18B 'null':5A 'puo':6B 'sostitu':7B 'ventil':1A 'Ã¸tot':16B 'Ã¸vent':14B
+16,7,NULL,NULL,VENTILATORE FUMI EBMPAPST CON ENCODER,EBM SMOKES FAN,VENTILATEUR FUMÃ‰ES EBM,VENTILADOR HUMOS EBM,,,,,"230V 50Hz 47W
+Ã¸Vent.15 cm
+Ã¸Tot. 17 cm
+
+MARCA: EBM","230V 50Hz 47W
+Ã¸Vent.15 cm
+Ã¸Tot. 17 cm","230V 50Hz 47W
+Ã¸Vent.15 cm
+Ã¸Tot. 17 cm","230V 50Hz 47W
+Ã¸Vent.15 cm
+Ã¸Tot. 17 cm
+
+MARCA: EBM",ventilatore-fumi-ebmpapst-con-encoder,115.90,30.00,,,,,0,true,,ventilatore-fumi-ebmpapst-con-encoder,ventilatore-fumi-ebmpapst-con-encoder,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/ventilatori-fumi/ventilatore-fumi-ebmpapst-con-encoder-2.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:36.330912+00,"'15':11B '17':14B '230v':7B '47w':9B '50hz':8B 'cm':12B,15B 'ebm':17B 'ebmpapst':3A 'encoder':5A 'fum':2A 'marc':16B 'null':6A 'ventil':1A 'Ã¸tot':13B 'Ã¸vent':10B"
+17,8,NULL,NULL,VENTILATORE ARIA CENTRIFUGO PER STUFA A PELLET,CENTRIFUGAL AIR FAN FOR PELLET STOVES,VENTILATEUR AIR CENTRIFUGE POUR POELE A GRANULES,VENTILADOR AIRE CENTRIFUGO PARA ESTUFAS DE PELLET,,,,,"TRIAL D2E120-AA01-04
+230V 50/60hz 0,38/0,43A 85/95W 1400/1300 G/Min
+DIM.BOCCA USCITA ARIA 6cm X 14,5cm","EBMPAPST D2E120-AA01-04
+230V 50/60hz 0,38/0,43A 85/95W 1400/1300 RPM
+OUTPUT AIR MOUTH DIMENSIONS 6cm X 14,5cm","EBMPAPST D2E120-AA01-04
+230V 50/60hz 0,38/0,43A 85/95W 1400/1300 RPM
+DIMENSIONS DE L'EMBOUCHURE DE LA SORTIE DE L'AIR 6cm X 14,5cm","EBMPAPST D2E120-AA01-04
+230V 50/60hz 0,38/0,43A 85/95W 1400/1300 G/Min
+DIM.BOCA SALIDA AIRE 6cm X 14,5cm",ventilatore-aria-centrifugo-per-stufa-a-pellet,186.66,,,,,,0,true,,Ventilatore aria per stufe a pellet,Ventilatore aria centrifugo per stufe a pellet,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/ventilatori-aria/ventilatore-aria-centrifugo-per-stufa-a-pellet-2.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:36.638181+00,"'0':16B '04':13B '14':27B '1400/1300':20B '230v':14B '38/0':17B '43a':18B '50/60hz':15B '5cm':28B '6cm':25B '85/95w':19B 'aa01':12B 'ari':2A,24B 'centrifug':3A 'd2e120':11B 'd2e120-aa01':10B 'dim.bocca':22B 'g/min':21B 'null':8A 'pellet':7A 'stuf':5A 'trial':9B 'uscit':23B 'ventil':1A 'x':26B"
+18,8,NULL,NULL,VENTILATORE TANGENZIALE GRANDE DX,"BIG TANGENTIAL RIGHT FAN ",VENTILATEUR TANGENTIEL GRAND DROIT,VENTILADOR TANGENCIAL GRANDE DX,,,,,"FERGAS COD.158202
+230V 50hz 77W
+
+BOCCAÂ  28 CM","EMMEVI COD.158202
+230V 50hz 77W","FERGAS COD.158202
+230V 50hz 77W
+
+Bouche: 28 cm","FERGAS COD.158202
+230V 50hz 77W
+
+BOCAÂ  28 CM",ventilatore-tangenziale-grande,207.16,30.36,,,,,0,true,,Ventilatore aria per stufe a pellet,Ventilatore tangenziale per stufe a pellet,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/ventilatori-aria/ventilatore-tangenziale-grande-dx-2.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:36.947176+00,'230v':8B '28':12B '50hz':9B '77w':10B 'bocc':11B 'cm':13B 'cod.158202':7B 'dx':4A 'fergas':6B 'grand':3A 'null':5A 'tangenzial':2A 'ventil':1A
+19,8,NULL,NULL,VENTILATORE TANGENZIALE PICCOLO,SMALL TANGENTIAL FAN,PETIT VENTILATEUR TANGENTIEL,VENTILADOR TANGENCIAL PEQUEÃ‘O,,,,,"TRIAL 8A123B-008
+8FA024-S2-G2-T90Â°
+230V 50/60hz
+
+Bocca da 23 cm","TRIAL 8A123B-008
+8FA024-S2-G2-T90Â°
+230V 50/60hz","TRIAL 8A123B-008
+8FA024-S2-G2-T90Â°
+230V 50/60hz","TRIAL 8A123B-008
+8FA024-S2-G2-T90Â°
+230V 50/60hz
+
+Boca da 23 cm",ventilatore-tangenziale-piccolo,128.10,31.40,,,,,0,true,,Ventilatore aria per stufe a pellet,Ventilatore tangenziale per stufe a pellet,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/ventilatori-aria/ventilatore-tangenziale-piccolo-2.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:37.236275+00,'-008':7B '23':17B '230v':13B '50/60hz':14B '8a123b':6B '8fa024':9B '8fa024-s2-g2-t90':8B 'bocc':15B 'cm':18B 'g2':11B 'null':4A 'piccol':3A 's2':10B 't90':12B 'tangenzial':2A 'trial':5B 'ventil':1A
+20,8,NULL,NULL,VENTILATORE TANGENZIALE BOCCA DA 24CM,TANGENTIAL FAN,VENTILATEUR TANGENTIEL,VENTILADOR TANGENCIAL,,,,,"EBMPAPST QLN65/2400A33-
+3025LH-58 adn
+230V 50HZ 33W I.CI.H
+
+Bocca da 25 cm","EBMPAPST QLN65/2400A33-
+3025LH-58 adn
+230V 50HZ 33W I.CI.H","EBMPAPST QLN65/2400A33-
+3025LH-58 adn
+230V 50HZ 33W I.CI.H
+
+Bouche: 25 cm","EBMPAPST QLN65/2400A33-
+3025LH-58 adn
+230V 50HZ 33W I.CI.H
+
+Boca da 25 cm",ventilatore-tangenziale,99.06,17.44,,,,,0,true,,Ventilatore aria per stufe a pellet,Ventilatore tangenziale per stufe a pellet,,https://www.ricambixstufe.it/ricambixstufe/203-home_default/ventilatore-tangenziale.jpg,2026-03-27 11:34:24.346804+00,2026-03-27 11:34:24.346804+00,"'-58':10B '230v':12B '24cm':5A '25':19B '3025lh':9B '33w':14B '50hz':13B 'adn':11B 'bocc':3A,17B 'cm':20B 'ebmpapst':7B 'h':16B 'i.ci':15B 'null':6A 'qln65/2400a33-':8B 'tangenzial':2A 'ventil':1A"
+22,8,NULL,NULL,VENTILATORE ARIA STUFE SLIM,AIR FAN -SLIM STOVES,VENTILATEUR AIR - POELES SLIM,VENTILADOR AIRE ESTUFAS SLIM,,,,,"EBMPAPST R2S175-AB56-01
+220V 50hz 0,33A 53W 2350 G/Min
+DIAMETRO VENTOLA 17,5 cm X 7 cm","EBMPAPST R2S175-AB56-01
+220V 50hz 0,33A 53W 2350 RPM
+FAN DIAMETER 17,5 cm X 7 cm","EBMPAPST R2S175-AB56-01
+220V 50hz 0,33A 53W 2350 RPM
+DIAMETRE DU VENTILATEUR 17,5 cm X 7 cm","EBMPAPST R2S175-AB56-01
+220V 50hz 0,33A 53W 2350 G/Min
+DIAMETRO VENTOLA 17,5 cm X 7 cm",ventilatore-aria-stufe-slim,135.42,35.64,,,,,0,true,,Ventilatore aria per stufe a pellet,Ventilatore aria centrifugo per stufe a pellet,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/ventilatori-aria/ventilatore-aria-stufe-slim.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:37.536382+00,"'0':13B '01':10B '17':20B '220v':11B '2350':16B '33a':14B '5':21B '50hz':12B '53w':15B '7':24B 'ab56':9B 'ari':2A 'cm':22B,25B 'diametr':18B 'ebmpapst':6B 'g/min':17B 'null':5A 'r2s175':8B 'r2s175-ab56':7B 'slim':4A 'stuf':3A 'ventil':1A 'ventol':19B 'x':23B"
+23,9,NULL,NULL,"RESISTENZA ELETTRICA Ã˜12,5 mm LUNGH.130 mm","SPARK PLUG Ã˜12,5 mm LENGTH.130 mm","BOUGIE D'ALLUMAGE Ã˜12,5 mm LUNGH.130 mm","Resistencia Electrica Ã˜12,5 mm LONG.130 mm",,,,,"Diametro: 12.5x130 mm. (senza raccordo)
+300W-230V
+Lunghezza cavi: 700 mm
+
+MARCA: ROTFIL","Diameter: 11x130 mm. (no connection)
+300W-230V
+Cable length: 700 mm","DiamÃ¨tre: 11x130 mm. (sans raccord)
+300W-230V
+Longueur des cÃ¢bles: 700 mm","Diametro: 11x130 mm. (sin uniÃ²n)
+300W-230V
+Longitud cables: 700 mm
+
+MARCA: ROTFIL",resistenza-elettrica,42.33,8.07,,,,,0,true,,Resistenza elettrica,Resistenza elettrica per accensione,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/resistenze-accensione/resistenza-elettrica-12-5-mm-lungh-130-mm.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:37.823685+00,"'12.5':10B '230v':17B '300w':16B '300w-230v':15B '5':4A '700':20B 'cav':19B 'diametr':9B 'elettr':2A 'lungh.130':6A 'lunghezz':18B 'marc':22B 'mm':5A,7A,12B,21B 'null':8A 'raccord':14B 'resistent':1A 'rotfil':23B 'senz':13B 'x130':11B 'Ã¸12':3A"
+24,9,NULL,NULL,"RESISTENZA ELETTRICA Ã˜ 12,5 mm LUNGH.100 mm","SPARK PLUG Ã˜ 12,5 mm LENGTH.100 mm","BOUGIE D'ALLUMAGE Ã˜ 12,5 mm LUNGH.100 mm","Resistencia ElÃ¨ctrica Ã˜ 12,5 mm LONG.100 mm",,,,,"Diametro: 12.5 x100 mm. (senza raccordo)
+300W-230V
+Lunghezza cavi: 700 mm
+
+MARCA:ROTFIL","Diameter: 12.5x100 mm. (no connection)
+300W-230V
+Cable length: 700 mm","DiamÃ¨tre: 12.5x100 mm. (sans raccord)
+300W-230V
+Longueur des cÃ¢bles: 700 mm","Diametro: 12.5x100 mm. (sin uniÃ²n)
+300W-230V
+Longitud cables: 700 mm
+
+MARCA: ROTFIL",resistenza-elettrica-2,41.48,7.80,,,,,0,true,,Resistenza elettrica,Resistenza elettrica per accensione,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/resistenze-accensione/resistenza-elettrica-12-5-mm-lungh-100-mm.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:38.027718+00,"'12':4A '12.5':11B '230v':18B '300w':17B '300w-230v':16B '5':5A '700':21B 'cav':20B 'diametr':10B 'elettr':2A 'lungh.100':7A 'lunghezz':19B 'marc':23B 'mm':6A,8A,13B,22B 'null':9A 'raccord':15B 'resistent':1A 'rotfil':24B 'senz':14B 'x100':12B 'Ã¸':3A"
+25,9,HT65012,NULL,"RESISTENZA ELETTRICA Ã˜ 9,9 mm x 140 mm ATTACCO A FILETTO 3/8","SPARK PLUG Ã˜ 9,9 mm","BOUGIE D'ALLUMAGE Ã˜ 9,9 mm","Resistencia ElÃ¨ctrica Ã˜ 9,9 mm",,,,,"Diametro: 9,9x140 mm. (sottobattuta raccordo)
+250W-230V
+Lunghezza cavi: 200 mm.
+Con raccordo 3/8â€œ GAS
+
+MARCA: HT","Diameter: 9,9x140 mm. (connection)
+250W-230V
+Cable length: 200 mm.
+With 3/8 ""BSP connection.","DiamÃ¨tre: 9,9x140 mm. (raccord)
+250W-230V
+Longueur des cÃ¢bles: 200 mm.
+Avec raccord 3/8 ""BSP","Diametro: 9,9x140 mm. (tuerca bajo batida)
+250W-230V
+Longitud cables: 200 mm.
+Con tuerca 3/8â€œ GAS
+
+MARCA:HT",resistenza-elettrica-3,42.70,7.18,,,,,0,true,,Resistenza elettrica,Resistenza elettrica per accensione,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/resistenze-accensione/resistenza-elettrica-9-9-mm-x-140-mm-attacco-a-filetto-38.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:38.253867+00,"'140':8A '200':26B '230v':23B '250w':22B '250w-230v':21B '3/8':13A,30B '9':4A,5A,16B '9x140':17B 'attacc':10A 'cav':25B 'diametr':15B 'elettr':2A 'filett':12A 'gas':31B 'ht':33B 'ht65012':14A 'lunghezz':24B 'marc':32B 'mm':6A,9A,18B,27B 'raccord':20B,29B 'resistent':1A 'sottobatt':19B 'x':7A 'Ã¸':3A"
+26,9,HT62705,NULL,"RESISTENZA ELETTRICA Ã˜ 12,5 mm","SPARK PLUG Ã˜ 12,5 mm","BOUGIE D'ALLUMAGE Ã˜ 12,5 mm","Resistencia ElÃ¨ctrica Ã˜ 12,5 mm",,,,,"Ã˜ 12,5 - lung.150 mm. (con flangia)
+350W-230V
+Lunghezza cavi: 500 mm.
+Palazzetti-Royal-Thermorossi Olimpia Splendid
+
+MARCA: HT","Ã˜ 12.5 - 150 mm. (with flange)
+350W-230V
+Cable Length: 500 mm.
+Palazzetti-Royal-Thermorossi Olimpia Splendid","Ã˜ 12,5 Ã  150 mm. (Avec bride)
+350W-230V
+Longueur des cÃ¢bles: 500 mm.
+Palazzetti-Royal-Thermorossi Olimpia Splendid","Ã˜ 12,5 - long.150 mm. (con brida)
+350W-230V
+Longitud cables: 500 mm.
+Palazzetti-Royal-Thermorossi Olimpia Splendid
+
+MARCA:HT",resistenza-elettrica-3-26,51.78,10.50,,,,,0,true,,Resistenza elettrica,Resistenza elettrica per accensione,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/resistenze-accensione/resistenza-elettrica-12-5-mm.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:38.409837+00,"'12':4A,9B '230v':17B '350w':16B '350w-230v':15B '5':5A,10B '500':20B 'cav':19B 'elettr':2A 'flang':14B 'ht':29B 'ht62705':7A 'lung.150':11B 'lunghezz':18B 'marc':28B 'mm':6A,12B,21B 'olimp':26B 'palazzett':23B 'palazzetti-royal-thermoross':22B 'resistent':1A 'royal':24B 'splendid':27B 'thermoross':25B 'Ã¸':3A,8B"
+27,10,NULL,NULL,DISPLAY LCD A 6 TASTI MICRONOVA,6 BUTTONS MICRONOVA LCD DISPLAY,ECRAN LCD Ã€ 6 TOUCHES MICRONOVA,PANTALLA LED A 6 BOTONES MICRONOVA,,,,,"Dimensione incasso: 16,3 x 4,5 cm.
+Non compatibile con le schede LED","Built size: 16.3 x 4.5 cm.
+Not compatible with LED boards","16.3 x 4.5 cm.
+Non compatible avec les cartes LED","Dimensiones ingreso: 16,3 x 4,5 cm.
+No es compatible con la tarjetas LED",display-lcd-a-6-tasti-micronova,87.84,19.60,,,,,0,true,,Display Lcd a 6 tasti Micronova,Display Lcd a 6 tasti Micronova,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/display-cavi-telecomandi/display-lcd-a-6-tasti-micronova-2.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:38.564596+00,'16':10B '3':11B '4':13B '5':14B '6':4A 'cm':15B 'compat':17B 'dimension':8B 'display':1A 'incass':9B 'lcd':2A 'led':21B 'micronov':6A 'null':7A 'sched':20B 'tast':5A 'x':12B
+28,10,NULL,NULL,DISPLAY LED A 6 TASTI MICRONOVA,6 BUTTONS MICRONOVA LED DISPLAY,ECRAN LED A 6 TOUCHES MICRONOVA,PANTALLA LED A 6 BOTONES MICRONOVA,,,,,"Dimensione incasso: 16,3 x 4,5 cm.
+Non compatibile con le schede LCD","16.3 x 4.5 cm.
+Not compatible with LCD boards","16.3 x 4.5 cm.
+Non compatible avec les cartes LCD","Dimensiones ingreso: 16,3 x 4,5 cm.
+No es compatible con las tarjetas LCD",display-lcd-a-6-tasti-micronova-2,70.03,14.49,,,,,0,true,,Display Lcd a 6 tasti Micronova,Display Lcd a 6 tasti Micronova,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/display-cavi-telecomandi/display-led-a-6-tasti-micronova-2.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:38.955253+00,'16':10B '3':11B '4':13B '5':14B '6':4A 'cm':15B 'compat':17B 'dimension':8B 'display':1A 'incass':9B 'lcd':21B 'led':2A 'micronov':6A 'null':7A 'sched':20B 'tast':5A 'x':12B
+29,10,NULL,NULL,DISPLAY LED A 3 TASTI MICRONOVA,MICRONOVA 3 BUTTONS LED DISPLAY,ECRAN LED A 3 TOUCHES MICRONOVA,PANTALLA LED A 3 BOTONES MICRONOVA,,,,,Non compatibile con display a 6 tasti,Not compatible with a 6 button-display.,Pas compatible avec Ã©crans Ã  3 touches.,No es compatible con pantallas a 6 botones,display-lcd-a-3-tasti-micronova,51.24,10.50,,,,,0,true,,Display Lcd a 3 tasti Micronova,Display Lcd a 3 tasti Micronova,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/display-cavi-telecomandi/display-led-a-3-tasti-micronova-2.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:39.402028+00,"'3':4A '6':13B 'compat':9B 'display':1A,11B 'led':2A 'micronov':6A 'null':7A 'tast':5A,14B"
+30,10,NULL,NULL,DISPLAY LED A 3 TASTI DUEPI,DUEPI LED DISPLAY  6 BUTTONS,ECRAN LED A 3 TOUCHES DUEPI,PANTALLA LED A 3 BOTONES DUEPI,,,,,Non compatibile con display a 6 tasti,not compatible with 6 button displays.,Non compatible avec Ã©crans Ã  6 touches,No es compatible con pantallas a 6 botones,display-led-a-3-tasti-duepi,41.11,10.49,,,,,0,true,,Display Lcd a 3 tasti Duepi,Display Lcd a 3 tasti Duepi,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/display-cavi-telecomandi/display-duepi-3-tasti-led.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:39.634269+00,"'3':4A '6':13B 'compat':9B 'display':1A,11B 'duep':6A 'led':2A 'null':7A 'tast':5A,14B"
+31,10,NULL,NULL,PANNELLO DI EMERGENZA TELECOMANDO RADIO MICRONOVA,MICRONOVA EMERGENCY PANEL FOR RADIO REMOTE CONTROL,PANNEAU D'URGENCE TELECOMMANDE RADIO MICRONOVA,PANEL DE EMERGENCIA CONTROL REMOTO RADIO MICRONOVA,,,,,"Pannello di emergenza micronova
+Per telecomando radio",Micronova emergency panel for radio remote control.,Panneau d'urgence Micronova pour radio-commande.,"Panel de emergencia micronova
+Para mando radio",pannello-di-emergenza-micronova,119.56,,,,,,0,true,,Pannello di emergenza micronova,Pannello di emergenza micronova per telecomando radio,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/display-cavi-telecomandi/pannello-di-emergenza-telecomando-radio-micronova.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:39.92823+00,"'emergent':3A,10B 'micronov':6A,11B 'null':7A 'pannell':1A,8B 'rad':5A,14B 'telecom':4A,13B"
+32,10,NULL,NULL,CAVO FLAT DISPLAY 1200 mm,FLAT CABLE FOR DISPLAY 1200 mm,CABLE FLAT POUR ÃˆCRAN 1200 mm,CABLE FLAT  PARA EL DISPLAY 1200mm,,,,,Lunghezza 1200mm,Length 1200mm,Longueur 1200mm,Longitud 1200mm,cavo-flat-display,15.01,1.15,,,,,0,true,,Cavo Flat Display,Cavo Flat Display,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/display-cavi-telecomandi/cavo-flat-display-1200-mm.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:40.073746+00,'1200':4A '1200mm':8B 'cav':1A 'display':3A 'flat':2A 'lunghezz':7B 'mm':5A 'null':6A
+33,10,NULL,NULL,TELECOMANDO RADIO MICRONOVA,MICRONOVA RADIO REMOTE CONTROL,TELECOMMANDE RADIO MICRONOVA,CONTROL REMOTO RADIO MICRONOVA,,,,,DISPLAY LCD PER CONTROLLO STUFE AD ANGOLO EVACALOR GIOTTO-RAFFAELLO-MICHELANGELO,LCD DISPLAY FOR CORNER STOVES EVACALOR GIOTTO-RAFFAELLO-MICHELANGELO,ECRAN LCD,PANTALLA LCD PARA CONTROL CHIMENEAS A ESQUINA GIOTTO-RAFFAELLO,telecomando-radio-micronova,244.00,46.10,,,,,0,true,,Telecomando radio micronova display lcd,Telecomando radio micronova display lcd,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/display-cavi-telecomandi/telecomando-micronova.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:40.224999+00,'angol':11B 'controll':8B 'display':5B 'evacalor':12B 'giott':14B 'giotto-raffaello-michelangel':13B 'lcd':6B 'michelangel':16B 'micronov':3A 'null':4A 'rad':2A 'raffaell':15B 'stuf':9B 'telecom':1A
+34,10,NULL,NULL,TELECOMANDO UNIVERSALE PER STUFE A PELLET ELETTRONICA MICRONOVA,UNIVERSAL REMOTE CONTROL FOR PELLET STOVES MICRONOVA,TELECOMMANDE UNIVERSEL POUR POELES A PELLET MICRONOVA,MANDO UNIVERSAL PARA ESTUFAS DE PELLET MICRONOVA,,,,,Con Display LED/LCD Micronova,With LED/LCD MicronovaÂ Display,Avec Ã¨cran LED/LCD Micronova,Con pantalla LED/LCD micronova,telecomando-universale-per-stufe-a-pellet,28.06,1.13,,,,,0,true,,Telecomando Universale per Stufe a Pellet,Telecomando Universale per Stufe a Pellet,,https://www.ricambixstufe.it/ricambixstufe/141-home_default/telecomando-universale-per-stufe-a-pellet.jpg,2026-03-27 11:34:24.346804+00,2026-03-27 11:34:24.346804+00,"'display':11B 'elettron':7A 'led/lcd':12B 'micronov':8A,13B 'null':9A 'pellet':6A 'stuf':4A 'telecom':1A 'universal':2A"
+35,11,NULL,NULL,SCHEDA ELETTRONICA MICRONOVA I023,MICRONOVA MOTHERBOARD I023,CARTE MERE MICRONOVA I023,TARJETA ELETTRONICA MICRONOVA I023,,,,,"Mod. I023-5 - supporto in ABS
+Per stufe aria
+
+COMPATIBILE SOLO CON DISPLAY MICRONOVA, ALL'ORDINE SPECIFICARE PER QUALE DISPLAY PROGRAMMARLA E SE CON ENCODER MOTORE FUMI O SENZA","Mod. I023-5 - ABS support.
+For air stoves.
+
+ONLY COMPATIBLE WITH MICRONOVA DISPLAY. WITH YOUR ORDER PLEASE SPECIFY FOR WHICH DISPLAY WE HAVE TO PROGRAM IT, AND IF WITH OR WITHOUTÂ THE SMOKES MOTOR ENCODER","Mod. I023-5 - support ABS.
+
+Pour poeles Ã  air.
+
+COMPATIBLE SEULEMENTÂ AVEC AFFICHEUR MICRONOVA. AU MOMENT DU COMMANDE, S'IL VOUS PLAIT PRÃ‰CISER POUR LESQUELS AFFICHEURS LES PROGRAMMER ET SI AVEC OU SANS L'ENCODEUR DU MOTEUR DES FUMÃˆES.","Mod. I023-5 - soporte en ABS
+Para estufas de aire
+
+Â 
+
+COMPATIBLE SOLO CON PANTALLA MICRONOVA. CUANDO SE HACE EL ORDEN ESPECIFICAR PARA QUE TIPO DE PANTALLA PROGRAMARLA Y SI TIENE MOTOR HUMOS CON ENCODER O SIN ENCODER.",scheda-elettronica-micronova-i023,201.30,35.00,,,,,0,true,,scheda-elettronica-micronova-i023,scheda-elettronica-micronova-i023,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/schede-elettroniche-sensori/scheda-elettronica-i023-5t.jpeg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:40.451571+00,"'-5':8B 'abs':11B 'ari':14B 'compat':15B 'display':18B,25B 'elettron':2A 'encoder':30B 'fum':32B 'i023':4A,7B 'micronov':3A,19B 'mod':6B 'motor':31B 'null':5A 'ordin':21B 'programm':26B 'sched':1A 'senz':34B 'sol':16B 'specific':22B 'stuf':13B 'support':9B"
+36,11,NULL,NULL,SCHEDA ELETTRONICA MICRONOVA I023-5T,MICRONOVA MOTHERBOARD I023-5T,CARTE MERE MICRONOVA I023-5T,TARJETA ELECTRONICA MICRONOVA I023-5T,,,,,"Mod. I023-5T - supporto in ABS
+Per aria/acqua/canalizzate
+
+COMPATIBILE SOLO CON DISPLAY MICRONOVA, ALL'ORDINE SPECIFICARE PER QUALE DISPLAY PROGRAMMARLA E SE CON ENCODER MOTORE FUMI O SENZA","Mod. I023-5T - ABSÂ support
+For air/water/ductable stoves,
+
+ONLY COMPATIBLE WITH MICRONOVA DISPLAY. WITH YOUR ORDER PLEASE SPECIFY FOR WHICH DISPLAY WE HAVE TO PROGRAM IT, AND IF WITH OR WITHOUT THE SMOKES MOTOR ENCODER","Mod. I023-5T - ABSÂ support
+Pour air/eau/canalisable.
+
+COMPATIBLE SEULEMENT AVEC AFFICHEUR MICRONOVA. AU MOMENT DU COMMANDE, S'IL VOUS PLAIT PRÃ‰CISER POUR LESQUELS AFFICHEURS LES PROGRAMMER ET SI AVEC OU SANS L'ENCODEUR DU MOTEUR DES FUMÃˆES.","Mod. I023-5T - soporte en ABS
+Para aire/agua/canalizadas
+
+Â 
+
+COMPATIBLE SOLO CON PANTALLA MICRONOVA. CUANDO SE HACE EL ORDEN ESPECIFICAR PARA QUE TIPO DE PANTALLA PROGRAMARLA Y SI TIENE MOTOR HUMOS CON ENCODER O SIN ENCODER.",centralina-elettronica-micronova-2,219.60,40.16,,,,,1,true,,centralina elettronica micronova,centralina elettronica micronova,,https://www.ricambixstufe.it/ricambixstufe/274-home_default/centralina-elettronica-micronova-2.jpg,2026-03-27 11:34:24.346804+00,2026-03-27 11:34:24.346804+00,"'5t':6A,11B 'abs':14B 'aria/acqua/canalizzate':16B 'compat':17B 'display':20B,27B 'elettron':2A 'encoder':32B 'fum':34B 'i023':5A,10B 'i023-5t':4A,9B 'micronov':3A,21B 'mod':8B 'motor':33B 'null':7A 'ordin':23B 'programm':28B 'sched':1A 'senz':36B 'sol':18B 'specific':24B 'support':12B"
+37,11,NULL,NULL,SCHEDA ELETTRONICA N100 MICRONOVA," MICRONOVA N100 MOTHERBOARD",CARTE MERE MICRONOVA N100,TARJETA ELECTRONICA MICRONOVA N100,,,,,"Programmabile per display 3 o 6 tasti
+Per stufe aria
+
+COMPATIBILE SOLO CON DISPLAY MICRONOVA, 
+
+ALL'ORDINE SPECIFICARE PER QUALE DISPLAY 
+
+PROGRAMMARLA(LED O LCD) (3 O 6 TASTI)Â  INDICARE I 
+
+KW DELLA STUFA","For display with 3 or 6 buttons.
+
+For air stoves.
+
+ONLY COMPATIBLE WITH MICRONOVA DISPLAY. WITH YOUR ORDER PLEASE SPECIFY FOR WHICH DISPLAY WE HAVE TO PROGRAM IT, AND IF WITH OR WITHOUT THE SMOKES MOTOR ENCODER","Pour Ã©crans Ã  3 ou 6 touches.Â Pour poeles Ã  air.
+
+COMPATIBLE UNIQUEMENT AVEC Lâ€™AFFICHAGE MICRONOVA, Ã€ LA COMMANDE SPÃ‰CIFIER POUR QUEL AFFICHAGE PROGRAMMEZ-LE (DEL OU LCD) (3 OU 6 TOUCHES) ET INDIQUEZ I KW DU POÃŠLE","Programable para pantallas con 3 o 6 botones
+Para estufas aire
+
+Â 
+
+COMPATIBLE SOLO CON PANTALLA MICRONOVA. CUANDO SE HACE EL ORDEN ESPECIFICAR PARA QUE TIPO DE PANTALLA PROGRAMARLA Y SI TIENE MOTOR HUMOS CON ENCODER O SIN ENCODER.",centralina-elettronica-micronova-n100,125.66,21.20,,,,,1,true,,centralina elettronica micronova,centralina elettronica micronova,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/schede-elettroniche-sensori/scheda-elettronica-n100-micronova.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:40.673079+00,"'3':9B,31B '6':11B,33B 'ari':15B 'compat':16B 'display':8B,19B,26B 'elettron':2A 'indic':35B 'kw':37B 'lcd':30B 'led':28B 'micronov':4A,20B 'n100':3A 'null':5A 'ordin':22B 'programm':6B,27B 'sched':1A 'sol':17B 'specific':23B 'stuf':14B,39B 'tast':12B,34B"
+38,11,NULL,NULL,SCHEDA ELETTRONICA DUEPI,DUEPI MOTHERBOARD,CARTE MERE DUEPI,TARJETA ELECTRONICA DUEPI,,,,,"SCHEDA MADRE DUEPI EVO VM88LED
+
+PER STUFE AD ARIA
+
+PROGRAMMATA PER STUFE 8 KW CON DISPLAY LED 3 TASTI","ABS support.
+
+For air stoves.","Support ABS
+
+Pour poeles Ã  air","Para estufas Aire
+
+Soporte en ABS",centralina-elettronica-duepi,127.49,24.15,,,,,1,true,,centralina elettronica duepi,centralina elettronica duepi,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/schede-elettroniche-sensori/scheda-elettronica-duepi.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:40.834933+00,"'3':22B '8':17B 'ari':13B 'display':20B 'duep':3A,7B 'elettron':2A 'evo':8B 'kw':18B 'led':21B 'madr':6B 'null':4A 'programm':14B 'sched':1A,5B 'stuf':11B,16B 'tast':23B 'vm88led':9B"
+39,12,NULL,NULL,BRACIERE STUFE 11-13 KW EVACALOR-PUNTOFUOCO,"BRAZIER FOR 8-11 KW STOVES ",BRASERO POELES 8-11 KW,BRASERO ESTUFAS 8-11 KW,,,,,"BRACIERE STUFE 11-13 KW
+EVACALOR - PUNTOFUOCO","BRAZIER FOR 8-11 KW STOVES
+EVACALOR","Brasero pour poeles 8-11 KW
+EVACALOR","BRASERO ESTUFAS 8-11 KW
+EVACALOR",braciere-stufe-8-11-kw,32.00,5.52,,,,,1,true,,braciere stufe 8-11 kw evacalor,braciere stufe 8-11 kw evacalor,,https://www.ricambixstufe.it/ricambixstufe/77-home_default/braciere-stufe-8-11-kw.jpg,2026-03-27 11:34:24.346804+00,2026-03-27 11:34:24.346804+00,"'-13':4A,13B '11':3A,12B 'brac':1A,10B 'evacalor':7A,15B 'evacalor-puntofuoc':6A 'kw':5A,14B 'null':9A 'puntofuoc':8A,16B 'stuf':2A,11B"
+40,12,NULL,NULL,BRACIERE COMPLETO STUFE 6-7-8KW ANITA-EDDY-ANNA,COMPLETE BRAZIER FOR 6-7-8 KW STOVES,BRASERO COMPLET POUR POELES 6-7-8 KW,BRASERO COMPLETO ESTUFAS 6-7-8 KW,,,,,"BRACIERE COMPLETO STUFE 6-7-8 KW
+EVACALOR-PUNTOFUOCO","COMPLETE BRAZIER FOR 6-7-8 KW STOVES
+EVACALOR","BRASERO COMPLET POUR POELES 6-7-8 KW
+EVACALOR","BRASERO COMPLETO ESTUFAS 6-7-8 KW
+EVACALOR",braciere-completo-stufe-6-7-8-kw,36.60,5.80,,,,,0,true,,braciere completo stufe 6-7-8 kw evacalor,braciere completo stufe 6-7-8 kw evacalor,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/bracieri-camere-combustione/braciere-completo-stufe-6-7-8kw-anita-eddy-anna.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:41.005271+00,"'-7':5A,17B '-8':6A,18B '6':4A,16B 'anit':9A 'anita-eddy-ann':8A 'anna':11A 'brac':1A,13B 'complet':2A,14B 'eddy':10A 'evacalor':21B 'evacalor-puntofuoc':20B 'kw':7A,19B 'null':12A 'puntofuoc':22B 'stuf':3A,15B"
+41,12,NULL,NULL,GRIGLIA ACCIAO BRACIERE,STEEL BRAZIER GRID,GRILLE EN ACIER POUR BRASERO,GRILLA EN ACERO PARA BRASEROS,,,,,"GRIGLIA ACCIAIO BRACIERE
+EVACALOR","STEEL BRAZIER GRID
+EVACALOR","GRILLE EN ACIER POUR BRASERO
+EVACALOR","GRILLA ACERO BRASERO
+EVACALOR",griglia-acciao-braciere,8.00,1.72,,,,,1,true,,griglia acciao braciere evacalor,griglia acciao braciere evacalor,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/bracieri-camere-combustione/griglia-acciao-braciere.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:41.154145+00,"'accia':2A 'acciai':6B 'brac':3A,7B 'evacalor':8B 'grigl':1A,5B 'null':4A"
+42,12,NULL,NULL,"BRACIERE IN GHISA ",BRAZIER IN CAST IRON,BRASERO EN FONTE,BRASERO EN HIERRO FUNDIDO,,,,,MISURE INCASSO BRACIERE 12 X 7 cm,12 X 7 cm,12 X 7 cm,MEDIDAS INGRESO BRASERO 12 X 7 cm,braciere-in-ghisa,36.60,8.69,,,,,1,true,,braciere in ghisa,braciere in ghisa,,https://www.ricambixstufe.it/ricambixstufe/80-home_default/braciere-in-ghisa.jpg,2026-03-27 11:34:24.346804+00,2026-03-27 11:34:24.346804+00,"'12':8B '7':10B 'brac':1A,7B 'cm':11B 'ghis':3A 'incass':6B 'misur':5B 'null':4A 'x':9B"
+43,12,NULL,NULL,BRACIERE IN GHISA,BRAZIER IN CAST IRON,BRASERO EN FONTE,BRASERO EN HIERRO FUNDIDO,,,,,"MISURE D'INCASSO 13,5 X 8 cm
+
+EVACALOR-PUNTOFUOCO","13,5 X 8 cm","TROUÂ 13,5 X 8 cm","MEDIDAS INGRESO BRASERO 13,5 X 8 cm",braciere-in-ghisa-2,115.90,15.73,,,,,1,true,,braciere in ghisa,braciere in ghisa,,https://www.ricambixstufe.it/ricambixstufe/544-home_default/braciere-in-ghisa-2.jpg,2026-03-27 11:34:24.346804+00,2026-03-27 11:34:24.346804+00,'13':8B '5':9B '8':11B 'brac':1A 'cm':12B 'd':6B 'evacalor':14B 'evacalor-puntofuoc':13B 'ghis':3A 'incass':7B 'misur':5B 'null':4A 'puntofuoc':15B 'x':10B
+44,13,NULL,NULL,"PRESSOSTATO / DEPRESSORE 0,4 mbar",PRESSURE SWITCH / DEPRESSOR,PRESSOSTAT / DEPRESSIOMETRE,PRESOSTATO / DEPRESOR,,,,,"TARATURA 0,6 mbar
+
+MARCA: MICRONOVA","CALIBRATION 0,6 mbar","CALIBRAGE 0,6 mbar","CalibraciÃ²n 0,6 mbar",pressostato-depressore,26.84,5.24,,,,,1,true,,"pressostato / depressore taratura 0,6 mbar","pressostato / depressore taratura 0,6 mbar",,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/sonde-depressori-termostati/pressostato-depressore-0-4-mbar.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:41.300355+00,"'0':3A,8B '4':4A '6':9B 'depressor':2A 'marc':11B 'mbar':5A,10B 'micronov':12B 'null':6A 'pressost':1A 'taratur':7B"
+45,13,NULL,NULL,"PRESSOSTATO / DEPRESSORE 0,6 mbar",PRESSURE SWITCH / DEPRESSOR,PRESSOSTAT / DEPRESSIOMETRE,PRESOSTATO / DEPRESOR,,,,,"TARATURA 0,4 mbar
+
+MARCA: MICRONOVA","CALIBRATION 0,4 mbar","CALIBRAGEÂ Â 0,4 mbar","CalibraciÃ²n 0,6 mbar",pressostato-depressore-2,26.84,5.60,,,,,1,true,,"pressostato / depressore taratura 0,4 mbar","pressostato / depressore taratura 0,4 mbar",,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/sonde-depressori-termostati/pressostato-depressore-0-6-mbar.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:41.462984+00,"'0':3A,8B '4':9B '6':4A 'depressor':2A 'marc':11B 'mbar':5A,10B 'micronov':12B 'null':6A 'pressost':1A 'taratur':7B"
+46,13,NULL,NULL,SONDA TEMPERATURA AMBIENTE NTC 10K MICRONOVA,NTC 10K MICRONOVA AMBIENT TEMPERATURE PROBE,SONDE TEMPERATURE AMBIANTE NTC 10K MICRONOVA,SONDA TEMPERATURA AMBIENTE NTC 10K MICRONOVA,,,,,"Lunghezza: 850 mm.
+Connettore per scheda N100, in alternativa si puÃ² tagliare il connettore per utilizzarla su altre schede","Length: 850 mm.
+Connector for N100 card, or you can cut the connector to use it on other boards","Longueur: 850 mm.
+Connecteur pour carte N100, ou vous pouvez couper le connecteur pour l'utiliser sur d'autres carte","Longitud: 850 mm.
+Conector para tarjeta N100, o puede cortar el conector para usarlo en otras placas",sonda-temperatura-ambiente-ntc-10k-micronova,13.42,1.25,,,,,1,true,,sonda temperatura ambiente ntc 10k micronova,sonda temperatura ambiente ntc 10k micronova,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/sonde-depressori-termostati/sonda-temperatura-ambiente-ntc-10k-micronova.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:41.613242+00,"'10k':5A '850':9B 'altern':16B 'altre':25B 'ambient':3A 'connettor':11B,21B 'lunghezz':8B 'micronov':6A 'mm':10B 'n100':14B 'ntc':4A 'null':7A 'puÃ²':18B 'sched':13B,26B 'sond':1A 'tagl':19B 'temperatur':2A 'utilizz':23B"
+47,13,NULL,NULL,SONDA TEMPERATURA FUMI MICRONOVA,MICRONOVA SMOKES PROBE,SONDE TEMPERATURE FUMÃ‰ES MICRONOVA,SONDA TEMPERATURA HUMOS MICRONOVA,,,,,"Lunghezza: 850 mm.
+Connettore per scheda N100, in alternativa si puÃ² tagliare il connettore per utilizzarla su altre schede","Length: 850 mm.
+Connector for N100 card, or you can cut the connector to use it on other boards","Longueur: 850 mm.
+Connecteur pour carte N100, ou vous pouvez couper le connecteur pour l'utiliser sur d'autres carte","Longitud: 850 mm.
+Conector para tarjeta N100, o puede cortar el conector para usarlo en otras placas",sonda-temperatura-fumi-micronova,25.01,4.00,,,,,1,true,,sonda temperatura fumi micronova,sonda temperatura fumi micronova,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/sonde-depressori-termostati/sonda-temperatura-fumi-micronova.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:41.758179+00,"'850':7B 'altern':14B 'altre':23B 'connettor':9B,19B 'fum':3A 'lunghezz':6B 'micronov':4A 'mm':8B 'n100':12B 'null':5A 'puÃ²':16B 'sched':11B,24B 'sond':1A 'tagl':17B 'temperatur':2A 'utilizz':21B"
+48,14,NULL,NULL,NASTRO ADESIVO IN FIBRA DI VETRO 550Â°C 10mm X 3mm,ADHESIVE TAPE FIBERGLASS 550Â°C 100mm x 3mm,RUBAN ADHÃ‰SIF  EN FIBRE DE VERRE 550Â°C 10mm x 3mm,CUERDA ADHESIVA EN FIBRA DE VIDRIO 550Â°C 10mm x 3mm,,,,,"Spessore 3 mm.
+Larghezza: 10
+
+Colore: Grigio Scuro
+
+PREZZO AL METRO!","Thickness 3 mm.
+Width: 10 mm.
+Black","3 mm d'Ã©paisseur.
+Largeur: 10 mm.
+Noir","Espesor 3 mm.
+Ancho: 10 mm.
+Negro",nastro-adesivo-in-fibra-di-vetro-550c,3.29,,,,,,1,true,,nastro adesivo in fibra di vetro 550Â°c,nastro adesivo in fibra di vetro 550Â°c,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/guarnizioni-silicone/nastro-adesivo-in-fibra-di-vetro-550-c-10mm-x-3mm.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:41.943045+00,'10':17B '10mm':9A '3':14B '3mm':11A '550':7A 'ades':2A 'color':18B 'fibr':4A 'grig':19B 'larghezz':16B 'metr':23B 'mm':15B 'nastr':1A 'null':12A 'prezz':21B 'scur':20B 'spessor':13B 'vetr':6A 'x':10A
+49,14,NULL,NULL,"CORDINO 9 MM ",BRAID IN FIBERGLASS TRICOTEX 550Â°C,TRESSE EN FIBRE DE VERRE TRICOTEX 550Â°C,"CUERDA PARA PUERTAS ",,,,,"Diametro 9 mm
+
+Flessibile Colore GRIGIO
+
+PREZZO AL METRO!","Diameter: 10 mm
+
+Flexible, Color: White","DiamÃ¨treÂ 10 mm.
+FlexibleÂ Couleur Blanc","Diametro 10 mm
+
+Flexible Colore Blanco",treccia-in-fibra-di-vetro-tricotex-550c,4.27,,,,,,1,true,,treccia in fibra di vetro tricotex 550Â°c,treccia in fibra di vetro tricotex 550Â°c,,https://www.ricambixstufe.it/ricambixstufe/574-home_default/treccia-in-fibra-di-vetro-tricotex-550c.jpg,2026-03-27 11:34:24.346804+00,2026-03-27 11:34:24.346804+00,"'9':2A,6B 'color':9B 'cordin':1A 'diametr':5B 'flessibil':8B 'grig':10B 'metr':13B 'mm':3A,7B 'null':4A 'prezz':11B"
+50,14,NULL,NULL,GUARNIZIONE SILICONICA PER TUBI PELLET,SILICONE GASKET FOR PELLET PIPES,JOINT EN SILICON POUR TUYAUX PELLET,GuarniciÃ²n en silicona para tubos,,,,,,,,,guarnizione-siliconica-per-tubi-pellet,1.95,,,,,,1,true,,guarnizione siliconica per tubi pellet,guarnizione siliconica per tubi pellet,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/guarnizioni-silicone/guarnizione-siliconica-per-tubi-pellet.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:42.091614+00,'guarnizion':1A 'null':6A 'pellet':5A 'silicon':2A 'tub':4A
+51,9,NULL,NULL,RESISTENZA CERAMICA ATTACCO 3/8,CERAMIC SPARK PLUG - 3/8 CONNECTION,BOUGIE EN CÃ‰RAMIQUE - CONNEXION FILETÃ‰E 3/8,RESISTENCIA CERAMICA ATAQUE 3/8,,,,,"MODELLO PSX-6-240-B 300W Â  220-240V
+
+RACCORDO FILETTATO 3/8
+
+LUNGHEZZA SOTTOBATTUTA RACCORDO 85mm
+
+LUNGHEZZA TOTALE 107mm
+
+MARCA: HT
+
+LUNGHEZZA CAVI 350mm","PSX-6-240-B 300W 220-240VÂ MODEL
+
+THREADED CONNECTION 3/8
+
+LENGTH UNDER BEAT CONNECTOR 85mm
+
+OVERALL LENGHT 107mm
+
+CABLE LENGTH 350mm","MODÃˆLE PSX-6-240-B 300W 220-240V
+
+CONNEXION FILETÃ‰E 3/8
+
+LONGUEUR SOUS BATTRE RACCORD 85mm
+
+LONGUEUR TOTALE 107mm
+
+LONGUEUR DU CABLE 350mm","MODELO PSX-6-240-B 300W Â  220-240V
+
+UNION ROSCADA 3/8
+
+LONGITUD TOTAL 107mm
+
+MARCA: HT",resistenza-ceramica-attacco-38,78.00,,,,,,1,true,,resistenza-ceramica-attacco-3/8,resistenza-ceramica-attacco-3/8,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/resistenze-accensione/resistenza-ceramica-attacco-38.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:42.240922+00,"'-240':9B,13B '-6':8B '107mm':24B '220':12B '3/8':4A,17B '300w':11B '350mm':29B '85mm':21B 'attacc':3A 'b':10B 'cav':28B 'ceram':2A 'filett':16B 'ht':26B 'lunghezz':18B,22B,27B 'marc':25B 'modell':6B 'null':5A 'psx':7B 'raccord':15B,20B 'resistent':1A 'sottobatt':19B 'total':23B 'v':14B"
+52,11,NULL,NULL,SENSORE DEBIMETRO MICRONOVA,"MICRONOVA DEBIMETER SENSOR ",CAPTEUR DEBIMÃˆTRE  MICRONOVA,SENSOR DEBIMETRO MICRONOVA,,,,,SENSORE ARIA COMBUSTIONE MICRONOVA,MICRONOVA COMBUSTION AIR SENSOR,CAPTEUR DE L'AIR DE COMBUSTION,SENSOR AIRE COMBUSTION MICRONOVA,sensore-debimetro-micronova,57.95,,,,,,0,true,,sensore-debimetro-micronova,sensore-debimetro-micronova,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/schede-elettroniche-sensori/sensore-debimetro-micronova.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:42.39515+00,"'ari':6B 'combustion':7B 'debimetr':2A 'micronov':3A,8B 'null':4A 'sensor':1A,5B"
+53,8,NULL,NULL,VENTILATORE CENTRIFUGO NATALINI EVAGOLD30CO0001,EVAGOLD30CO0001 CENTRIFUGAL FAN,VENTILATEUR CENTRIFUGE EVAGOLD30CO0001,VENTILADOR CENTRIFUGO EVAGOLD30CO0001,"230V 50HZ 70W CL.H RO CODE W925300010
+
+Chiocciola in lamiera alluminata
+- Motore a poli schermati, con rotore pressofuso
+- Uscita da Î¦60mm
+- Elevata efficienza (ridotto consumo energetico a paritÃ  di prestazioni della caldaia)
+- Ridotta rumorositÃ 
+- Albero motore in acciaio Inox temprato
+- Protezione dei lamierini dalla ruggine
+- Pacco motore realizzato mediante lamiera magnetica 3W a ridotte perdite elettromagnetiche
+- Sistema di smorzamento delle vibrazioni e della rumorositÃ  magnetica mediante l'utilizzo di antivibranti in gomma siliconica
+- Non sono richieste manutenzioni particolari.
+- L'albero motore Ã¨ supportato da 2 cuscinetti basculanti, schermati e lubrificati mediante grasso ad alta temperatura.
+- La soluzioni di fissaggio alla cappa Ã¨ brevettata
+- Ampia disponibilitÃ  di soluzioni di fissaggio della sonda di pressione
+- PossibilitÃ  di installazione sia in verticale sia in orizzontale
+- Sensore tachimetrico ad effetto Hall disponibile su richiesta
+- ConformitÃ  alle normativa vigenti in materia di estrazione fumi (EN 60335-1 /IEC 342-1).","- Aluminized steel housing
+- Shaded poles motor with die-cast rotor
+- Î¦60mm outlet
+- High efficiency (reduced power consumption @ the desired working parameters)
+- Low Noise
+- Hardened stainless steel shaft
+- Rust proof protection
+- Motor stack made of magnetic laminations with minimal loss rate
+- Any need for specific maintenance
+- Motor shaft supported by two oscillating ball bearings, that are shielded and lubricated with special high temperature grease
+- Vibration-damping system
+- Patented coupling system inside boiler
+- Several solutions for pressure signal available
+- Possible either vertical or horizontal installation
+- Hall effect sensor for speed check available on request
+- It fulfils EN 60335-1 /IEC 342-1 standards.","- BoÃ®tier en acier aluminisÃ©
+- Moteur pÃ´les Ã  rotor moulÃ© sous pression
+- Sortie Î¦60mm
+- Haute efficacitÃ© (consommation d'Ã©nergie rÃ©duite @ les paramÃ¨tres de travail souhaitÃ©e)
+- Faible bruit
+- Arbre en acier trempÃ© inoxydable
+- Rust protection preuve
+- Pile Ã  moteur en tÃ´les magnÃ©tiques avec un taux de perte minimale
+- Tous les besoins d'entretien spÃ©cifique
+- Arbre moteur supportÃ© par deux roulements Ã  billes oscillants, qui sont protÃ©gÃ©s et lubrifiÃ©s avec de la graisse Ã  haute tempÃ©rature spÃ©ciale
+- SystÃ¨me antivibratoire
+- SystÃ¨me de couplage brevetÃ© intÃ©rieur chaudiÃ¨re
+- Plusieurs solutions pour le signal de pression disponible
+- Installation possible soit verticale ou horizontale
+- Capteur Ã  effet Hall pour le contrÃ´le de la vitesse disponible sur demande
+- Il respecte les standards EN 60335-1 / IEC 342-1.",,"VENTILATORE CENTRIFUGO ARIA PER STUFE A PELLET EVAGOLD30CO0001
+
+MARCA: SIT",EVAGOLD30CO0001 CENTRIFUGAL AIR FAN FOR AIR PELLET STOVES,VENTILATEUR CENTRIFUGE POUR AIR POELES -Â EVAGOLD30CO0001,"VENTILADOR CENTRIFUGO ARIA PARA ESTUFAS A PELLET EVAGOLD30CO0001
+
+MARCA: SIT",ventilatore-centrifugo-w925300010,110.04,,,,,,1,true,,ventilatore-centrifugo-w925300010,ventilatore-centrifugo-w925300010,,https://www.ricambixstufe.it/ricambixstufe/121-home_default/ventilatore-centrifugo-w925300010.jpg,2026-03-27 11:34:24.346804+00,2026-03-27 11:34:24.346804+00,"'-1':157C,160C '/iec':158C '2':100C '230v':16C '342':159C '3w':67C '50hz':17C '60335':156C '70w':18C 'acciai':53C 'alber':50C,95C 'allumin':26C 'alta':109C 'ampi':119C 'antivibr':85C 'ari':8B 'bascul':102C 'brevett':118C 'caldai':47C 'capp':116C 'centrifug':2A,7B 'chiocciol':23C 'cl.h':19C 'cod':21C 'conform':146C 'consum':40C 'cuscinett':101C 'dispon':143C 'disponibil':120C 'effett':141C 'efficient':38C 'elettromagnet':71C 'elev':37C 'en':155C 'energet':41C 'estrazion':153C 'evagold30co0001':4A,13B 'fissagg':114C,124C 'fum':154C 'gomm':87C 'grass':107C 'hall':142C 'inox':54C 'install':131C 'lamier':25C,65C 'lamierin':58C 'lubrific':105C 'magnet':66C,80C 'manutenzion':92C 'marc':14B 'mater':151C 'mediant':64C,81C,106C 'motor':27C,51C,62C,96C 'natalin':3A 'normat':148C 'null':5A 'orizzontal':137C 'pacc':61C 'parit':43C 'particolar':93C 'pellet':12B 'perd':70C 'pol':29C 'possibil':129C 'pression':128C 'pressofus':33C 'prestazion':45C 'protezion':56C 'realizz':63C 'richiest':91C,145C 'ridott':39C,48C,69C 'ro':20C 'rotor':32C 'ruggin':60C 'rumoros':49C,79C 'scherm':30C,103C 'sensor':138C 'silicon':88C 'sistem':72C 'sit':15B 'smorz':74C 'soluzion':112C,122C 'sond':126C 'stuf':10B 'support':98C 'tachimetr':139C 'temperatur':110C 'tempr':55C 'uscit':34C 'utilizz':83C 'ventil':1A,6B 'vertical':134C 'vibrazion':76C 'vigent':149C 'w925300010':22C 'Ï†60mm':36C"
+54,8,NULL,NULL,VENTILATORE ARIA CENTRIFUGO RLH120/0038-3038LH,RLH120/0038-3038LH CENTRIFUGAL AIR FAN,"VENTILATEUR AIR CENTRIFUGE RLH120/0038-3038LH ",VENTILADOR AIRE CENTRIFUGO,,,,,"RLH120/0038 A12-3038LH-449 aaa
+
+230V AC 50Hz 90W
+
+(WITH INTAKE NOZZLE)
+
+5546096461
+
+MARCA: EBM","RLH120/0038 A12-3038LH-449 aaa
+
+230V AC 50Hz 90W
+
+(WITH INTAKE NOZZLE)
+
+5546096461","RLH120/0038 A12-3038LH-449 aaa
+
+230V AC 50Hz 90W
+
+(AVEC ASPIRATION BUSE)
+
+5546096461","RLH120/0038 A12-3038LH-449 aaa
+
+230V AC 50Hz 90W
+
+(WITH INTAKE NOZZLE)
+
+5546096461
+
+MARCA: EBM",ventilatore-aria-centrifugo,153.72,,,,,,1,true,,ventilatore-aria-centrifugo,ventilatore-aria-centrifugo,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/ventilatori-aria/ventilatore-aria-centrifugo-rlh1200038-3038lh-2.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:42.538288+00,'230v':12B '3038lh':9B '449':10B '50hz':14B '5546096461':19B '90w':15B 'a12':8B 'a12-3038lh':7B 'aaa':11B 'ac':13B 'ari':2A 'centrifug':3A 'ebm':21B 'intak':17B 'marc':20B 'nozzl':18B 'null':5A 'rlh120/0038':6B 'rlh120/0038-3038lh':4A 'ventil':1A 'with':16B
+55,7,NULL,NULL,"VENTILATORE FUMI CON ENCODER E CHIOCCIOLA ",SMOKES FAN WITH ENCODER AND SPIRAL,"VENTILATEUR DES FUMÃ‰ES AVEC ENCODEUR ET LIMAÃ‡ON ",VENTILADOR HUMOS CON ENCODER Y CARACOL,,,,,"ASPIRATORE FUMI TRIAL CAF15Y-165LS
+
+DIAMETRO USCITA 80MM
+
+230v AC 50 Hz
+
+Â 
+
+MARCA: EBM","G2E152/0020-3030LH-609 arn
+
+230v AC 50 Hz
+
+55462.50020","G2E152/0020-3030LH-609 arn
+
+230v AC 50 Hz
+
+55462.50020","G2E152/0020-3030LH-609 arn
+
+230v AC 50 Hz
+
+55462.50020
+
+MARCA: EBM",ventilatore-fumi-con-encoder-e-chiocciola-,115.90,,,,,,1,true,,ventilatore-fumi-con-encoder-e-chiocciola-,ventilatore-fumi-con-encoder-e-chiocciola-,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/ventilatori-fumi/ventilatore-fumi-con-encoder-e-chiocciola-2.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:42.762206+00,"'165ls':13B '230v':17B '50':19B '80mm':16B 'ac':18B 'aspir':8B 'caf15y':12B 'caf15y-165ls':11B 'chiocciol':6A 'diametr':14B 'ebm':22B 'encoder':4A 'fum':2A,9B 'hz':20B 'marc':21B 'null':7A 'trial':10B 'uscit':15B 'ventil':1A"
+56,12,NULL,NULL,"BRACIERE SUSY-PERLA 7,5 KW EVACALOR",BRAZIER FOR SUSY-PERLA-CATRIA EVACALOR STOVES,BRASERO SUSY-PERLA-CATRIA EVACALOR,BRASERO SUSY-PERLA-CATRIA EVACALOR,,,,,"BRACIERE IN ACCIAIO INOX STUFE 7,5 KW SLIM
+
+ EVACALOR-PUNTOFUOCO","INOX STEEL BRAZIER FOR 7,5 KW SLIM EVACALOR-PUNTOFUOCO STOVES","BRASERO EN ACIER INOX - POELES 7,5 KW SLIM EVACALOR-PUNTOFUOCO",,braciere-susy-perla-catria-evacalor,40.00,,,,,,1,true,,braciere-susy-perla-catria-evacalor,braciere-susy-perla-catria-evacalor,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/bracieri-camere-combustione/braciere-susy-perla-catria-evacalor-2.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:42.993014+00,"'5':6A,16B '7':5A,15B 'acciai':12B 'brac':1A,10B 'evacalor':8A,20B 'evacalor-puntofuoc':19B 'inox':13B 'kw':7A,17B 'null':9A 'perl':4A 'puntofuoc':21B 'slim':18B 'stuf':14B 'susy':3A 'susy-p':2A"
+57,10,NULL,NULL,"DISPLAY LCD ELETTRONICA TIEMME ",LCD DISPLAY - TIEMME ELECTRONICS,"Ã‰CRAN LCD - ELECTRONIQUE TIEMME ","PANTALLA LCD ELECTRONICA TIEMME ",,,,,COMPATIBILE CON SCHEDE ELETTRONICHE TIEMME PER STUFE IDRO,COMPATIBLE WITH ELECTRONIC BOARDS FOR TIEMME IDROÂ STOVES.,COMPATIBLE AVEC CARTES ELECTRONIQUES POUR POÃŠLES TIEMME IDRO,COMPATIBLE CON TARJETAS ELECTRONICAS TIEMME PARA ESTUFAS IDRO,display-lcd-elettronica-tiemme-,139.81,,,,,,1,true,,display-lcd-elettronica-tiemme-,display-lcd-elettronica-tiemme-,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/display-cavi-telecomandi/display-lcd-elettronica-tiemme.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:43.217872+00,"'compat':6B 'display':1A 'elettron':3A,9B 'idro':13B 'lcd':2A 'null':5A 'sched':8B 'stuf':12B 'tiemm':4A,10B"
+58,10,NULL,NULL,CAVO FLAT DISPLAY 1200 mm,FLAT CABLE FOR DISPLAY 1200 mm,CABLE FLAT POUR ÃˆCRAN 1200 mm,CABLE PLANO PANTALLA 1200mm,,,,,Lunghezza 1500mm,Length 120cm,Longueur 120cm,Longitud 120 cm,cavo-flat-display-58,13.42,,,,,,1,true,,Cavo Flat Display,Cavo Flat Display,,https://www.ricambixstufe.it/ricambixstufe/151-home_default/cavo-flat-display.jpg,2026-03-27 11:34:24.346804+00,2026-03-27 11:34:24.346804+00,'1200':4A '1500mm':8B 'cav':1A 'display':3A 'flat':2A 'lunghezz':7B 'mm':5A 'null':6A
+59,9,HT62663,NULL,"RESISTENZA ELETTRICA Ã˜ 12,5 mm LUNGH.160mm 350w ATTACCO A FILETTO 1/2",ELECTRICAL RESISTANCE Ã˜ 12.5 mm LENGTH 160 mm 350w WITH THREAD 1/2,"RÃ‰SISTANCE Ã‰LECTRIQUE Ã˜ 12,5 mm LONG.160 mm 350w AVEC FILET 1/2","Resistencia ElÃ¨ctrica  Ã˜ 12,5 mm Long.160mm 350w con tuerca 1/2",,,,,"Diametro: 12,5 x160 mm. (sottobattuta raccordo)
+350W-230V
+Lunghezza cavi: 500 mm.
+Con raccordo 1/2â€œ GAS
+
+COMPATIBILE CON: PALAZZETTI-MCZ
+
+MARCA: HT","Diameter: 12.5 x 160 mm.
+350W-230V
+Cable Length: 500 mm.
+With 1/2 ""GAS fitting.
+COMPATIBLE WITH: PALAZZETTI-MCZ","DiamÃ¨tre: 12,5 x 160 mm (avec raccord)
+350W-230V
+Longueur du cÃ¢ble: 500 mm.
+Avec raccord 1/2 ""GAS
+COMPATIBLE AVEC: PALAZZETTI-MCZ","Diametro: 9,9x140 mm. (tuerca bajo batida)
+350W-230V
+Longitud cables: 500 mm.
+Con tuerca 1/2â€œ GAS
+
+COMPATIBLE: MCZ-PALAZZETTI
+
+MARCA:HT",resistenza-elettrica-3-59,56.30,,,,,,1,true,,Resistenza elettrica,Resistenza elettrica per accensione,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/resistenze-accensione/resistenza-elettrica-12-5-mm-lungh-160mm-attacco-a-filetto-38.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:43.368374+00,"'1/2':12A,30B '12':4A,15B '230v':23B '350w':8A,22B '350w-230v':21B '5':5A,16B '500':26B 'attacc':9A 'cav':25B 'compat':32B 'diametr':14B 'elettr':2A 'filett':11A 'gas':31B 'ht':38B 'ht62663':13A 'lungh.160mm':7A 'lunghezz':24B 'marc':37B 'mcz':36B 'mm':6A,18B,27B 'palazzett':35B 'palazzetti-mcz':34B 'raccord':20B,29B 'resistent':1A 'sottobatt':19B 'x160':17B 'Ã¸':3A"
+60,9,HT62683,NULL,"RESISTENZA ELETTRICA Ã˜ 9,5 mm LUNGH.188 MM  ESECUZIONE DRITTA","ELECTRICAL RESISTANCE Ã˜ 9,5 mm LENGTH 188 MM - STRAIGHT","RESISTANCE ELECTRIQUE Ã˜ 9,5 mm LONG.188 MM DROIT","Resistencia ElÃ¨ctrica Ã˜ 9,5 mm Long.188 MM  ejecuciÃ²n recta",,,,,"Diametro: 9,5 x 188 mm.Â 
+250W-230V
+Lunghezza cavi: 500 mm.
+
+COMPATIBILE CON: THERMOROSSI
+
+MARCA: HT","Diameter: 9.5 x 188 mm.
+250W-230V
+Cable Length: 500 mm.
+
+COMPATIBLE WITH: THERMOROSSI","DiamÃ¨tre: 9,5 x 188 mm.
+250W-230V
+Longueur du cÃ¢ble: 500 mm.
+
+COMPATIBLE AVEC: THERMOROSSI","Diametro: 9,9x140 mm. (tuerca bajo batida)
+250W-230V
+Longitud cables: 200 mm.
+Con tuerca 3/8â€œ GAS
+
+MARCA:HT",resistenza-elettrica-3-60,36.60,,,,,,1,true,,Resistenza elettrica,Resistenza elettrica per accensione,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/resistenze-accensione/resistenza-elettrica-9-5-mm-lungh-188-mm-esecuzione-dritta.jpg,2026-03-27 11:34:24.346804+00,2026-04-02 10:47:43.519243+00,"'188':16B '230v':20B '250w':19B '250w-230v':18B '5':5A,14B '500':23B '9':4A,13B 'cav':22B 'compat':25B 'diametr':12B 'dritt':10A 'elettr':2A 'esecu':9A 'ht':29B 'ht62683':11A 'lungh.188':7A 'lunghezz':21B 'marc':28B 'mm':6A,8A,17B,24B 'resistent':1A 'thermoross':27B 'x':15B 'Ã¸':3A"
+61,9,HT62706,NULL,"RESISTENZA ELETTRICA Ã˜ 12,5 mm LUNGH.160 mm","SPARK PLUG Ã˜ 12,5 mm LENGTH 160 mm","BOUGIE D'ALLUMAGEÃ˜ 12,5 mm LONG.160 mm","Resistencia ElÃ¨ctrica Ã˜ 12,5 mm Long.160 mm",,,,,"Ã˜ 12,5 - lung.160 mm. (sotto battuta flangia)
+350W-230V
+Lunghezza cavi: 500 mm.
+COMPATIBILE CON: PALAZZETTI-MCZ
+
+MARCA: HT","Ã˜ 12.5 - length 160mm. (Bottom flange)
+350W-230V
+Cable Length: 500 mm.
+COMPATIBLE WITH: PALAZZETTI-MCZ","Ã˜ 12,5 - long.160mm. (bride infÃ©rieure)
+350W-230V
+Longueur du cÃ¢ble: 500 mm.
+COMPATIBLE AVEC: PALAZZETTI-MCZ","Ã˜ 12,5 - long.150 mm. (con brida)
+350W-230V
+Longitud cables: 1200 mm.
+Palazzetti-Royal-Thermorossi Olimpia Splendid
+
+MARCA: HT",resistenza-elettrica-3-61,44.00,,,,,,0,true,,Resistenza elettrica,Resistenza elettrica per accensione,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/resistenze-accensione/resistenza-elettrica-12-5-mm-lungh-160-mm.jpg,2026-03-27 11:34:24.476299+00,2026-04-02 12:30:40.993369+00,"'12':4A,11B '230v':20B '350w':19B '350w-230v':18B '5':5A,12B '500':23B 'batt':16B 'cav':22B 'compat':25B 'elettr':2A 'flang':17B 'ht':31B 'ht62706':9A 'lung.160':13B 'lungh.160':7A 'lunghezz':21B 'marc':30B 'mcz':29B 'mm':6A,8A,14B,24B 'palazzett':28B 'palazzetti-mcz':27B 'resistent':1A 'sott':15B 'Ã¸':3A,10B"
+62,9,HT62708,NULL,RESISTENZA ELETTRICA Ã˜ 16 mm LUNGH.120 mm,SPARK PLUG Ã˜ 16 mm length 120 mm,BOUGIE D'ALLUMAGE Ã˜ 16 mm long. 120 mm,"Resistencia ElÃ¨ctrica Ã˜ 12,5 mm LONG.120 mm",,,,,"Ã˜ 16 - lung.120 mm. (sotto battuta flangia) fornita con kit tubo porta resistenza
+350W-230V CODICE:HT62708
+Lunghezza cavi: 500 mm.
+COMPATIBILE CON: COLA
+
+MARCA: HT","Ã˜ 16 - length 120 mm. (Bottom flange) supplied with the tube resistance kit.
+350W-230V CODE: HT62708
+Cable Length: 500 mm.
+COMPATIBLE WITH: COLA","Ã˜ 16 - long.120 mm. (Bottom bride) fourni avec le kit tube porte rÃ©sistance.
+350W-230V: CODE HT62708
+Longueur du cÃ¢ble: 500 mm.
+COMPATIBLE AVEC: COLA","Ã˜ 12,5 - long.150 mm. (con brida)
+350W-230V
+Longitud cables: 1200 mm.
+Palazzetti-Royal-Thermorossi Olimpia Splendid",resistenza-elettrica-3-62,76.36,,,,,,1,true,,Resistenza elettrica,Resistenza elettrica per accensione,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/resistenze-accensione/resistenza-elettrica-16-mm-lungh-120-mm.jpg,2026-03-27 11:34:24.476299+00,2026-04-02 10:47:43.816883+00,"'16':4A,10B '230v':24B '350w':23B '350w-230v':22B '500':29B 'batt':14B 'cav':28B 'codic':25B 'col':33B 'compat':31B 'elettr':2A 'flang':15B 'forn':16B 'ht':35B 'ht62708':8A,26B 'kit':18B 'lung.120':11B 'lungh.120':6A 'lunghezz':27B 'marc':34B 'mm':5A,7A,12B,30B 'port':20B 'resistent':1A,21B 'sott':13B 'tub':19B 'Ã¸':3A,9B"
+63,9,HT62685,NULL,"RESISTENZA ELETTRICA Ã˜ 9,9 mm LUNGH.155 MM  ESECUZIONE DRITTA","SPARK PLUG Ã˜ 9,9 mm length 155 mm straight","BOUGIE D'ALLUMAGE Ã˜ 9,9 mm long.155 mm droit","Resistencia ElÃ¨ctrica Ã˜ 9,9 mm Long.155 MM ejecuciÃ²n recta",,,,,"Diametro: 9,9 x 155 mm. esecuzione drittaÂ 
+300W-230V
+Lunghezza cavi: 500 mm.
+
+COMPATIBILE CON: EDILKAMIN
+
+MARCA: HT62685","Diameter: 9.9 x 155 mm. straight run
+300W-230V
+Cable Length: 500 mm.
+
+COMPATIBLE WITH: EDILKAMIN","DiamÃ¨tre: 9,9 x 155 mm. course droite
+300W-230V
+Longueur du cÃ¢ble: 500 mm.
+
+COMPATIBLE AVEC: EDILKAMIN","Diametro: 9,9x140 mm. (tuerca bajo batida)
+250W-230V
+Longitud cables: 200 mm.
+Con tuerca 3/8â€œ GAS
+
+MARCA: HT",resistenza-elettrica-3-63,44.66,,,,,,1,true,,Resistenza elettrica,Resistenza elettrica per accensione,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/resistenze-accensione/resistenza-elettrica-9-9-mm-lungh-155-mm-esecuzione-dritta.jpg,2026-03-27 11:34:24.476299+00,2026-04-02 10:47:43.968276+00,"'155':16B '230v':22B '300w':21B '300w-230v':20B '500':25B '9':4A,5A,13B,14B 'cav':24B 'compat':27B 'diametr':12B 'dritt':10A,19B 'edilkamin':29B 'elettr':2A 'esecu':9A,18B 'ht62685':11A,31B 'lungh.155':7A 'lunghezz':23B 'marc':30B 'mm':6A,8A,17B,26B 'resistent':1A 'x':15B 'Ã¸':3A"
+64,8,NULL,NULL,VENTILATORE TANGENZIALE GRANDE SX,"BIG TANGENTIAL LEFT FAN ","VENTILATEUR TANGENTIEL GAUCHE GRAND ",VENTILADOR TANGENCIAL GRANDE SX,,,,,"EMMEVI COD.158202
+230V 50hz 77W
+
+BOCCA DA 28 CM
+
+COMPATIBILE CON STUFE: CADEL -FREEPOINT","EMMEVI COD.158202
+
+230V 50hz 77W
+
+SUITABLE FOR CADEL -FREEPOINT STOVES","EMMEVI COD.158202
+230V 50hz 77W
+
+COMPATIBLE AVEC POÃŠLES: CADEL -FREEPOINT","EMMEVI COD.158202
+230V 50hz 77W
+
+COMPATIBLE CON ESTUFAS: CADEL -FREEPOINT
+
+BOCA DE 28 CM",ventilatore-tangenziale-grande-64,181.00,,,,,,1,true,,Ventilatore aria per stufe a pellet,Ventilatore tangenziale per stufe a pellet,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/ventilatori-aria/ventilatore-tangenziale-grande-sx-2.jpg,2026-03-27 11:34:24.476299+00,2026-04-02 10:47:44.116715+00,'230v':8B '28':13B '50hz':9B '77w':10B 'bocc':11B 'cadel':18B 'cm':14B 'cod.158202':7B 'compat':15B 'emmev':6B 'freepoint':19B 'grand':3A 'null':5A 'stuf':17B 'sx':4A 'tangenzial':2A 'ventil':1A
+65,9,HT68027,NULL,"RESISTENZA ELETTRICA Ã˜ 12,5 mm LUNG.85 mm HT68027","SPARK PLUG Ã˜ 12,5 mm LUNGH.85 mm HT68027","BOUGIE D'ALLUMAGE Ã˜ 12,5 mm LUNGH.85 mm HT68027","Resistencia ElÃ¨ctrica Ã˜ 12,5 mm LUNG. 85 mm HT68027",,,,,"Diametro: 12.5 x 85 mm. (senza raccordo)
+200W-230V
+Lunghezza cavi: 500 mm
+
+COMPATIBILE CON CADEL FAMILY
+
+MARCA:Â HT68027","Diameter: 12.5x85 mm. (no connection)
+200W-230V
+Cable length: 500 mm
+
+COMPATIBLE WITH FAMILY CADEL","DiamÃ¨tre: 12.5x 85 mm. (sans raccord)
+200W-230V
+Longueur des cÃ¢bles: 500 mm
+
+COMPATIBLE AVEC CADEL FAMILY","Diametro: 12.5x 85 mm. (sin uniÃ²n)
+200W-230V
+Longitud cables: 500 mm
+
+COMPATIBLE CON CADEL FAMILY
+
+MARCA: HT",resistenza-elettrica-2-65,41.42,,,,,,1,true,,Resistenza elettrica,Resistenza elettrica per accensione,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/resistenze-accensione/resistenza-elettrica-12-5-mm-lung-85-mm-ht68027.jpg,2026-03-27 11:34:24.476299+00,2026-04-02 10:47:44.351096+00,"'12':4A '12.5':12B '200w':19B '200w-230v':18B '230v':20B '5':5A '500':23B '85':14B 'cadel':27B 'cav':22B 'compat':25B 'diametr':11B 'elettr':2A 'family':28B 'ht68027':9A,10A,30B 'lung.85':7A 'lunghezz':21B 'marc':29B 'mm':6A,8A,15B,24B 'raccord':17B 'resistent':1A 'senz':16B 'x':13B 'Ã¸':3A"
+66,14,NULL,NULL,NASTRO ADESIVO IN FIBRA DI VETRO 550Â°C 10mm X 1mm,ADHESIVE TAPE FIBERGLASS 550Â°C 10mm X 1mm,RUBAN ADHÃ‰SIF  EN FIBRE DE VERRE 550Â°C 10mm x 1mm,CUERDA ADHESIVA EN FIBRA DE VIDRIO 550Â°C 10mm x 1mm,,,,,"Spessore 1 mm.
+Larghezza: 10
+
+Colore: Grigio Scuro
+
+PREZZO AL METRO!","Thickness 1 mm.
+Width: 10 mm.
+Black","1 mm d'Ã©paisseur.
+Largeur: 10 mm.
+Noir","Espesor 1 mm.
+Ancho: 10 mm.
+Negro",nastro-adesivo-in-fibra-di-vetro-550c-66,3.05,,,,,,1,true,,nastro adesivo in fibra di vetro 550Â°c,nastro adesivo in fibra di vetro 550Â°c,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/guarnizioni-silicone/nastro-adesivo-in-fibra-di-vetro-550-c-10mm-x-1mm.jpg,2026-03-27 11:34:24.476299+00,2026-04-02 10:47:44.496059+00,'1':14B '10':17B '10mm':9A '1mm':11A '550':7A 'ades':2A 'color':18B 'fibr':4A 'grig':19B 'larghezz':16B 'metr':23B 'mm':15B 'nastr':1A 'null':12A 'prezz':21B 'scur':20B 'spessor':13B 'vetr':6A 'x':10A
+67,13,NULL,NULL,SUPPORTO DEPRESSORE,"PRESSURE SWITCH'S SUPPORT ",SUPPORT DEPRÃ‰SSEUR,SOPORTE DEPRESOR,,,,,SUPPORTO CON AGGANCIO RAPIDO PER FISSARE IL DEPRESSORE,SUPPORT WITH QUICK CONNECTION TO FIX THE PRESSURE SWITCH.,SUPPORT CONNEXION RAPIDE POUR FIXER LEÂ DEPRÃ‰SSEUR,SOPORTE CON CONEXIÃ“N RÃPIDA PARA FIJAR EL DEPRESOR,supporto-depressore,1.00,,,,,,1,true,,supporto-depressore,supporto-depressore,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/sonde-depressori-termostati/supporto-depressore.jpg,2026-03-27 11:34:24.476299+00,2026-04-02 10:47:44.64421+00,"'agganc':6B 'depressor':2A,11B 'fiss':9B 'null':3A 'rapid':7B 'support':1A,4B"
+68,13,NULL,NULL,TERMOSTATO DI SICUREZZA A RIARMO MANUALE 80Â°,SAFETY THERMOSTAT 80Â°,THERMOSTAT DE SÃ‰CURITÃ‰ 80Â°,TERMOSTATO DE SEGURIDAD 80 Â°,,,,,"TERMOSTATO DI SICUREZZA CON SONDA CON TASTO PER RIARMO MANUALE
+
+TARATURA 80Â°","SAFETY THERMOSTAT WITH PROBE WITH KEY FOR MANUAL RESET
+Â 
+SETTING 80 Â°","THERMOSTAT DE SÃ‰CURITÃ‰ AVEC SONDE AVEC CLÃ‰ POUR RÃ‰ARMEMENT MANUEL
+Â 
+CONFIGURATION 80 Â°","TERMOSTATO DE SEGURIDAD CON SONDAÂ 
+Â 
+AJUSTE DE 80 Â°",termostato-di-sicurezza-a-riarmo-manuale-80,30.50,,,,,,1,true,,termostato-di-sicurezza-a-riarmo-manuale-80,termostato-di-sicurezza-a-riarmo-manuale-80,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/sonde-depressori-termostati/termostato-di-sicurezza-a-riarmo-manuale-80.jpg,2026-03-27 11:34:24.476299+00,2026-04-02 10:47:44.791494+00,"'80':7A,20B 'manual':6A,18B 'null':8A 'riarm':5A,17B 'sicurezz':3A,11B 'sond':13B 'taratur':19B 'tast':15B 'termost':1A,9B"
+69,13,NULL,NULL,TERMOSTATO DI SICUREZZA A RIARMO MANUALE 100Â°,SAFETY THERMOSTAT 100Â°,THERMOSTAT DE SÃ‰CURITÃ‰ 100Â°,TERMOSTATO DE SEGURIDAD 100 Â°,,,,,"TERMOSTATO DI SICUREZZA CON SONDA CON TASTO PER RIARMO MANUALE
+
+TARATURA 100Â°","SAFETY THERMOSTAT WITH PROBE WITH KEY FOR MANUAL RESET
+Â 
+SETTING 100 Â°","THERMOSTAT DE SÃ‰CURITÃ‰ AVEC SONDE AVEC CLÃ‰ POUR RÃ‰ARMEMENT MANUEL
+Â 
+CONFIGURATION 100 Â°","TERMOSTATO DE SEGURIDAD CON SONDAÂ 
+Â 
+AJUSTE DE 100 Â°",termostato-di-sicurezza-a-riarmo-manuale-100,30.50,,,,,,1,true,,termostato-di-sicurezza-a-riarmo-manuale-100,termostato-di-sicurezza-a-riarmo-manuale-100,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/sonde-depressori-termostati/termostato-di-sicurezza-a-riarmo-manuale-100.jpg,2026-03-27 11:34:24.476299+00,2026-04-02 10:47:44.94181+00,"'100':7A,20B 'manual':6A,18B 'null':8A 'riarm':5A,17B 'sicurezz':3A,11B 'sond':13B 'taratur':19B 'tast':15B 'termost':1A,9B"
+70,11,NULL,NULL,CONNETTORE SCHEDA 10 POLI,MOTHERBOARD CONNECTOR - 10 POLES,CONNECTEUR 10 POLES POUR CARTE MÃˆRE,CONECTOR TARJETA 10 POLES,,,,,,,,,connettore-scheda-10-poli,2.00,,,,,,1,true,,connettore-scheda-10-poli,connettore-scheda-10-poli,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/schede-elettroniche-sensori/connettore-scheda-10-poli.jpg,2026-03-27 11:34:24.476299+00,2026-04-02 10:47:45.088784+00,'10':3A 'connettor':1A 'null':5A 'pol':4A 'sched':2A
+71,11,NULL,NULL,CONNETTORE SCHEDA 7 POLI,MOTHERBOARD CONNECTOR - 7 POLES,CONNECTEUR 7 POLES POUR CARTE MÃˆRE,CONECTOR TARJETA 7 POLES,,,,,,,,,connettore-scheda-7-poli,2.00,,,,,,1,true,,connettore-scheda-7-poli,connettore-scheda-7-poli,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/schede-elettroniche-sensori/connettore-scheda-7-poli.jpg,2026-03-27 11:34:24.476299+00,2026-04-02 10:47:45.237877+00,'7':3A 'connettor':1A 'null':5A 'pol':4A 'sched':2A
+72,11,NULL,NULL,CONNETTORE SCHEDA 6 POLI,MOTHERBOARD CONNECTOR - 6 POLES,CONNECTEUR 6 POLES POUR CARTE MÃˆRE,CONECTOR TARJETA 6 POLES,,,,,,,,,connettore-scheda-6-poli,2.00,,,,,,1,true,,connettore-scheda-6-poli,connettore-scheda-6-poli,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/schede-elettroniche-sensori/connettore-scheda-6-poli.jpg,2026-03-27 11:34:24.476299+00,2026-04-02 10:47:45.39004+00,'6':3A 'connettor':1A 'null':5A 'pol':4A 'sched':2A
+73,11,NULL,NULL,CONNETTORE SCHEDA 4 POLI,MOTHERBOARD CONNECTOR - 4 POLES,CONNECTEUR 4 POLES POUR CARTE MÃˆRE,CONECTOR TARJETA 4 POLES,,,,,,,,,connettore-scheda-4-poli,2.00,,,,,,1,true,,connettore-scheda-4-poli,connettore-scheda-4-poli,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/schede-elettroniche-sensori/connettore-scheda-4-poli.jpg,2026-03-27 11:34:24.476299+00,2026-04-02 10:47:45.541113+00,'4':3A 'connettor':1A 'null':5A 'pol':4A 'sched':2A
+74,11,NULL,NULL,CONNETTORE SCHEDA 3 POLI,MOTHERBOARD CONNECTOR - 3 POLES,CONNECTEUR 3 POLES POUR CARTE MÃˆRE,CONECTOR TARJETA 3 POLES,,,,,,,,,connettore-scheda-10-poli-74,2.00,,,,,,1,true,,,,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/schede-elettroniche-sensori/connettore-scheda-3-poli.jpg,2026-03-27 11:34:24.476299+00,2026-04-02 10:47:45.693646+00,'3':3A 'connettor':1A 'null':5A 'pol':4A 'sched':2A
+75,11,NULL,NULL,CONNETTORE SCHEDA 2 POLI,MOTHERBOARD CONNECTOR - 2 POLES,CONNECTEUR 2 POLES POUR CARTE MÃˆRE,"CONECTOR TARJETA 2 POLES ",,,,,,,,,connettore-scheda-10-poli-75,2.00,,,,,,1,true,,,,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/schede-elettroniche-sensori/connettore-scheda-2-poli.jpg,2026-03-27 11:34:24.476299+00,2026-04-02 10:47:45.843869+00,'2':3A 'connettor':1A 'null':5A 'pol':4A 'sched':2A
+76,11,NULL,NULL,"SCHEDA ELETTRONICA TIEMME SY8P-H01 ","MOTHER BOARD TIEMME SY8P-H01 ","CARTE ELECTRONIQUE TIEMME SY8P-H01 ","TARJETA ELECTRONICA TIEMME SY8P-H01 ",,,,,SCHEDA ELETTRONICA TIEMME PER STUFE IDRO,MOTHER BOARD TIEM FOR IDRO STOVE,CARTE ELECTRONIQUE TIEMME POUR POELE HYDRO,TARJETA ELECTRONICA PARA ESTUFA IDRO,scheda-elettronica-tiemme-sy8p-h01-,274.50,,,,,,1,true,,scheda elettronica tiemme sy8p-h01,scheda tiemme per stufa idro,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/schede-elettroniche-sensori/scheda-elettronica-tiemme-sy8p-h01.jpg,2026-03-27 11:34:24.476299+00,2026-04-02 10:47:45.999978+00,"'elettron':2A,9B 'h01':6A 'idro':13B 'null':7A 'sched':1A,8B 'stuf':12B 'sy8p':5A 'sy8p-h01':4A 'tiemm':3A,10B"
+77,6,NULL,NULL,"MOTORE COCLEA PER STUFE A PELLET 1,5 RPM","AUGER MOTOR FOR PELLET STOVES 1.5 RPM  ","MOTORÃ‰DUCTEUR POUR POÃŠLE Ã€ PELLET - MELLOR 1,5 RPM","MOTOR SINFIN PARA ESTUFAS DE PELLET MELLOR 1,5 RPM",,,,,"MOTORE COCLEA PER STUFE A PELLETÂ  1,5 RPM
+
+Diametro perno 9,5 mm 1,5 rpm
+
+GGM","AUGER MOTOR FOR PELLET STOVES 1.5 RPM 
+Pin diameter 9.5 mm 1.5 rpm
+MELLOR","DiamÃ¨tre de la goupille: 9,5 mm 1,5 rpm","Diametro arbol 9,5 mm 1,5 rpm
+
+MELLOR",motoriduttore-per-stufe-a-pellet-mellor-77,121.45,,,,,,1,true,,motoriduttore per stufe a pellet,motoriduttore per stufe a pellet mellor,,https://www.ricambixstufe.it/ricambixstufe/585-home_default/motoriduttore-per-stufe-a-pellet-mellor.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'1':7A,17B,25B '5':8A,18B,23B,26B '9':22B 'cocle':2A,12B 'diametr':20B 'ggm':28B 'mm':24B 'motor':1A,11B 'null':10A 'pellet':6A,16B 'pern':21B 'rpm':9A,19B,27B 'stuf':4A,14B"
+78,11,NULL,NULL,SENSORE DEBIMETRO CON CAVO CEZA,"CEZA DEBIMETER SENSOR WITH CABLE ",CAPTEUR DEBIMÃˆTRE CEZA AVEC CABLE,SENSOR DEBIMETRO CEZA CON CABLE,,,,,SENSORE ARIA COMBUSTIONE CEZA,CEZA COMBUSTION AIR SENSOR,CAPTEUR DE L'AIR DE COMBUSTION,SENSORÂ DEBIMETROÂ AIRE COMBUSTION Â CEZA,sensore-debimetro-con-cavo-ceza,85.40,,,,,,1,true,,Sensore debimetro Ceza,sensore portata aria Ceza,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/schede-elettroniche-sensori/sensore-debimetro-con-cavo-ceza-2.jpg,2026-03-27 11:34:24.476299+00,2026-04-02 10:47:46.162526+00,"'ari':8B 'cav':4A 'cez':5A,10B 'combustion':9B 'debimetr':2A 'null':6A 'sensor':1A,7B"
+79,9,HT62656,NULL,"RESISTENZA ELETTRICA Ã˜ 9,9 mm LUNGH.170MM W350 ATTACCO A FILETTO 3/8","ELECTRICAL RESISTANCE Ã˜ 9,9 mm LENGTH 170mm 350w WITH THREAD 3/8","RÃ‰SISTANCE Ã‰LECTRIQUE Ã˜ 9,9 mm LONG.170mm 350w AVEC FILET 3/8","Resistencia ElÃ¨ctrica  Ã˜ 9,9 mm Long.170mm W350 con tuerca 3/8",,,,,"Diametro: 9,9 x170 mm. (sottobattuta raccordo)
+350W-230V
+Lunghezza cavi: 500 mm.
+Con raccordo 3/8â€œ GAS
+
+COMPATIBILE CON: LAMINOX
+
+MARCA: HT","Diameter: 9,9 x 170 mm.
+350W-230V
+Cable Length: 500 mm.
+With 3/8 ""GAS fitting.
+COMPATIBLE WITH: LAMINOX","DiamÃ¨tre: 9,9 x 170 mm (avec raccord)
+350W-230V
+Longueur du cÃ¢ble: 500 mm.
+Avec raccord 3/8 ""GAS
+COMPATIBLE AVEC: LAMINOX","Diametro: 9,9x170 mm. (tuerca bajo batida)
+350W-230V
+Longitud cables: 500 mm.
+Con tuerca 3/8â€œ GAS
+
+MARCA: HT",resistenza-elettrica-3-79,48.80,,,,,,1,true,,Resistenza elettrica,Resistenza elettrica per accensione,,https://www.ricambixstufe.it/ricambixstufe/237-home_default/resistenza-elettrica-3.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'230v':23B '3/8':12A,30B '350w':22B '350w-230v':21B '500':26B '9':4A,5A,15B,16B 'attacc':9A 'cav':25B 'compat':32B 'diametr':14B 'elettr':2A 'filett':11A 'gas':31B 'ht':36B 'ht62656':13A 'laminox':34B 'lungh.170mm':7A 'lunghezz':24B 'marc':35B 'mm':6A,18B,27B 'raccord':20B,29B 'resistent':1A 'sottobatt':19B 'w350':8A 'x170':17B 'Ã¸':3A"
+80,10,NULL,NULL,DISPLAY LED A 5 TASTI CEZA,5 BUTTONS CEZA LED DISPLAY,ECRAN LED Ã€ 5 TOUCHES CEZA,PANTALLA LED A 5 BOTONES CEZA,,,,,"Dimensione incasso: 16 x 4,5 cm.
+Compatibile con schede Ceza","Built size: 16 x 4.5 cm.
+Compatible with Ceza Mather boards","Dimension de L'encastre 16 x 4.5 cm.
+Compatible avec les cartes Ceza","Dimensiones ingreso: 16 x 4,5 cm.
+Es compatible con la tarjetas CEZA",display-lcd-a-6-tasticeza,97.11,,,,,,1,true,,Display Led 5 tasti Ceza,Display Led 5 tasti Ceza,,https://www.ricambixstufe.it/ricambixstufe/240-home_default/display-lcd-a-6-tasticeza.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'16':10B '4':12B '5':4A,13B 'cez':6A,18B 'cm':14B 'compat':15B 'dimension':8B 'display':1A 'incass':9B 'led':2A 'null':7A 'sched':17B 'tast':5A 'x':11B"
+81,10,NULL,NULL,DISPLAY LED A 3 TASTI DUEPI,3 BUTTONS DUEPI LED DISPLAY,ECRAN LED Ã€ 3 TOUCHES DUEPI,PANTALLA LED A 3 BOTONES DUEPI,,,,,"Dimensione incasso: 16 x 4,5 cm.
+Compatibile con schede DUEPI","Built size: 16 x 4.5 cm.
+Compatible with DUEPI Mather boards","Dimension de L'encastre 16 x 4.5 cm.
+Compatible avec les cartes DUEPI","Dimensiones ingreso: 16 x 4,5 cm.
+Es compatible con la tarjetas DUEPI",display-lcd-a-6-tasticeza-81,35.00,,,,,,1,true,,Display Led 5 tasti Ceza,Display Led 5 tasti Ceza,,https://www.ricambixstufe.it/ricambixstufe/242-home_default/display-lcd-a-6-tasticeza.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'16':10B '3':4A '4':12B '5':13B 'cm':14B 'compat':15B 'dimension':8B 'display':1A 'duep':6A,18B 'incass':9B 'led':2A 'null':7A 'sched':17B 'tast':5A 'x':11B"
+82,12,NULL,NULL,CAMERA POSTERIORE IN GHISA IDRO LAMINOX-EVACALOR,REAR CAMERA IN CAST IRON IDRO LAMINOX-EVA CALOR,CAMERA ARRIERE EN FONTE IDRO LAMINOX-EVA CALOR,CÃMARA POSTERIOR DE HIERRO IDRO LAMINOX-EVA CALOR,,,,,"MISURE, LARGHEZZA 30,5 CM X 39 CM",MEASURES 30.5 CM X 39 CM,"MESURES 30,5 CM X 39 CM","MEDIDAS 30,5 cm x 39 cm",camera-posteriore-in-ghisa-idro-laminox-evacalor,128.83,,,,,,1,true,,camera-posteriore-in-ghisa-idro-laminox-evacalor,camera-posteriore-in-ghisa-idro-laminox-evacalor,,https://www.ricambixstufe.it/ricambixstufe/245-home_default/camera-posteriore-in-ghisa-idro-laminox-evacalor.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'30':12B '39':16B '5':13B 'camer':1A 'cm':14B,17B 'evacalor':8A 'ghis':4A 'idro':5A 'laminox':7A 'laminox-evacalor':6A 'larghezz':11B 'misur':10B 'null':9A 'posterior':2A 'x':15B"
+84,12,NULL,NULL,"BRACIERE COMPLETO STUFE EVACALOR 4 KW CAMILLA-MATILDE-GAIA-FLORA ",COMPLETE BRAZIER FOR 4 KW STOVES EVACALOR MATILDE-CAMILLA-GAIA-FLORA,BRASERO COMPLET POUR POELES EVACALOR 4 KW Matilde-Camilla-Gaia-Flora,BRASERO COMPLETO ESTUFAS EVACALOR 4 KW Matilde-Camilla-Adam,,,,,"BRACIERE COMPLETO STUFE 4KW
+EVACALOR","COMPLETE BRAZIER FOR 4 KW STOVES
+EVACALOR","BRASERO COMPLET POUR POELES 4 KW
+EVACALOR","BRASERO COMPLETO ESTUFAS 4 KW
+EVACALOR-PUNTOFUOCO",braciere-completo-stufe-6-7-8-kw-84,21.96,,,,,,1,true,,braciere completo stufe 6-7-8 kw evacalor,braciere completo stufe 6-7-8 kw evacalor,,https://www.ricambixstufe.it/ricambixstufe/251-home_default/braciere-completo-stufe-6-7-8-kw.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'4':5A '4kw':16B 'brac':1A,13B 'camill':8A 'camilla-matilde-gaia-flor':7A 'complet':2A,14B 'evacalor':4A,17B 'flor':11A 'gai':10A 'kw':6A 'matild':9A 'null':12A 'stuf':3A,15B"
+85,12,NULL,NULL,BRACIERE STUFE 11-13  KW INOX  EVACALOR-PUNTOFUOCO,"BRAZIER INOX FOR 11 KW STOVES ",BRASERO INOX POELES 8-11 KW,BRASERO INOX ESTUFAS 11-13 KW,,,,,"BRACIERE INOX STUFE 11-13 KW
+EVACALOR - PUNTOFUOCO","BRAZIER FOR 8-11 KW STOVES
+EVACALOR","Brasero pour poeles 8-11 KW
+EVACALOR","BRASERO ESTUFAS 11-13 KW
+EVACALOR",braciere-stufe-8-11-kw-85,42.70,,,,,,1,true,,braciere stufe 8-11 kw evacalor,braciere stufe 8-11 kw evacalor,,https://www.ricambixstufe.it/ricambixstufe/259-home_default/braciere-stufe-8-11-kw.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'-13':4A,15B '11':3A,14B 'brac':1A,11B 'evacalor':8A,17B 'evacalor-puntofuoc':7A 'inox':6A,12B 'kw':5A,16B 'null':10A 'puntofuoc':9A,18B 'stuf':2A,13B"
+86,12,NULL,NULL,BRACIERE 3 FORI IN ACCIAIO PER MOD. 6-8KW,BRAZIER 3 HOLES INOX STELL FOR MOD. 6-8KW,BRASERO 3 TROUS EN ACIER INOX - POELES 6-8 KW,BRASERO 3 AGUJEROS EN ACERO ESTUFAS 6-8KW,,,,,"Braciere in acciaio per mod. 6 e 8 kw, misura base forata 6 cm x 7 cm
+
+COMPATIBILE CON ADLER-ECOTEK-CAMPBEL","INOX STEEL BRAZIER FOR 6-8KW STOVES ADLER-ECOTEK-CAMPBELL
+
+Measuring perforated base 6 cm x 7 cm","BRASERO EN ACIER INOX - POELES 6-8KW ADLER-ECOTECK-CAMPBELL
+
+Mesure de base perforÃ©e 6 cm x 7 cm","BRASERO 3 AGUJEROS EN ACERO ESTUFAS 6-8KWÂ ADLER-ECOTECK-CAMPBELL
+
+base perforada 6 cm x 7 cm",braciere-3-fori-in-acciaio-per-mod-6-8kw,78.00,,,,,,1,true,,braciere-3-fori-in-acciaio-per-mod-6-8kw,braciere-3-fori-in-acciaio-per-mod-6-8kw,,https://www.ricambixstufe.it/ricambixstufe/263-home_default/braciere-3-fori-in-acciaio-per-mod-6-8kw.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'-8':9A '3':2A '6':8A,17B,24B '7':27B '8':19B 'acciai':5A,14B 'adler':32B 'adler-ecotek-campbel':31B 'bas':22B 'brac':1A,12B 'campbel':34B 'cm':25B,28B 'compat':29B 'ecotek':33B 'for':3A,23B 'kw':10A,20B 'misur':21B 'mod':7A,16B 'null':11A 'x':26B"
+87,12,NULL,NULL,BRACIERE IN ACCIAIO PER STUFE 11 (9) KW SLIM EVACALOR-PUNTOFUOCO,BRAZIER FOR SOLE-NADIA-ERIKA-PETRA EVACALOR STOVES,BRASERO SOLE-NADIA-ERIKA-PETRA EVACALOR,BRASERO SOLE-NADIA-ERIKA-PETRA EVACALOR,,,,,"BRACIERE IN ACCIAIO INOX STUFE 9 KW SLIM
+
+NADIA-REBECCA-ERIKA-PETRA
+
+EVACALOR-PUNTOFUOCO",INOX STEEL BRAZIER FOR 9 KW SLIM EVACALOR-PUNTOFUOCO STOVES,BRASERO EN ACIER INOX - POELES 9 KW SLIM EVACALOR-PUNTOFUOCO,BRACERO EN ACERO INOXIDABLE - POELES 9 KW SLIM EVACALOR-PUNTOFUOCO,braciere-nadia-sole-erika-petra-evacalor,48.80,,,,,,1,true,,braciere-nadia-sole-erika-petra-evacalor,braciere-nadia-sole-erika-petra-evacalor,,https://www.ricambixstufe.it/ricambixstufe/462-home_default/braciere-nadia-sole-erika-petra-evacalor.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'11':6A '9':7A,19B 'acciai':3A,16B 'brac':1A,14B 'erik':25B 'evacalor':11A,28B 'evacalor-puntofuoc':10A,27B 'inox':17B 'kw':8A,20B 'nad':23B 'nadia-rebecca-erika-petr':22B 'null':13A 'petr':26B 'puntofuoc':12A,29B 'rebecc':24B 'slim':9A,21B 'stuf':5A,18B"
+88,14,NULL,NULL,FISCHER - SILICONE ACETICO ALTE TEMPERATURE - NERO,FISCHER - HIGH TEMPERATURE ACETIC SILICONE - BLACK,FISCHER - ACETIC HAUTE TEMPERATURE SILICONE - NOIR,FISCHER - ALTA TEMPERATURA ACÃ‰TICO SILICONA - NEGRO,"Certificato per la sigillatura non strutturale di:
+
+Facciate in ambito edile, lato interno e/o esterno, anche per clima freddo (es. pannelli prefabbricati in calcestruzzo)
+Vetrate, anche per clima freddo
+
+Adatto anche per la sigillatura di:
+
+Giunti di piani cottura, forni e caminetti
+Giunti di caldaie e forni industriali
+Giunti di tubazioni e profili soggetti alle alte temperature
+Griglie di ventilazione
+UnitÃ  di condizionamento aria","Certified for non-structural sealing of:
+Facades in the building, interior and / or exterior, even for cold weather (eg concrete prefabricated panels)
+Stained glass, even for cold weather
+Also suitable for sealing of:
+Joints of hobs, ovens and fireplaces
+Industrial boilers and industrial joints
+Couplings of pipes and profiles subject to high temperatures
+Ventilation grids
+Air conditioning units","Certificat pour l'Ã©tanchÃ©itÃ© non structurelle de:
+FaÃ§ades dans les bÃ¢timents, Ã  l'intÃ©rieur et / ou Ã  l'extÃ©rieur, mÃªme pour le climat froid (par exemple. Precast Panneaux en bÃ©ton)
+Les vitraux, mÃªme par temps froid
+AdaptÃ© pour assurer l'Ã©tanchÃ©itÃ© Ã©galement:
+Une fois, fours et tables de cuisson cheminÃ©es
+Joints des chaudiÃ¨res et des fours industriels
+Les joints de tuyaux et profilÃ©s soumis Ã  des tempÃ©ratures Ã©levÃ©es
+Grilles de ventilation
+les unitÃ©s de conditionnement d'air","Certificado para el sellado no estructural de:
+Fachadas en edificios, en el interior y / o exterior, incluso para el clima frÃ­o (por ejemplo. Precast paneles de hormigÃ³n)
+Vidrieras, y por el clima frÃ­o
+TambiÃ©n es adecuado para el sellado de:
+Una vez Estufas, hornos y chimeneas
+Las juntas de calderas y hornos industriales
+Las juntas de tubos y perfiles sometidos a altas temperaturas
+rejillas de ventilaciÃ³n
+unidades de aire acondicionado",La resistenza alle alte temperature fino a +315Â°C indica che SAT puÃ² essere utilizzato per giunti sottoposti ad alti stress termici,High temperature resistance up to + 315 Â° C indicates that SAT can be used for high stressed joints,La rÃ©sistance aux tempÃ©ratures Ã©levÃ©es jusqu'Ã  + 315 Â° C indique que le satellite peut Ãªtre utilisÃ© pour des joints soumis Ã  une contrainte thermique Ã©levÃ©e,La resistencia a las altas temperaturas de hasta + 315 Â° C indica que el SAT se puede utilizar para las articulaciones sometidas a una alta tensiÃ³n tÃ©rmica,fischer-silicone-acetico-alte-temperature-nero,21.25,,,,,,1,true,,fischer-silicone-acetico-alte-temperature-nero,fischer-silicone-acetico-alte-temperature-nero,,https://www.ricambixstufe.it/ricambixstufe/269-home_default/fischer-silicone-acetico-alte-temperature-nero.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'+315':15B 'acet':3A 'adatt':59C 'alte':4A,11B,85C 'alti':27B 'ambit':39C 'ari':93C 'calcestruzz':53C 'caldai':74C 'caminett':71C 'certific':30C 'clim':47C,57C 'condizion':92C 'cottur':68C 'e/o':43C 'edil':40C 'es':49C 'esser':21B 'estern':44C 'fin':13B 'fischer':1A 'forn':69C,76C 'fredd':48C,58C 'giunt':24B,65C,72C,78C 'grigl':87C 'indic':17B 'industrial':77C 'intern':42C 'lat':41C 'ner':6A 'null':7A 'pannell':50C 'pian':67C 'prefabbric':51C 'profil':82C 'puÃ²':20B 'resistent':9B 'sat':19B 'sigillatur':33C,63C 'silicon':2A 'soggett':83C 'sottopost':25B 'stress':28B 'struttural':35C 'temperatur':5A,12B,86C 'termic':29B 'tubazion':80C 'unit':90C 'utilizz':22B 'ventil':89C 'vetr':54C"
+89,16,NULL,NULL,COCLEA PER STUFE 6-9 KW SLIM NEW ATTACCO FEMMINA,AUGER FOR STOVES 6-9 KW SLIM NEW ATTACK FEMALE,VIS SANS FIN POELES 6-9 KW SLIM NEW ATTAQUE FEMELLE,SINFIN PARA ESTUFAS 6-9 KW SLIM NUEVO ATAQUE FEMININO,"COCLEA PER STUFE A PELLET: DIAMETRO 57mm LUNGHEZZA 16,5cm/ PERNO FEMMINA DIAMETRO 9mm LUNGHEZZA 2,5cm",,,,"COCLEA PER STUFE A PELLET: DIAMETRO 57mm LUNGHEZZA 16,5cm/ PERNO FEMMINA DIAMETRO 9mm LUNGHEZZA 2,5cm","PELLET STOVE AUGER: DIAMETER 57mm LENGTH 16,5cm / DIAMETER FEMALE PIN: 9mm LENGTH 2,5cm","VIS SANS FIN POELES 6-9 KW SLIM NEW ATTAQUE FEMELLE. Â DIAMÃˆTRE 57mm LONGUEUR 16,5cm / DIAMÃˆTRE FEMELLE 9mm LONGUEUR 2,5cm","COCLEA PARA ESTUFAS 6-9 KW SLIM NUEVO ATAQUE FEMININO. DIAMETRO 57mm LONGITUD 16,5cm / DIAMETRO HEMBRA 9mm LONGITUD 2,5cm",coclea-per-stufe-6-9-kw-slim-new-attacco-femmina,62.95,45.00,,,,,1,true,,coclea-per-stufe-6-9-kw-slim-new-attacco-femmina,coclea-per-stufe-6-9-kw-slim-new-attacco-femmina,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/coclee/coclea-per-stufe-6-9-kw-slim-new-attacco-femmina.jpg,2026-03-27 11:34:24.476299+00,2026-04-02 10:47:46.383888+00,"'-9':5A '16':20B,37C '2':27B,44C '57mm':18B,35C '5cm':21B,28B,38C,45C '6':4A '9mm':25B,42C 'attacc':9A 'cocle':1A,12B,29C 'diametr':17B,24B,34C,41C 'femmin':10A,23B,40C 'kw':6A 'lunghezz':19B,26B,36C,43C 'new':8A 'null':11A 'pellet':16B,33C 'pern':22B,39C 'slim':7A 'stuf':3A,14B,31C"
+90,16,NULL,NULL,COCLEA 9 KW NEW/ INSERTO ATTACCO FEMMINA,9 KW NEW AUGER/ INSERT FEMALE ATTACK,VIS SANS FIN 9 KW NEW/ INSERT - ATTAQUE FEMELLE,SINFIN 9 KW NUEVO/ INSERT ATAQUE FEMININA,"COCLEA PER STUFE A PELLET: DIAMETRO 57mm LUNGHEZZA 16,5cm/ PERNO FEMMINA DIAMETRO 9mm LUNGHEZZA 2,5cm",,,,"COCLEA PER STUFE A PELLET: DIAMETRO 57mm LUNGHEZZA 16,5cm/ PERNO FEMMINA DIAMETRO 9mm LUNGHEZZA 2,5cm","PELLET STOVE AUGER: DIAMETER 57mm LENGTH 16,5cm / DIAMETER FEMALE PIN: 9mm LENGTH 2,5cm","DIAMÃˆTRE 57mm LONGUEUR 16,5cm
+
+DIAMÃˆTRE GOUPILLE FEMELLE 9mm LONGUEUR 2,5cm","COCLEA 9 KW NUEVO/ INSERT ATAQUE FEMININA
+
+Â DIAMETRO 57mm LONGITUD 16,5cm / DIAMETRO HEMBRA 9mm LONGITUD 2,5cm",coclea-9-kw-new-inserto-attacco-femmina,62.95,48.50,,,,,1,true,,coclea-9-kw-new-inserto-attacco-femmina,coclea-9-kw-new-inserto-attacco-femmina,,https://www.ricambixstufe.it/ricambixstufe/278-home_default/coclea-9-kw-new-inserto-attacco-femmina.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'16':17B,34C '2':24B,41C '57mm':15B,32C '5cm':18B,25B,35C,42C '9':2A '9mm':22B,39C 'attacc':6A 'cocle':1A,9B,26C 'diametr':14B,21B,31C,38C 'femmin':7A,20B,37C 'insert':5A 'kw':3A 'lunghezz':16B,23B,33C,40C 'new':4A 'null':8A 'pellet':13B,30C 'pern':19B,36C 'stuf':11B,28C"
+91,16,NULL,NULL,COCLEA 4-11-13 kw ATTACCO FEMMINA +PIASTRA,SCREW 4-11-13 kw FEMALE ATTACK +PLATE,VIS SANS FIN 4-11-13 kw FEMELLE +PLAQUE,SINFIN 4-11-13 kw ATAQUE FEMININO +PLACA,"COCLEA PER STUFE A PELLET: DIAMETRO 55mm LUNGHEZZA 16,5cm/ PERNO FEMMINA DIAMETRO 9mm LUNGHEZZA 2,5cm",,,,"COCLEA PER STUFE A PELLET: DIAMETRO 55mm LUNGHEZZA 16,5cm/ PERNO FEMMINA DIAMETRO 9mm LUNGHEZZA 2,5cm","SCREW 4-11-13 kw FEMALE ATTACKÂ +PLATE
+
+DIAMETER 55mm LENGTH 16,5cm / Â FEMALE PIN DIAMETERÂ 9mm LENGTH 2,5cm","VIS SANS FIN 4-11-13 kw FEMELLE +PLAQUE
+
+DIAMÃˆTRE 55mm LONGUEUR 16,5cm / Â FEMELLE DIAMÃˆTRE 9mm LONGUEUR 2,5cm","COCLEA 4-11-13 kw ATAQUE FEMININO +PLACA
+
+DIAMETRO 55m m LONGITUD 16.5cm / DIAMETRO HEMBRA 9m m LONGITUD 2.5cm",coclea-4-11-13-kw-attacco-femmina-piastra,79.30,58.00,,,,,1,true,,coclea-4-11-13-kw-attacco-femmina-piastra,coclea-4-11-13-kw-attacco-femmina-piastra,,https://www.ricambixstufe.it/ricambixstufe/281-home_default/coclea-4-11-13-kw-attacco-femmina-piastra.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'-11':3A '-13':4A '16':18B,35C '2':25B,42C '4':2A '55mm':16B,33C '5cm':19B,26B,36C,43C '9mm':23B,40C 'attacc':6A 'cocle':1A,10B,27C 'diametr':15B,22B,32C,39C 'femmin':7A,21B,38C 'kw':5A 'lunghezz':17B,24B,34C,41C 'null':9A 'pellet':14B,31C 'pern':20B,37C 'piastr':8A 'stuf':12B,29C"
+92,16,NULL,NULL,COCLEA PER STUFE  ATTACCO MASCHIO,AUGER FOR STOVES  - MALE WITH PIN,VIS SANS FIN POUR POELES - ATTAQUE MALE,COCLEA PARA ESTUFAS ATAQUE MASCULINO,"COCLEA PER STUFE A PELLET: DIAMETRO 57mm LUNGHEZZA 37cm/ PERNO MASCHIO DIAMETRO 0,8mm LUNGHEZZA 3,5cm",,,,"COCLEA PER STUFE A PELLET: DIAMETRO 57mm LUNGHEZZA 37cm/ PERNO MASCHIO DIAMETRO 0,8mm LUNGHEZZA 3,5cm","PELLET STOVE AUGER: DIAMETER 57mm LENGTH 37cm / Â MALE PIN DIAMETER 0,8mm LENGTH 3,5cm","VIS SANS FIN POUR POELES A PELLET - DIAMÃˆTRE 57mm LONGUEUR 37cmÂ 
+
+DIAMÃˆTRE GOUPILLE: 0,8mm LONGUEUR 3,5cm","COCLEA PARA ESTUFAS ATAQUE MASCULINO
+
+DIAMETRO 57mm LONGITUD 37cm Â 
+
+DIÃMETRO ALFILERÂ 0,8mm LONGITUD 3,5cm",coclea-per-stufe-attacco-maschio,150.00,124.00,,,,,1,true,,coclea-per-stufe-attacco-maschio,coclea-per-stufe-attacco-maschio,,https://www.ricambixstufe.it/ricambixstufe/284-home_default/coclea-per-stufe-attacco-maschio.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'0':19B,36C '3':22B,39C '37cm':15B,32C '57mm':13B,30C '5cm':23B,40C '8mm':20B,37C 'attacc':4A 'cocle':1A,7B,24C 'diametr':12B,18B,29C,35C 'lunghezz':14B,21B,31C,38C 'masc':5A,17B,34C 'null':6A 'pellet':11B,28C 'pern':16B,33C 'stuf':3A,9B,26C"
+93,12,NULL,NULL,BRACIERE IN ACCIAIO INOX STUFE 9 (8) KW SLIM EVACALOR-PUNTOFUOCO,STANLESS STEEL BRAZIER STOVES  9 (8) KW SLIM EVACALOR-PUNTOFUOCO,BRASERO EN ACIER INOX POELES 9(8) KW SLIM EVACALOR-PUNTOFUOCO,BRASERO IN ACERO INOX ESTUFAS 9 (8) KW SLIM EVACALOR-PUNTOFUOCO,,,,,"BRACIERE IN ACCIAIO INOX STUFE 9(8) KW SLIM EVACALOR-PUNTOFUOCO
+
+DIMENSIONI:12X7cm","INOX STEEL BRAZIER STOVES Â 9 (8) KW SLIM EVACALOR-PUNTOFUOCO
+
+DIMENSIONS:12X7cm","BRASERO EN ACIER INOX POELES 9(8) KW SLIM EVACALOR-PUNTOFUOCO
+
+DIMENSIONS:12X7cm","BRASERO IN ACERO INOX ESTUFAS 9 (8) KW SLIM EVACALOR-PUNTOFUOCO
+
+DIMENSIONES:12X7cm",braciere-in-acciaio-inox-stufe-9-8-kw-slim-evacalor-puntofuoco,30.50,12.90,,,,,1,true,,braciere-in-acciaio-inox-stufe-9-8-kw-slim-evacalor-puntofuoco,braciere-in-acciaio-inox-stufe-9-8-kw-slim-evacalor-puntofuoco,,https://www.ricambixstufe.it/ricambixstufe/548-home_default/braciere-in-acciaio-inox-stufe-9-8-kw-slim-evacalor-puntofuoco.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'12x7cm':27B '8':7A,20B '9':6A,19B 'acciai':3A,16B 'brac':1A,14B 'dimension':26B 'evacalor':11A,24B 'evacalor-puntofuoc':10A,23B 'inox':4A,17B 'kw':8A,21B 'null':13A 'puntofuoc':12A,25B 'slim':9A,22B 'stuf':5A,18B"
+94,12,NULL,NULL,BRACIERE IN ACCIAIO INOX STUFE 6 (5) kw SLIM EVACALOR-PUNTOFUOCO,STAINLESS STEEL BRAZIER 6 (5) kw SLIM EVACALOR-PUNTOFUOCO,BRASERO EN ACIER INOX POELES 6(5)kw SLIM EVACALOR-PUNTOFUOCO,BRASERO DE ACERO INOXIDABLE ESTUFA 6 (5) KW SLIM EVACALOR - PUNTO FUEGO,,,,,"BRACIERE IN ACCIAIO INOX STUFE 6(5)kw SLIM EVACALOR-PUNTOFUOCO
+
+DIMENSIONI:10X5,5cm","STAINLESS STEEL BRAZIER 6 (5) kw SLIM EVACALOR-PUNTOFUOCO
+
+DIMENSIONS: 10X5,5cm","BRASERO EN ACIER INOX POELES 6(5)kw SLIM EVACALOR-PUNTOFUOCO
+
+DIMENSIONS: 10X5,5cm","BRASERO DE ACERO INOXIDABLE ESTUFA 6 (5) KW SLIM EVACALOR - PUNTO FUEGO
+
+DIMENSIONES: 10X5,5cm",braciere-in-acciaio-inox-stufe-6-5-kw-slim-evacalor-puntofuoco,18.30,12.00,,,,,1,true,,braciere-in-acciaio-inox-stufe-6-5-kw-slim-evacalor-puntofuoco,braciere-in-acciaio-inox-stufe-6-5-kw-slim-evacalor-puntofuoco,,https://www.ricambixstufe.it/ricambixstufe/550-home_default/braciere-in-acciaio-inox-stufe-6-5-kw-slim-evacalor-puntofuoco.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'10x5':27B '5':7A,20B '5cm':28B '6':6A,19B 'acciai':3A,16B 'brac':1A,14B 'dimension':26B 'evacalor':11A,24B 'evacalor-puntofuoc':10A,23B 'inox':4A,17B 'kw':8A,21B 'null':13A 'puntofuoc':12A,25B 'slim':9A,22B 'stuf':5A,18B"
+95,12,NULL,NULL,BRACIERE 15/18 KW IN GHISA,BRAZIER 15/18 KW IN CAST IRON,BRASERO 15/18 KW EN FONTE,BRASERO 15/18 KW IN HIERRO FUNDIDO,,,,,"BRACIERE 15/18 KW IN GHISAÂ 
+
+MISURE FONDO:12X7cm
+
+CORNICE BRACIERE: 15X10cm
+
+PER STUFE HYDRO 15/18 KW","BRAZIER 15/18 KW IN CAST IRON
+
+BOTTOM MEASURES: 12X7cm
+
+FRAME MEASURES: 15x10cm","BRASERO 15/18 KW EN FONTE
+
+MESURES DU FOND: 12X7cm
+
+CADRE DU BRASERO: 15x10cm
+
+POUR POÃŠLES HYDRO 15/18 KW","BRASERO 15/18 KW IN HIERRO FUNDIDO
+
+MEDIDAS DEL FONDO: 12X7cm
+
+MEDIDAS DEL MARCO: 15X10cm",braciere-1518-kw-in-ghisa,60.88,,,,,,1,true,,braciere-1518-kw-in-ghisa,braciere-1518-kw-in-ghisa,,https://www.ricambixstufe.it/ricambixstufe/552-home_default/braciere-1518-kw-in-ghisa.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'12x7cm':14B '15/18':2A,8B,21B '15x10cm':17B 'brac':1A,7B,16B 'cornic':15B 'fond':13B 'ghis':5A,11B 'hydro':20B 'kw':3A,9B,22B 'misur':12B 'null':6A 'stuf':19B"
+97,11,NULL,NULL,"KIT SCHEDA ELETTRONICA CEZA  + DISPLAY ",MOTHERBOARD CEZA,CARTE MERE MICRONOVA I023-5T,TARJETA ELECTRONICA CEZA,,,,,"Mod. FSECZ008
+
+SCHEDA ELETTRONICA CEZA PER STUFA A PELLET AD ARIA CON 1 O 2 VENTILATORI.
+
+DISPLAY CEZAÂ FPNCZ105Px","Mod. FSECZ008
+CEZA electronic board for pellet stove with air heating and 1 or 2 fans.
+CEZA Display FPNCZ105Px","Mod. FSECZ008
+
+Carte Ã©lectronique CEZA pour poÃªle Ã  pellets Ã  air avec 1 ou 2 ventilateurs.
+
+Ã‰cran CEZA FPNCZ105Px","Mod. FSECZ008
+
+Placa electrÃ³nica CEZA para estufa de pellets de aire con 1 o 2 ventiladores.
+
+Pantalla CEZA FPNCZ105Px",scheda-elettronica-ceza-,219.60,,,,,,1,true,,centralina elettronica ceza,centralina elettronica ceza,,https://www.ricambixstufe.it/ricambixstufe/581-home_default/scheda-elettronica-ceza-.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'1':19B '2':21B 'ari':17B 'cez':4A,11B,24B 'display':5A,23B 'elettron':3A,10B 'fpncz105px':25B 'fsecz008':8B 'kit':1A 'mod':7B 'null':6A 'pellet':15B 'sched':2A,9B 'stuf':13B 'ventil':22B"
+98,12,NULL,NULL,PARAFIAMMA STUFE HYDRO,FLAME ARRESTER FOR HYDRO STOVES,PARE-FEU POELE HYDRO,CORTAFUEGO ESTUFAS HYDRO,,,,,PARAFIAMMA PER STUFE HYDRO CON BRACIERE DI 14 cm X 7 cm,FLAME ARRESTER FOR HYDRO STOVES WITH 14 cm X 7 cm BRAZIER,PARE-FEU POELE HYDRO AVEC BRASERO DEÂ 14 cm X 7 cm,CORTAFUEGO ESTUFAS HYDROÂ CON BRASERO 14 cm X 7 cm,parafiamma-stufe-hydro,23.55,,,,,,1,true,,,,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/bracieri-camere-combustione/parafiamma-hydro-2.jpeg,2026-03-27 11:34:24.476299+00,2026-04-02 10:47:46.538007+00,"'14':12B '7':15B 'brac':10B 'cm':13B,16B 'hydro':3A,8B 'null':4A 'parafiamm':1A,5B 'stuf':2A,7B 'x':14B"
+99,10,NULL,NULL,DISPLAY 3 TASTI MICRONOVA,MICRONOVA 3-BUTTON DISPLAY,Ã‰CRAN 3 TOUCHES MICRONOVA,PANTALLA 3 BOTONES MICRONOVA,,,,,DISPLAY 3 TASTI MICRONOVA + PROTEZIONE POSTERIORE,MICRONOVA 3-BUTTON DISPLAYÂ + PROTECTION,Ã‰CRAN 3 TOUCHES MICRONOVA + PROTECTION,PANTALLA 3 BOTONES MICRONOVA + PROTECCIÃ“N,display-3-tasti-micronova,54.90,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/312-home_default/display-3-tasti-micronova.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'3':2A,7B 'display':1A,6B 'micronov':4A,9B 'null':5A 'posterior':11B 'protezion':10B 'tast':3A,8B"
+100,9,NULL,NULL,RESISTENZA ELETTRICA 12 X 100 morsetto in CERAMICA,"SPARK PLUG 12 X 100 CERAMIC electric clamp ",BOUGIE 12 X 100 pince Ã©lectrique EN CERAMIQUE,RESISTENCIA ENCENDIDO 12 X 100 abrazadera elÃ©ctrica en CERÃMICA,,,,,"Candeletta Resistenza per Stufe a pellet
+
+Diametro Â  Â  Â  Â 12,7 mm
+
+Lunghezza Â  Â  101,6Â mm
+
+Potenza Â  Â  Â  Â  300 watt
+
+Alimentazione Â  Â 220/230 volts
+
+Cavi Â  Â  Â  Â  Â  Â  Â  10 mm
+
+Morsetto in Ceramica
+
+MARCA: HT","Resistance for pellet stoves
+
+Diameter 12.7 mm
+
+Length 101.6 mm
+
+Power 300 watts
+
+Power supply 220/230 volts
+
+Cables 10 mm
+
+Ceramic clamp","RÃ©sistance pour poÃªles Ã  granulÃ©s
+
+DiamÃ¨tre 12,7 mm
+
+Longueur 101,6 mm
+
+Puissance 300 watts
+
+Alimentation 220/230 volts
+
+CÃ¢bles 10 mm
+
+Pince en cÃ©ramique","Resistencia estufas de pellets
+
+DiÃ¡metro 12.7 mm
+
+Longitud 101.6 mm
+
+Potencia 300 vatios
+
+MARCA: HT
+
+AlimentaciÃ³n 220/230 voltios
+
+Cables de 10 mm
+
+Pinza cerÃ¡mica",resistenza-elettrica-12-x-100-morsetto-in-ceramica,59.22,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/315-home_default/resistenza-elettrica-12-x-100-morsetto-in-ceramica.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'10':31B '100':5A '101':21B '12':3A,17B '220/230':28B '300':25B '6':22B '7':18B 'aliment':27B 'candelett':10B 'cav':30B 'ceram':8A,35B 'diametr':16B 'elettr':2A 'ht':37B 'lunghezz':20B 'marc':36B 'mm':19B,23B,32B 'morsett':6A,33B 'null':9A 'pellet':15B 'potenz':24B 'resistent':1A,11B 'stuf':13B 'volts':29B 'watt':26B 'x':4A"
+101,17,NULL,NULL,"STUFA A PELLET PUNTOFUOCO 13,5 KW MARY","PUNTOFUOCO 13,5 KW MARY PELLET STOVE","POÃŠLE Ã€ PELLET PUNTOFUOCO MARY 13,5 KW MARY","ESTUFA DE PELLET PUNTOFUOCO 13,5 KW MARY","Riscalda 190/280 m.c.
+Dimensioni: 50 X 54 H 98,5
+CapacitÃ  serbatoio: 15 kg","Heat: 190/280 cubic meters
+Dimensions: 50 X 54 H 98.5
+Tank capacity: 15 kg","Chauffe: 190/280 mÃ¨tres cubes
+Dimensions: 50 X 54 H 98,5
+CapacitÃ© du rÃ©servoir: 15 kg","Calor: 190/280 metros cÃºbicos
+Dimensiones: 50 X 54 H 98.5
+Capacidad del tanque: 15 kg","Una linea nuova accompagna Mary. Frontale stilizzato e fianchi affusolati rendono l'estetica accativante; oltre alle solite sicurezze abbiamo aggiunto anche la maniglia a ""scomparsa"".
+Una stufa 13,5 kw bruciati iper collaudata e con un rapporto qualitÃ /prezzo che non teme confronti.
+DISPONIBILE NEI COLORI ROSSO E AVORIO","Mary has a new line: the stylized frontal and tapered hips have an aesthetic appeal. In addition to the usual safety devices we have also added a retractable handle.
+A 13.5 kw stove that has been hyper tested and with an unmatched quality / price ratio.
+AVAILABLE IN RED AND IVORY COLORS","Une nouvelle ligne accompagne Mary. Les hanches stylisÃ©es en faÃ§ade et coniques rendent l'esthÃ©tique attrayante; En plus de la sÃ©curitÃ© habituelle, nous avons ajoutÃ© une poignÃ©e rÃ©tractable.
+Un poÃªle de 13,5 kw brÃ»lÃ©s et bien testÃ©, avec un rapport qualitÃ© / prix qui ne craint pas les comparaisons.
+DISPONIBLE EN COULEURS ROUGE ET IVOIRE .","Una nueva lÃ­nea acompaÃ±a Mary. Las caderas estilizadas frontales y cÃ³nicas hacen un atractivo estÃ©tico; AdemÃ¡s de los dispositivos de seguridad habituales tambiÃ©n hemos aÃ±adido el retractile mango.
+Una estufa de 13,5 kw quemado probado bien probado y con una relaciÃ³n calidad-precio que no tiene miedo comparaciones.
+DISPONIBLE EN COLOR ROJO Y AVOOR",stufa-a-pellet-puntofuoco-135-kw-mary,2257.00,,,,,,1,true,,stufa-a-pellet-puntofuoco-135-kw-mary,stufa-a-pellet-puntofuoco-135-kw-mary,,https://www.ricambixstufe.it/ricambixstufe/320-home_default/stufa-a-pellet-puntofuoco-135-kw-mary.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'/prezzo':48B '13':5A,37B '15':71C '190/280':60C '5':6A,38B,68C '50':63C '54':65C '98':67C 'accativ':23B 'accompagn':13B 'affusol':19B 'aggiunt':29B 'avor':58B 'bruc':40B 'capac':69C 'collaud':42B 'color':55B 'confront':52B 'dimension':62C 'dispon':53B 'estet':22B 'fianc':18B 'frontal':15B 'h':66C 'iper':41B 'kg':72C 'kw':7A,39B 'line':11B 'm.c':61C 'manigl':32B 'mary':8A,14B 'null':9A 'nuov':12B 'oltre':24B 'pellet':3A 'puntofuoc':4A 'qualit':47B 'rapport':46B 'rend':20B 'riscald':59C 'ross':56B 'scompars':34B 'serbatoi':70C 'sicurezz':27B 'sol':26B 'stilizz':16B 'stuf':1A,36B 'tem':51B 'x':64C"
+102,17,NULL,NULL,STUFA A PELLET PUNTOFUOCO 9 KW LOTUS,PELLET STOVE PUNTOFUOCO 9 KW LOTUS,POELE Ã€ PELLET PUNTOFUOCO 9 KW LOTUS,ESTUFA DE PELLET PUNTOFUOCO 9 KW LOTUS,,,,,"Â· Potenza bruciata: max 8,8 kW â€“ min 2,8 kW
+Â· Potenza resa in riscaldamento: max 8 kW â€“ min 2,5 kW
+Â· Rendimento: Pmax 85,5% â€“ Pmin 90%
+Â· Consumo orario pellet: max 1,8 kg/h â€“ min 0,6 kg/h
+Â· CapacitÃ  serbatoio: 13,5 kg
+Â· Grandezza ambiente riscaldabile: 140 â€“ 200 mc
+Â· Potenza nominale elettrica: 320 W
+Â· Peso: 54,7 kg
+DISPONIBILE NEI COLORI ROSSO O TORTORA","Â· Burned power: max 8.8 kW - min 2.8 kW
+Â· Power output in heating: max 8 kW - min 2,5 kW
+Â· Performance: Pmax 85.5% - Pmin 90%
+Â· Hourly pellet consumption: max 1,8 kg / h - min 0.6 kg / h
+Â· Tank capacity: 13.5 kg
+Â· Heatable environment: 140 - 200 mc
+Â· Electric Power: 320 W
+Â· Weight: 54.7 kg
+AVAILABLE IN RED OR TURTLEDOVE COLOR","Â· Puissance brÃ»lÃ©e: max 8.8 kW - min 2.8 kW
+Â· CapacitÃ© de chauffage: 8 kW max - min 2,5 kW
+Â· Rendement: 85,5% P max - P min 90%
+Â· Consommation horaire des pellets: max 1,8 kg / h - min 0,6 kg / h
+Â· CapacitÃ© du rÃ©servoir: 13,5 kg
+Â· Environnement chauffant: 140 Ã  200 mÃ¨tres cubes
+Â· Puissance Ã©lectrique: 320 W
+Â· Poids: 54,7 kg
+DISPONIBLE EN COULEURS ROUGE OU TOURTERELLE","Potencia quemada: mÃ¡x 8,8 kW - min 2,8 kW
+Â· Potencia de salida en calefacciÃ³n: mÃ¡x. 8 kW - min 2,5 kW
+Â· Rendimiento: Pmax 85,5% - Pmin 90%
+Â· Consumo de tiempo en pellets: mÃ¡x. 1,8 kg / h - min 0,6 kg / h
+Â· Capacidad del tanque: 13.5 kg
+Â· Entorno calentable: 140 - 200 mc
+Â· EnergÃ­a ElÃ©ctrica: 320 W
+Â· Peso: 54.7 kg
+DISPONIBLE EN COLORES ROJO O TÃ“RTOLA",stufa-a-pellet-puntofuoco-9-kw-lotus,1464.00,,,,,,1,true,,stufa-a-pellet-puntofuoco-9-kw-lotus,stufa-a-pellet-puntofuoco-9-kw-lotus,,https://www.ricambixstufe.it/ricambixstufe/335-home_default/stufa-a-pellet-puntofuoco-9-kw-lotus.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'0':44B '1':40B '13':49B '140':55B '2':16B,27B '200':56B '320':61B '5':28B,33B,50B '54':64B '6':45B '7':65B '8':12B,13B,17B,24B,41B '85':32B '9':5A '90':35B 'ambient':53B 'bruc':10B 'capac':47B 'color':69B 'consum':36B 'dispon':67B 'elettr':60B 'grandezz':52B 'kg':51B,66B 'kg/h':42B,46B 'kw':6A,14B,18B,25B,29B 'lotus':7A 'max':11B,23B,39B 'mc':57B 'min':15B,26B,43B 'nominal':59B 'null':8A 'orar':37B 'pellet':3A,38B 'pes':63B 'pmax':31B 'pmin':34B 'potenz':9B,19B,58B 'puntofuoc':4A 'rend':30B 'res':20B 'riscald':22B,54B 'ross':70B 'serbatoi':48B 'stuf':1A 'tortor':72B 'w':62B"
+103,17,NULL,NULL,STUFA A PELLET PUNTOFUOCO 11 KW CATRIA,PUNTOFUOCO 11 KW CATRIA PELLET STOVE,POÃŠLE Ã€ GRANULÃ‰S PUNTOFUOCO 11 KW CATRIA,ESTUFA DE PELLET PUNTOFUOCO 11KW CATRIA,"Riscalda: 160/220 m.c.
+Dimensioni: 85 X 25 H 82
+
+PossibilitÃ  di appenderla (KIT OPTIONAL)
+Canalizzabile (KIT OPTIONAL)
+Scarico posteriore e superiore","Heats: 160/220 cubic meters
+Dimensions: 85 X 25 H 82
+Possibility to hang it (KIT OPTIONAL)
+Canalizable (OPTIONAL KIT)
+Rear and upper discharge","Chauffe: 160/220 mÃ¨tres cubes
+Dimensions: 85 X 25 H 82
+PossibilitÃ© de l'accrocher (KIT OPTIONNEL)
+Canalizable (KIT OPTIONNEL)
+Ã‰chappement arriÃ¨re et dessus","Calor: 160/220 metros cÃºbicos
+Dimensiones: 85 X 25 H 82
+Posibilidad de colgarlo (KIT OPCIONAL)
+Canalizable (KIT OPCIONAL)
+descarga trasera y superior","CATRIA Ã¨ una stufa SLIM dalleÂ dimensioni compatte, solamente
+26cm di profonditÃ  che leÂ permettono la collocazione negli
+ambienti piÃ¹ ristretti, ancheÂ grazie alla possibilitÃ  di avere lo
+scarico superiore o posteriore.
+Con i suoi 11kW sprigionati,Â sfruttando la possibilitÃ  di essere
+canalizzata, la nostra stufaÂ puÃ² riscaldare piÃ¹ ambienti.","CATRIA is a compact SLIM stove, only 26cm deep, that allows it to be placed in tighter environments, also thanks to the possibility of having the upper or rear discharge.
+With its emitted 11kW, and with the possibility of being canalised, our stove can heat up more environments.","CATRIA est un poÃªle SLIM compacte de seulement 26 cm de profondeur qui peut Ãªtre placÃ© dans des environnements plus serrÃ©s, aussi grÃ¢ce Ã  la possibilitÃ© d'avoir le tuyau d'Ã©chappement des fumÃ©es supÃ©rieur ou Ã  l'arriÃ¨re.
+Avec son 11kW Ã©mis, en profitant de la possibilitÃ© d'Ãªtre canalisÃ©, notre poÃªle peut chauffer plusieurs piÃ¨ces.","CATRIA es una estufa SLIM compacta delgada, de sÃ³lo 26 cm de profundidad que permite colocarla en entornos mÃ¡s estrechos, tambiÃ©n gracias a la posibilidad de tener la descarga superior o posterior.
+Con su 11kW emite, aprovechando la oportunidad de ser canalizado, nuestra estufa puede calentar varias habitaciones.",stufa-a-pellet-puntofuoco-11-kw-catria,2283.84,,,,,,1,true,,stufa-a-pellet-puntofuoco-11-kw-catria,stufa-a-pellet-puntofuoco-11-kw-catria,,https://www.ricambixstufe.it/ricambixstufe/333-home_default/stufa-a-pellet-puntofuoco-11-kw-catria.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'11':5A '11kw':44B '160/220':60C '25':65C '26cm':18B '82':67C '85':63C 'ambient':27B,58B 'append':70C 'aver':35B 'canalizz':51B,73C 'catr':7A,9B 'colloc':25B 'compatt':16B 'dimension':15B,62C 'esser':50B 'graz':31B 'h':66C 'kit':71C,74C 'kw':6A 'm.c':61C 'null':8A 'optional':72C,75C 'pellet':3A 'permett':23B 'possibil':33B,48B,68C 'posterior':40B,77C 'profond':20B 'puntofuoc':4A 'puÃ²':55B 'riscald':56B,59C 'ristrett':29B 'scaric':37B,76C 'sfrutt':46B 'slim':13B 'sol':17B 'sprigion':45B 'stuf':1A,12B,54B 'superior':38B,79C 'x':64C"
+104,11,NULL,NULL,CAVO DEBIMETRO,"DEBIMETER CABLE  ",CABLE DEBIMETRE,CAVO DEBIMETRO,,,,,"CAVO DEBIMETRO
+
+LUNGHEZZA 30 CM","DEBIMETER CABLE
+ LENGTH 30 CM","CABLE DEBIMETRE
+
+Â 
+
+LONGUEUR 30 CM",Longitud 30 cm,cavo-debimetro,7.93,3.69,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/339-home_default/cavo-debimetro.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'30':7B 'cav':1A,4B 'cm':8B 'debimetr':2A,5B 'lunghezz':6B 'null':3A"
+105,7,NULL,NULL,"CAVO ENCODER "," ENCODER CABLE ","CABLE ENCODEUR ",CABLE ENCODER,,,,,"CAVO ENCODER PER MOTORI EBM
+
+lunghezza cavo: 80 cm","ENCODER CABLE FOR EBM ENGINES 
+
+cable length: 80 cm","CABLE ENCODEUR POUR MOTEURS EBM
+
+longueur de cÃ¢ble: 80 cm","longitud cable: 80 cm
+
+CABLE ENCODER PARA MOTORES EBM",cavo-encoder,5.49,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/524-home_default/cavo-encoder.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'80':11B 'cav':1A,4B,10B 'cm':12B 'ebm':8B 'encoder':2A,5B 'lunghezz':9B 'motor':7B 'null':3A"
+106,18,NULL,NULL,VASO SPIRALE PORTA PELLET,PELLET HOLDERS,PORTE-GRANULÃˆS,PORTA PELLET,,,,,"I vasi portapellet sono disponibili in due versioni. Entrambi molto capienti e
+resitenti, permettono di stoccare il pellet necessario in modo ordinato, pulito e
+con un tocco di classe.
+COLORI DISPONIBILI: AVORIO - ROSSO - NERO
+SIZE H 450 - Ã˜ 345 MMÂ CAPACITY 15 KG","There are two types of durable, high capacity pellet holder available. These allow
+you to store the pellets in an orderly, clean way and with a touch of class.","Les rÃ©cipients porte-granulÃ©s sont disponibles en deux versions, toutes deux trÃ¨s
+rÃ©sistantes ; leur grande contenance permet de stocker proprement et de maniÃ¨re
+ordonnÃ©e les granulÃ©s nÃ©cessaires, avec une touche de classe.","Los recipientes portapellet se encuentran disponibles en dos versiones. Ambos
+son muy espaciosos y resistentes, permiten almacenar el pellet necesario de forma
+ordenada, limpia y con un toque de clase.",vaso-spirale-porta-pellet,71.00,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/341-home_default/vaso-spirale-porta-pellet.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'15':47B '345':44B '450':42B 'avor':37B 'capacity':46B 'capient':16B 'class':34B 'color':35B 'dispon':10B,36B 'due':12B 'entramb':14B 'h':41B 'kg':48B 'mm':45B 'mod':26B 'molt':15B 'necessar':24B 'ner':39B 'null':5A 'ordin':27B 'pellet':4A,23B 'permett':19B 'port':3A 'portapellet':8B 'pul':28B 'resitent':18B 'ross':38B 'siz':40B 'spiral':2A 'stocc':21B 'tocc':32B 'vas':1A,7B 'version':13B 'Ã¸':43B"
+107,18,NULL,NULL,VASO FIORE PORTA PELLET,PELLET HOLDER,PORTE GRANULÃˆS,PORTA PELLET,,,,,"I vasi portapellet sono disponibili in due versioni. Entrambi molto capienti e
+resitenti, permettono di stoccare il pellet necessario in modo ordinato, pulito e
+con un tocco di classe.
+COLORI DISPONIBILI: AVORIO - ROSSO - NERO
+
+SIZE H 515 - Ã˜ 490 MM CAPACITY 30KG","There are two types of durable, high capacity pellet holder available. These allow
+you to store the pellets in an orderly, clean way and with a touch of class.","Les rÃ©cipients porte-granulÃ©s sont disponibles en deux versions, toutes deux trÃ¨s
+rÃ©sistantes ; leur grande contenance permet de stocker proprement et de maniÃ¨re
+ordonnÃ©e les granulÃ©s nÃ©cessaires, avec une touche de classe.","Los recipientes portapellet se encuentran disponibles en dos versiones. Ambos
+son muy espaciosos y resistentes, permiten almacenar el pellet necesario de forma
+ordenada, limpia y con un toque de clase.",vaso-spirale-porta-pellet-107,83.00,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/342-home_default/vaso-spirale-porta-pellet.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'30kg':47B '490':44B '515':42B 'avor':37B 'capacity':46B 'capient':16B 'class':34B 'color':35B 'dispon':10B,36B 'due':12B 'entramb':14B 'fior':2A 'h':41B 'mm':45B 'mod':26B 'molt':15B 'necessar':24B 'ner':39B 'null':5A 'ordin':27B 'pellet':4A,23B 'permett':19B 'port':3A 'portapellet':8B 'pul':28B 'resitent':18B 'ross':38B 'siz':40B 'stocc':21B 'tocc':32B 'vas':1A,7B 'version':13B 'Ã¸':43B"
+108,18,NULL,NULL,"ARMOUR&DANFORTH AD5123 ASPIRACENERE CERVINO, 18 LT","ARMOUR&DANFORTH AD5123 ASPIRACENERE CERVINO, 18 LT","ARMOUR&DANFORTH AD5123 ASPIRACENERE CERVINO, 18 LT","ARMOUR&DANFORTH AD5123 ASPIRACENERE CERVINO, 18 LT","Bidone aspiratuttoÂ 800 watt - capacitÃ  1,8 lt. - filtro hepa lavabile - tubo flessibile",,,,"Descrizione
+Aspiracenere cervino, 18 lt.
+- Motore 800 W - 50 Hz, 230 V.Â 
+- Cavo alimentazione 2.00 mt.Â 
+- Tanica 18 lt.Â 
+- Lancia piatta 22 cm.Â 
+- Filtro HEPA lavabile.Â 
+Designed in Italy.
+
+Contenuto della confezione
+Aspiracenere",,,,armourdanforth-ad5123-aspiracenere-cervino-18-lt,44.00,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/343-home_default/armourdanforth-ad5123-aspiracenere-cervino-18-lt.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'1':47C '18':6A,12B,26B '2.00':23B '22':30B '230':19B '50':17B '8':48C '800':15B,44C 'ad5123':3A 'aliment':22B 'armour':1A 'aspiracen':4A,10B,41B 'aspiratutt':43C 'bidon':42C 'capac':46C 'cav':21B 'cervin':5A,11B 'cm':31B 'confezion':40B 'conten':38B 'danforth':2A 'descrizion':9B 'designed':35B 'filtr':32B,50C 'flessibil':54C 'hep':33B,51C 'hz':18B 'italy':37B 'lanc':28B 'lavabil':34B,52C 'lt':7A,13B,27B,49C 'motor':14B 'mt':24B 'null':8A 'piatt':29B 'tanic':25B 'tub':53C 'v':20B 'w':16B 'watt':45C"
+110,16,NULL,NULL,BOCCOLA PER COCLEA FEMMINA," BUSH FOR FEMALE AUGER",ENTRETOISE POUR VIS SANS FIN FEMELLE AVEC VIS ET ECROU,BOCCOLA PARA SINFIN,,,,,BOCCOLA PER COCLEA FEMMINA CON VITE E DADO,BUSH FOR FEMALE AUGER,ENTRETOISE POUR VIS SANS FIN FEMELLE AVEC VIS ET ECROU,,boccola-per-coclea-femmina,5.49,,,,,,1,true,,,,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/coclee/951044900-boccola-per-coclea-femmina-con-vite-e-dado.png,2026-03-27 11:34:24.476299+00,2026-04-02 10:47:46.754545+00,"'boccol':1A,6B 'cocle':3A,8B 'dad':13B 'femmin':4A,9B 'null':5A 'vit':11B"
+111,16,NULL,NULL,"GIUNTO MOTORE COCLEA ","AUGER MOTOR JOINT ","JOINT MOTEUR VIS SANS FIN ","JUNTO MOTOR SINFIN ",,,,,GIUNTO MOTORE COCLEA 30X20+2 FIL.M4,AUGER MOTOR JOINT 30X20 + 2 FIL.M4,JOINT MOTEUR VIS SANS FIN 30X20+2 FIL.M4,,giunto-motore-coclea-,6.00,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/349-home_default/giunto-motore-coclea-.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'+2':9B '30x20':8B 'cocle':3A,7B 'fil.m4':10B 'giunt':1A,5B 'motor':2A,6B 'null':4A"
+112,9,NULL,NULL,CANDELA UTXS022576 D12.5 MM L162MM,SPARK PLUG UTXS022576 D12.5 MM L162MM,BOUGIE D'ALLUMAGE UTXS022576 D12.5 MM L162MM,RESISTENCIA DE ENCENDIDO UTXS022576 D12.5 MM L162MM,,,,,"CANDELA ACCENSIONE UTX D.12.5 MM L162 MM W350 V230 CON FLANGIA
+
+MARCA: ROTFIL","SPARK PLUG UTXS022576 DIAMETER 12.5 MM LONG 162 MM W350 V230 WITH FLANGE
+Â 
+BRAND: ROTFIL","BRAND: ROTFIL
+
+BOUGIE UTXS022576Â  Â DIAMÃˆTRE 12.5 MMÂ  LONG 162 MM W350 V230 AVEC BRIDE
+Â 
+MARQUE: ROTFIL","RESISTENCIA DE ENCENDIDO UTXS022576 DIÃMETRO 12.5 MM LARGA 162 MM W350 V230 CON BRIDA
+Â 
+MARCA: ROTFIL",candela-utx-d125-mm-l162mm,30.56,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/351-home_default/candela-utx-d125-mm-l162mm.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'accension':8B 'candel':1A,7B 'd.12.5':10B 'd12.5':3A 'flang':17B 'l162':12B 'l162mm':5A 'marc':18B 'mm':4A,11B,13B 'null':6A 'rotfil':19B 'utx':9B 'utxs022576':2A 'v230':15B 'w350':14B"
+113,8,NULL,NULL,VENTILATORE ARIA +CONDENSATORE CABLATO," AIR FAN + CABLED CONDENSER",VENTILATEUR AIR + CONDENSEUR,VENTILADOR AIRE +CONDENSADOR CABLADO,,,,,"VENTILATORE ARIA +CONDENSATOREÂ 
+
+BOCCA 22X7 CM
+
+MARCA: EBM",AIR FAN + CONDENSER MOUTH 22X7 CM BRAND: EBM,"VENTILATEUR AIR + CONDENSEUR
+
+BOUCHE 22X7 CM
+
+MARQUE: EBM","VENTILADOR AIRE +CONDENSADORÂ 
+
+BOCA 22X7 CM
+
+MARCA: EBM",ventilatore-aria-condensatore-cablato,277.92,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/541-home_default/ventilatore-aria-condensatore-cablato.jpg,2026-03-27 11:34:24.476299+00,2026-03-27 11:34:24.476299+00,"'22x7':10B 'ari':2A,7B 'bocc':9B 'cabl':4A 'cm':11B 'condens':3A,8B 'ebm':13B 'marc':12B 'null':5A 'ventil':1A,6B"
+114,13,NULL,NULL,"TUBO SILICONICO "," SILICONE TUBE INTERNAL DIAMETER 5MM",TUYAU SILICONE,TUBO DE SILICONA,,,,,TUBO SILICONICO DIAMETRO INTERNO 5MM,SILICONE TUBE INTERNAL DIAMETER 5MM,DIAMETRE INTÃ‰RIEUR DU TUYAU EN SILICONE 5MM,DIAMETRO 5 MM,tubo-siliconico-,6.95,,,,,,0,true,,,,,https://www.ricambixstufe.it/ricambixstufe/356-home_default/tubo-siliconico-.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'5mm':8B 'diametr':6B 'intern':7B 'null':3A 'silicon':2A,5B 'tub':1A,4B"
+115,9,HT69907,NULL,"CANDELA MM.90 D.9,9 190W 3/8GAS CAB",SPARK PLUG MM.90 D.9.9 190W 3 / 8GAS CAB,"BOUGIE  MM.90 D.9,9 190W 3/8GAS CAB","RESISTENCIA MM.90 D.9,9 190W 3/8GAS CAB",,,,,"CANDELA MM.90 D.9,9 190W 3/8GAS CAB
+
+MARCA:Â HT69907","CANDLE MM.90 D.9.9 190W 3 / 8GAS CAB 
+
+BRAND: HT69907","BOUGIE MM.90 D.9.9 190W 3/8 GAS CAB
+
+MARQUE: HT69907",MARCA:Â HT69907,candela-mm90-d99-190w-38gas-cab,41.48,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/358-home_default/candela-mm90-d99-190w-38gas-cab.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'190w':5A,13B '3/8gas':6A,14B '9':4A,12B 'cab':7A,15B 'candel':1A,9B 'd.9':3A,11B 'ht69907':8A,17B 'marc':16B 'mm.90':2A,10B"
+116,9,KH67053,NULL,"CANDELA CERAMICA 230W Ã˜ 11,55 230V RACC. 3/8""","CERAMIC SPARK PLUG 230W Ã˜ 11.55 230V RACC. 3/8 ""","BOUGIE CERAMIQUE 230W Ã˜ 11,55 230V RACC. 3/8""","RESISTENCIA CERAMICA 230W Ã˜ 11,55 230V UNION. 3/8""",,,,,"CANDELA CERAMICA 230W Ã˜ 11,55 230V RACC. 3/8""
+
+MARCA: HTÂ Â KH67053","CERAMIC SPARK PLUG 230W Ã˜ 11.55 230V RACC. 3/8 "" BRAND: HT KH67053","BOUGIE CERAMIQUE 230W Ã˜ 11.55 230V RACC. 3/8 ""
+
+MARQUE: HT KH67053",MARCA: HT,candela-ceramica-230w-o-1155-230v-racc-38,59.22,,,,,,1,true,,,,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/resistenze-accensione/kh67053.jpg,2026-03-27 11:34:24.586574+00,2026-04-02 10:47:46.897932+00,"'11':5A,15B '230v':7A,17B '230w':3A,13B '3/8':9A,19B '55':6A,16B 'candel':1A,11B 'ceram':2A,12B 'ht':21B 'kh67053':10A,22B 'marc':20B 'racc':8A,18B 'Ã¸':4A,14B"
+117,10,NULL,NULL,DISPLAY VERTICALE MICRONOVA 6 TASTI," MICRONOVA 6-BUTTON VERTICAL DISPLAY",AFFICHEUR VERTICAL MICRONOVA Ã€ 6 BOUTONS,PANTALLA VERTICAL MICRONOVA 6 BOTONES,,,,,LED DISPLAY VERTICALE MICRONOVA 6 TASTI,MICRONOVA LED 6-BUTTON VERTICAL DISPLAY,AFFICHEUR VERTICAL MICRONOVA Ã€ 6 BOUTONS,,display-verticale-micronova-6-tasti,64.66,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/361-home_default/display-verticale-micronova-6-tasti.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'6':4A,11B 'display':1A,8B 'led':7B 'micronov':3A,10B 'null':6A 'tast':5A,12B 'vertical':2A,9B"
+118,12,NULL,NULL,BRACIERE PER INSERTO A PELLET 11 KW ACCIAIO,"BRAZIER FOR PELLET INSERT 11 KW STEEL ",BRASIER POUR INSERT PELLET 11 KW EN ACIER,BRASERO PARA INSERTO A PELLET 11 KW ACERO,,,,,"BRACIERE PER INSERTO A PELLET 11 KW ACCIAIOÂ 
+
+PER MODELLI EVA CALOR-PUNTOFUOCO",BRAZIER FOR PELLET INSERT 11 KW STEEL FOR EVA CALOR-PUNTOFUOCO MODELS,"BRASIER POUR INSERT PELLET 11 KW EN ACIER
+
+POUR MODÃˆLES EVA CALOR-PUNTOFUOCO","BRASERO PARA INSERTO A PELLET 11 KW ACERO
+
+PARA MODELOS EVA CALOR-PUNTOFUOCO",braciere-per-inserto-a-pellet-11-kw-acciaio,42.70,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/555-home_default/braciere-per-inserto-a-pellet-11-kw-acciaio.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'11':6A,15B 'acciai':8A,17B 'brac':1A,10B 'calor':22B 'calor-puntofuoc':21B 'eva':20B 'insert':3A,12B 'kw':7A,16B 'modell':19B 'null':9A 'pellet':5A,14B 'puntofuoc':23B"
+119,12,NULL,NULL,"BRACIERE IN ACCIAIO 24- 27 KW ",BRAZIER IN STEEL 24-27 KW FOR HYDRO STOVES,BRASERO EN ACIER 24-27 KW POUR POÃŠLES HYDRO,"BRASERO EN ACERO 24-27 KW ",,,,,"BRACIERE IN ACCIAIO 24-27 KWÂ  PER STUFE HYDRO
+
+EVACALOR-PUNTOFUOCO","BRAZIER IN STEEL 24-27 KW FOR HYDRO STOVES 
+
+EVACALOR-PUNTOFUOCO","BRASERO EN ACIER 24-27 KW POUR POÃŠLES HYDRO
+
+EVACALOR-PUNTOFUOCO","BRASERO EN ACERO 24-27 KWÂ  PARA ESTUFAS HYDRO
+
+EVACALOR-PUNTOFUOCO",braciere-in-acciaio-24-27-kw-,107.36,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/557-home_default/braciere-in-acciaio-24-27-kw-.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'-27':12B '24':4A,11B '27':5A 'acciai':3A,10B 'brac':1A,8B 'evacalor':18B 'evacalor-puntofuoc':17B 'hydro':16B 'kw':6A,13B 'null':7A 'puntofuoc':19B 'stuf':15B"
+120,12,NULL,NULL,BRACIERE HYDRO 20/24 AC.430 SALD.,BRAZIER HYDRO 20/24 AC.430,"BRASERO HYDRO 20/24 AC.430 ",BRASERO HYDRO 20/24 AC.430 SALD.,,,,,"BRACIERE HYDRO 20/24 AC.430 SALD.
+
+EVACALOR-PUNTOFUOCO","BRAZIER HYDRO 20/24 AC.430 SALD
+
+. EVACALOR-PUNTOFUOCO","BRASERO HYDRO 20/24 AC.430Â 
+
+EVACALOR-PUNTOFUOCO","BRASERO HYDRO 20/24 AC.430 SALD.Â 
+
+PARA ESTUFAS EVACALOR-PUNTO FUOCO",braciere-hydro-2024-ac430-sald,56.12,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/565-home_default/braciere-hydro-2024-ac430-sald.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'20/24':3A,9B 'ac.430':4A,10B 'brac':1A,7B 'evacalor':13B 'evacalor-puntofuoc':12B 'hydro':2A,8B 'null':6A 'puntofuoc':14B 'sald':5A,11B"
+121,13,NULL,NULL,SONDA FUMI PER SCHEDE  DUEPI," 4KW SMOKE  PROBE FOR DUEPI BOARDS",SONDE FUMÃ‰ES POUR CARTES MÃˆRES DUEPI,SONDA DE HUMOS PARA TARJETAS   DUEPI,,,,,SONDA FUMI 4KW PER SCHEDE DUEPI,4KW SMOKE PROBE FOR DUEPI BOARDS,SONDE FUMÃ‰ES 4KW POUR CARTES MÃˆRES DUEPI,,sonda-fumi-per-schede-duepi,29.77,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/367-home_default/sonda-fumi-per-schede-duepi.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'4kw':9B 'duep':5A,12B 'fum':2A,8B 'null':6A 'sched':4A,11B 'sond':1A,7B"
+122,6,NULL,NULL,MOTORE COCLEA PER STUFE A PELLET  3 RPM CON SENSORE GIRI," AUGER MOTOR 3 RPM PELLET STOVES WITH RPM SENSOR  ",MOTEUR VIS SANS FIN POUR POELES A PELLET - 3 RPM AVEC CAPTEUR DE TOURS,MOTOR SINFIN MELLOR 3 RPM CON SENSOR GIRAS,,,,,"MOTORE COCLEAÂ  PER STUFE A PELLET MELLOR 3 RPM CON SENSORE GIRI
+
+Diametro perno 8,5 mmÂ 
+
+MELLOR","AUGER MOTOR FOR MELLOR 3 RPM PELLET STOVES WITH RPM SENSOR
+
+ Pin diameter 8.5 mm
+
+MELLOR","MOTEUR VIS SANS FIN POUR POELES A PELLET - 3 T / MIN MELLOR AVEC CAPTEUR DE T / MIN
+
+DiamÃ¨tre du goujon 8,5 mm
+
+MELLOR","Diametro arbol 8,5 mm 3 rpm
+
+con sensor girasÂ 
+
+MELLOR",motoriduttore-per-stufe-a-pellet-mellor-3-rpm-con-sensore-di-giri,152.13,,,,,,1,true,,,,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/motoriduttori/motoriduttore-per-stufe-a-pellet-mellor-3-rpm-con-sensore-di-giri-1.jpg,2026-03-27 11:34:24.586574+00,2026-04-02 10:47:47.039604+00,"'3':7A,20B '5':28B '8':27B 'cocle':2A,14B 'diametr':25B 'gir':11A,24B 'mellor':19B,30B 'mm':29B 'motor':1A,13B 'null':12A 'pellet':6A,18B 'pern':26B 'rpm':8A,21B 'sensor':10A,23B 'stuf':4A,16B"
+123,6,NULL,NULL,MOTORE COCLEA PER STUFE A PELLET  1 RPM,1 RPM MELLOR AUGER MOTOR,MOTEUR VIS SANS FIN POUR POELES A PELLET 1 RPM,MOTOR SINFIN  MELLOR 1 RPM,,,,,"MOTORE COCLEA PER STUFE A PELLET MELLOR 1 RPM
+
+DIAMETRO PERNO 9,5 MM
+
+MELLOR","AUGER MOTOR FOR MELLOR PELLET STOVES 1 RPM 
+
+PIN DIAMETER 9.5 MM
+
+MELLOR","MOTEUR VIS SANS FIN POUR POELES A PELLET 1 RPM
+
+DIAMETRE GOUJON 9,5 MM
+
+MELLOR","Diametro arbol 9,5 mm 1 rpm
+
+MELLOR",motoriduttore-per-stufe-a-pellet-mellor-1-rpm,120.90,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/507-home_default/motoriduttore-per-stufe-a-pellet-mellor-1-rpm.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'1':7A,17B '5':22B '9':21B 'cocle':2A,11B 'diametr':19B 'mellor':16B,24B 'mm':23B 'motor':1A,10B 'null':9A 'pellet':6A,15B 'pern':20B 'rpm':8A,18B 'stuf':4A,13B"
+124,6,NULL,NULL,MOTORE COCLEA  PER STUFE A PELLET  4 RPM CON SENSORE GIRI,"AUGER MOTOR  4 RPM PELLET STOVES WITH RPM SENSOR  ",MOTEUR AUGER POUR POELES A PELLET 4 RPM AVEC CAPTEUR DE TOURS,MOTOR SINFIN MELLOR 4 RPM CON SENSOR GIRAS,,,,,"MOTORE COCLEAÂ  PER STUFE A PELLET MELLOR 4 RPM CON SENSORE GIRI
+
+Diametro perno 9,5 mmÂ 
+
+MELLOR","AUGER MOTOR FOR MELLOR 4 RPM PELLET STOVES WITH RPM SENSOR 
+Pin diameter 9.5 mm
+MELLOR","MOTEUR AUGER POUR POELES A PELLET 4 TR / MIN MELLOR AVEC CAPTEUR DE TR / MIN
+
+DiamÃ¨tre goujon 9,5 mm
+
+MELLOR","Diametro arbol 9,5 mm 4 rpmÂ 
+
+con sensor di giras",motoriduttore-per-stufe-a-pellet-mellor-4-rpm-con-sensore-giri,152.13,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/504-home_default/motoriduttore-per-stufe-a-pellet-mellor-4-rpm-con-sensore-giri.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'4':7A,20B '5':28B '9':27B 'cocle':2A,14B 'diametr':25B 'gir':11A,24B 'mellor':19B,30B 'mm':29B 'motor':1A,13B 'null':12A 'pellet':6A,18B 'pern':26B 'rpm':8A,21B 'sensor':10A,23B 'stuf':4A,16B"
+125,6,NULL,NULL,"MOTORE COCLEA PER STUFE A PELLET 5,3 RPM","5.3 RPM AUGER MOTOR ","MOTEUR VIS SANS FIN 5.3 RPM POUR POELES A PELLET ","MOTOR SINFIN   MELLOR SERIE T35,3 RPM",,,,,"MOTORE COCLEA PER STUFE A PELLET MELLOR 5,3 RPM
+
+DIAMETRO PERNO 9.5 MM
+
+MELLOR","AUGER MOTOR FOR MELLOR PELLET STOVES 5.3 RPM
+
+ PIN DIAMETER 9.5 MM
+
+MELLOR","MOTEUR VIS SANS FINÂ MELLOR 5.3 RPMÂ POUR POELES A PELLETÂ 
+
+DIAMETRE GOUJON 9,5 MM
+
+MELLOR","Diametro arbol 9,5 mm 5,3 RPM",motoriduttore-per-stufe-a-pellet-mellor-serie-t353-rpm,140.79,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/509-home_default/motoriduttore-per-stufe-a-pellet-mellor-serie-t353-rpm.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'3':8A,19B '5':7A,18B '9.5':23B 'cocle':2A,12B 'diametr':21B 'mellor':17B,25B 'mm':24B 'motor':1A,11B 'null':10A 'pellet':6A,16B 'pern':22B 'rpm':9A,20B 'stuf':4A,14B"
+126,6,NULL,NULL,MOTORE COCLEA 2 RPM CON SENSORE GIRI,2 RPM AUGER MOTOR WITH SENSE TURNS,MOTEUR VIS SANS FIN 2 RPM AVEC CAPTEUR DE TOURS,MOTOR SINFIN 2RPM CON SENSOR GIRAS,,,,,"MOTORE COCLEA 2 RPM CON SENSORE GIRI
+
+DIAMETRO PERNO 9,5 MM
+
+marca:MELLOR","2 RPM AUGER MOTOR WITH RPM SENSOR
+ PIN DIAMETER 9.5 MM
+MELLOR","MOTEUR VIS SANS FIN Ã€ 2 RPM AVEC CAPTEUR DE RPM
+
+DIAMETRE PIN 9,5 MM
+
+Marque: MELLOR","MOTOR SINFIN 2 RPM CON SENSOR GIRAS
+
+DIAMETRO ARBOL 9,5 MM
+
+marca:MELLOR",motore-coclea-2rpm-con-sensore-giri,146.64,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/512-home_default/motore-coclea-2rpm-con-sensore-giri.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'2':3A,11B '5':19B '9':18B 'cocle':2A,10B 'diametr':16B 'gir':7A,15B 'marc':21B 'mellor':22B 'mm':20B 'motor':1A,9B 'null':8A 'pern':17B 'rpm':4A,12B 'sensor':6A,14B"
+127,6,NULL,NULL,"MOTORE COCLEA 1,5 RPM CON SENSORE GIRI",1.5 RPM AUGER MOTOR WITH SENSE TURNS,"MOTEUR VIS SANS FIN 1,5 RPM AVEC CAPTEUR DE T / MIN","MOTOR SINFIN 1,5 RPM CON SENSOR GIRAS",,,,,"MOTORE COCLEA 1,5 RPM CON SENSRE GIRI
+
+DIAMETRO PERNO 9,5 MM
+
+MELLOR","1.5 RPM AUGER MOTOR WITH SENSE TURNS 
+PIN DIAMETER 9.5 MM
+MELLOR","MOTEUR VIS SANS FIN 1,5 T / MN AVEC CAPTEUR DE T / MIN
+
+DIAMETRE GOUJON 9,5 MM
+
+MELLOR","MOTOR SINFIN 1,5 RPM CON SENSOR GIRAS
+
+Â 
+
+DIAMETRO ARBOL 9,5 MM
+
+MELLOR",motore-coclea-15-rpm-con-sensre-giri,146.64,,,,,,0,true,,,,,https://www.ricambixstufe.it/ricambixstufe/516-home_default/motore-coclea-15-rpm-con-sensre-giri.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'1':3A,12B '5':4A,13B,21B '9':20B 'cocle':2A,11B 'diametr':18B 'gir':8A,17B 'mellor':23B 'mm':22B 'motor':1A,10B 'null':9A 'pern':19B 'rpm':5A,14B 'sensor':7A 'sensr':16B"
+128,6,NULL,NULL,"MOTORE COCLEA 3,6 RPM ",AUGER MOTOR 3.6 RPM,"MOTEUR VIS SANS FIN 3,6 RPM ","MOTOR SINFIN 3,6 RPM ",,,,,"MOTORE COCLEA 3,6 RPMÂ 
+
+DIAMETRO PERNO 9.5 MM
+
+MARCA GGM","AUGER MOTOR 3.6 RPM
+
+Pin diameter 9.5 mmÂ 
+
+ BRAND GGM","MOTEUR VIS SANSÂ 3.6 RPM
+
+DIAMETRE GOUJON 9,5 MM
+
+MARQUE GGM","MOTOR SINFIN 3,6 RPMÂ 
+
+DIAMETRO ARBOL 9.5 MM
+
+MARCA GGM",motore-coclea-36-rpm-,124.00,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/519-home_default/motore-coclea-36-rpm-.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'3':3A,9B '6':4A,10B '9.5':14B 'cocle':2A,8B 'diametr':12B 'ggm':17B 'marc':16B 'mm':15B 'motor':1A,7B 'null':6A 'pern':13B 'rpm':5A,11B"
+129,11,NULL,NULL,SCHEDA MADRE L023  7T MICRONOVA,"MOTHERBOARD L023 7T ",CARTE MÃˆRE L023 7T MICRONOVA,TARJETA MADRE L023  7T MICRONOVA,,,,,SCHEDA MADRE L023 7T FONDO NERO,MOTHERBOARD L023 7T BLACK BOTTOM,CARTE MÃˆRE L023 7T FOND NOIR,,scheda-madre-l023-7t-micronova,256.20,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/438-home_default/scheda-madre-l023-7t-micronova.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'7t':4A,10B 'fond':11B 'l023':3A,9B 'madr':2A,8B 'micronov':5A 'ner':12B 'null':6A 'sched':1A,7B"
+130,11,NULL,NULL,SCHEDA ELETTRONICA MICRONOVA I023 6T," MICRONOVA I023 6T ELECTRONIC BOARD",CARTE ELECTRONIQUE MICRONOVA I023 6T,TARJETA ELECTRONICA MICRONOVA I023 6T,,,,,SCHEDA ELETTRONICA MICRONOVA I023 6T,MICRONOVA I023 6T ELECTRONIC BOARD,CARTE ELECTRONIQUE MICRONOVA I023 6T,,scheda-elettronica-micronova-i023-6t,273.28,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/439-home_default/scheda-elettronica-micronova-i023-6t.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'6t':5A,11B 'elettron':2A,8B 'i023':4A,10B 'micronov':3A,9B 'null':6A 'sched':1A,7B"
+131,7,NULL,NULL,"MOTORE FUMI CENTRIFUGO DA 100 MM+CABLAGGIO ",100 MM CENTRIFUGE SMOKE MOTOR + WIRING,MOTEUR DE FUMÃ‰E EBM CENTRIFUGE 100MM + CABLAGE,"MOTOR HUMOS CENTRIFUGO DA 100+CABLE ",,,,,MOTORE FUMI EBM CENTRIFUGO DA 100MM +CONDENSATORE+CABLAGGIO,"100 MM CENTRIFUGE SMOKE MOTOR + WIRING
+EBM",EBM MOTEUR DE FUMÃ‰E CENTRIFUGEÂ 100MM + CONDENSEUR + CABLAGE,MOTOR HUMOS EBM CENTRIFUGOÂ  100MM +CONDENSADOR+CABLE,motore-fumi-centrifugo-da-100cablaggio-,450.18,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/445-home_default/motore-fumi-centrifugo-da-100cablaggio-.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'100':5A '100mm':14B 'cablagg':7A,16B 'centrifug':3A,12B 'condens':15B 'ebm':11B 'fum':2A,10B 'mm':6A 'motor':1A,9B 'null':8A"
+132,7,NULL,NULL,GUARNIZIONE MOTORI FUMI EBM," GASKET OF FUME ENGINES EBM",JOINT MOTEURS FUMÃ‰ES EBM,JUNTA MOTOR HUMOS EBM,,,,,GUARNIZIONE MOTORI FUMI EBMÂ 55462.50020,,JOINT MOTEURS FUMÃ‰ES EBM 55462.50020,JUNTA MOTOR HUMOS EBMÂ 55462.50020,guarnizione-motori-fumi-ebm,13.97,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/427-home_default/guarnizione-motori-fumi-ebm.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'55462.50020':10B 'ebm':4A,9B 'fum':3A,8B 'guarnizion':1A,6B 'motor':2A,7B 'null':5A"
+133,7,NULL,NULL,VENTILATORE FUMI DA 80MM + CABLAGGIO," 80MM SMOKE FAN + HARNESS","VENTILATEUR DE FUMÃ‰E EBM 80 MM + CÃ‚BLAGE ",VENTILADOR HUMOS  80MM + CABLE,,,,,VENTILATORE FUMI EBMÂ  DA 80 MM+CONDENSATATORE+CABLAGGIO,"80MM SMOKE FAN + HARNESS
+
+EBM",VENTILATEUR DE FUMÃ‰E EBM 80 MM + CONDENSEUR + CÃ‚BLAGE,VENTILADOR HUMOS EBMÂ  DE 80 MM+CONDENSADOR+CABLE,ventilatore-fumi-da-80mm-cablaggio,278.47,,,,,,0,true,,,,,https://www.ricambixstufe.it/ricambixstufe/444-home_default/ventilatore-fumi-da-80mm-cablaggio.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'80':11B '80mm':4A 'cablagg':5A,14B 'condensat':13B 'ebm':9B 'fum':2A,8B 'mm':12B 'null':6A 'ventil':1A,7B"
+134,12,NULL,NULL,"CORNICE BRACIERE IN GHISA "," CAST IRON FRAME FRAME","CORNICE BRACIERE IN GHISA ",MARCO DE BRASERO EN HIERRO FUNDIDO,,,,,"CORNICE BRACIERE IN GHISAÂ 
+
+EVACALOR-PUNTOFUOCO","BRAZIER FRAME CAST IRON 
+EVACALOR-PUNTOFUOCO",,"MARCO DE BRASERO EN HIERRO FUNDIDO
+
+PARA ESTUFAS EVACALOR-PUNTO FUOCO",cornice-braciere-in-ghisa-,24.77,,,,,,0,true,,,,,https://www.ricambixstufe.it/ricambixstufe/430-home_default/cornice-braciere-in-ghisa-.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'brac':2A,7B 'cornic':1A,6B 'evacalor':11B 'evacalor-puntofuoc':10B 'ghis':4A,9B 'null':5A 'puntofuoc':12B"
+135,12,NULL,NULL," BRACIERE IN GHISA 9-11 KW "," CAST IRON BURNER 9-11 KW","BRASERO EN FONTE 9-11 KW "," BRASERO EN HIERRO FUNDIDO 9-11 KW ",,,,,"BRACIERE IN GHISAÂ 
+
+PER STUFE 11 KW SLIM
+
+Â 
+
+EVACALOR-PUNTOFUOCO","CAST IRON BRAZIER FOR STOVES 11 KW SLIM Â 
+
+ EVACALOR-PUNTOFUOCO","BRASERO EN FONTEÂ 
+
+POUR POELES 11 KW SLIM
+
+Â 
+
+EVACALOR-PUNTOFUOCO","BRASERO EN HIERRO FUNDIDO
+
+PARA ESTUFAS 11 KW SLIM
+
+EVACALOR-PUNTO FUOCO",-braciere-in-ghisa-9-11-kw-,51.12,,,,,,0,true,,,,,https://www.ricambixstufe.it/ricambixstufe/559-home_default/-braciere-in-ghisa-9-11-kw-.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'-11':5A '11':13B '9':4A 'brac':1A,8B 'evacalor':17B 'evacalor-puntofuoc':16B 'ghis':3A,10B 'kw':6A,14B 'null':7A 'puntofuoc':18B 'slim':15B 'stuf':12B"
+136,12,NULL,NULL,BRACIERE IN GHISA 8 KW,"CAST IRON BRAZIER 8 KW  FOR CERINO-ENRICA STOVES    ",BRASERO EN FONTE 8 KW,BRASERO EN HIERRO FUNDIDO 8 KW,,,,,"BRACIERE IN GHISA 8 KW
+
+PER STUFE CERINO-ENRICA
+
+Â 
+
+EVACALOR-PUNTOFUOCO",CAST IRON BRAZIER 8 KW FOR CERINO-ENRICA STOVES Â  EVACALOR-PUNTOFUOCO,"BRASERO EN FONTE 8 KW
+
+POUR LES POÃŠLES CERINO-ENRICA
+
+Â 
+
+EVACALOR-PUNTOFUOCO","BRASERO EN HIERRO FUNDIDO
+
+PARA ESTUFAS 8 KWÂ 
+
+EVACALOR-PUNTO FUOCO",braciere-in-ghisa-8-kw,57.00,,,,,,0,true,,,,,https://www.ricambixstufe.it/ricambixstufe/561-home_default/braciere-in-ghisa-8-kw.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'8':4A,10B 'brac':1A,7B 'cerin':15B 'cerino-enr':14B 'enric':16B 'evacalor':18B 'evacalor-puntofuoc':17B 'ghis':3A,9B 'kw':5A,11B 'null':6A 'puntofuoc':19B 'stuf':13B"
+137,19,NULL,NULL,"POMPA DI RICIRCOLO INVERTER "," INVERTER X HYDRO RECIRCULATION PUMP + RELAY","POMPE DE RECIRCULATION INVERTER ","BOMBA DE RECIRCULO INVERTER ",,,,,"POMPA DI RICIRCOLO INVERTER X HYDRO + RELE'
+
+MARCA: WILO","INVERTER X HYDRO RECIRCULATION PUMP + RELAY 
+
+BRAND: WILO","INVERTER POUR POMPE DE RECIRCULATION HYDRO + RELAIS
+
+MARQUE: WILO","BOMBA DE RECIRCULO INVERTER X HYDRO + RELE'
+
+MARCA: WILO",pompa-di-ricircolo-inverter-,253.00,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/399-home_default/pompa-di-ricircolo-inverter-.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'hydro':11B 'inverter':4A,9B 'marc':13B 'null':5A 'pomp':1A,6B 'rel':12B 'ricircol':3A,8B 'wil':14B 'x':10B"
+138,8,NULL,NULL,VENTILATORE ARIA EBM DX," EBM DX AIR FAN",VENTILATEUR AIR EBM DROIT,VENTILADOR AIRE EBM DX,,,,,"VENTILATORE ARIA EBM DX
+
+PER STUFE EVACALOR/PUNTOFUOCO",EBM DX AIR FAN FOR EVACALOR STOVES / PUNTOFUOCO,"VENTILATEUR AIR EBM DROIT
+
+POUR POELES EVA CALOR / PUNTO FUOCO","VENTILADOR AIRE EBM DX
+
+PARA ESTUFAS EVACALOR/PUNTOFUOCO",ventilatore-aria-ebm-dx,123.34,,,,,,0,true,,,,,https://www.ricambixstufe.it/ricambixstufe/440-home_default/ventilatore-aria-ebm-dx.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'ari':2A,7B 'dx':4A,9B 'ebm':3A,8B 'evacalor/puntofuoco':12B 'null':5A 'stuf':11B 'ventil':1A,6B"
+139,8,NULL,NULL,VENTILATORE ARIA EBM SX," EBM SX â€‹â€‹AIR FAN",VENTILATEUR AIR EBM GAUCHE,VENTILADOR AIRE EBM SX,,,,,"VENTILATORE ARIA EBM SX
+
+PER STUFE EVACALOR/PUNTOFUOCO",EBM SX AIR FAN FOR EVACALOR STOVES / PUNTOFUOCO,"VENTILATEUR AIR EBM GAUCHE
+
+POUR POELES EVACALOR / PUNTOFUOCO","VENTILADOR AIRE EBM SX
+
+PARA ESTUFAS EVACALOR/PUNTOFUOCO",ventilatore-aria-ebm-sx,123.34,,,,,,0,true,,,,,https://www.ricambixstufe.it/ricambixstufe/442-home_default/ventilatore-aria-ebm-sx.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'ari':2A,7B 'ebm':3A,8B 'evacalor/puntofuoco':12B 'null':5A 'stuf':11B 'sx':4A,9B 'ventil':1A,6B"
+140,12,NULL,NULL,BRACIERE IN ACCIAIO PER INSERTI EVACALOR," BRAZIER IN STEEL WITH FRAME AND SCREWS  FOR PELLET   INSERTS",BRASERO EN ACIER POUR INSERT EVACALOR,BRASERO EN ACERO PARA INSERTOS  EVACALOR,,,,,"BRACIERE IN ACCIAIO CON CORNICE E VITIÂ 
+
+PER INSERTI EVACALOR/PUNTOFUOCO",BRAZIER IN STEEL WITH FRAME AND SCREWS FOR EVACALOR / PUNTOFUOCO INSERTS,"BRASERO EN ACIERÂ AVEC CADRE ET VIS
+
+POUR INSERTS EVACALOR / PUNTOFUOCO","BRASERO CON TORNILLOS
+
+PARA INSERTOSÂ 
+
+EVACALOR-PUNTO FUOCO",braciere-in-acciaio-per-inserti-evacalor,42.70,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/562-home_default/braciere-in-acciaio-per-inserti-evacalor.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'acciai':3A,10B 'brac':1A,8B 'cornic':12B 'evacalor':6A 'evacalor/puntofuoco':17B 'insert':5A,16B 'null':7A 'vit':14B"
+141,20,NULL,NULL,"MANIGLIA RIMOVIBILE "," REMOVABLE HANDLE  ",POIGNEE AMOVIBLE,MANIJA REMOVIBLE,,,,,"MANIGLIA RIMOVIBILEÂ 
+
+PER STUFE EVACALOR/PUNTOFUOCO",REMOVABLE HANDLE FOR EVACALOR STOVES / PUNTOFUOCO,"POIGNEE AMOVIBLE
+
+POUR POELES EVACALOR / PUNTOFUOCO","MANIJA REMOVIBLE
+
+PARA ESTUFAS EVACALOR/PUNTOFUOCO",maniglia-rimovibile-,3.17,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/526-home_default/maniglia-rimovibile-.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'evacalor/puntofuoco':8B 'manigl':1A,4B 'null':3A 'rimov':2A,5B 'stuf':7B"
+142,20,NULL,NULL,"PIEDINO STUFE A PELLET "," PELLET STOVE FEET  MEASURE: 4 CM  ","PIED POELE A PELLET ","PIE ESTUFAS A PELLET ",,,,,"PIEDINO STUFE A PELLET
+
+MISURA:4 CM
+
+PER STUFE EVACALOR/PUNTOFUOCO",PELLET STOVE FEET MEASURE: 4 CM FOR EVACALOR STOVES / PUNTOFUOCO,"PIED POELES A PELLETÂ 
+
+MESURE:4 CM
+
+POUR POELES EVACALOR/PUNTOFUOCO","PIE ESTUFAS A PELLET
+
+MISURA:4 CM
+
+PARA ESTUFAS EVACALOR/PUNTOFUOCO",piedino-stufe-a-pellet-,1.00,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/426-home_default/piedino-stufe-a-pellet-.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'4':11B 'cm':12B 'evacalor/puntofuoco':15B 'misur':10B 'null':5A 'pellet':4A,9B 'piedin':1A,6B 'stuf':2A,7B,14B"
+143,19,NULL,NULL,"RELÃˆ ESTERNO PER POMPA "," EXTERNAL RELAY FOR LOW PUMP ",RELAIS EXTERNE POUR POMPE,"RELÃˆ EXTERIOR PARA BOMBA ",,,,,RELÃˆ ESTERNO PER POMPA BASSO +CAVO COLLEGAMENTO,EXTERNAL RELAY FOR LOW PUMP + CONNECTION CABLE,RELAIS EXTERNE POUR POMPEÂ BASSE CONSOMMATION + CABLE DE CONNEXION,RELÃˆ EXTERIOR PARA BOMBA BAJO +CABLE CONECCION,rele-esterno-per-pompa-,29.28,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/409-home_default/rele-esterno-per-pompa-.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'bass':10B 'cav':11B 'colleg':12B 'estern':2A,7B 'null':5A 'pomp':4A,9B 'rel':1A,6B"
+144,19,NULL,NULL,"SENSORE  PRESSIONE PER ACQUA "," PRESSURE SENSOR FOR WATER",CAPTEUR PRESSION POUR EAU,"SENSOR PRESION PARA AGUA ",,,,,TRASDUTTORE PRESSIONE PER ACQUA 505,PRESSURE SENSOR FOR WATER,TRANSDUCTEUR DE PRESSION POUR EAU 505,SENSOR PRESION PARA AGUA,sensore-pressione-per-acqua-,44.04,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/411-home_default/sensore-pressione-per-acqua-.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'505':10B 'acqua':4A,9B 'null':5A 'pression':2A,7B 'sensor':1A 'trasduttor':6B"
+145,14,NULL,NULL,NASTRO ADESIVO IN FIBRA DI VETRO 550Â°C 10mm X 5mm,GLASS FIBER ADHESIVE TAPE 550 Â° C 10mm X 5mm,RUBAN ADHÃ‰SIF EN FIBRE DE VERRE 550Â°C 10mm X 5mm,CUERDA ADHESIVA 550Â°C 10mm X 5mm,,,,,"NASTRO ADESIVO IN FIBRA DI VETRO 550Â°C 10mm X 5mm
+
+Spessore 5 mm.
+Larghezza: 10
+
+Colore: Grigio Scuro
+
+PREZZO AL METRO!","GLASS FIBER ADHESIVE TAPE 550 Â° C 10mm X 5mm
+
+ Thickness 5 mm. Width: 10 Color: Dark Gray 
+
+PRICE PER METER!","RUBAN ADHÃ‰SIF EN FIBRE DE VERRE 550 Â° C 10mm X 5mm
+
+Ã‰paisseur 5 mm.
+Largeur: 10
+
+Couleur: gris foncÃ©
+
+PRIX PAR MÃˆTRE!","DIMENSION 5 mm.
+LONGITUD: 10
+
+Color: GRIS
+
+PRECIO CADA METRO!",nastro-adesivo-in-fibra-di-vetro-550c-10mm-x-5mm,4.39,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/413-home_default/nastro-adesivo-in-fibra-di-vetro-550c-10mm-x-5mm.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'10':28B '10mm':9A,21B '5':25B '550':7A,19B '5mm':11A,23B 'ades':2A,14B 'color':29B 'fibr':4A,16B 'grig':30B 'larghezz':27B 'metr':34B 'mm':26B 'nastr':1A,13B 'null':12A 'prezz':32B 'scur':31B 'spessor':24B 'vetr':6A,18B 'x':10A,22B"
+146,14,NULL,NULL,CORDINO 12 MM BIANCO,Diameter 12 mm Flexible White Color,CORDON 12 MM BLANC,CUERDA 12 MM BIANCO,,,,,"Diametro 12 mm
+
+Flessibile Colore Bianco
+
+PREZZO AL METRO!","Diameter 12 mm Flexible White Color
+
+ PRICE PER METER!","DiamÃ¨tre 12 mm
+
+Couleur blanche, flexible
+
+PRIX PAR MÃˆTRE!","Diametro 12 mm
+
+Flesible Color Blanco
+
+PRECIO CADA METRO!",cordino-12-mm-bianco,4.64,,,,,,0,true,,,,,https://www.ricambixstufe.it/ricambixstufe/415-home_default/cordino-12-mm-bianco.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'12':2A,7B 'bianc':4A,11B 'color':10B 'cordin':1A 'diametr':6B 'flessibil':9B 'metr':14B 'mm':3A,8B 'null':5A 'prezz':12B"
+147,14,NULL,NULL,CORDINO 20 MM,Diameter 20 mm Flexible White Color,CORDON 20 MM,CUERDA 20 MM,,,,,"Diametro 20 mm
+
+Flessibile Colore Bianco
+
+PREZZO AL METRO!","Diameter 20 mm Flexible White Color 
+
+PRICE PER METER!","DiamÃ¨tre 20 mm
+
+Flexible, coleur blanche
+
+PRIX PAR MÃˆTRE!","Diametro 20 mm
+
+Flesible Color Blanco
+
+PRECIO CADA METRO!",cordino-20-mm,7.93,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/414-home_default/cordino-20-mm.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'20':2A,6B 'bianc':10B 'color':9B 'cordin':1A 'diametr':5B 'flessibil':8B 'metr':13B 'mm':3A,7B 'null':4A 'prezz':11B"
+148,12,NULL,NULL,BRACIERE CAMINETTI AD ANGOLO," BRAZIER FOR EVACALOR STOVES GIOTTO-RAFFAELLO-MICHELANGELO",BRASERO POUR CHEMINÃˆES D'ANGLE,BRASERO PARA CHIMENEAS A ESQUINA,,,,,BRACIERE PER STUFE EVACALOR-PUNTOFUOCOÂ  GIOTTO-RAFFAELLO-MICHELANGELO,BRAZIER FOR EVACALOR STOVES-PUNTOFUOCO MODELS: GIOTTO-RAFFAELLO-MICHELANGELO,BRASERO POUR POELES EVACALOR-PUNTOFUOCOÂ  GIOTTO-RAFFAELLO-MICHELANGELO,"BRASERO PARA CHIMENEAS A ESQUINA
+
+EVACALOR-PUNTO FUOCO",braciere-caminetti-ad-angolo,35.99,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/566-home_default/braciere-caminetti-ad-angolo.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'angol':4A 'brac':1A,6B 'caminett':2A 'evacalor':10B 'evacalor-puntofuoc':9B 'giott':13B 'giotto-raffaello-michelangel':12B 'michelangel':15B 'null':5A 'puntofuoc':11B 'raffaell':14B 'stuf':8B"
+149,20,NULL,NULL,MODULO WIFI AGUA NAVEL 2.0," AGUA NAVEL 2.0 WIFI MODULE  ",MODULE WIFI AGUA NAVEL 2.0,MODULO WIFI AGUA NAVEL 2.0,,,,,"MODULO WIFI AGUA NAVEL 2.0 PER COMANDO A DISTANZA
+
+BLUETOOTH E APPLICAZIONE PER SMARTPHONE
+
+Â 
+
+PER STUFE EVACALOR-PUNTOFUOCO CON ELETTRONICA MICRONOVA( PRODOTTE DAL 2017)
+
+Accessorio compatibile per tutti i modelli predisposti.","AGUA NAVEL 2.0 WIFI MODULE FOR REMOTE
+
+ CONTROL BLUETOOTH AND APPLICATION FOR SMARTPHONES
+
+ FOR EVACALOR STOVES - PUNTOFUOCO WITH MICRONOVA ELECTRONICS (PRODUCED SINCE 2017) 
+Compatible accessory for all models prepared.","MODULE WIFI AGUA NAVEL 2.0 POUR COMMANDE A DISTANCE
+
+BLUETOOTH ET APPLICATION POUR SMARTPHONES
+
+Â 
+
+POUR POELES EVACALOR - PUNTOFUOCO AVEC MICRONOVA ELECTRONICS (PRODUIT DEPUIS 2017)
+
+Accessoire compatible avec les modÃ¨les prÃ©parÃ©s.","MODULO WIFI AGUA NAVEL 2.0
+
+PARA ESTUFAS EVACALOR-PUNTOFUOCO CON ELECTRONICA MICRONOVA( PRODUCIDAS DESDE 2017)",modulo-wifi-agua-navel-20,231.80,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/429-home_default/modulo-wifi-agua-navel-20.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'2.0':5A,11B '2017':31B 'accessor':32B 'agu':3A,9B 'applic':18B 'bluetooth':16B 'com':13B 'compat':33B 'distanz':15B 'elettron':27B 'evacalor':24B 'evacalor-puntofuoc':23B 'micronov':28B 'modell':37B 'modul':1A,7B 'navel':4A,10B 'null':6A 'predispost':38B 'prodott':29B 'puntofuoc':25B 'smartphon':20B 'stuf':22B 'wif':2A,8B"
+150,20,NULL,NULL,INTERFACCIA SERIALE MICRONOVA," SERIAL INTERFACE FOR STOVES WITH MICRONOVA ELECTRONICS",INTERFACE DE SERIE MICRONOVA,INTERFAZ SERIE MICRONOVA,,,,,INTERFACCIA SERIALE PER STUFE CON ELETTRONICA MICRONOVA,SERIAL INTERFACE FOR STOVES WITH MICRONOVA ELECTRONICS,INTERFACE DE SERIE POUR POELES AVEC ELECTRONIQUE MICRONOVA,PARA ESTUFAS CON ELECTRONICA MICRONOVA,interfaccia-seriale-micronova,238.00,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/421-home_default/interfaccia-seriale-micronova.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'elettron':10B 'interfacc':1A,5B 'micronov':3A,11B 'null':4A 'serial':2A,6B 'stuf':8B"
+151,20,NULL,NULL,RACCORDO CANALIZZAZIONE," DUCT FITTING FOR SLIM 11 KW ",RACCORD CANALISATION,CONEXIONES DE CONDUCTO,,,,,RACCORDO CANALIZZAZIONE PER STUFE SLIM 11 KW EVACALOR/PUNTOFUOCO,DUCT FITTING FOR SLIM 11 KW EVACALOR / PUNTOFUOCO STOVES,RACCORD CANALISATION POUR POELES SLIM 11 KW EVACALOR/PUNTOFUOCO,CONEXIONES DE CONDUCTO PARA ESTUFAS SLIM 11 KW EVACALOR/PUNTOFUOCO,raccordo-canalizzazione,24.20,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/424-home_default/raccordo-canalizzazione.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'11':9B 'canalizz':2A,5B 'evacalor/puntofuoco':11B 'kw':10B 'null':3A 'raccord':1A,4B 'slim':8B 'stuf':7B"
+152,20,NULL,NULL,RIDUTTORE CANALIZZAZIONE 60-80," DUCT FITTING REDUCTION 60-80MM ",RACCORD POUR CANALISATION 60-80,"CONEXIONES DE CONDUCTO ",,,,,RACCORDO CANALIZZAZIONE RIDUZIONE 60-80MM PER STUFE 15 KW CANALIZZATE EVACALOR/PUNTOFUOCO,DUCT FITTING REDUCTION 60-80MM FOR STOVES 15 KW DUCTED EVACALOR / PUNTOFUOCO,RACCORD CANALISATIONÂ Â 60-80 POUR POELES 15 KW EVACALOR/PUNTOFUOCO CANALISÃ‰S,CONEXIONES DE CONDUCTOÂ  60-80MM PARA ESTUFAS 15 KW CANALIZADAS EVACALOR/PUNTOFUOCO,raccordo-canalizzazione-60-80,22.62,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/529-home_default/raccordo-canalizzazione-60-80.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'-80':4A,10B '15':14B '60':3A,9B 'canalizz':2A,7B,16B 'evacalor/puntofuoco':17B 'kw':15B 'mm':11B 'null':5A 'raccord':6B 'riduttor':1A 'riduzion':8B 'stuf':13B"
+153,7,NULL,NULL,ENCODER PER MOTORE FUMI EBM," ENCODER FOR FUMI EBM ENGINE",ENCODEUR POUR MOTEUR FUMÃˆES EBM,ENCODER PARA MOTOR HUMOS EBM,,,,,SOLO ENCODER PER MOTORE FUMI EBM,ENCODER ONLY FOR EBM SMOKES MOTOR,SEULEMENTÂ ENCODEURÂ POUR MOTEUR FUMÃˆES EBM,ENCODERÂ PARA MOTOR HUMOS EBM,encoder-per-motore-fumi-ebm,0.00,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/446-home_default/encoder-per-motore-fumi-ebm.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'ebm':5A,12B 'encoder':1A,8B 'fum':4A,11B 'motor':3A,10B 'null':6A 'sol':7B"
+154,12,NULL,NULL,BRACIERE STUFE 14.5  KW EVACALOR-PUNTOFUOCO,14.5  KW EVACALOR-PUNTOFUOCO BRAZIER,BRASERO 14.5  KW EVACALOR-PUNTOFUOCO,BRASERO ESTUFAS 14.5  KW EVACALOR-PUNTOFUOCO,,,,,"BRACIERE STUFE 14.5 KW EVACALOR-PUNTOFUOCO
+
+NAOMI-ALICE-MARA","BRAZIER STOVES 14.5 KW EVACALOR-PUNTOFUOCO
+
+ NAOMI-ALICE-MARA","BRASERO POELES 14.5 KW EVACALOR-PUNTOFUOCO
+
+NAOMI-ALICE-MARA",PARA ESTUFAS NAOMI ALICE MARTA,braciere-stufe-145-kw-evacalor-puntofuoco,52.00,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/569-home_default/braciere-stufe-145-kw-evacalor-puntofuoco.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'14.5':3A,11B 'alic':18B 'brac':1A,9B 'evacalor':6A,14B 'evacalor-puntofuoc':5A,13B 'kw':4A,12B 'mar':19B 'naom':17B 'naomi-alice-mar':16B 'null':8A 'puntofuoc':7A,15B 'stuf':2A,10B"
+155,12,NULL,NULL,"PARETE CAMERA DI COMBUSTIONE IN GHISA STUFE 7,5 KW SLIM"," WALL OF COMBUSTION CAST IRON STOVES 7.5 KW SLIM",MUR CHAMBRE DE COMBUSTION EN FONTE POELES 7.5 KW SLIM,PARED CAMARA DE COMBUSTION EN HIERRO FUNDIDO ESTUFAS EVACALOR-PUNTOFUOCO,,,,,"PARETE CAMERA DI COMBUSTIONE IN GHISA STUFE 7,5 KW SLIMÂ 
+
+PER STUFE EVACALOR-PUNTOFUOCO
+
+PUO' SOSTITUIRE UNA PARETE USURATA I GHISA OPPURE ESSERE AGGIUNTA A STUFE SLIM CON LA CAMERA DI COMBUSTIONE IN METALLO(APPORTANDO DELLE MODIFICHE)","WALL OF COMBUSTION CAST IRON STOVES 7.5 KW SLIM FOR EVACALOR STOVES - PUNTOFUOCO
+YOU CAN REPLACE A WEARED CAST IRON OR BE ADDED TO SLIM STOVES WITH THE METAL COMBUSTION CHAMBER (MAKING MODIFICATIONS)","MUR CHAMBRE DE COMBUSTION EN FONTE POELES 7.5 KW SLIM
+
+POUR POELES EVACALOR - PUNTOFUOCO
+
+VOUS POUVEZ REMPLACER UN MUR EN FONTE OU IL PEUT ÃŠTRE AJOUTÃ‰ Ã€ DES POÃŠLES SLIM AVEC LA CHAMBRE DE COMBUSTION EN MÃ‰TAL (AVEC DES MODIFICATIONS)","PUEDE SOSTITUIRÂ  UNA PARED URRUINADA EN HIERRO FUNDIDO O PUEDE SER ANADIDA
+
+A ESTUFAS SLIM CON LA CAMARA DE COMBUSTION EN HIERRO (HACIENDO MODIFICAS)",parete-camera-di-combustione-in-ghisa-stufe-evacalor-puntofuoco,44.29,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/449-home_default/parete-camera-di-combustione-in-ghisa-stufe-evacalor-puntofuoco.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'5':9A,21B '7':8A,20B 'aggiunt':38B 'apport':49B 'camer':2A,14B,44B 'combustion':4A,16B,46B 'esser':37B 'evacalor':27B 'evacalor-puntofuoc':26B 'ghis':6A,18B,35B 'kw':10A,22B 'metall':48B 'modif':51B 'null':12A 'oppur':36B 'par':1A,13B,32B 'puntofuoc':28B 'puo':29B 'slim':11A,23B,41B 'sostitu':30B 'stuf':7A,19B,25B,40B 'usur':33B"
+156,12,NULL,NULL,BRACIERE IN ACCIAIO PER STUFE FRIDA-LUISA-ILARIA," STEEL BRAZIER FOR FRIDA-LUISA-ILARIA STOVES",BRASERO EN ACIER POUR POÃŠLES FRIDA-LUISA-ILARIA,BRASERO EN ACERO PARA ESTUFAS FRIDA-LUISA-ILARIA,,,,,"BRACIERE IN ACCIAIO PER STUFE FRIDA-LUISA-ILARIA
+
+PUNTOFUOCO - EVACALOR","STEEL BRAZIER FOR FRIDA-LUISA-ILARIA 
+
+STOVES PUNTOFUOCO - EVACALOR","BRASERO EN ACIER POUR POÃŠLES FRIDA-LUISA-ILARIA
+
+PUNTOFUOCO - EVACALOR",,braciere-in-acciaio-per-stufe-frida-luisa-ilaria,54.00,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/570-home_default/braciere-in-acciaio-per-stufe-frida-luisa-ilaria.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'acciai':3A,13B 'brac':1A,11B 'evacalor':21B 'frid':7A,17B 'frida-luisa-ilar':6A,16B 'ilar':9A,19B 'luis':8A,18B 'null':10A 'puntofuoc':20B 'stuf':5A,15B"
+157,10,NULL,NULL,PANNELLO DI COMANDO CEZA E RICEVITORE TELECOMANDO,CONTROL PANEL CEZA AND REMOTE RECEIVER,PANNEAU DE COMMANDE CEZA ET RECEPTEUR DE TELECOMMANDE,PANEL DE CONTROL CEZA Y RECEPTOR DE CONTROL REMOTO,,,,,PANNELLO DI COMANDO CEZA E RICEVITORE TELECOMANDO,CONTROL PANEL CEZA AND REMOTE RECEIVER,PANNEAU DE COMMANDE CEZA ET RECEPTEUR DE TELECOMMANDE,PANEL DE CONTROL CEZA Y RECEPTOR DE CONTROL REMOTO,display-verticale-micronova-6-tasti-157,60.88,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/456-home_default/display-verticale-micronova-6-tasti.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'cez':4A,12B 'com':3A,11B 'null':8A 'pannell':1A,9B 'ricevitor':6A,14B 'telecom':7A,15B"
+159,12,NULL,NULL,"BRACIERE 15/19.5 KW  FUTURA, DUNA, IVY","BRAZIER 15 / 19.5 KW FUTURA, DUNA, IVY","BRASERO 15/19.5 KW  FUTURA, DUNA, IVY","BRASERO 15/19.5 KW  FUTURA, DUNA, IVY",,,,,"BRACIERE 15/20 KW ACC.430 SALDATO
+
+PER STUFE EVACALOR- PUNTOFUOCO FUTURA -DUNA - IVY","BRAZIER 15/20 KW ACC.430 WELDED FOR EVACALOR STOVES - PUNTOFUOCO
+
+ FUTURA - DUNA - IVY","BRASERO 15/20 KW ACC.430 SOUDÃ‰
+
+POUR POELES EVACALOR - PUNTOFUOCO FUTURA - DUNA - IVY",,braciere-15195-kw-futura-duna-ivy,47.99,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/572-home_default/braciere-15195-kw-futura-duna-ivy.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'15/19.5':2A '15/20':9B 'acc.430':11B 'brac':1A,8B 'dun':5A,18B 'evacalor':15B 'futur':4A,17B 'ivy':6A,19B 'kw':3A,10B 'null':7A 'puntofuoc':16B 'sald':12B 'stuf':14B"
+160,12,NULL,NULL,BRACIERE SENZA FONDO," BRAZIER WITHOUT BASE",BRASERO SANS FOND,BRASERO SIN FONDO,,,,,"BRACIERE SENZA FONDO
+
+Â PER STUFE EVACALOR-PUNTOFUOCO INES-MILLYÂ 
+
+VIENE VENDUTO SOLO BRACIERE E NON I FONDI BRACIERE",BRAZIER WITHOUT BASE Â FOR EVACALOR STOVES - PUNTOFUOCO INES-MILLY,"BRASERO SANS FOND
+
+Â 
+
+POUR POELES EVACALOR-PUNTO FUOCO INES-MILLY",PARA ESTUFAS INES-MILLY,braciere-senza-fondo,25.00,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/573-home_default/braciere-senza-fondo.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'brac':1A,5B,19B,24B 'evacalor':11B 'evacalor-puntofuoc':10B 'fond':3A,7B,23B 'ines':14B 'ines-milly':13B 'milly':15B 'null':4A 'puntofuoc':12B 'senz':2A,6B 'sol':18B 'stuf':9B 'vend':17B 'vien':16B"
+161,12,NULL,NULL,DEFLETTORE FUMI STUFE EVACALOR- PUNTOFUOCO," FUME DEFLECTOR STOVES EVACALOR- PUNTOFUOCO",DEFLECTEUR FUMÃˆES POELES EVACALOR- PUNTOFUOCO,DEFLECTOR DE HUMOS ESTUFAS EVACALOR- PUNTOFUOCO,,,,,"DEFLETTORE FUMI STUFE 13,5 KE- 15 KWÂ  EVACALOR- PUNTOFUOCO",SMOKE DEFLECTOR STOVES 13.5 KE- 15 KW EVACALOR - FIREPOINT,"DEFLECTEUR FUMÃˆES POELES 13,5 KE- 15 KWÂ  EVACALOR- PUNTOFUOCO",PARA ESTUFAS 11-13 KW EVACALOR-PUNTOFUOCO,deflettore-fumi-stufe-evacalor-puntofuoco,16.35,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/459-home_default/deflettore-fumi-stufe-evacalor-puntofuoco.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'13':10B '15':13B '5':11B 'deflettor':1A,7B 'evacalor':4A,15B 'fum':2A,8B 'ke':12B 'kw':14B 'null':6A 'puntofuoc':5A,16B 'stuf':3A,9B"
+162,12,NULL,NULL,FONDO BRACIERE PELLET,BRAZIER PELLET BACKGROUND,FOND BRASERO PELLET,FONDO BRASERO PELLET,,,,,"FONDO BRACIERE PELLETÂ 
+
+RICAMBIO PER BRACIERE SENZA FONDOÂ 
+
+STUFE INES -MILLY
+
+MISURE:11.3X4.7 CM
+
+EVACALOR -PUNTOFUOCO","BRAZIER PELLET BACKGROUND REPLACEMENT FOR BRAZIER WITHOUT BASE STOVES INES -MILLY EVACALOR - PUNTOFUOCO
+Â 
+
+Â Impara la pronuncia
+Â 
+
+Â 
+
+BRAZIER PELLET BACKGROUND REPLACEMENT FOR BRAZIER WITHOUT BASE STOVES INES -MILLY EVACALOR - PUNTOFUOCO","FOND BRASERO PELLETÂ 
+
+PIECE DETACHÃ‰E POUR BRASERO SANS FOND
+
+POÃŠLES INES -MILLY
+
+EVACALOR -PUNTOFUOCO","RECAMBIO PARA BRASERO SIN FONDOÂ 
+
+ESTUFAS INES -MILLY
+
+EVACALOR -PUNTOFUOCO",fondo-braciere-pellet,15.00,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/461-home_default/fondo-braciere-pellet.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'11.3':17B 'brac':2A,6B,10B 'cm':19B 'evacalor':20B 'fond':1A,5B,12B 'ines':14B 'milly':15B 'misur':16B 'null':4A 'pellet':3A,7B 'puntofuoc':21B 'ricamb':8B 'senz':11B 'stuf':13B 'x4.7':18B"
+163,12,NULL,NULL,FONDO BRACIERE NOCCIOLINO,OLIVE KERNEL BRACIER BACKGROUND,FOND BRASERO COQUILLE DE NOIX,FONDO BRASERO NOCCIOLINO,,,,,"FONDO BRACIERE NOCCIOLINO
+
+RICAMBIO PER BRACIERE SENZA FONDOÂ 
+
+STUFE INES -MILLY
+
+MISURE:11.3X4.7 CM
+
+EVACALOR -PUNTOFUOCO","OLIVE KERNEL BRACIER BACKGROUND
+
+REPLACEMENT FOR BRAZIER WITHOUT BASE STOVES
+
+ INES -MILLY EVACALOR - PUNTOFUOCO","FONDÂ BRASERO COQUILLE DE NOIX
+
+PIECE DETACHEE POUR BRASERO SANS FOND
+
+POELES INES -MILLY
+
+EVACALOR -PUNTOFUOCO",,fondo-braciere-nocciolino,15.00,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/467-home_default/fondo-braciere-nocciolino.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'11.3':17B 'brac':2A,6B,10B 'cm':19B 'evacalor':20B 'fond':1A,5B,12B 'ines':14B 'milly':15B 'misur':16B 'nocciolin':3A,7B 'null':4A 'puntofuoc':21B 'ricamb':8B 'senz':11B 'stuf':13B 'x4.7':18B"
+164,7,NULL,NULL,VENTILATORE FUMI CON ENCODER E CHIOCCIOLA,SMOKES FAN WITH ENCODER AND SNAIL,"VENTILATEUR DE FUMÃ‰E AVEC ENCODEUR ET ESCARGOT ","VENTILADOR DE HUMOS CON CARACOL Y ENCODER ",,,,,"VENTILATORE FUMI CON ENCODER E CHIOCCIOLA ERMETICO
+
+ASPIRATORE FUMI PER TUTTI I MODELLI DI STUFE ERMETICHE DELLA LINEA EVACALOR-PUNTOFUOCO
+
+DIAMETRO USCITA 80MM
+
+230v AC 50 Hz
+
+55462.50020
+
+MARCA: EBM","SMOKE FAN WITH ENCODER AND HERMETIC NOSE FUME ASPIRATOR FOR ALL THE MODELS OF ERMETIC STOVES OF THE EVACALOR-PUNTOFUOCO 
+
+LINE 80MM OUTPUT DIAMETER
+
+ 230v AC 50 Hz 
+
+55462.50020 BRAND: EBM","VENTILATEUR DE FUMÃ‰E AVEC ENCODEUR ET ESCARGOT HERMETIQUE
+
+ASPIRATEUR DE FUMÃ‰E POUR TOUS LES MODÃˆLES DE POÃŠLES ERMÃ‰TIQUES DE LA LIGNE EVACALOR-PUNTOFUOCO
+
+DIAMÃˆTRE DE SORTIE 80MM
+
+230v AC 50 Hz
+
+55462,50020
+
+MARQUE: EBM","VENTILADOR DEÂ  HUMOS CON ENCODER Y CARACOL ERMETICO
+
+ASPIRADOR DE HUMOS PARA TODOS LOS MODELOS DE ESTUFAS ERMETICASÂ  EVACALOR-PUNTOFUOCO
+
+DIAMETRO SALIDA 80MM
+
+230v AC 50 Hz
+
+55462.50020
+
+MARCA: EBM",ventilatore-fumi-con-encoder-e-chiocciola,161.28,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/603-home_default/ventilatore-fumi-con-encoder-e-chiocciola.jpg,2026-03-27 11:34:24.586574+00,2026-03-27 11:34:24.586574+00,"'230v':32B '50':34B '55462.50020':36B '80mm':31B 'ac':33B 'aspir':15B 'chiocciol':6A,13B 'diametr':29B 'ebm':38B 'encoder':4A,11B 'ermet':14B,23B 'evacalor':27B 'evacalor-puntofuoc':26B 'fum':2A,9B,16B 'hz':35B 'line':25B 'marc':37B 'modell':20B 'null':7A 'puntofuoc':28B 'stuf':22B 'uscit':30B 'ventil':1A,8B"
+165,20,NULL,NULL,TUBO FLESSIBILE BIANCO PER CANALIZZAZIONE O ASPIRAZIONE  ARIA,WHITE FLEXIBLE HOSE FOR DUCTING OR AIR SUCTION,TUYAU FLEXIBLE BLANC POUR AIR,MANGUERA FLEXIBLE PARA AIRE BLANCO,,,,,"TUBO FLESSIBILE BIANCOÂ PER CANALIZZAZIONE O ASPIRAZIONEÂ  ARIA
+
+DIAMETRO 60MM
+
+MATERIALE:ALLUMINIO
+
+ALLUNGABILE FINO A 3 METRI","WHITE FLEXIBLE HOSE FOR DUCTING OR AIR SUCTION
+
+ DIAMETER 60MM
+
+ MATERIAL: ALUMINUM
+
+ EXTENDABLE UP TO 3 METERS","TUYAU FLEXIBLE BLANC POUR CANALISATION OU POUR ASPIRER L'AIR
+
+DIAMETRE 60MM
+
+MatÃ©riel: Aluminium
+
+EXTENSIBLE JUSQU'Ã€ 3 MÃˆTRES","DIAMETRO 60MM
+
+MATERIAL:ALUMINIO
+
+EXENSIBLE HASTA 3 METROS",tubo-flessibile-per-aria-bianco,7.00,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/470-home_default/tubo-flessibile-per-aria-bianco.jpg,2026-03-27 11:34:24.684675+00,2026-03-27 11:34:24.684675+00,"'3':25B '60mm':19B 'allumin':21B 'allung':22B 'ari':8A,17B 'aspir':7A,16B 'bianc':3A,12B 'canalizz':5A,14B 'diametr':18B 'fin':23B 'flessibil':2A,11B 'material':20B 'metr':26B 'null':9A 'tub':1A,10B"
+166,20,NULL,NULL,TUBO FLESSIBILE GRIGIO PER CANALIZZAZIONE O ASPIRAZIONE ARIA,GRAY FLEXIBLE HOSE FOR DUCTING OR AIR SUCTION,TUYAU FLEXIBLE GRIS POUR CANALISER OU ASPIRER L'AIR,MANGUERA FLEXIBLE GRIS PARA  AIRE,,,,,"TUBO FLESSIBILE GRIGIO PER CANALIZZAZIONE O ASPIRAZIONE ARIA
+
+DIAMETRO 60MM
+
+MATERIALE:ALLUMINIO
+
+ALLUNGABILE FINO A 3 METRI","GRAY FLEXIBLE HOSE FOR DUCTING OR AIR SUCTION
+ DIAMETER 60MM 
+MATERIAL: ALUMINUM
+ EXTENDABLE UP TO 3 METERS","TUYAU FLEXIBLE GRIS POUR CANALISER OU ASPIRER L'AIR
+
+DIAMETRE 60MM
+
+MatÃ©riel: Aluminium
+
+EXTENSIBLE JUSQU'Ã€ 3 MÃˆTRES","DIAMETRO 60MM
+
+MATERIAL:ALUMINIO
+
+EXTENDSIBLEÂ  HSTA 3 METROS",tubo-flessibile-grigio-per-canalizzazione-o-aspirazione-aria,7.00,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/471-home_default/tubo-flessibile-grigio-per-canalizzazione-o-aspirazione-aria.jpg,2026-03-27 11:34:24.684675+00,2026-03-27 11:34:24.684675+00,"'3':25B '60mm':19B 'allumin':21B 'allung':22B 'ari':8A,17B 'aspir':7A,16B 'canalizz':5A,14B 'diametr':18B 'fin':23B 'flessibil':2A,11B 'grig':3A,12B 'material':20B 'metr':26B 'null':9A 'tub':1A,10B"
+167,20,NULL,NULL,TUBO FLESSIBILE NERO PER CANALIZZAZIONE O ASPIRAZIONE  ARIA,BLACK FLEXIBLE HOSE FOR DUCTING OR AIR SUCTION,TUYAU FLEXIBLE NOIR POUR CANALISER OU ASPIRER L'AIR,MANGUERA FLEXIBLE PARA AIRE,,,,,"TUBO FLESSIBILE NERO PER CANALIZZAZIONE O ASPIRAZIONEÂ  ARIA
+
+DIAMETRO 60MM
+
+MATERIALE:ALLUMINIO
+
+ALLUNGABILE FINO A 3 METRI","BLACK FLEXIBLE HOSE FOR DUCTING OR AIR SUCTION
+ DIAMETER 60MM 
+MATERIAL: ALUMINUM 
+EXTENDABLE UP TO 3 METERS","TUYAU FLEXIBLE NOIR POUR CANALISER OU ASPIRER L'AIR
+
+DIAMETRE 60MM
+
+MatÃ©riel: Aluminium
+
+EXTENSIBLE JUSQU'Ã€ 3 MÃˆTRES","DIAMETRO 60MM
+
+MATERIAL:ALUMINIO
+
+EXTENSIBLE HASTA 3 METROS",tubo-flessibile-nero-per-canalizzazione-o-aspirazione-aria,7.00,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/472-home_default/tubo-flessibile-nero-per-canalizzazione-o-aspirazione-aria.jpg,2026-03-27 11:34:24.684675+00,2026-03-27 11:34:24.684675+00,"'3':25B '60mm':19B 'allumin':21B 'allung':22B 'ari':8A,17B 'aspir':7A,16B 'canalizz':5A,14B 'diametr':18B 'fin':23B 'flessibil':2A,11B 'material':20B 'metr':26B 'ner':3A,12B 'null':9A 'tub':1A,10B"
+168,8,NULL,NULL,"VENTILATORE TANGENZIALE 230V 50Hz PALA Ã˜60X270mm ","VENTILATORE TANGENZIALE 230V 50Hz PALA Ã˜60X270mm ","VENTILATORE TANGENZIALE 230V 50Hz PALA Ã˜60X270mm ","VENTILATORE TANGENZIALE 230V 50Hz PALA Ã˜60X270mm ",,,,,"VENTILATORE TANGENZIALE 230V 50Hz PALA Ã˜60X270mm
+SU BRONZINE E CON TERMICA, MOTORE A SINISTRA",,,,ventilatore-tangenziale-230v-50hz-pala-o60x270mm-,75.40,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/473-home_default/ventilatore-tangenziale-230v-50hz-pala-o60x270mm-.jpg,2026-03-27 11:34:24.684675+00,2026-03-27 11:34:24.684675+00,"'230v':3A,10B '50hz':4A,11B 'bronzin':15B 'motor':19B 'null':7A 'pal':5A,12B 'sinistr':21B 'tangenzial':2A,9B 'termic':18B 'ventil':1A,8B 'Ã¸60x270mm':6A,13B"
+169,8,NULL,NULL,"VENTILATORE TANGENZIALE 230V 50Hz PALA Ã˜60X300mm ","VENTILATORE TANGENZIALE 230V 50Hz PALA Ã˜60X300mm ","VENTILATORE TANGENZIALE 230V 50Hz PALA Ã˜60X300mm ","VENTILATORE TANGENZIALE 230V 50Hz PALA Ã˜60X300mm ",,,,,"VENTILATORE TANGENZIALE 230V 50Hz PALA Ã˜60X300mm
+
+SU BRONZINE E CON TERMICA, MOTORE A DESTRA",,,,ventilatore-tangenziale-230v-50hz-pala-o60x300mm-,61.00,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/474-home_default/ventilatore-tangenziale-230v-50hz-pala-o60x300mm-.jpg,2026-03-27 11:34:24.684675+00,2026-03-27 11:34:24.684675+00,"'230v':3A,10B '50hz':4A,11B 'bronzin':15B 'destr':21B 'motor':19B 'null':7A 'pal':5A,12B 'tangenzial':2A,9B 'termic':18B 'ventil':1A,8B 'Ã¸60x300mm':6A,13B"
+170,7,NULL,NULL,"MOTORE PER ESTRATTORE FUMI 230V 50Hz PALA Ã˜150X20mm ","MOTORE PER ESTRATTORE FUMI 230V 50Hz PALA Ã˜150X20mm ","MOTORE PER ESTRATTORE FUMI 230V 50Hz PALA Ã˜150X20mm ","MOTORE PER ESTRATTORE FUMI 230V 50Hz PALA Ã˜150X20mm ",,,,,"MOTORE PER ESTRATTORE FUMI 230V 50Hz PALA Ã˜150X20mm
+
+CON ENCODER",,,,motore-per-estrattore-fumi-230v-50hz-pala-o150x20mm-,85.40,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/475-home_default/motore-per-estrattore-fumi-230v-50hz-pala-o150x20mm-.jpg,2026-03-27 11:34:24.684675+00,2026-03-27 11:34:24.684675+00,"'230v':5A,14B '50hz':6A,15B 'encoder':19B 'estrattor':3A,12B 'fum':4A,13B 'motor':1A,10B 'null':9A 'pal':7A,16B 'Ã¸150x20mm':8A,17B"
+171,20,NULL,NULL,VASO DI ESPANSIONE CIMM  LT.8,VASO DI ESPANSIONE CIMM  LT.8,VASO DI ESPANSIONE CIMM  LT.8,VASO DI ESPANSIONE CIMM  LT.8,,,,,"VASO DI ESPANSIONEÂ  LT.8
+
+MARCA CIMM",,,,vaso-di-espansione-cimm-lt8,60.00,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/477-home_default/vaso-di-espansione-cimm-lt8.jpg,2026-03-27 11:34:24.684675+00,2026-03-27 11:34:24.684675+00,"'cimm':4A,12B 'espansion':3A,9B 'lt.8':5A,10B 'marc':11B 'null':6A 'vas':1A,7B"
+173,20,NULL,NULL,TERMOREGOLATORE 2 RELE' 230Vac 1 MULTI PROBE,TERMOREGOLATORE 2 RELE' 230Vac 1 MULTI PROBE,TERMOREGOLATORE 2 RELE' 230Vac 1 MULTI PROBE,TERMOREGOLATORE 2 RELE' 230Vac 1 MULTI PROBE,,,,,TERMOREGOLATORE 2 RELE' 230Vac 1 MULTI PROBE,,,,termoregolatore-2-rele-230vac-1-multi-probe,103.00,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/575-home_default/termoregolatore-2-rele-230vac-1-multi-probe.jpg,2026-03-27 11:34:24.684675+00,2026-03-27 11:34:24.684675+00,"'1':5A,13B '2':2A,10B '230vac':4A,12B 'mult':6A,14B 'null':8A 'prob':7A,15B 'rel':3A,11B 'termoregol':1A,9B"
+174,6,NULL,NULL,"MOTORE COCLEA 1,5 RPM GGM","MOTORE COCLEA 1,5 RPM GGM","MOTORE COCLEA 1,5 RPM GGM","MOTORE COCLEA 1,5 RPM GGM",,,,,"MOTORE COCLEA 1,5 RPM
+
+MARCA GGM
+
+ALBERO DA 9,5 MM",,,,motore-coclea-15-rpm-ggm,101.99,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/587-home_default/motore-coclea-15-rpm-ggm.jpg,2026-03-27 11:34:24.684675+00,2026-03-27 11:34:24.684675+00,"'1':3A,10B '5':4A,11B,18B '9':17B 'alber':15B 'cocle':2A,9B 'ggm':6A,14B 'marc':13B 'mm':19B 'motor':1A,8B 'null':7A 'rpm':5A,12B"
+175,12,NULL,NULL,"BRACIERE IN GHISA ","BRACIERE IN GHISA ","BRACIERE IN GHISA ","BRACIERE IN GHISA ",,,,,"BRACIERE IN GHISA
+
+MISURE BASE INCASTRO 11.5X7
+
+MISURE CORNICE 14,5X10
+
+UTILIZZATO SU MODELLI EVACALOR MAURA-NICO",,,,braciere-in-ghisa-,50.39,,,,,,1,true,,,,,https://pub-e5b1a861541243efa43922161ac876d7.r2.dev/products/bracieri-camere-combustione/braciere-in-ghisa-2.jpg,2026-03-27 11:34:24.684675+00,2026-04-02 10:47:47.260283+00,"'11.5':11B '14':15B '5x10':16B 'bas':9B 'brac':1A,5B 'cornic':14B 'evacalor':20B 'ghis':3A,7B 'incastr':10B 'maur':22B 'maura-n':21B 'misur':8B,13B 'modell':19B 'nic':23B 'null':4A 'utilizz':17B 'x7':12B"
+176,8,NULL,NULL,VENTILATORE TANGENZIALE PALA Ã˜60X360mm,VENTILATORE TANGENZIALE BOCCA 36CM,VENTILATORE TANGENZIALE BOCCA 36CM,VENTILATORE TANGENZIALE BOCCA 36CM,,,,,"VENTILATORE TANGENZIALEÂ 230V 50Hz PALA Ã˜60X360mm
+
+MARCA: TRIAL
+
+CODICE THS36B6-031K
+
+COMPATIBILE CON STUFE PELLET",,,,ventilatore-tangenziale-bocca-36cm,65.88,,,,,,1,true,,,,,https://www.ricambixstufe.it/ricambixstufe/606-home_default/ventilatore-tangenziale-bocca-36cm.jpg,2026-03-27 11:34:24.684675+00,2026-03-27 11:34:24.684675+00,"'031k':17B '230v':8B '50hz':9B 'codic':14B 'compat':18B 'marc':12B 'null':5A 'pal':3A,10B 'pellet':21B 'stuf':20B 'tangenzial':2A,7B 'ths36b6':16B 'ths36b6-031k':15B 'trial':13B 'ventil':1A,6B 'Ã¸60x360mm':4A,11B"
+177,20,NULL,NULL,MODULO WIFI DUEPI,WIFI MODULE DUEPI,MODULE WIFI DUEPI,MÃ“DULO WIFI DUEPI,"Caratterizzato da una tecnologia di ultima generazione, il modulo WiFi Duepi offre velocitÃ  di trasferimento dati notevoli, consentendo un'esperienza di connessione fluida e senza interruzioni. La sua versatilitÃ  lo rende adatto a diverse applicazioni, tra cui dispositivi IoT, elettronica di consumo, automazione domestica e molto altro ancora.
+
+Le sue caratteristiche avanzate includono una potente crittografia per garantire la sicurezza delle comunicazioni, assicurando che i dati trasmessi siano protetti da accessi non autorizzati. Inoltre, la facile integrazione con varie piattaforme e microcontrollori rende questo modulo WiFi un'opzione flessibile per i progettisti e gli sviluppatori.
+
+Il design compatto e leggero del modulo consente un'installazione agevole in qualsiasi dispositivo senza compromettere le prestazioni. Con una semplice interfaccia utente, anche gli sviluppatori meno esperti possono integrare facilmente questo modulo nei loro progetti, rendendolo una scelta ideale sia per professionisti che per appassionati.
+
+Scegli il modulo WiFi della marca Duepi per godere di una connessione wireless affidabile, veloce e sicura. Potenzia i tuoi progetti con la qualitÃ  e l'innovazione che solo Duepi puÃ² offrire.","Characterized by state-of-the-art technology, the Duepi WiFi module offers remarkable data transfer speeds, providing a seamless and uninterrupted connection experience. Its versatility makes it suitable for various applications, including IoT devices, consumer electronics, home automation, and much more.
+
+Its advanced features include robust encryption to ensure communication security, safeguarding transmitted data from unauthorized access. Additionally, easy integration with various platforms and microcontrollers makes this WiFi module a flexible choice for designers and developers.
+
+The compact and lightweight design of the module allows easy installation in any device without compromising performance. With a user-friendly interface, even less experienced developers can easily integrate this module into their projects, making it an ideal choice for both professionals and enthusiasts.
+
+Choose the Duepi brand's WiFi module to enjoy a reliable, fast, and secure wireless connection. Empower your projects with the quality and innovation that only Duepi can offer.","CaractÃ©risÃ© par une technologie de pointe, le module WiFi Duepi offre des vitesses de transfert de donnÃ©es remarquables, garantissant une expÃ©rience de connexion fluide et sans interruption. Sa polyvalence le rend adaptÃ© Ã  diverses applications, notamment les dispositifs IoT, l'Ã©lectronique grand public, l'automatisation domestique, et bien plus encore.
+
+Ses fonctionnalitÃ©s avancÃ©es comprennent un chiffrement puissant pour assurer la sÃ©curitÃ© des communications, protÃ©geant les donnÃ©es transmises contre les accÃ¨s non autorisÃ©s. De plus, son intÃ©gration facile avec diffÃ©rentes plates-formes et microcontrÃ´leurs en fait un choix flexible pour les concepteurs et les dÃ©veloppeurs.
+
+Le design compact et lÃ©ger du module permet une installation facile dans n'importe quel appareil sans compromettre les performances. Avec une interface utilisateur simple, mÃªme les dÃ©veloppeurs moins expÃ©rimentÃ©s peuvent intÃ©grer facilement ce module dans leurs projets, en faisant un choix idÃ©al tant pour les professionnels que pour les passionnÃ©s.
+
+Choisissez le module WiFi de la marque Duepi pour bÃ©nÃ©ficier d'une connexion sans fil fiable, rapide et sÃ©curisÃ©e. Donnez de la puissance Ã  vos projets avec la qualitÃ© et l'innovation que seule Duepi peut offrir.","Caracterizado por una tecnologÃ­a de Ãºltima generaciÃ³n, el mÃ³dulo WiFi Duepi ofrece velocidades de transferencia de datos notables, garantizando una experiencia de conexiÃ³n fluida y sin interrupciones. Su versatilidad lo hace adecuado para diversas aplicaciones, como dispositivos IoT, electrÃ³nica de consumo, automatizaciÃ³n del hogar y mucho mÃ¡s.
+
+Sus caracterÃ­sticas avanzadas incluyen un sÃ³lido cifrado para garantizar la seguridad de las comunicaciones, protegiendo los datos transmitidos contra accesos no autorizados. AdemÃ¡s, la fÃ¡cil integraciÃ³n con varias plataformas y microcontroladores lo convierte en una opciÃ³n flexible para diseÃ±adores y desarrolladores.
+
+El diseÃ±o compacto y ligero del mÃ³dulo permite una instalaciÃ³n sencilla en cualquier dispositivo sin comprometer el rendimiento. Con una interfaz de usuario intuitiva, incluso los desarrolladores menos experimentados pueden integrar fÃ¡cilmente este mÃ³dulo en sus proyectos, convirtiÃ©ndolo en una elecciÃ³n ideal tanto para profesionales como para entusiastas.
+
+Elige el mÃ³dulo WiFi de la marca Duepi para disfrutar de una conexiÃ³n inalÃ¡mbrica confiable, rÃ¡pida y segura. Potencia tus proyectos con la calidad y la innovaciÃ³n que solo Duepi puede ofrecer.","Il modulo WiFi della marca Duepi Ã¨ una soluzione avanzata e affidabile progettata per offrire prestazioni eccellenti nella connettivitÃ  wireless. Con un design compatto e una potente capacitÃ  di trasmissione, questo modulo Ã¨ ideale per una vasta gamma di applicazioni, garantendo una connessione stabile e veloce.","The Duepi brand's WiFi module is an advanced and reliable solution designed to deliver excellent performance in wireless connectivity. With a compact design and powerful transmission capability, this module is ideal for a wide range of applications, ensuring a stable and fast connection.","Le module WiFi de la marque Duepi est une solution avancÃ©e et fiable conÃ§ue pour offrir d'excellentes performances dans la connectivitÃ© sans fil. Avec un design compact et une capacitÃ© de transmission puissante, ce module est idÃ©al pour une large gamme d'applications, assurant une connexion stable et rapide.","El mÃ³dulo WiFi de la marca Duepi es una soluciÃ³n avanzada y confiable diseÃ±ada para ofrecer un rendimiento excelente en la conectividad inalÃ¡mbrica. Con un diseÃ±o compacto y una potente capacidad de transmisiÃ³n, este mÃ³dulo es ideal para una amplia gama de aplicaciones, asegurando una conexiÃ³n estable y rÃ¡pida.",modulo-wifi-duepi-connessione-senza-fili,207.40,,,,,,1,true,,Modulo WiFi Duepi: Connessione Wireless Avanzata per Dispositivi IoT e Smart,Scopri il modulo WiFi avanzato di Duepi per una connettivitÃ  senza fili affidabile e veloce. Ideale per dispositivi IoT e elettronica smart. Massima sicurezza e facile integrazione,,https://www.ricambixstufe.it/ricambixstufe/608-home_default/modulo-wifi-duepi-connessione-senza-fili.jpg,2026-03-27 11:34:24.684675+00,2026-04-02 10:50:53.031041+00,"'access':121C 'adatt':82C 'affid':16B,205C 'agevol':156C 'altro':97C 'ancor':98C 'appassion':191C 'applic':44B,85C 'assicur':113C 'autom':93C 'autorizz':123C 'avanz':14B,102C 'capac':32B 'caratterist':101C 'caratterizz':51C 'compatt':28B,148C 'compromett':161C 'comun':112C 'connession':47B,72C,203C 'connett':23B 'consent':68C,153C 'consum':92C 'crittograf':106C 'dat':66C,116C 'design':27B,147C 'disposit':88C,159C 'divers':84C 'domest':94C 'duep':3A,10B,61C,198C,221C 'eccellent':21B 'elettron':90C 'esperient':70C 'espert':173C 'facil':126C,176C 'flessibil':139C 'fluid':73C 'gamm':42B 'garant':45B,108C 'gener':57C 'god':200C 'ideal':38B,185C 'includ':103C 'innov':218C 'inoltr':124C 'install':155C 'integr':127C,175C 'interfacc':167C 'interru':76C 'iot':89C 'legger':150C 'marc':9B,197C 'men':172C 'microcontrollor':132C 'modul':1A,6B,36B,59C,135C,152C,178C,194C 'molt':96C 'notevol':67C 'null':4A 'offre':62C 'offrir':19B,223C 'opzion':138C 'piattaform':130C 'poss':174C 'potent':31B,105C 'potenz':209C 'prestazion':20B,163C 'profession':188C 'progett':17B,142C,181C,212C 'protett':119C 'puÃ²':222C 'qualit':215C 'qualsias':158C 'rend':81C,133C,182C 'scegl':192C 'scelt':184C 'semplic':166C 'senz':75C,160C 'sicur':208C 'sicurezz':110C 'sol':220C 'soluzion':13B 'stabil':48B 'svilupp':145C,171C 'tecnolog':54C 'trasfer':65C 'trasmess':117C 'trasmission':34B 'ultim':56C 'utent':168C 'var':129C 'vast':41B 'veloc':50B,63C,206C 'versatil':79C 'wif':2A,7B,60C,136C,195C 'wireless':24B,204C"

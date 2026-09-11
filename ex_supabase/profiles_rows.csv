@@ -1,0 +1,4 @@
+id,email,first_name,last_name,role,company,vat_number,phone,address_line1,address_line2,city,province,postal_code,country,created_at,updated_at
+42ced3f0-b60f-42cd-a2f2-d1fc6e3cce9a,deniscazzulo@icloud.com,Denis,Cazzulo,admin,,,,,,,,,IT,2026-03-27 13:08:39.242871+00,2026-03-30 07:17:05.59887+00
+7a974cb3-ed3a-4a58-b2e3-636193c56c84,denis.cazzulo@tesisquare.com,Denis,Cazzulo,dealer,Denis cazz,03771060260,3247787644,,,,,,IT,2026-03-27 14:31:34.890535+00,2026-03-27 14:31:36.389865+00
+ad2158e2-d29f-4444-a9af-c996d7519062,tropinimail@gmail.com,Gianfranco,Tropini,dealer,Tropini Service di Tropini Gianfranco,03474870049,3342968625,,,,,,IT,2026-03-27 17:41:12.901236+00,2026-03-27 17:42:14.928069+00

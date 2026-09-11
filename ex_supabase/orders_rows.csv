@@ -1,0 +1,2 @@
+id,user_id,guest_email,status,payment_method,payment_status,subtotal,shipping_cost,tax_amount,total,shipping_address,billing_address,tracking_number,notes,danea_exported,created_at,updated_at
+1,42ced3f0-b60f-42cd-a2f2-d1fc6e3cce9a,,cancelled,bank_transfer,awaiting_transfer,44.00,10.37,0.00,54.37,"{""zip"":""10022"",""city"":""cavallermaggiore"",""name"":""Denis Cazzulo"",""phone"":"""",""address"":""via san giorgio 14"",""country"":""IT"",""province"":""""}","{""email"":""deniscazzulo@icloud.com""}",,,false,2026-04-02 12:30:40.780134+00,2026-04-02 13:54:37.08657+00

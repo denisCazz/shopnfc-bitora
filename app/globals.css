@@ -1,0 +1,241 @@
+﻿@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-background: #f8fafc;
+  --color-foreground: #020617;
+  --color-muted: #64748b;
+  --color-surface: #ffffff;
+  --color-surface-hover: #eef2f7;
+  --color-surface-alt: #eef2f7;
+  --color-border: #dbe3ee;
+  --color-border-hover: #c6d2e3;
+  --color-accent: #0369a1;
+  --color-accent-hover: #075985;
+  --color-accent-glow: rgba(3, 105, 161, 0.22);
+  --font-sans: var(--font-jakarta);
+}
+
+@keyframes product-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.product-card-in {
+  opacity: 0;
+  animation: product-card-in 0.35s ease-out forwards;
+}
+
+.dark {
+  --color-background: #334155;
+  --color-foreground: #f1f5f9;
+  --color-muted: #94a3b8;
+  --color-surface: #475569;
+  --color-surface-hover: #64748b;
+  --color-surface-alt: #1e293b;
+  --color-border: rgba(241, 245, 249, 0.16);
+  --color-border-hover: rgba(241, 245, 249, 0.28);
+  --color-accent: #38bdf8;
+  --color-accent-hover: #0ea5e9;
+  --color-accent-glow: rgba(56, 189, 248, 0.22);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-hover) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--color-border-hover);
+  border-radius: 3px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted);
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+body {
+  overflow-x: clip;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+/* Fix 300ms tap delay on mobile */
+a, button, input, select, textarea, [role="button"] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@keyframes slide-in-right {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.25s ease-out;
+}
+
+::selection {
+  background: #f5f5f7;
+  color: #000000;
+}
+
+.dark ::selection {
+  background: #f5f5f7;
+  color: #000000;
+}
+
+.sl-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 980px;
+  padding: 0.9rem 1.7rem;
+  background: #0369a1;
+  color: #ffffff;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s;
+}
+.sl-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(3, 105, 161, 0.28);
+}
+.sl-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 980px;
+  padding: 0.9rem 1.7rem;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.sl-btn-secondary:hover {
+  background: #f8fafc;
+}
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Fire animation */
+@keyframes flame-flicker {
+  0%, 100% { transform: scaleY(1) scaleX(1); opacity: 1; }
+  25% { transform: scaleY(1.15) scaleX(0.92); opacity: 0.85; }
+  50% { transform: scaleY(0.92) scaleX(1.08); opacity: 1; }
+  75% { transform: scaleY(1.08) scaleX(0.95); opacity: 0.9; }
+}
+
+@keyframes flame-rise {
+  0% { transform: translateY(0) scale(1); opacity: 0.8; }
+  50% { transform: translateY(-18px) scale(1.1); opacity: 0.4; }
+  100% { transform: translateY(-36px) scale(0.6); opacity: 0; }
+}
+
+.animate-flame {
+  animation: flame-flicker 2s ease-in-out infinite;
+}
+
+@keyframes cart-bounce {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.4); }
+  50% { transform: scale(0.9); }
+  75% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+.animate-cart-bounce {
+  animation: cart-bounce 0.4s ease-out;
+}
+
+.animate-flame-rise {
+  animation: flame-rise 1.8s ease-out infinite;
+}
+
+/* Fire background animations */
+@keyframes ember-float {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-45vh) translateX(15px) scale(0.8);
+    opacity: 0.6;
+  }
+  80% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateY(-90vh) translateX(-10px) scale(0.3);
+    opacity: 0;
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+  50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+}
+
+@keyframes heat-shimmer {
+  0%, 100% { opacity: 0.4; transform: scaleX(1); }
+  50% { opacity: 0.7; transform: scaleX(1.02); }
+}
+
+.animate-ember-float {
+  animation: ember-float 10s ease-in-out infinite;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 6s ease-in-out infinite;
+}
+
+.animate-heat-shimmer {
+  animation: heat-shimmer 8s ease-in-out infinite;
+}
+
+/* Radial gradient utility */
+.bg-gradient-radial {
+  background: radial-gradient(ellipse at center, var(--tw-gradient-from), var(--tw-gradient-via), var(--tw-gradient-to));
+}
