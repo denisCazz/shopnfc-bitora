@@ -924,17 +924,15 @@ export default function CheckoutClient() {
                       <div className="flex items-center gap-0 border border-border rounded-lg overflow-hidden">
                         <button
                           type="button"
-                          onClick={() => {
-                            if (item.quantity <= 1) removeItem(item.id, item.lineKey);
-                            else updateQuantity(item.id, item.quantity - 1, item.lineKey);
-                          }}
+                          onClick={() =>
+                            updateQuantity(item.id, item.quantity - 1, item.lineKey)
+                          }
                           className="w-7 h-7 flex items-center justify-center hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors"
                         >
                           <Minus className="w-3 h-3" />
                         </button>
                         <span className="w-14 h-7 flex items-center justify-center text-xs font-medium border-x border-border bg-surface">
                           {item.quantity}
-                          {item.lineKey === "unit:meter" ? " m" : ""}
                         </span>
                         <button
                           type="button"

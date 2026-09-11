@@ -1,12 +1,9 @@
 import { redirect } from "next/navigation";
 import { getUser } from "@/lib/auth";
 import AdminShell from "./AdminShell";
+import { noIndexMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: {
-    absolute: "Admin | Shop NFC",
-  },
-};
+export const metadata = noIndexMetadata("Admin | Shop NFC");
 
 export default async function AdminLayout({
   children,

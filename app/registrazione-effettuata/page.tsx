@@ -13,7 +13,7 @@ export default function RegistrazioneEffettuataPage() {
         <div className="text-center mb-8">
           <Link href="/" className="inline-block">
             <h1 className="text-2xl font-bold text-[var(--color-foreground)]">
-              Ricambi<span className="text-[var(--color-accent)]">X</span>Stufe
+              shopnfc<span className="text-[var(--color-accent)]">.bitora.it</span>
             </h1>
           </Link>
         </div>

@@ -1,11 +1,6 @@
-import type { Metadata } from "next";
 import { Suspense } from "react";
 import Footer from "@/components/Footer";
 import CheckoutClient from "./CheckoutClient";
-
-export const metadata: Metadata = {
-  title: "Checkout | Shop NFC",
-};
 
 export default function CheckoutPage() {
   return (

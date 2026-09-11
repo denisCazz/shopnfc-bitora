@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import { useCart } from "@/lib/cart-context";
 import { useLocale } from "@/lib/locale-context";
 import { useUser } from "@/lib/user-context";
+import { normalizeMinQuantity } from "@/lib/min-quantity";
+import QuantityStepper from "@/components/QuantityStepper";
 
 type StoveRow = {
   id: number;
@@ -32,6 +34,7 @@ export default function ElectronicBoardCartSection({
     image: string | null;
     weight?: number | null;
     stockQuantity?: number;
+    minQuantity?: number;
   };
   compatibleStoves: StoveRow[];
   showBuyNow?: boolean;
@@ -46,6 +49,8 @@ export default function ElectronicBoardCartSection({
   const [stoveId, setStoveId] = useState<number | "">("");
   const [stoveText, setStoveText] = useState("");
   const [displayText, setDisplayText] = useState("");
+  const minQuantity = normalizeMinQuantity(product.minQuantity);
+  const [quantity, setQuantity] = useState(minQuantity);
 
   const outOfStock = product.stockQuantity !== undefined && product.stockQuantity <= 0;
 
@@ -118,9 +123,10 @@ export default function ElectronicBoardCartSection({
       ...product,
       name: localizedName,
       price: finalPrice,
+      minQuantity,
       lineKey: line.lineKey,
       lineNotes: line.lineNotes,
-    });
+    }, quantity);
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
   }
@@ -133,9 +139,10 @@ export default function ElectronicBoardCartSection({
       ...product,
       name: localizedName,
       price: finalPrice,
+      minQuantity,
       lineKey: line.lineKey,
       lineNotes: line.lineNotes,
-    });
+    }, quantity);
     router.push("/checkout");
   }
 
@@ -258,6 +265,19 @@ export default function ElectronicBoardCartSection({
             {t("product.board_option_display_required")}
           </div>
         ) : null}
+      </div>
+
+      <div className="w-full p-3 rounded-xl border border-border bg-surface/70 space-y-1">
+        <QuantityStepper
+          value={quantity}
+          min={minQuantity}
+          onChange={setQuantity}
+          unit="pz"
+          label={t("product.qty_label")}
+        />
+        <p className="text-xs text-muted">
+          {t("product.min_qty").replace("{qty}", String(minQuantity))}
+        </p>
       </div>
 
       <div className="flex flex-col sm:flex-row gap-3">

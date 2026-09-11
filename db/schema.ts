@@ -137,6 +137,8 @@ export const products = pgTable(
     height: decimal("height", { precision: 8, scale: 3 }),
     depth: decimal("depth", { precision: 8, scale: 3 }),
     stockQuantity: integer("stock_quantity").notNull().default(0),
+    /** Pezzi minimi per ordine. Default 10. */
+    minQuantity: integer("min_quantity").notNull().default(10),
     active: boolean("active").notNull().default(true),
     brand: text("brand"),
     metaTitle: text("meta_title"),
@@ -223,7 +225,7 @@ export const cartItems = pgTable("cart_items", {
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
-export const stoves = pgTable("stoves", {
+export const chips = pgTable("chips", {
   id: serial("id").primaryKey(),
   nameIt: text("name_it").notNull(),
   nameEn: text("name_en"),
@@ -238,13 +240,13 @@ export const stoves = pgTable("stoves", {
   peso: text("peso"),
 });
 
-export const productStoves = pgTable("product_stoves", {
+export const productChips = pgTable("product_chips", {
   productId: integer("product_id")
     .notNull()
     .references(() => products.id, { onDelete: "cascade" }),
-  stoveId: integer("stove_id")
+  chipId: integer("chip_id")
     .notNull()
-    .references(() => stoves.id, { onDelete: "cascade" }),
+    .references(() => chips.id, { onDelete: "cascade" }),
 });
 
 export const productImages = pgTable("product_images", {
@@ -338,16 +340,16 @@ export const categoriesRelations = relations(categories, ({ many }) => ({
 export const productsRelations = relations(products, ({ one, many }) => ({
   category: one(categories, { fields: [products.categoryId], references: [categories.id] }),
   images: many(productImages),
-  compatibleStoves: many(productStoves),
+  compatibleChips: many(productChips),
 }));
 
-export const stovesRelations = relations(stoves, ({ many }) => ({
-  products: many(productStoves),
+export const chipsRelations = relations(chips, ({ many }) => ({
+  products: many(productChips),
 }));
 
-export const productStovesRelations = relations(productStoves, ({ one }) => ({
-  product: one(products, { fields: [productStoves.productId], references: [products.id] }),
-  stove: one(stoves, { fields: [productStoves.stoveId], references: [stoves.id] }),
+export const productChipsRelations = relations(productChips, ({ one }) => ({
+  product: one(products, { fields: [productChips.productId], references: [products.id] }),
+  chip: one(chips, { fields: [productChips.chipId], references: [chips.id] }),
 }));
 
 export const appUsersRelations = relations(appUsers, ({ one }) => ({

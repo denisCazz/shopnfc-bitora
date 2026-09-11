@@ -15,13 +15,27 @@ const infoLinkKeys = [
   { key: "footer.info_terms", href: "/come-acquistare" },
 ];
 
+const catalogLinks = [
+  { href: "/categories/sticker-nfc", label: "Sticker NFC" },
+  { href: "/categories/tessere-nfc", label: "Tessere NFC" },
+  { href: "/categories/braccialetti-nfc", label: "Braccialetti NFC" },
+  { href: "/categories/tag-industriali", label: "Tag industriali" },
+  { href: "/categories/tag-schermati", label: "Tag schermati" },
+  { href: "/categories/gadget-nfc", label: "Gadget NFC" },
+  { href: "/categories/lettori-nfc", label: "Lettori NFC" },
+  { href: "/categories/soluzioni-nfc", label: "Soluzioni NFC" },
+  { href: "/tag-nfc", label: "Tag NFC per aziende" },
+  { href: "/tag-nfc-personalizzati", label: "Tag NFC personalizzati" },
+  { href: "/assistenza", label: "Assistenza" },
+];
+
 export default function Footer() {
   const { t } = useLocale();
 
   return (
     <footer id="contatti" className="border-t border-slate-200 bg-slate-700 text-slate-100">
       <div className="max-w-[1120px] mx-auto px-6 md:px-12 lg:px-8 py-14 lg:py-16">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-10">
           <div className="col-span-2 lg:col-span-1 flex flex-col items-start">
             <Link href="/" className="mb-4 flex items-center gap-2.5">
               <Image
@@ -77,6 +91,21 @@ export default function Footer() {
                 WhatsApp
               </a>
             </div>
+          </div>
+
+          <div>
+            <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400 mb-4">
+              Catalogo
+            </h4>
+            <ul className="space-y-2">
+              {catalogLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-sm text-slate-300 hover:text-white transition-colors">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div>

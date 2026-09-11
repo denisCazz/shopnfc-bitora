@@ -160,6 +160,7 @@ export async function POST(req: NextRequest) {
       .select({
         id: products.id,
         stockQuantity: products.stockQuantity,
+        minQuantity: products.minQuantity,
         nameIt: products.nameIt,
       })
       .from(products)
@@ -173,6 +174,20 @@ export async function POST(req: NextRequest) {
           (requestedByProduct.get(item.id) || 0) + item.quantity
         );
       }
+      const belowMin = stockProducts.filter((p) => {
+        const requested = requestedByProduct.get(p.id) ?? 0;
+        return requested > 0 && requested < p.minQuantity;
+      });
+      if (belowMin.length > 0) {
+        const details = belowMin
+          .map((p) => `${p.nameIt} (min. ${p.minQuantity})`)
+          .join(", ");
+        return NextResponse.json(
+          { error: `Quantità minima non raggiunta per: ${details}` },
+          { status: 400 }
+        );
+      }
+
       const outOfStock = stockProducts.filter((p) => {
         const requested = requestedByProduct.get(p.id) ?? 0;
         return requested > 0 && p.stockQuantity < requested;

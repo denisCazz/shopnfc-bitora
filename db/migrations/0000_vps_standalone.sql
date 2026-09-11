@@ -99,18 +99,22 @@ CREATE TABLE products (
   description_short_es TEXT,
   slug TEXT NOT NULL UNIQUE,
   price DECIMAL(10,2) NOT NULL DEFAULT 0,
+  catalog_price DECIMAL(10,2),
   wholesale_price DECIMAL(10,2),
   weight DECIMAL(8,3),
   width DECIMAL(8,3),
   height DECIMAL(8,3),
   depth DECIMAL(8,3),
   stock_quantity INT NOT NULL DEFAULT 0,
+  min_quantity INT NOT NULL DEFAULT 10,
   active BOOLEAN NOT NULL DEFAULT true,
   brand TEXT,
   meta_title TEXT,
   meta_description TEXT,
   meta_keywords TEXT,
   image_url TEXT,
+  fragile_shipping BOOLEAN NOT NULL DEFAULT false,
+  fragile_shipping_cost DECIMAL(10,2),
   created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
@@ -169,6 +173,7 @@ CREATE TABLE orders (
   shipping_address JSONB NOT NULL DEFAULT '{}',
   billing_address JSONB NOT NULL DEFAULT '{}',
   tracking_number TEXT,
+  bank_transfer_receipt_url TEXT,
   notes TEXT,
   danea_exported BOOLEAN NOT NULL DEFAULT false,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -229,6 +234,140 @@ CREATE TABLE product_images (
 
 CREATE INDEX idx_product_images_product ON product_images(product_id);
 CREATE INDEX idx_product_images_sort ON product_images(product_id, sort_order);
+
+-- ============================================================
+-- CHIPS NFC
+-- ============================================================
+CREATE TABLE chips (
+  id SERIAL PRIMARY KEY,
+  name_it TEXT NOT NULL,
+  name_en TEXT,
+  name_fr TEXT,
+  name_es TEXT,
+  slug TEXT NOT NULL UNIQUE,
+  active BOOLEAN NOT NULL DEFAULT true,
+  sort_order INT NOT NULL DEFAULT 0,
+  categoria TEXT,
+  potenza TEXT,
+  dimensioni TEXT,
+  peso TEXT
+);
+
+CREATE TABLE product_chips (
+  product_id INT NOT NULL REFERENCES products(id) ON DELETE CASCADE,
+  chip_id INT NOT NULL REFERENCES chips(id) ON DELETE CASCADE,
+  PRIMARY KEY (product_id, chip_id)
+);
+
+CREATE INDEX idx_product_chips_product ON product_chips(product_id);
+CREATE INDEX idx_product_chips_chip ON product_chips(chip_id);
+
+-- ============================================================
+-- DANEA LOGS
+-- ============================================================
+CREATE TABLE danea_import_logs (
+  id SERIAL PRIMARY KEY,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  success BOOLEAN NOT NULL,
+  source TEXT NOT NULL DEFAULT 'catalog',
+  mode TEXT,
+  message TEXT,
+  stats JSONB,
+  xml_bytes INTEGER
+);
+
+CREATE INDEX idx_danea_import_logs_created ON danea_import_logs (created_at DESC);
+
+CREATE TABLE danea_orders_export_logs (
+  id SERIAL PRIMARY KEY,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  success BOOLEAN NOT NULL,
+  order_count INTEGER NOT NULL DEFAULT 0,
+  order_ids JSONB,
+  firstdate TEXT,
+  lastdate TEXT,
+  message TEXT
+);
+
+CREATE INDEX idx_danea_orders_export_logs_created ON danea_orders_export_logs (created_at DESC);
+
+-- ============================================================
+-- SETTINGS
+-- ============================================================
+CREATE TABLE app_settings (
+  key TEXT PRIMARY KEY,
+  value JSONB NOT NULL,
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+INSERT INTO app_settings (key, value) VALUES (
+  'shipping',
+  '{
+    "zones": {
+      "italy": {
+        "label": "Italia",
+        "tiers": [
+          {"maxKg": 10, "rate": 8.50},
+          {"maxKg": 30, "rate": 12.50}
+        ],
+        "includesIva": true
+      },
+      "islands_calabria": {
+        "label": "Isole e Calabria",
+        "tiers": [
+          {"maxKg": 10, "rate": 12.50},
+          {"maxKg": 30, "rate": 16.50}
+        ],
+        "includesIva": true
+      },
+      "europe": {
+        "label": "Europa",
+        "tiers": [
+          {"maxKg": 10, "rate": 20.00},
+          {"maxKg": 30, "rate": 30.00}
+        ],
+        "includesIva": false
+      }
+    },
+    "codSurcharge": 7.00,
+    "ivaRate": 0.22,
+    "islandsCalabriaProvincia": [
+      "AG","CL","CT","EN","ME","PA","RG","SR","TP",
+      "CA","CI","MD","NU","OG","OT","OR","SS","SU","VS",
+      "CS","CZ","KR","RC","VV"
+    ]
+  }'::jsonb
+);
+
+INSERT INTO app_settings (key, value) VALUES (
+  'pricing',
+  '{"markup": 1.8}'::jsonb
+);
+
+-- ============================================================
+-- ANNOUNCEMENTS
+-- ============================================================
+CREATE TYPE announcement_severity AS ENUM ('info', 'warning', 'critical');
+CREATE TYPE announcement_audience AS ENUM ('users', 'admin', 'both');
+CREATE TYPE announcement_schedule_mode AS ENUM ('always', 'range');
+
+CREATE TABLE announcements (
+  id SERIAL PRIMARY KEY,
+  message_it TEXT NOT NULL,
+  message_en TEXT,
+  message_fr TEXT,
+  message_es TEXT,
+  severity announcement_severity NOT NULL DEFAULT 'info',
+  audience announcement_audience NOT NULL DEFAULT 'users',
+  schedule_mode announcement_schedule_mode NOT NULL DEFAULT 'always',
+  starts_at TIMESTAMPTZ,
+  ends_at TIMESTAMPTZ,
+  active BOOLEAN NOT NULL DEFAULT true,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX idx_announcements_active ON announcements (active);
 
 CREATE OR REPLACE FUNCTION decrement_stock_on_order()
 RETURNS TRIGGER AS $$

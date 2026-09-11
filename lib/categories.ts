@@ -1,5 +1,5 @@
 ﻿import { unstable_cache } from "next/cache";
-import { and, eq, asc, notInArray, exists } from "drizzle-orm";
+import { and, eq, asc, exists } from "drizzle-orm";
 import { getDb } from "@/db";
 import { categories, products } from "@/db/schema";
 import { CACHE_TAGS } from "@/lib/cache-tags";
@@ -41,9 +41,6 @@ function mapRow(row: {
   };
 }
 
-// These slugs are full-product categories, not spare-parts filters
-const HIDDEN_CATEGORY_SLUGS = ["stufe-a-pellet", "porta-pellet-aspiracenere"];
-
 async function fetchCategories(): Promise<CategoryWithCount[]> {
   const db = getDb();
   const data = await db
@@ -51,7 +48,6 @@ async function fetchCategories(): Promise<CategoryWithCount[]> {
     .from(categories)
     .where(and(
       eq(categories.active, true),
-      notInArray(categories.slug, HIDDEN_CATEGORY_SLUGS),
       exists(
         db.select({ id: products.id })
           .from(products)

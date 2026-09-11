@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from "react";
+import { DEFAULT_MIN_QUANTITY, normalizeMinQuantity } from "@/lib/min-quantity";
 
 export interface CartItem {
   id: number;
@@ -10,6 +11,8 @@ export interface CartItem {
   image: string | null;
   quantity: number;
   weight?: number | null;
+  /** Pezzi minimi per questa riga */
+  minQuantity?: number;
   /** Same product, different options (es. scheda programmata vs vergine) */
   lineKey?: string;
   /** Nota ordine (mostrata in checkout e ordine) */
@@ -52,11 +55,19 @@ const CartContext = createContext<CartContextType | null>(null);
 
 const CART_KEY = "shopnfc_cart_v2";
 
+function normalizeCartItem(item: CartItem): CartItem {
+  const minQuantity = normalizeMinQuantity(item.minQuantity ?? DEFAULT_MIN_QUANTITY);
+  const quantity = Math.max(Math.floor(item.quantity) || minQuantity, minQuantity);
+  return { ...item, minQuantity, quantity };
+}
+
 function loadCart(): CartItem[] {
   if (typeof window === "undefined") return [];
   try {
     const raw = localStorage.getItem(CART_KEY);
-    return raw ? JSON.parse(raw) : [];
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed.map((item: CartItem) => normalizeCartItem(item)) : [];
   } catch {
     return [];
   }
@@ -85,16 +96,23 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [items, loaded]);
 
   const addItem = useCallback((product: Omit<CartItem, "quantity">, quantity = 1) => {
+    const minQuantity = normalizeMinQuantity(product.minQuantity);
+    const qty = Math.max(1, Math.floor(quantity) || 1);
     setItems((prev) => {
       const existing = prev.find((i) => sameLine(i, product));
       if (existing) {
         return prev.map((i) =>
           sameLine(i, product)
-            ? { ...i, quantity: i.quantity + quantity, lineNotes: product.lineNotes ?? i.lineNotes }
+            ? {
+                ...i,
+                minQuantity,
+                quantity: i.quantity + qty,
+                lineNotes: product.lineNotes ?? i.lineNotes,
+              }
             : i
         );
       }
-      return [...prev, { ...product, quantity }];
+      return [...prev, { ...product, minQuantity, quantity: Math.max(qty, minQuantity) }];
     });
   }, []);
 
@@ -105,9 +123,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const updateQuantity = useCallback((id: number, quantity: number, lineKey?: string) => {
-    if (quantity < 1) return;
     setItems((prev) =>
-      prev.map((i) => (sameLine(i, { id, lineKey }) ? { ...i, quantity } : i))
+      prev.flatMap((i) => {
+        if (!sameLine(i, { id, lineKey })) return [i];
+        const minQuantity = normalizeMinQuantity(i.minQuantity);
+        if (quantity < minQuantity) return [];
+        return [{ ...i, quantity: Math.floor(quantity) }];
+      })
     );
   }, []);
 
@@ -116,7 +138,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const replaceCart = useCallback((next: CartItem[]) => {
-    setItems(next);
+    setItems(next.map((item) => normalizeCartItem(item)));
   }, []);
 
   const totalItems = items.reduce((sum, i) => sum + i.quantity, 0);

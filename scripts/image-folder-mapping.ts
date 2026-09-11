@@ -24,7 +24,6 @@ export const FOLDER_CATEGORY_MAP: FolderCategoryMapping[] = [
   { folderName: "RESISTENZE ACCENSIONE", categoryId: 9, categorySlug: "resistenze-accensione", description: "Resistenze Accensione" },
   { folderName: "SCHEDE ELETTRONICHE E SENSORI", categoryId: 11, categorySlug: "schede-elettroniche-sensori", description: "Schede Elettroniche e Sensori" },
   { folderName: "SONDE-DEPRESSORI-TERMOSTATI", categoryId: 13, categorySlug: "sonde-depressori-termostati", description: "Sonde, Depressori, Termostati" },
-  { folderName: "STUFE", categoryId: 17, categorySlug: "stufe-a-pellet", description: "Stufe a Pellet" },
   { folderName: "VENTILATORI ARIA", categoryId: 8, categorySlug: "ventilatori-aria", description: "Ventilatori Aria" },
   { folderName: "VENTILATORI FUMI", categoryId: 7, categorySlug: "ventilatori-fumi", description: "Ventilatori Fumi" },
 ];
@@ -32,13 +31,11 @@ export const FOLDER_CATEGORY_MAP: FolderCategoryMapping[] = [
 /**
  * Cartelle NON mappate a categorie prodotto (asset generici / da ignorare):
  * - "Camera Roll"           → foto generiche non categorizzabili
- * - "foto stufe"            → foto ambientate stufe (usare per marketing/hero)
  * - "SCHEDE TECNICHE IPC"   → PDF schede tecniche, non immagini prodotto
  * - "sito ricambi"          → loghi e immagini del sito
  */
 export const EXCLUDED_FOLDERS = [
   "Camera Roll",
-  "foto stufe",
   "SCHEDE TECNICHE IPC",
   "sito ricambi",
 ];

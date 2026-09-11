@@ -2,7 +2,7 @@
 
 E-commerce NFC nello stile Bitora, dominio previsto **shopnfc.bitora.it**.
 
-Catalogo ispirato a [shopnfc.com/it](https://shopnfc.com/it/) (sticker, tessere, braccialetti, tag industriali/schermati, gadget, lettori, soluzioni). Motore shop e admin ripresi da ricambixstufe.
+Catalogo NFC B2B (sticker, tessere, braccialetti, tag industriali/schermati, gadget, lettori, soluzioni).
 
 ## Avvio locale
 

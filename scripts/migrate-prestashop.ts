@@ -53,7 +53,6 @@ const CATEGORY_SLUGS: Record<number, string> = {
   13: "sonde-depressori-termostati",
   14: "guarnizioni-silicone",
   16: "coclee",
-  17: "stufe-a-pellet",
   18: "porta-pellet-aspiracenere",
   19: "pompe-sensori",
   20: "accessori",

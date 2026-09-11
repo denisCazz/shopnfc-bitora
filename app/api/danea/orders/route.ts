@@ -395,12 +395,11 @@ function buildEasyfattXml(
     // Rows
     xml += `      <Rows>\n`;
     for (const item of order.order_items) {
-      const isMeterRow = item.product_name.toLowerCase().includes("vendita al metro");
       xml += `        <Row>\n`;
       xml += rowTag("Code", item.product_sku || `P${item.product_id}`);
       xml += rowTag("Description", item.product_name);
       xml += rowTag("Qty", item.quantity);
-      xml += rowTag("Um", isMeterRow ? "m" : "pz");
+      xml += rowTag("Um", "pz");
       xml += rowTag("Price", item.unit_price.toFixed(2));
       if (item.discount_percent > 0) {
         xml += rowTag("Discounts", `${item.discount_percent}%`);

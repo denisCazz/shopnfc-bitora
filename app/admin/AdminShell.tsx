@@ -29,7 +29,7 @@ const navItems = [
   { href: "/admin/orders", label: "Ordini", icon: ShoppingCart },
   { href: "/admin/products", label: "Prodotti", icon: Package },
   { href: "/admin/categories", label: "Categorie", icon: LayoutList },
-  { href: "/admin/stufe", label: "Chip", icon: Cpu },
+  { href: "/admin/chip", label: "Chip", icon: Cpu },
   { href: "/admin/users", label: "Utenti", icon: Users },
   { href: "/admin/dealers", label: "Clienti B2B", icon: Briefcase },
   { href: "/admin/avvisi", label: "Avvisi", icon: Megaphone },

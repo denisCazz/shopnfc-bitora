@@ -35,6 +35,7 @@ export async function GET(request: Request) {
       price: products.price,
       wholesalePrice: products.wholesalePrice,
       stockQuantity: products.stockQuantity,
+      minQuantity: products.minQuantity,
       active: products.active,
       catName: categories.nameIt,
       descriptionIt: products.descriptionIt,
@@ -54,6 +55,7 @@ export async function GET(request: Request) {
     "Prezzo (€)": p.price != null ? Number(p.price) : "",
     "Prezzo ingrosso (€)": p.wholesalePrice != null ? Number(p.wholesalePrice) : "",
     Quantità: p.stockQuantity ?? "",
+    "Ordine minimo": p.minQuantity ?? "",
     Attivo: p.active ? "Sì" : "No",
     Descrizione: p.descriptionIt || "",
   }));

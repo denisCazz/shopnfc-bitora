@@ -1,4 +1,4 @@
-﻿export interface StoveFilter {
+﻿export interface ChipFilter {
   id: number;
   nameIt: string;
   nameEn: string | null;

@@ -6,9 +6,9 @@ import {
   appUsers,
   profiles,
   categories,
-  stoves,
+  chips,
   products,
-  productStoves,
+  productChips,
   productImages,
 } from "../db/schema";
 
@@ -321,7 +321,7 @@ async function main() {
     const catId = Object.fromEntries(insertedCats.map((c) => [c.slug, c.id]));
 
     const insertedChips = await db
-      .insert(stoves)
+      .insert(chips)
       .values(
         CHIPS.map((c, i) => ({
           slug: c.slug,
@@ -336,7 +336,7 @@ async function main() {
           dimensioni: c.dimensioni,
         }))
       )
-      .returning({ id: stoves.id, slug: stoves.slug });
+      .returning({ id: chips.id, slug: chips.slug });
 
     const chipId = Object.fromEntries(insertedChips.map((c) => [c.slug, c.id]));
 
@@ -378,12 +378,12 @@ async function main() {
         altText: p.it,
       });
 
-      const stoveRows = p.chips
+      const chipRows = p.chips
         .map((slug) => chipId[slug])
         .filter(Boolean)
-        .map((stoveId) => ({ productId: row.id, stoveId }));
-      if (stoveRows.length) {
-        await db.insert(productStoves).values(stoveRows);
+        .map((id) => ({ productId: row.id, chipId: id }));
+      if (chipRows.length) {
+        await db.insert(productChips).values(chipRows);
       }
     }
     console.log(`Inseriti ${PRODUCTS.length} prodotti, ${CATEGORIES.length} categorie, ${CHIPS.length} chip.`);

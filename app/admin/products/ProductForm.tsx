@@ -3,7 +3,7 @@
 import { useActionState, useMemo, useState } from "react";
 import { Save } from "lucide-react";
 import ImageUploader from "@/components/admin/ImageUploader";
-import StovesMultiSelect from "@/components/admin/StovesMultiSelect";
+import ChipsMultiSelect from "@/components/admin/ChipsMultiSelect";
 import { DEFAULT_MARKUP, retailFromCatalog } from "@/lib/pricing";
 
 interface Category {
@@ -12,7 +12,7 @@ interface Category {
   slug: string;
 }
 
-interface Stove {
+interface ChipOption {
   id: number;
   nameIt: string;
 }
@@ -34,6 +34,7 @@ interface ProductData {
   catalog_price?: number;
   price: number;
   stock_quantity: number;
+  min_quantity: number;
   sku: string | null;
   ean13: string | null;
   brand: string | null;
@@ -66,6 +67,7 @@ const emptyProduct: ProductData = {
   catalog_price: 0,
   price: 0,
   stock_quantity: 0,
+  min_quantity: 10,
   sku: null,
   ean13: null,
   brand: null,
@@ -104,6 +106,7 @@ function Input({
   placeholder,
   required,
   step,
+  min,
 }: {
   name: string;
   defaultValue?: string | number | null;
@@ -111,6 +114,7 @@ function Input({
   placeholder?: string;
   required?: boolean;
   step?: string;
+  min?: number;
 }) {
   return (
     <input
@@ -120,6 +124,7 @@ function Input({
       placeholder={placeholder}
       required={required}
       step={step}
+      min={min}
       className="w-full px-3 py-2 rounded-xl bg-background border border-border text-sm placeholder:text-muted focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all"
     />
   );
@@ -150,8 +155,8 @@ function Textarea({
 export default function ProductForm({
   product,
   categories,
-  stoves = [],
-  selectedStoveIds = [],
+  chips = [],
+  selectedChipIds = [],
   action,
   submitLabel,
   productImages = [],
@@ -160,8 +165,8 @@ export default function ProductForm({
 }: {
   product?: ProductData;
   categories: Category[];
-  stoves?: Stove[];
-  selectedStoveIds?: number[];
+  chips?: ChipOption[];
+  selectedChipIds?: number[];
   action: (prevState: { error?: string } | null, formData: FormData) => Promise<{ error?: string } | null>;
   submitLabel: string;
   productImages?: ProductImage[];
@@ -251,6 +256,19 @@ export default function ProductForm({
             <Input name="stock_quantity" type="number" defaultValue={p.stock_quantity} required />
           </div>
           <div>
+            <Label htmlFor="min_quantity">Ordine minimo (pz) *</Label>
+            <Input
+              name="min_quantity"
+              type="number"
+              defaultValue={p.min_quantity ?? 10}
+              required
+              min={1}
+            />
+            <p className="mt-1.5 text-xs text-muted">
+              Quantità minima per ordine, in pezzi. Default 10.
+            </p>
+          </div>
+          <div>
             <Label htmlFor="sku">SKU</Label>
             <Input name="sku" defaultValue={p.sku} placeholder="Codice SKU" />
           </div>
@@ -289,11 +307,11 @@ export default function ProductForm({
       </section>
 
       {/* Compatible Stoves */}
-      {stoves.length > 0 && (
+      {chips.length > 0 && (
         <section className="bg-surface border border-border rounded-2xl p-5">
           <h2 className="text-lg font-semibold text-foreground mb-1">Chip compatibili</h2>
           <p className="text-sm text-muted mb-4">Associa i chip NFC (NTAG, MIFARE, DESFire…) a questo prodotto</p>
-          <StovesMultiSelect stoves={stoves} selectedStoveIds={selectedStoveIds} />
+          <ChipsMultiSelect chips={chips} selectedChipIds={selectedChipIds} />
         </section>
       )}
 

@@ -11,22 +11,39 @@ import type { Product } from "@/data/products";
 import type { Category } from "@/data/categories";
 import { useLocale } from "@/lib/locale-context";
 import type { AuthUser } from "@/lib/auth";
+import type { CategorySeoContent } from "@/lib/seo-content";
+import SeoContentBlock from "@/components/SeoContentBlock";
 
 function getCategoryName(cat: Category, locale: string): string {
   const key = `name_${locale}` as keyof Category;
   return (cat[key] as string) || cat.name_it || cat.name;
 }
 
+const RELATED_LABELS: Record<string, string> = {
+  "tag-nfc-personalizzati": "Tag NFC personalizzati",
+  "sticker-nfc": "Sticker NFC",
+  "tessere-nfc": "Tessere NFC",
+  "braccialetti-nfc": "Braccialetti NFC",
+  "tag-industriali": "Tag industriali",
+  "tag-schermati": "Tag schermati",
+  "gadget-nfc": "Gadget NFC",
+  "lettori-nfc": "Lettori NFC",
+  "soluzioni-nfc": "Soluzioni NFC",
+  ntag213: "Chip NTAG213",
+};
+
 export default function CategoryPageClient({
   category,
   products,
   categories,
   user,
+  seoContent,
 }: {
   category: Category;
   products: Product[];
   categories: Category[];
   user?: AuthUser | null;
+  seoContent?: CategorySeoContent | null;
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { locale } = useLocale();
@@ -68,6 +85,7 @@ export default function CategoryPageClient({
             activeCategory={category.slug}
             onSelect={(slug) => handleCategorySelect(slug)}
             categories={categories}
+            useLinks
           />
         </div>
 
@@ -80,7 +98,23 @@ export default function CategoryPageClient({
             categories={categories}
             products={products}
           />
-          <ProductGrid activeCategory={null} products={products} />
+          <div className="flex-1 min-w-0">
+            <ProductGrid activeCategory={null} products={products} />
+            {seoContent && (
+              <SeoContentBlock
+                intro={seoContent.intro}
+                guideTitle={seoContent.guideTitle}
+                guide={seoContent.guide}
+                applicationsTitle={seoContent.applicationsTitle}
+                applications={seoContent.applications}
+                faq={seoContent.faq}
+                relatedLinks={seoContent.relatedSlugs.map((s) => ({
+                  href: s === "tag-nfc-personalizzati" ? "/tag-nfc-personalizzati" : s.startsWith("ntag") ? `/chip/${s}` : `/categories/${s}`,
+                  label: RELATED_LABELS[s] || s,
+                }))}
+              />
+            )}
+          </div>
         </div>
       </main>
     </>

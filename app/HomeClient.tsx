@@ -10,24 +10,24 @@ import Hero from "@/components/Hero";
 import type { Product } from "@/data/products";
 import type { Category } from "@/data/categories";
 import type { AuthUser } from "@/lib/auth";
-import type { StoveFilter } from "@/lib/types";
+import type { ChipFilter } from "@/lib/types";
 
-export type { StoveFilter };
+export type { ChipFilter };
 
 export default function HomeClient({
   products,
   categories,
   user,
-  stoves = [],
+  chips = [],
 }: {
   products: Product[];
   categories: Category[];
   user: AuthUser | null;
-  stoves?: StoveFilter[];
+  chips?: ChipFilter[];
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
-  const [activeStoveId, setActiveStoveId] = useState<number | null>(null);
+  const [activeChipId, setActiveChipId] = useState<number | null>(null);
 
   return (
     <div className="min-h-screen flex flex-col relative bg-background">
@@ -44,7 +44,7 @@ export default function HomeClient({
         <div className="lg:hidden mb-4">
           <CategoryPills
             activeCategory={activeCategory}
-            onSelect={(slug) => { setActiveCategory(slug); setActiveStoveId(null); }}
+            onSelect={(slug) => { setActiveCategory(slug); setActiveChipId(null); }}
             categories={categories}
           />
         </div>
@@ -53,14 +53,14 @@ export default function HomeClient({
             open={sidebarOpen}
             onClose={() => setSidebarOpen(false)}
             activeCategory={activeCategory}
-            onSelect={(slug) => { setActiveCategory(slug); setActiveStoveId(null); }}
+            onSelect={(slug) => { setActiveCategory(slug); setActiveChipId(null); }}
             categories={categories}
             products={products}
-            stoves={stoves}
-            activeStoveId={activeStoveId}
-            onSelectStove={(id) => { setActiveStoveId(id); setActiveCategory(null); }}
+            chips={chips}
+            activeChipId={activeChipId}
+            onSelectChip={(id) => { setActiveChipId(id); setActiveCategory(null); }}
           />
-          <ProductGrid activeCategory={activeCategory} activeStoveId={activeStoveId} products={products} />
+          <ProductGrid activeCategory={activeCategory} activeChipId={activeChipId} products={products} />
         </div>
       </main>
 

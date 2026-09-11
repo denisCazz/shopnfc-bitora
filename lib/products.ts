@@ -5,6 +5,7 @@ import { products, categories, productImages } from "@/db/schema";
 import { CACHE_TAGS } from "@/lib/cache-tags";
 import { retailFromCatalog } from "@/lib/pricing";
 import { getPricingConfig } from "@/lib/pricing-server";
+import { normalizeMinQuantity } from "@/lib/min-quantity";
 
 export interface ProductImage {
   id: number;
@@ -32,6 +33,7 @@ export interface ProductWithCategory {
   brand: string | null;
   weight: number | null;
   stockQuantity: number;
+  minQuantity: number;
   metaTitle: string | null;
   metaDescription: string | null;
   name_it?: string;
@@ -74,6 +76,7 @@ type PRow = {
   brand: string | null;
   weight: string | null;
   stockQuantity: number;
+  minQuantity: number;
   metaTitle: string | null;
   metaDescription: string | null;
   nameEn: string | null;
@@ -112,6 +115,7 @@ function mapProduct(
     brand: pr.brand,
     weight: numOrNull(pr.weight),
     stockQuantity: pr.stockQuantity,
+    minQuantity: normalizeMinQuantity(pr.minQuantity),
     metaTitle: pr.metaTitle,
     metaDescription: pr.metaDescription,
     name_it: pr.nameIt || undefined,

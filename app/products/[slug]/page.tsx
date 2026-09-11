@@ -5,7 +5,7 @@ import { getProductBySlug, getRelatedProducts } from "@/lib/products";
 import { getCategories } from "@/lib/categories";
 import { eq } from "drizzle-orm";
 import { getDb } from "@/db";
-import { products, productStoves, stoves } from "@/db/schema";
+import { products, productChips, chips } from "@/db/schema";
 import { getUser } from "@/lib/auth";
 import Footer from "@/components/Footer";
 import ProductDetailClient from "./ProductDetailClient";
@@ -18,6 +18,8 @@ import TranslatedText from "@/components/TranslatedText";
 import LocalizedText from "@/components/LocalizedText";
 import ProductImageCarousel from "@/components/ProductImageCarousel";
 import { SITE } from "@/lib/site";
+import { buildPageMetadata, breadcrumbJsonLd, productJsonLd } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
 
 export async function generateStaticParams() {
   const db = getDb();
@@ -32,10 +34,18 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const product = await getProductBySlug(slug);
   if (!product) return { title: "Prodotto non trovato" };
-  return {
-    title: `${product.name} | Shop NFC`,
-    description: product.descriptionShort || product.description,
-  };
+  const title = product.metaTitle?.trim() || product.name;
+  const description =
+    product.metaDescription?.trim() ||
+    product.descriptionShort ||
+    product.description ||
+    `${product.name} — tag NFC per aziende su Shop NFC.`;
+  return buildPageMetadata({
+    title,
+    description,
+    path: `/products/${slug}`,
+    image: product.image,
+  });
 }
 
 export default async function ProductDetailPage({
@@ -52,14 +62,38 @@ export default async function ProductDetailPage({
     getUser(),
     getCategories(),
     getDb()
-      .select({ id: stoves.id, nameIt: stoves.nameIt, nameEn: stoves.nameEn, nameFr: stoves.nameFr, nameEs: stoves.nameEs })
-      .from(productStoves)
-      .innerJoin(stoves, eq(productStoves.stoveId, stoves.id))
-      .where(eq(productStoves.productId, product.id)),
+      .select({ id: chips.id, nameIt: chips.nameIt, nameEn: chips.nameEn, nameFr: chips.nameFr, nameEs: chips.nameEs, slug: chips.slug })
+      .from(productChips)
+      .innerJoin(chips, eq(productChips.chipId, chips.id))
+      .where(eq(productChips.productId, product.id)),
   ]);
+
+  const productName = product.name_it || product.name;
+  const productDescription = product.descriptionShort || product.description;
 
   return (
     <div className="min-h-screen flex flex-col">
+      <JsonLd
+        data={[
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: product.category, path: `/categories/${product.categorySlug}` },
+            { name: productName, path: `/products/${product.slug}` },
+          ]),
+          productJsonLd({
+            name: productName,
+            description: productDescription,
+            slug: product.slug,
+            image: product.image,
+            sku: product.sku,
+            ean13: product.ean13,
+            brand: product.brand,
+            price: product.price,
+            inStock: product.stockQuantity > 0,
+            categoryName: product.category,
+          }),
+        ]}
+      />
       <ProductDetailClient user={user} categories={categories}>
         <main className="flex-1 max-w-7xl mx-auto w-full px-4 py-8">
           {/* Breadcrumb */}
@@ -163,6 +197,7 @@ export default async function ProductDetailPage({
                       image: product.image,
                       weight: product.weight,
                       stockQuantity: product.stockQuantity,
+                      minQuantity: product.minQuantity,
                     }}
                   />
                 ) : (
@@ -181,6 +216,7 @@ export default async function ProductDetailPage({
                       image: product.image,
                       weight: product.weight,
                       stockQuantity: product.stockQuantity,
+                      minQuantity: product.minQuantity,
                     }}
                   />
                 )}
@@ -209,12 +245,16 @@ export default async function ProductDetailPage({
 
               {compatibleStoves.length > 0 && (
                 <div className="mt-6 bg-sky-50/50 dark:bg-sky-950/20 border border-sky-200/60 dark:border-sky-800/40 rounded-xl p-4">
-                  <p className="text-xs font-semibold text-muted uppercase tracking-wide mb-2">Compatibile con</p>
+                  <p className="text-xs font-semibold text-muted uppercase tracking-wide mb-2">Chip compatibili</p>
                   <div className="flex flex-wrap gap-2">
                     {compatibleStoves.map((s) => (
-                      <span key={s.id} className="inline-flex items-center px-2.5 py-1 rounded-lg bg-background border border-border text-sm text-foreground">
+                      <Link
+                        key={s.id}
+                        href={`/chip/${s.slug}`}
+                        className="inline-flex items-center px-2.5 py-1 rounded-lg bg-background border border-border text-sm text-foreground hover:border-accent/40 transition-colors"
+                      >
                         <LocalizedText it={s.nameIt} en={s.nameEn ?? undefined} fr={s.nameFr ?? undefined} es={s.nameEs ?? undefined} fallback={s.nameIt} />
-                      </span>
+                      </Link>
                     ))}
                   </div>
                 </div>

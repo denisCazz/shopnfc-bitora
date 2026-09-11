@@ -3,14 +3,14 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ShoppingCart, Eye, X, Minus, Plus } from "lucide-react";
+import { ShoppingCart, Eye, X } from "lucide-react";
 import { type Product } from "@/data/products";
 import { useCart } from "@/lib/cart-context";
 import { useLocale } from "@/lib/locale-context";
 import { useUser } from "@/lib/user-context";
 import { useCatalogDisplayPrice } from "@/lib/use-catalog-display-price";
 import { productNeedsBoardProgrammingOption } from "@/lib/product-board-options";
-import { productSoldByMeter } from "@/lib/product-meter-options";
+import { normalizeMinQuantity } from "@/lib/min-quantity";
 
 export default function ProductCard({
   product,
@@ -31,8 +31,7 @@ export default function ProductCard({
   const [boardStovesLoading, setBoardStovesLoading] = useState(false);
   const [boardStoveId, setBoardStoveId] = useState<number | "">("");
   const [boardDisplayText, setBoardDisplayText] = useState("");
-  const [showMetersModal, setShowMetersModal] = useState(false);
-  const [meters, setMeters] = useState(1);
+  const minQuantity = normalizeMinQuantity(product.minQuantity);
 
   // Locale-aware name & description
   const localizedName = (locale !== "it" && product[`name_${locale}` as keyof typeof product] as string) || product.name;
@@ -50,22 +49,7 @@ export default function ProductCard({
     name_it: product.name,
   });
 
-  const soldByMeter = productSoldByMeter({
-    categorySlug: product.categorySlug,
-    nameIt: product.name,
-  });
-
-  const maxMeters = product.stockQuantity && product.stockQuantity > 0
-    ? product.stockQuantity
-    : undefined;
-
-  function clampMeters(v: number): number {
-    const int = Math.max(1, Math.floor(v));
-    if (maxMeters === undefined) return int;
-    return Math.min(maxMeters, int);
-  }
-
-  function doAddToCart(quantity = 1, lineKey?: string, lineNotes?: string) {
+  function doAddToCart(quantity = minQuantity, lineKey?: string, lineNotes?: string) {
     addItem({
       id: product.id,
       name: localizedName,
@@ -73,6 +57,7 @@ export default function ProductCard({
       price: discountedPrice,
       image: product.image,
       weight: product.weight,
+      minQuantity,
       lineKey,
       lineNotes,
     }, quantity);
@@ -90,19 +75,14 @@ export default function ProductCard({
       setBoardStoves([]);
       setShowBoardModal(true);
       setBoardStovesLoading(true);
-      fetch(`/api/stoves?productId=${product.id}`)
+      fetch(`/api/chips?productId=${product.id}`)
         .then((r) => r.json())
         .then((data) => setBoardStoves(Array.isArray(data) ? data : []))
         .catch(() => setBoardStoves([]))
         .finally(() => setBoardStovesLoading(false));
       return;
     }
-    if (soldByMeter) {
-      setMeters(1);
-      setShowMetersModal(true);
-      return;
-    }
-    doAddToCart();
+    doAddToCart(minQuantity);
   }
 
   function handleBoardConfirm() {
@@ -134,17 +114,11 @@ export default function ProductCard({
           displayNote;
       }
     }
-    doAddToCart(1, lineKey, lineNotes);
+    doAddToCart(minQuantity, lineKey, lineNotes);
     setShowBoardModal(false);
     setBoardStoveText("");
     setBoardStoveId("");
     setBoardDisplayText("");
-  }
-
-  function handleMetersConfirm() {
-    const qty = clampMeters(meters);
-    doAddToCart(qty, "unit:meter", "Vendita al metro (quantità in metri)");
-    setShowMetersModal(false);
   }
 
   return (
@@ -353,72 +327,6 @@ export default function ProductCard({
             >
               <ShoppingCart className="w-4 h-4" />
               {t("product.add_to_cart")}
-            </button>
-          </div>
-        </div>
-      )}
-
-      {showMetersModal && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
-          onClick={() => setShowMetersModal(false)}
-        >
-          <div
-            className="bg-surface rounded-2xl border border-border shadow-xl w-full max-w-sm p-5 space-y-4"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between">
-              <p className="font-semibold text-foreground">Quanti metri vuoi acquistare?</p>
-              <button
-                type="button"
-                onClick={() => setShowMetersModal(false)}
-                className="text-muted hover:text-foreground transition-colors"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-            <p className="text-xs text-muted line-clamp-2">{localizedName}</p>
-            <div>
-              <label className="block text-xs text-muted mb-1">Metri</label>
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => setMeters((m) => clampMeters(m - 1))}
-                  className="w-10 h-10 rounded-lg border border-border flex items-center justify-center hover:bg-stone-100 dark:hover:bg-stone-800"
-                  aria-label="Diminuisci metri"
-                >
-                  <Minus className="w-4 h-4" />
-                </button>
-                <input
-                  type="number"
-                  min={1}
-                  max={maxMeters}
-                  step={1}
-                  value={meters}
-                  onChange={(e) => {
-                    const next = Number.parseInt(e.target.value || "1", 10);
-                    setMeters(clampMeters(Number.isFinite(next) ? next : 1));
-                  }}
-                  className="w-24 h-10 text-center px-2 rounded-lg border border-border bg-background text-sm text-foreground"
-                  autoFocus
-                />
-                <button
-                  type="button"
-                  onClick={() => setMeters((m) => clampMeters(m + 1))}
-                  className="w-10 h-10 rounded-lg border border-border flex items-center justify-center hover:bg-stone-100 dark:hover:bg-stone-800"
-                  aria-label="Aumenta metri"
-                >
-                  <Plus className="w-4 h-4" />
-                </button>
-                <span className="text-sm text-muted">m</span>
-              </div>
-            </div>
-            <button
-              type="button"
-              onClick={handleMetersConfirm}
-              className="w-full py-2.5 rounded-xl bg-gradient-to-r from-sky-400 to-sky-600 text-white font-semibold hover:shadow-lg hover:shadow-sky-500/25 transition-all duration-200"
-            >
-              Aggiungi al carrello
             </button>
           </div>
         </div>

@@ -2,20 +2,20 @@ import Link from "next/link";
 import { asc, and, eq, notInArray } from "drizzle-orm";
 import { ChevronLeft } from "lucide-react";
 import { getDb } from "@/db";
-import { categories, stoves } from "@/db/schema";
+import { categories, chips } from "@/db/schema";
 import { createProduct } from "../../actions/products";
 import ProductForm from "../ProductForm";
 import { getPricingConfig } from "@/lib/pricing-server";
 
 export default async function NewProductPage() {
   const db = getDb();
-  const [catRows, stoveRows, pricing] = await Promise.all([
+  const [catRows, chipRows, pricing] = await Promise.all([
     db
       .select({ id: categories.id, nameIt: categories.nameIt, slug: categories.slug })
       .from(categories)
       .where(and(eq(categories.active, true), notInArray(categories.id, [17, 18])))
       .orderBy(asc(categories.sortOrder)),
-    db.select({ id: stoves.id, nameIt: stoves.nameIt }).from(stoves).where(eq(stoves.active, true)).orderBy(asc(stoves.sortOrder)),
+    db.select({ id: chips.id, nameIt: chips.nameIt }).from(chips).where(eq(chips.active, true)).orderBy(asc(chips.sortOrder)),
     getPricingConfig(),
   ]);
 
@@ -46,7 +46,7 @@ export default async function NewProductPage() {
 
       <ProductForm
         categories={categoriesList}
-        stoves={stoveRows}
+        chips={chipRows}
         action={action}
         submitLabel="Crea Prodotto"
         markup={pricing.markup}

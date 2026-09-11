@@ -7,6 +7,9 @@ import { categories } from "@/db/schema";
 import { getUser } from "@/lib/auth";
 import Footer from "@/components/Footer";
 import CategoryPageClient from "./CategoryPageClient";
+import { buildPageMetadata, breadcrumbJsonLd, collectionPageJsonLd } from "@/lib/seo";
+import { getCategorySeo } from "@/lib/seo-content";
+import JsonLd from "@/components/JsonLd";
 
 export async function generateStaticParams() {
   const db = getDb();
@@ -21,10 +24,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const category = await getCategoryBySlug(slug);
   if (!category) return { title: "Categoria non trovata" };
-  return {
-    title: `${category.name} | Shop NFC`,
-    description: `Ricambi per stufe a pellet: ${category.name}. Spedizione rapida in tutta Europa.`,
-  };
+  const seo = getCategorySeo(slug);
+  return buildPageMetadata({
+    title: `${category.name} per aziende`,
+    description:
+      seo?.metaDescription ||
+      `${category.name}: tag NFC professionali per aziende. Programmazione inclusa, spedizione in Italia.`,
+    path: `/categories/${slug}`,
+  });
 }
 
 export default async function CategoryPage({
@@ -53,6 +60,7 @@ export default async function CategoryPage({
     image: p.image,
     weight: p.weight,
     stockQuantity: p.stockQuantity,
+    minQuantity: p.minQuantity,
     name_it: p.name_it,
     name_en: p.name_en,
     name_fr: p.name_fr,
@@ -74,13 +82,31 @@ export default async function CategoryPage({
     name_es: c.name_es,
   }));
 
+  const seo = getCategorySeo(slug);
+  const categoryName = category.name_it || category.name;
+
   return (
     <div className="min-h-screen flex flex-col">
+      <JsonLd
+        data={[
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: categoryName, path: `/categories/${slug}` },
+          ]),
+          collectionPageJsonLd({
+            name: categoryName,
+            description: seo?.metaDescription || `${categoryName} — catalogo Shop NFC`,
+            path: `/categories/${slug}`,
+            products: products.map((p) => ({ name: p.name, slug: p.slug, image: p.image })),
+          }),
+        ]}
+      />
       <CategoryPageClient
         category={{ ...category, icon: category.icon || "Package", name_it: category.name_it, name_en: category.name_en, name_fr: category.name_fr, name_es: category.name_es }}
         products={products}
         categories={categories}
         user={user}
+        seoContent={seo}
       />
       <Footer />
     </div>

@@ -8,7 +8,7 @@ import type { AuthUser } from "@/lib/auth";
 import { logout } from "@/app/(auth)/actions";
 import { useCart } from "@/lib/cart-context";
 import { useLocale } from "@/lib/locale-context";
-import { searchProducts, searchStoves, type SearchResult, type StoveSearchResult } from "@/app/actions/search";
+import { searchProducts, searchChips, type SearchResult, type ChipSearchResult } from "@/app/actions/search";
 import { locales, type Locale } from "@/lib/i18n";
 
 const languageFlags: Record<Locale, string> = {
@@ -48,7 +48,7 @@ export default function Header({
   // Search state
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
-  const [stoveResults, setStoveResults] = useState<StoveSearchResult[]>([]);
+  const [stoveResults, setStoveResults] = useState<ChipSearchResult[]>([]);
   const [searching, setSearching] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
@@ -98,12 +98,12 @@ export default function Header({
     setSearching(true);
     setShowResults(true);
     debounceRef.current = setTimeout(async () => {
-      const [res, stoves] = await Promise.all([
+      const [res, chipHits] = await Promise.all([
         searchProducts(value, locale),
-        searchStoves(value),
+        searchChips(value),
       ]);
       setResults(res);
-      setStoveResults(stoves);
+      setStoveResults(chipHits);
       setSearching(false);
     }, 300);
   }, [locale]);
@@ -115,7 +115,7 @@ export default function Header({
     setMobileSearch(false);
   }
 
-  const getStoveName = (s: StoveSearchResult) =>
+  const getStoveName = (s: ChipSearchResult) =>
     (locale === "en" && s.nameEn) ||
     (locale === "fr" && s.nameFr) ||
     (locale === "es" && s.nameEs) ||
@@ -129,7 +129,7 @@ export default function Header({
           {stoveResults.map((s) => (
             <Link
               key={s.id}
-              href={`/stufe/${s.slug}`}
+              href={`/chip/${s.slug}`}
               onClick={handleResultClick}
               className="flex items-center gap-3 px-4 py-3 bg-sky-50/60 dark:bg-sky-950/20 hover:bg-sky-50 dark:hover:bg-sky-950/40 active:bg-sky-50 transition-colors border-b border-sky-100/60 dark:border-sky-900/30 last:border-0"
             >
@@ -139,7 +139,7 @@ export default function Header({
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-semibold text-foreground truncate">{getStoveName(s)}</p>
                 <p className="text-xs text-accent">
-                  Vedi tutti i {s.productCount} ricambi compatibili &rarr;
+                  Vedi tutti i {s.productCount} prodotti con questo chip &rarr;
                 </p>
               </div>
             </Link>

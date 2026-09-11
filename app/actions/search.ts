@@ -2,7 +2,7 @@
 
 import { and, or, ilike, eq, asc, getTableColumns, exists, sql } from "drizzle-orm";
 import { getDb } from "@/db";
-import { products, categories, stoves, productStoves } from "@/db/schema";
+import { products, categories, chips, productChips } from "@/db/schema";
 import { retailFromCatalog } from "@/lib/pricing";
 import { getPricingConfig } from "@/lib/pricing-server";
 
@@ -54,17 +54,17 @@ export async function searchProducts(query: string, locale: string = "it"): Prom
           ilike(products.descriptionEs, term),
           exists(
             db
-              .select({ id: stoves.id })
-              .from(productStoves)
-              .innerJoin(stoves, eq(productStoves.stoveId, stoves.id))
+              .select({ id: chips.id })
+              .from(productChips)
+              .innerJoin(chips, eq(productChips.chipId, chips.id))
               .where(
                 and(
-                  eq(productStoves.productId, products.id),
+                  eq(productChips.productId, products.id),
                   or(
-                    ilike(stoves.nameIt, term),
-                    ilike(stoves.nameEn, term),
-                    ilike(stoves.nameFr, term),
-                    ilike(stoves.nameEs, term)
+                    ilike(chips.nameIt, term),
+                    ilike(chips.nameEn, term),
+                    ilike(chips.nameFr, term),
+                    ilike(chips.nameEs, term)
                   )
                 )
               )
@@ -86,7 +86,7 @@ export async function searchProducts(query: string, locale: string = "it"): Prom
   }));
 }
 
-export interface StoveSearchResult {
+export interface ChipSearchResult {
   id: number;
   nameIt: string;
   nameEn: string | null;
@@ -96,48 +96,47 @@ export interface StoveSearchResult {
   productCount: number;
 }
 
-export async function searchStoves(query: string): Promise<StoveSearchResult[]> {
+export async function searchChips(query: string): Promise<ChipSearchResult[]> {
   if (!query || query.trim().length < 2) return [];
   const term = `%${query.trim()}%`;
   const db = getDb();
   const rows = await db
     .select({
-      id: stoves.id,
-      nameIt: stoves.nameIt,
-      nameEn: stoves.nameEn,
-      nameFr: stoves.nameFr,
-      nameEs: stoves.nameEs,
-      slug: stoves.slug,
+      id: chips.id,
+      nameIt: chips.nameIt,
+      nameEn: chips.nameEn,
+      nameFr: chips.nameFr,
+      nameEs: chips.nameEs,
+      slug: chips.slug,
     })
-    .from(stoves)
+    .from(chips)
     .where(
       and(
-        eq(stoves.active, true),
+        eq(chips.active, true),
         or(
-          ilike(stoves.nameIt, term),
-          ilike(stoves.nameEn, term),
-          ilike(stoves.nameFr, term),
-          ilike(stoves.nameEs, term)
+          ilike(chips.nameIt, term),
+          ilike(chips.nameEn, term),
+          ilike(chips.nameFr, term),
+          ilike(chips.nameEs, term)
         )
       )
     )
-    .orderBy(asc(stoves.nameIt))
+    .orderBy(asc(chips.nameIt))
     .limit(3);
 
   if (rows.length === 0) return [];
 
-  // Count products per stove
   const { count: countFn } = await import("drizzle-orm");
   const counts = await db
-    .select({ stoveId: productStoves.stoveId, n: countFn() })
-    .from(productStoves)
-    .innerJoin(products, and(eq(productStoves.productId, products.id), eq(products.active, true)))
+    .select({ chipId: productChips.chipId, n: countFn() })
+    .from(productChips)
+    .innerJoin(products, and(eq(productChips.productId, products.id), eq(products.active, true)))
     .where(
-      or(...rows.map((r) => eq(productStoves.stoveId, r.id)))
+      or(...rows.map((r) => eq(productChips.chipId, r.id)))
     )
-    .groupBy(productStoves.stoveId);
+    .groupBy(productChips.chipId);
 
-  const countMap = new Map(counts.map((c) => [c.stoveId, Number(c.n)]));
+  const countMap = new Map(counts.map((c) => [c.chipId, Number(c.n)]));
 
   return rows.map((r) => ({
     ...r,

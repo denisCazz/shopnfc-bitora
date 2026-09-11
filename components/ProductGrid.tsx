@@ -10,11 +10,11 @@ const PAGE_SIZE = 9;
 
 export default function ProductGrid({
   activeCategory,
-  activeStoveId,
+  activeChipId,
   products,
 }: {
   activeCategory: string | null;
-  activeStoveId?: number | null;
+  activeChipId?: number | null;
   products: Product[];
 }) {
   const { t } = useLocale();
@@ -23,14 +23,14 @@ export default function ProductGrid({
   // Reset visible count when filters change
   useEffect(() => {
     setVisibleCount(PAGE_SIZE);
-  }, [activeCategory, activeStoveId]);
+  }, [activeCategory, activeChipId]);
 
   let filtered = activeCategory
     ? products.filter((p) => p.categorySlug === activeCategory)
     : products;
 
-  if (activeStoveId != null) {
-    filtered = filtered.filter((p) => p.compatibleStoveIds?.includes(activeStoveId));
+  if (activeChipId != null) {
+    filtered = filtered.filter((p) => p.compatibleChipIds?.includes(activeChipId));
   }
 
   const visible = filtered.slice(0, visibleCount);

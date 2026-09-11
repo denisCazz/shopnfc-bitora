@@ -5,10 +5,11 @@ import { revalidateCatalog } from "@/lib/revalidate-catalog";
 import { redirect } from "next/navigation";
 import { eq } from "drizzle-orm";
 import { getDb } from "@/db";
-import { products, productStoves } from "@/db/schema";
+import { products, productChips } from "@/db/schema";
 import { getUser } from "@/lib/auth";
 import { retailFromCatalog } from "@/lib/pricing";
 import { getPricingConfig } from "@/lib/pricing-server";
+import { normalizeMinQuantity } from "@/lib/min-quantity";
 
 async function requireAdmin() {
   const user = await getUser();
@@ -56,6 +57,7 @@ export async function createProduct(formData: FormData) {
       catalogPrice,
       price,
       stockQuantity: parseInt(formData.get("stock_quantity") as string, 10) || 0,
+      minQuantity: normalizeMinQuantity(formData.get("min_quantity")),
       sku: (formData.get("sku") as string) || null,
       ean13: (formData.get("ean13") as string) || null,
       brand: (formData.get("brand") as string) || null,
@@ -92,16 +94,15 @@ export async function createProduct(formData: FormData) {
     return { error: e instanceof Error ? e.message : "Errore" };
   }
 
-  // Save compatible stoves: get the newly inserted product id
-  const stoveIds = formData.getAll("compatible_stove_ids").map(Number).filter(Boolean);
-  if (stoveIds.length > 0) {
+  const chipIds = formData.getAll("compatible_chip_ids").map(Number).filter(Boolean);
+  if (chipIds.length > 0) {
     const [inserted] = await db
       .select({ id: products.id })
       .from(products)
       .where(eq(products.slug, slugify(formData.get("name_it") as string)))
       .limit(1);
     if (inserted) {
-      await db.insert(productStoves).values(stoveIds.map((sid) => ({ productId: inserted.id, stoveId: sid })));
+      await db.insert(productChips).values(chipIds.map((chipId) => ({ productId: inserted.id, chipId })));
     }
   }
 
@@ -132,6 +133,7 @@ export async function updateProduct(id: number, formData: FormData) {
         catalogPrice,
         price,
         stockQuantity: parseInt(formData.get("stock_quantity") as string, 10) || 0,
+        minQuantity: normalizeMinQuantity(formData.get("min_quantity")),
         sku: (formData.get("sku") as string) || null,
         ean13: (formData.get("ean13") as string) || null,
         brand: (formData.get("brand") as string) || null,
@@ -170,11 +172,10 @@ export async function updateProduct(id: number, formData: FormData) {
     return { error: e instanceof Error ? e.message : "Errore" };
   }
 
-  // Replace compatible stoves
-  const stoveIds = formData.getAll("compatible_stove_ids").map(Number).filter(Boolean);
-  await db.delete(productStoves).where(eq(productStoves.productId, id));
-  if (stoveIds.length > 0) {
-    await db.insert(productStoves).values(stoveIds.map((sid) => ({ productId: id, stoveId: sid })));
+  const chipIds = formData.getAll("compatible_chip_ids").map(Number).filter(Boolean);
+  await db.delete(productChips).where(eq(productChips.productId, id));
+  if (chipIds.length > 0) {
+    await db.insert(productChips).values(chipIds.map((chipId) => ({ productId: id, chipId })));
   }
 
   const categoryId = formData.get("category_id") as string;

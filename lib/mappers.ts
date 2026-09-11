@@ -14,6 +14,7 @@ export function productToFormData(p: P) {
     catalog_price: Number(p.catalogPrice ?? p.price),
     price: Number(p.price),
     stock_quantity: p.stockQuantity,
+    min_quantity: p.minQuantity,
     sku: p.sku,
     ean13: p.ean13,
     brand: p.brand,

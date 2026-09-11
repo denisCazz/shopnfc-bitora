@@ -7,4 +7,7 @@ export function revalidateCatalog() {
   revalidateTag(CACHE_TAGS.categories, "max");
   revalidateTag(CACHE_TAGS.pricing, "max");
   revalidatePath("/");
+  revalidatePath("/tag-nfc");
+  revalidatePath("/tag-nfc-personalizzati");
+  revalidatePath("/sitemap.xml");
 }

@@ -10,18 +10,12 @@ export interface Category {
 }
 
 export const categories: Category[] = [
-  { id: 6, name: "Motoriduttori", slug: "motoriduttori", icon: "Cog" },
-  { id: 7, name: "Ventilatori Fumi", slug: "ventilatori-fumi", icon: "Wind" },
-  { id: 8, name: "Ventilatori Aria", slug: "ventilatori-aria", icon: "Fan" },
-  { id: 9, name: "Resistenze Accensione", slug: "resistenze-accensione", icon: "Zap" },
-  { id: 10, name: "Display, Cavi, Telecomandi", slug: "display-cavi-telecomandi", icon: "Monitor" },
-  { id: 11, name: "Schede Elettroniche e Sensori", slug: "schede-elettroniche-sensori", icon: "Cpu" },
-  { id: 12, name: "Bracieri e Camere Combustione", slug: "bracieri-camere-combustione", icon: "Flame" },
-  { id: 13, name: "Sonde, Depressori, Termostati", slug: "sonde-depressori-termostati", icon: "Thermometer" },
-  { id: 14, name: "Guarnizioni e Silicone Alta Temp.", slug: "guarnizioni-silicone", icon: "CircleDot" },
-  { id: 16, name: "Coclee", slug: "coclee", icon: "RotateCw" },
-  { id: 17, name: "Stufe a Pellet", slug: "stufe-a-pellet", icon: "Home" },
-  { id: 18, name: "Porta Pellet e Aspiracenere", slug: "porta-pellet-aspiracenere", icon: "Package" },
-  { id: 19, name: "Pompe e Sensori", slug: "pompe-sensori", icon: "Gauge" },
-  { id: 20, name: "Accessori", slug: "accessori", icon: "Wrench" },
+  { id: 1, name: "Sticker NFC", slug: "sticker-nfc", icon: "StickyNote" },
+  { id: 2, name: "Tessere NFC", slug: "tessere-nfc", icon: "CreditCard" },
+  { id: 3, name: "Braccialetti NFC", slug: "braccialetti-nfc", icon: "Watch" },
+  { id: 4, name: "Tag industriali", slug: "tag-industriali", icon: "Gauge" },
+  { id: 5, name: "Tag schermati", slug: "tag-schermati", icon: "Shield" },
+  { id: 6, name: "Gadget NFC", slug: "gadget-nfc", icon: "Package" },
+  { id: 7, name: "Lettori e scrittori", slug: "lettori-nfc", icon: "Radio" },
+  { id: 8, name: "Soluzioni NFC", slug: "soluzioni-nfc", icon: "Wrench" },
 ];
