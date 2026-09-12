@@ -174,6 +174,9 @@ CREATE TABLE orders (
   billing_address JSONB NOT NULL DEFAULT '{}',
   tracking_number TEXT,
   bank_transfer_receipt_url TEXT,
+  custom_graphic_url TEXT,
+  custom_graphic_original_name TEXT,
+  custom_graphic_disclaimer_accepted_at TIMESTAMPTZ,
   notes TEXT,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
@@ -319,6 +322,7 @@ INSERT INTO app_settings (key, value) VALUES (
 CREATE TYPE announcement_severity AS ENUM ('info', 'warning', 'critical');
 CREATE TYPE announcement_audience AS ENUM ('users', 'admin', 'both');
 CREATE TYPE announcement_schedule_mode AS ENUM ('always', 'range');
+CREATE TYPE discount_type AS ENUM ('percent', 'fixed');
 
 CREATE TABLE announcements (
   id SERIAL PRIMARY KEY,
@@ -337,6 +341,38 @@ CREATE TABLE announcements (
 );
 
 CREATE INDEX idx_announcements_active ON announcements (active);
+
+-- ============================================================
+-- DISCOUNT CODES
+-- ============================================================
+CREATE TABLE discount_codes (
+  id SERIAL PRIMARY KEY,
+  code TEXT NOT NULL UNIQUE,
+  type discount_type NOT NULL,
+  value DECIMAL(10,2) NOT NULL,
+  min_order_amount DECIMAL(10,2),
+  max_uses INT,
+  used_count INT NOT NULL DEFAULT 0,
+  starts_at TIMESTAMPTZ,
+  ends_at TIMESTAMPTZ,
+  active BOOLEAN NOT NULL DEFAULT true,
+  note TEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX idx_discount_codes_active ON discount_codes (active);
+
+CREATE TRIGGER discount_codes_updated_at
+  BEFORE UPDATE ON discount_codes
+  FOR EACH ROW
+  EXECUTE FUNCTION update_updated_at();
+
+ALTER TABLE orders
+  ADD COLUMN discount_code_id INT REFERENCES discount_codes(id) ON DELETE SET NULL,
+  ADD COLUMN discount_code TEXT,
+  ADD COLUMN discount_amount DECIMAL(10,2) NOT NULL DEFAULT 0,
+  ADD COLUMN discount_redeemed BOOLEAN NOT NULL DEFAULT false;
 
 CREATE OR REPLACE FUNCTION decrement_stock_on_order()
 RETURNS TRIGGER AS $$

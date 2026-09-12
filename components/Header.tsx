@@ -10,6 +10,7 @@ import { useCart } from "@/lib/cart-context";
 import { useLocale } from "@/lib/locale-context";
 import { searchProducts, searchChips, type SearchResult, type ChipSearchResult } from "@/app/actions/search";
 import { locales, type Locale } from "@/lib/i18n";
+import { SITE } from "@/lib/site";
 
 const languageFlags: Record<Locale, string> = {
   it: "https://flagcdn.com/w20/it.png",
@@ -176,7 +177,10 @@ export default function Header({
               <p className="text-sm font-medium text-foreground truncate">{r.name}</p>
               <p className="text-xs text-muted">{r.category}</p>
             </div>
-            <span className="text-sm font-bold text-accent shrink-0">{formatPrice(r.price)}</span>
+            <span className="text-sm font-bold text-accent shrink-0">
+              {formatPrice(r.price)}{" "}
+              <span className="text-[10px] font-semibold text-muted">{t("product.price_each")}</span>
+            </span>
           </Link>
         ))
       ) : null}
@@ -204,15 +208,15 @@ export default function Header({
             <Link href="/" className="flex items-center gap-2.5 group shrink-0">
               <Image
                 src="/bitora.png"
-                alt="Bitora"
+                alt={SITE.name}
                 width={40}
                 height={40}
                 className="h-9 w-9 sm:h-10 sm:w-10 rounded-full object-cover"
                 priority
               />
-              <span className="hidden sm:flex items-baseline gap-0 tracking-tight">
-                <span className="text-[15px] font-semibold text-foreground">shopnfc</span>
-                <span className="text-[15px] font-medium text-muted">.bitora.it</span>
+              <span className="hidden sm:flex items-baseline gap-1 tracking-tight">
+                <span className="text-[15px] font-semibold text-foreground">Shop NFC</span>
+                <span className="text-[15px] font-medium text-muted">Bitora</span>
               </span>
             </Link>
             <Link

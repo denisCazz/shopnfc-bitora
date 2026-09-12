@@ -11,7 +11,10 @@ import Footer from "@/components/Footer";
 import ProductDetailClient from "./ProductDetailClient";
 import AddToCartButton from "@/components/AddToCartButton";
 import ElectronicBoardCartSection from "@/components/ElectronicBoardCartSection";
+import PrintOptionsCartSection from "@/components/PrintOptionsCartSection";
 import { productNeedsBoardProgrammingOption } from "@/lib/product-board-options";
+import { productNeedsPrintOption } from "@/lib/print-options";
+import { getPrintConfig } from "@/lib/print-options-server";
 import PriceDisplay from "@/components/PriceDisplay";
 import ProductVatLabel from "@/components/ProductVatLabel";
 import TranslatedText from "@/components/TranslatedText";
@@ -57,7 +60,7 @@ export default async function ProductDetailPage({
   const product = await getProductBySlug(slug);
   if (!product) notFound();
 
-  const [related, user, categories, compatibleStoves] = await Promise.all([
+  const [related, user, categories, compatibleStoves, printConfig] = await Promise.all([
     getRelatedProducts(product.id, product.categoryId, 4),
     getUser(),
     getCategories(),
@@ -66,6 +69,7 @@ export default async function ProductDetailPage({
       .from(productChips)
       .innerJoin(chips, eq(productChips.chipId, chips.id))
       .where(eq(productChips.productId, product.id)),
+    getPrintConfig(),
   ]);
 
   const productName = product.name_it || product.name;
@@ -141,6 +145,13 @@ export default async function ProductDetailPage({
                   )}
                 </div>
               )}
+              {(product.images.length > 0 || product.image) && (
+                <TranslatedText
+                  k="product.image_disclaimer"
+                  as="p"
+                  className="mt-3 text-xs text-muted leading-relaxed"
+                />
+              )}
             </div>
 
             {/* Info */}
@@ -174,10 +185,15 @@ export default async function ProductDetailPage({
                 <div className="text-3xl font-bold text-accent mb-1">
                   <PriceDisplay price={product.price} />
                 </div>
-                <ProductVatLabel />
+                <ProductVatLabel
+                  minQuantity={product.minQuantity}
+                  sku={product.sku}
+                  slug={product.slug}
+                  name={product.name_it || product.name}
+                />
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-3">
+              <div className="w-full">
                 {productNeedsBoardProgrammingOption({
                   categorySlug: product.categorySlug,
                   name_it: product.name_it || product.name,
@@ -192,6 +208,27 @@ export default async function ProductDetailPage({
                       name_en: product.name_en,
                       name_fr: product.name_fr,
                       name_es: product.name_es,
+                      sku: product.sku,
+                      slug: product.slug,
+                      price: product.price,
+                      image: product.image,
+                      weight: product.weight,
+                      stockQuantity: product.stockQuantity,
+                      minQuantity: product.minQuantity,
+                    }}
+                  />
+                ) : productNeedsPrintOption({ categorySlug: product.categorySlug }) ? (
+                  <PrintOptionsCartSection
+                    showBuyNow
+                    printPrices={printConfig.prices}
+                    product={{
+                      id: product.id,
+                      name: product.name,
+                      name_it: product.name_it,
+                      name_en: product.name_en,
+                      name_fr: product.name_fr,
+                      name_es: product.name_es,
+                      sku: product.sku,
                       slug: product.slug,
                       price: product.price,
                       image: product.image,
@@ -210,6 +247,7 @@ export default async function ProductDetailPage({
                       name_en: product.name_en,
                       name_fr: product.name_fr,
                       name_es: product.name_es,
+                      sku: product.sku,
                       slug: product.slug,
                       categorySlug: product.categorySlug,
                       price: product.price,

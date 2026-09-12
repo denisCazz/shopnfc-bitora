@@ -16,6 +16,8 @@ import {
   CreditCard,
   User,
   Building2,
+  ImageIcon,
+  TicketPercent,
 } from "lucide-react";
 import { useCart, cartLineId } from "@/lib/cart-context";
 import { useLocale } from "@/lib/locale-context";
@@ -25,8 +27,31 @@ import {
   italianVatIncludedOnProducts,
   isValidItalianPartitaIva,
 } from "@/lib/italian-vat";
-import { grossToNetItalianVat } from "@/lib/catalog-display-price";
+import { chargedItalianVat, grossToNetItalianVat } from "@/lib/catalog-display-price";
 import type { EuropeShippingMethod } from "@/lib/shipping";
+import AddressAutocomplete from "@/components/AddressAutocomplete";
+import CustomGraphicUploader from "@/components/CustomGraphicUploader";
+import PrintConditionsAcceptance from "@/components/PrintConditionsAcceptance";
+import type { AddressSuggestion } from "@/lib/address-search";
+import { parsePrintOption } from "@/lib/print-options";
+import { computeDiscountAmount } from "@/lib/discount";
+import type { DiscountType } from "@/lib/types";
+
+const DISCOUNT_ERROR_KEYS: Record<string, string> = {
+  invalid: "checkout.discount.invalid",
+  inactive: "checkout.discount.inactive",
+  expired: "checkout.discount.expired",
+  not_started: "checkout.discount.not_started",
+  exhausted: "checkout.discount.exhausted",
+  min_order: "checkout.discount.min_order",
+};
+
+type AppliedDiscount = {
+  code: string;
+  type: DiscountType;
+  value: number;
+  minOrderAmount: number | null;
+};
 
 const STRIPE_RETURN_ERROR_KEYS: Record<string, string> = {
   stripe_cancelled: "checkout.stripe_cancelled",
@@ -116,6 +141,7 @@ interface ShippingCalc {
   shippingCost: number;
   codSurcharge: number;
   fragileShippingCost: number;
+  includesIva?: boolean;
 }
 
 export default function CheckoutClient() {
@@ -149,6 +175,22 @@ export default function CheckoutClient() {
   // Track country/province for shipping calculation
   const [selectedCountry, setSelectedCountry] = useState("Italia");
   const [selectedProvince, setSelectedProvince] = useState("");
+  const [addressLine, setAddressLine] = useState("");
+  const [city, setCity] = useState("");
+  const [zip, setZip] = useState("");
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [graphicToken, setGraphicToken] = useState<string | null>(null);
+  const [graphicDisclaimer, setGraphicDisclaimer] = useState(false);
+  const [graphicBusy, setGraphicBusy] = useState(false);
+  const [discountInput, setDiscountInput] = useState("");
+  const [appliedDiscount, setAppliedDiscount] = useState<AppliedDiscount | null>(null);
+  const [discountError, setDiscountError] = useState<string | null>(null);
+  const [discountLoading, setDiscountLoading] = useState(false);
+  const hasPrint = items.some((i) => parsePrintOption(i.printOption) !== "none");
+  const printTotal = items.reduce(
+    (sum, i) => sum + (Number(i.printSurcharge) || 0) * i.quantity,
+    0
+  );
 
   useEffect(() => {
     const code = searchParams.get("error");
@@ -176,6 +218,9 @@ export default function CheckoutClient() {
             : "Italia";
           setSelectedCountry(country);
           setSelectedProvince(data.profile.province || "");
+          setAddressLine(data.profile.address_line1 || "");
+          setCity(data.profile.city || "");
+          setZip(data.profile.postal_code || "");
           // Pre-fill company toggle
           if (data.profile.company || data.profile.vat_number) {
             setIsCompany(true);
@@ -224,6 +269,27 @@ export default function CheckoutClient() {
     }
   }, [calcShipping, profileLoaded]);
 
+  useEffect(() => {
+    const code = zip.trim();
+    if (selectedCountry !== "Italia" || !/^\d{5}$/.test(code)) return;
+    const timer = window.setTimeout(async () => {
+      try {
+        const res = await fetch(
+          `/api/address/search?q=${encodeURIComponent(code)}&country=Italia`
+        );
+        if (!res.ok) return;
+        const data = (await res.json()) as { suggestions?: AddressSuggestion[] };
+        const hit = data.suggestions?.find((s) => s.city && (!s.zip || s.zip === code));
+        if (!hit) return;
+        if (hit.city) setCity(hit.city);
+        if (hit.province && !lockShipping) setSelectedProvince(hit.province);
+      } catch {
+        // Keep manual city/province if lookup fails.
+      }
+    }, 350);
+    return () => window.clearTimeout(timer);
+  }, [zip, selectedCountry, lockShipping]);
+
   const billingVatForDisplay = useMemo(() => {
     if (isCompany && vatDraft.trim()) return vatDraft.trim();
     const profileVat = profile?.vat_number?.trim();
@@ -236,20 +302,94 @@ export default function CheckoutClient() {
     return italianVatIncludedOnProducts(selectedCountry, billingVatForDisplay);
   }, [profileLoaded, billingVatForDisplay, pricesIncludeVat, selectedCountry]);
 
-  // totalPrice is already discounted (discount applied in AddToCartButton)
-  const originalTotal = dealerDiscount
-    ? Math.round((totalPrice / (1 - dealerDiscount / 100)) * 100) / 100
-    : totalPrice;
-  const dealerSaving = originalTotal - totalPrice;
+  // totalPrice is already discounted (discount applied in AddToCartButton).
+  // Il sovrapprezzo stampa non è scontato: va escluso dal calcolo del risparmio dealer.
+  const productTotal = Math.round((totalPrice - printTotal) * 100) / 100;
+  const originalProductTotal = dealerDiscount
+    ? Math.round((productTotal / (1 - dealerDiscount / 100)) * 100) / 100
+    : productTotal;
+  const originalTotal = Math.round((originalProductTotal + printTotal) * 100) / 100;
+  const dealerSaving = originalProductTotal - productTotal;
 
   const shippingCost = shippingCalc?.shippingCost ?? 0;
   const fragileShippingCost = shippingCalc?.fragileShippingCost ?? 0;
   const effectiveShippingCost = fragileShippingCost > 0 ? fragileShippingCost : shippingCost;
+  const shippingIncludesIva =
+    shippingCalc?.includesIva ?? selectedCountry === "Italia";
   const baseTotal = totalPrice + effectiveShippingCost;
   const productsNetIt = grossToNetItalianVat(totalPrice);
+  const productsChargeSubtotal = italianVatIncluded ? totalPrice : productsNetIt;
+  const couponAmount = appliedDiscount
+    ? computeDiscountAmount(productsChargeSubtotal, appliedDiscount.type, appliedDiscount.value)
+    : 0;
   const grandTotal = italianVatIncluded
-    ? Math.round(baseTotal * 100) / 100
-    : Math.round((productsNetIt + effectiveShippingCost) * 100) / 100;
+    ? Math.round((baseTotal - couponAmount) * 100) / 100
+    : Math.round((productsNetIt - couponAmount + effectiveShippingCost) * 100) / 100;
+  const vatAmount = chargedItalianVat({
+    productsGrossAfterDiscount: Math.round((productsChargeSubtotal - couponAmount) * 100) / 100,
+    shippingGross: effectiveShippingCost,
+    italianVatIncluded,
+    shippingIncludesIva,
+  });
+
+  function discountMessage(error: string, minOrderAmount?: number | null) {
+    const key = DISCOUNT_ERROR_KEYS[error] || "checkout.discount.error";
+    const amount =
+      minOrderAmount != null && Number.isFinite(minOrderAmount)
+        ? formatPrice(minOrderAmount)
+        : "";
+    return t(key).replace("{amount}", amount);
+  }
+
+  async function applyDiscountCode() {
+    const code = discountInput.trim();
+    if (!code) {
+      setDiscountError(t("checkout.discount.invalid"));
+      return;
+    }
+    setDiscountLoading(true);
+    setDiscountError(null);
+    try {
+      const res = await fetch("/api/checkout/discount", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code, subtotal: productsChargeSubtotal }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.ok) {
+        setAppliedDiscount(null);
+        setDiscountError(discountMessage(data.error, data.minOrderAmount));
+        return;
+      }
+      setAppliedDiscount({
+        code: data.code,
+        type: data.type,
+        value: Number(data.value),
+        minOrderAmount: data.minOrderAmount != null ? Number(data.minOrderAmount) : null,
+      });
+      setDiscountInput(data.code);
+      setDiscountError(null);
+    } catch {
+      setDiscountError(t("checkout.discount.error"));
+    } finally {
+      setDiscountLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    if (!appliedDiscount) return;
+    if (
+      appliedDiscount.minOrderAmount != null &&
+      productsChargeSubtotal + 1e-9 < appliedDiscount.minOrderAmount
+    ) {
+      setAppliedDiscount(null);
+      setDiscountError(
+        discountMessage("min_order", appliedDiscount.minOrderAmount)
+      );
+    }
+    // formatPrice/t are stable enough for display; we only react to cart/code.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [appliedDiscount, productsChargeSubtotal]);
 
   // VIES validation handler
   async function checkVies(vatNumberValue: string) {
@@ -346,6 +486,18 @@ export default function CheckoutClient() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (payingRef.current) return;
+    if (!acceptedTerms) {
+      setError(t("checkout.terms_required"));
+      return;
+    }
+    if (graphicBusy) {
+      setError(t("checkout.graphic_wait"));
+      return;
+    }
+    if ((hasPrint || graphicToken) && !graphicDisclaimer) {
+      setError(t("print.conditions_required"));
+      return;
+    }
     payingRef.current = true;
     setPaying(true);
     setError(null);
@@ -399,10 +551,22 @@ export default function CheckoutClient() {
             image: i.image,
             lineKey: i.lineKey,
             lineNotes: i.lineNotes ?? null,
+            printOption: i.printOption ?? "none",
           })),
           shippingInfo,
           billingInfo,
+          acceptedTerms: true,
+          ...(hasPrint || graphicToken
+            ? { printTermsAccepted: graphicDisclaimer }
+            : {}),
+          ...(graphicToken
+            ? {
+                customGraphicToken: graphicToken,
+                customGraphicDisclaimerAccepted: graphicDisclaimer,
+              }
+            : {}),
           ...(shippingInfo.country !== "Italia" && !lockShipping && { europeShippingMethod }),
+          ...(appliedDiscount ? { discountCode: appliedDiscount.code } : {}),
         }),
       });
 
@@ -447,6 +611,19 @@ export default function CheckoutClient() {
     company: profile?.company || "",
     vatNumber: profile?.vat_number || "",
   };
+
+  function applyAddressSuggestion(suggestion: AddressSuggestion) {
+    if (suggestion.address) setAddressLine(suggestion.address);
+    else if (!addressLine.trim()) setAddressLine("");
+    if (suggestion.city) setCity(suggestion.city);
+    if (suggestion.zip) setZip(suggestion.zip);
+    if (!lockShipping) {
+      if (suggestion.province) setSelectedProvince(suggestion.province);
+      if (suggestion.country && COUNTRIES.includes(suggestion.country)) {
+        setSelectedCountry(suggestion.country);
+      }
+    }
+  }
 
   const inputClass =
     "w-full px-4 py-2.5 rounded-xl border border-border bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition";
@@ -546,12 +723,14 @@ export default function CheckoutClient() {
                   <label className="block text-sm font-medium text-foreground/70 mb-1.5">
                     {t("checkout.address")} *
                   </label>
-                  <input
+                  <AddressAutocomplete
                     required
-                    type="text"
                     name="address"
-                    autoComplete="street-address"
-                    defaultValue={defaults.address}
+                    value={addressLine}
+                    onChange={setAddressLine}
+                    onSelect={applyAddressSuggestion}
+                    country={selectedCountry}
+                    placeholder={t("checkout.address_placeholder")}
                     className={inputClass}
                   />
                 </div>
@@ -564,7 +743,8 @@ export default function CheckoutClient() {
                     type="text"
                     name="city"
                     autoComplete="address-level2"
-                    defaultValue={defaults.city}
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
                     className={inputClass}
                   />
                 </div>
@@ -577,7 +757,9 @@ export default function CheckoutClient() {
                     type="text"
                     name="zip"
                     autoComplete="postal-code"
-                    defaultValue={defaults.zip}
+                    inputMode="numeric"
+                    value={zip}
+                    onChange={(e) => setZip(e.target.value)}
                     className={inputClass}
                   />
                 </div>
@@ -602,7 +784,7 @@ export default function CheckoutClient() {
                     <select
                       required
                       name="country"
-                      defaultValue={defaults.country}
+                      value={selectedCountry}
                       autoComplete="country-name"
                       onChange={(e) => {
                         setSelectedCountry(e.target.value);
@@ -704,6 +886,31 @@ export default function CheckoutClient() {
               </div>
             )}
           </div>
+
+          {hasPrint && (
+          <div className="bg-surface rounded-2xl border border-border p-5 sm:p-6">
+            <div className="flex items-center gap-2 mb-3">
+              <ImageIcon className="w-5 h-5 text-accent" />
+              <h2 className="text-lg font-bold text-foreground">
+                {t("checkout.graphic_title")}
+              </h2>
+            </div>
+            <p className="text-sm text-muted mb-4">{t("checkout.graphic_later")}</p>
+            <PrintConditionsAcceptance
+              checked={graphicDisclaimer}
+              onChange={setGraphicDisclaimer}
+              id="checkout-print-terms"
+            />
+            <div className="mt-4">
+              <CustomGraphicUploader
+                mode="pending"
+                disclaimerAccepted={graphicDisclaimer}
+                onTokenChange={setGraphicToken}
+                onBusyChange={setGraphicBusy}
+              />
+            </div>
+          </div>
+          )}
 
           {/* Billing / Company info (optional) */}
           <div className="bg-surface rounded-2xl border border-border p-5 sm:p-6">
@@ -848,10 +1055,49 @@ export default function CheckoutClient() {
             </div>
           </div>
 
+          <label className="flex items-start gap-2.5 text-xs text-muted leading-relaxed cursor-pointer">
+            <input
+              type="checkbox"
+              required
+              checked={acceptedTerms}
+              onChange={(e) => setAcceptedTerms(e.target.checked)}
+              className="mt-0.5 h-4 w-4 shrink-0 rounded border-border accent-sky-600"
+            />
+            <span>
+              {t("checkout.terms_accept")}{" "}
+              <Link
+                href="/come-acquistare"
+                className="text-accent font-medium hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {t("footer.info_terms")}
+              </Link>{" "}
+              {t("checkout.terms_and")}{" "}
+              <Link
+                href="/resi"
+                className="text-accent font-medium hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {t("footer.info_returns")}
+              </Link>
+              .
+            </span>
+          </label>
+
           {/* Submit */}
           <button
             type="submit"
-            disabled={paying || !profileLoaded}
+            disabled={
+              paying ||
+              !profileLoaded ||
+              !acceptedTerms ||
+              graphicBusy ||
+              (hasPrint && !graphicDisclaimer)
+            }
             className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-sky-400 to-sky-600 text-white font-bold text-base hover:shadow-lg hover:shadow-sky-500/25 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
           >
             {paying ? (
@@ -867,7 +1113,7 @@ export default function CheckoutClient() {
             )}
           </button>
 
-          <p className="text-xs text-muted text-center">
+          <p className="text-[11px] text-muted text-center">
             {t("checkout.terms")}
           </p>
         </form>
@@ -918,7 +1164,8 @@ export default function CheckoutClient() {
                     <p className="text-sm font-bold text-accent mt-0.5">
                       {formatPrice(
                         italianVatIncluded ? item.price : grossToNetItalianVat(item.price)
-                      )}
+                      )}{" "}
+                      <span className="text-[11px] font-semibold text-muted">{t("product.price_each")}</span>
                     </p>
                     <div className="flex items-center justify-between mt-1.5">
                       <div className="flex items-center gap-0 border border-border rounded-lg overflow-hidden">
@@ -972,6 +1219,16 @@ export default function CheckoutClient() {
                   )}
                 </span>
               </div>
+              {printTotal > 0 && (
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted">{t("print.surcharge_label")}</span>
+                  <span className="font-medium text-foreground">
+                    {formatPrice(
+                      italianVatIncluded ? printTotal : grossToNetItalianVat(printTotal)
+                    )}
+                  </span>
+                </div>
+              )}
               {isDealer && dealerDiscount && dealerSaving > 0 && (
                 <div className="flex justify-between text-sm">
                   <span className="text-green-600">
@@ -979,6 +1236,75 @@ export default function CheckoutClient() {
                   </span>
                   <span className="font-medium text-green-600">
                     -{formatPrice(italianVatIncluded ? dealerSaving : grossToNetItalianVat(dealerSaving))}
+                  </span>
+                </div>
+              )}
+              <div className="pt-2">
+                {appliedDiscount ? (
+                  <div className="flex items-center justify-between gap-2 rounded-xl border border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-950/30 px-3 py-2">
+                    <div className="min-w-0">
+                      <p className="text-xs text-green-700 dark:text-green-400 font-medium">
+                        {t("checkout.discount.applied").replace("{code}", appliedDiscount.code)}
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setAppliedDiscount(null);
+                        setDiscountError(null);
+                      }}
+                      className="text-xs font-medium text-green-700 dark:text-green-400 hover:underline shrink-0"
+                    >
+                      {t("checkout.discount.remove")}
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex gap-2">
+                    <div className="relative flex-1">
+                      <TicketPercent className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted" />
+                      <input
+                        type="text"
+                        value={discountInput}
+                        onChange={(e) => {
+                          setDiscountInput(e.target.value.toUpperCase());
+                          if (discountError) setDiscountError(null);
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            e.preventDefault();
+                            void applyDiscountCode();
+                          }
+                        }}
+                        placeholder={t("checkout.discount.placeholder")}
+                        autoComplete="off"
+                        className="w-full pl-9 pr-3 py-2 rounded-xl border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent"
+                      />
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => void applyDiscountCode()}
+                      disabled={discountLoading || !discountInput.trim()}
+                      className="px-3 py-2 rounded-xl border border-border text-sm font-medium text-foreground hover:bg-surface-hover disabled:opacity-50"
+                    >
+                      {discountLoading ? (
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      ) : (
+                        t("checkout.discount.apply")
+                      )}
+                    </button>
+                  </div>
+                )}
+                {discountError && (
+                  <p className="text-xs text-red-600 mt-1.5">{discountError}</p>
+                )}
+              </div>
+              {couponAmount > 0 && (
+                <div className="flex justify-between text-sm">
+                  <span className="text-green-600">
+                    {t("checkout.discount.applied").replace("{code}", appliedDiscount?.code ?? "")}
+                  </span>
+                  <span className="font-medium text-green-600">
+                    -{formatPrice(couponAmount)}
                   </span>
                 </div>
               )}
@@ -1010,6 +1336,14 @@ export default function CheckoutClient() {
                 </div>
               )}
               <p className="text-xs text-muted pt-1">{t("checkout.delivery_note")}</p>
+              {italianVatIncluded ? (
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted">{t("checkout.vat_of_which")}</span>
+                  <span className="font-medium text-foreground">
+                    {formatPrice(vatAmount)}
+                  </span>
+                </div>
+              ) : null}
               <div className="border-t border-border pt-3 flex justify-between">
                 <span className="font-bold text-foreground">
                   {t("checkout.total")}

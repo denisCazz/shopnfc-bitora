@@ -118,7 +118,8 @@ export default function CartDrawer() {
                       <p className="text-xs text-muted mt-0.5 line-clamp-2">{item.lineNotes}</p>
                     )}
                     <div className="text-accent font-bold text-sm mt-1">
-                      {formatCatalogPrice(item.price)}
+                      {formatCatalogPrice(item.price)}{" "}
+                      <span className="text-[11px] font-semibold text-muted">{t("product.price_each")}</span>
                     </div>
 
                     {/* Quantity controls */}

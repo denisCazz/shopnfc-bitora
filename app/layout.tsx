@@ -22,8 +22,8 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Shop NFC | Tag, card e lettori NFC — Bitora",
-    template: "%s | Shop NFC",
+    default: `${SITE.name} | Tag, card e lettori NFC`,
+    template: `%s | ${SITE.name}`,
   },
   description:
     "Catalogo NFC Bitora: sticker, tessere, braccialetti, tag industriali, gadget e lettori. Programmazione inclusa. Spedizione soggetta a disponibilità, solitamente entro 7 giorni.",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     locale: "it_IT",
     url: siteUrl,
     siteName: SITE.name,
-    title: "Shop NFC | Tag, card e lettori NFC — Bitora",
+    title: `${SITE.name} | Tag, card e lettori NFC`,
     description:
       "Catalogo NFC Bitora: sticker, tessere, braccialetti, tag industriali e lettori. Programmazione inclusa.",
     images: [
@@ -47,13 +47,13 @@ export const metadata: Metadata = {
         url: "/nfc.png",
         width: 1200,
         height: 630,
-        alt: "Shop NFC Bitora",
+        alt: SITE.name,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shop NFC | Tag, card e lettori NFC — Bitora",
+    title: `${SITE.name} | Tag, card e lettori NFC`,
     description: "Catalogo NFC Bitora: sticker, tessere, braccialetti e lettori.",
     images: ["/nfc.png"],
   },

@@ -5,12 +5,10 @@ import { desc, eq } from "drizzle-orm";
 import { getUser } from "@/lib/auth";
 import { getDb } from "@/db";
 import { productImages, products } from "@/db/schema";
-import { uploadToR2 } from "@/lib/r2";
 
 const UPLOAD_DIR = path.join(process.cwd(), "public", "uploads", "products");
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
-const USE_R2 = !!process.env.R2_ACCOUNT_ID;
 
 export async function POST(req: NextRequest) {
   const user = await getUser();
@@ -48,18 +46,11 @@ export async function POST(req: NextRequest) {
   const bytes = new Uint8Array(await file.arrayBuffer());
   const pid = parseInt(productId, 10);
 
-  let imageUrl: string;
-
-  if (USE_R2) {
-    const r2Key = `products/${productId}/${safeName}`;
-    imageUrl = await uploadToR2(r2Key, Buffer.from(bytes), file.type);
-  } else {
-    const productDir = path.join(UPLOAD_DIR, productId);
-    await mkdir(productDir, { recursive: true });
-    const filePath = path.join(productDir, safeName);
-    await writeFile(filePath, bytes);
-    imageUrl = `/uploads/products/${productId}/${safeName}`;
-  }
+  const productDir = path.join(UPLOAD_DIR, productId);
+  await mkdir(productDir, { recursive: true });
+  const filePath = path.join(productDir, safeName);
+  await writeFile(filePath, bytes);
+  const imageUrl = `/uploads/products/${productId}/${safeName}`;
 
   const db = getDb();
   const [last] = await db

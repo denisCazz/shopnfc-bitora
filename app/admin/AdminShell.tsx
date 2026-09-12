@@ -20,6 +20,7 @@ import {
   Truck,
   LayoutList,
   Megaphone,
+  TicketPercent,
 } from "lucide-react";
 import { logout } from "@/app/(auth)/actions";
 import type { AuthUser } from "@/lib/auth";
@@ -33,6 +34,7 @@ const navItems = [
   { href: "/admin/users", label: "Utenti", icon: Users },
   { href: "/admin/dealers", label: "Clienti B2B", icon: Briefcase },
   { href: "/admin/avvisi", label: "Avvisi", icon: Megaphone },
+  { href: "/admin/sconti", label: "Codici sconto", icon: TicketPercent },
   { href: "/admin/settings", label: "Impostazioni", icon: Settings },
   { href: "/admin/spedizioni", label: "Spedizioni", icon: Truck },
   { href: "/admin/support", label: "Supporto", icon: LifeBuoy },
@@ -80,7 +82,7 @@ export default function AdminShell({
             <Link href="/admin" className="flex items-center gap-2.5">
               <Image src="/bitora.png" alt="Bitora" width={32} height={32} className="w-8 h-8 rounded-full" />
               <span className="text-base font-bold tracking-tight">
-                Shop<span className="text-accent">NFC</span>
+                Shop NFC <span className="text-accent">Bitora</span>
               </span>
             </Link>
             <button

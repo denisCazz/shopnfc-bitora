@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useCart } from "@/lib/cart-context";
 import { useLocale } from "@/lib/locale-context";
 import { useUser } from "@/lib/user-context";
-import { normalizeMinQuantity } from "@/lib/min-quantity";
+import { minQuantityForProduct } from "@/lib/min-quantity";
 import QuantityStepper from "@/components/QuantityStepper";
 
 type StoveRow = {
@@ -29,6 +29,7 @@ export default function ElectronicBoardCartSection({
     name_en?: string;
     name_fr?: string;
     name_es?: string;
+    sku?: string | null;
     slug: string;
     price: number;
     image: string | null;
@@ -49,7 +50,7 @@ export default function ElectronicBoardCartSection({
   const [stoveId, setStoveId] = useState<number | "">("");
   const [stoveText, setStoveText] = useState("");
   const [displayText, setDisplayText] = useState("");
-  const minQuantity = normalizeMinQuantity(product.minQuantity);
+  const minQuantity = minQuantityForProduct(product.minQuantity, product);
   const [quantity, setQuantity] = useState(minQuantity);
 
   const outOfStock = product.stockQuantity !== undefined && product.stockQuantity <= 0;
@@ -275,9 +276,6 @@ export default function ElectronicBoardCartSection({
           unit="pz"
           label={t("product.qty_label")}
         />
-        <p className="text-xs text-muted">
-          {t("product.min_qty").replace("{qty}", String(minQuantity))}
-        </p>
       </div>
 
       <div className="flex flex-col sm:flex-row gap-3">

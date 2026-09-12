@@ -45,6 +45,7 @@ export default function ProductGrid({
             {filtered.length} {filtered.length === 1 ? t("cart.item") : t("cart.items")}{" "}
             {activeCategory ? t("grid.in_category") : t("grid.available")}
           </p>
+          <p className="text-xs text-muted mt-1">{t("grid.price_note")}</p>
         </div>
       </div>
 

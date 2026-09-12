@@ -11,7 +11,7 @@ import JsonLd from "@/components/JsonLd";
 export const revalidate = 300;
 
 export const metadata = buildPageMetadata({
-  title: "Shop NFC | Tag, card e lettori NFC per aziende",
+  title: "Tag, card e lettori NFC per aziende",
   description:
     "Catalogo NFC Bitora: sticker, tessere, braccialetti, tag industriali, gadget e lettori. Programmazione inclusa. Spedizione soggetta a disponibilità, solitamente entro 7 giorni.",
   path: "/",

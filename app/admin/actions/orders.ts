@@ -7,6 +7,7 @@ import { getUser } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 import type { OrderStatus } from "@/lib/types";
 import { sendOrderStatusUpdateEmail } from "@/lib/email";
+import { unredeemDiscountCode } from "@/lib/discount-codes";
 
 export async function getOrders(filters?: {
   status?: string;
@@ -84,6 +85,8 @@ export async function getOrders(filters?: {
     payment_status: o.paymentStatus,
     subtotal: Number(o.subtotal),
     shipping_cost: Number(o.shippingCost),
+    discount_code: o.discountCode,
+    discount_amount: Number(o.discountAmount),
     total: Number(o.total),
     shipping_address: o.shippingAddress as Record<string, unknown>,
     billing_address: o.billingAddress as Record<string, unknown>,
@@ -92,6 +95,8 @@ export async function getOrders(filters?: {
     notes: o.notes,
     tracking_number: o.trackingNumber,
     bank_transfer_receipt_url: o.bankTransferReceiptUrl,
+    custom_graphic_url: o.customGraphicUrl,
+    custom_graphic_original_name: o.customGraphicOriginalName,
     order_items: (itemsByOrder.get(o.id) || []).map((it) => ({
       id: it.id,
       product_name: it.productName,
@@ -127,6 +132,7 @@ export async function updateOrderStatus(orderId: number, status: string) {
         .set({ stockQuantity: sql`${products.stockQuantity} + ${item.quantity}`, updatedAt: new Date() })
         .where(eq(products.id, item.productId));
     }
+    await unredeemDiscountCode(orderId);
   }
 
   await db
@@ -201,6 +207,7 @@ export async function deleteOrder(orderId: number) {
         .set({ stockQuantity: sql`${products.stockQuantity} + ${item.quantity}`, updatedAt: new Date() })
         .where(eq(products.id, item.productId));
     }
+    await unredeemDiscountCode(orderId);
   }
 
   // Delete order items first (foreign key constraint)

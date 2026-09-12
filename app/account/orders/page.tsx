@@ -5,8 +5,10 @@ import { getDb } from "@/db";
 import { orders, orderItems } from "@/db/schema";
 import OrdersListClient from "./OrdersListClient";
 
+import { SITE } from "@/lib/site";
+
 export const metadata = {
-  title: "I miei ordini | Shop NFC",
+  title: `I miei ordini | ${SITE.name}`,
 };
 
 export default async function MyOrdersPage() {
@@ -49,10 +51,14 @@ export default async function MyOrdersPage() {
     payment_status: o.paymentStatus,
     subtotal: Number(o.subtotal),
     shipping_cost: Number(o.shippingCost),
+    discount_code: o.discountCode,
+    discount_amount: Number(o.discountAmount),
     total: Number(o.total),
     shipping_address: shippingAddress,
     tracking_number: o.trackingNumber,
     bank_transfer_receipt_url: o.bankTransferReceiptUrl,
+    custom_graphic_url: o.customGraphicUrl,
+    custom_graphic_original_name: o.customGraphicOriginalName,
     order_items: (byOrder.get(o.id) || []).map((it) => ({
       id: it.id,
       product_name: it.productName,

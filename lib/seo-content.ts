@@ -468,7 +468,7 @@ export const TAG_NFC_PERSONALIZZATI_LANDING = {
     {
       question: "Qual è la quantità minima per tag personalizzati?",
       answer:
-        "Dipende dal formato e dalla stampa richiesta. Contattaci con quantità indicativa e ti inviamo un preventivo entro 24 ore lavorative.",
+        "I prezzi indicati sono cad. (al pezzo). La quantità minima è 10 pezzi o soggetta a revisione, in base al formato e alla stampa. I kit si possono ordinare anche singoli. Contattaci con la quantità indicativa e ti inviamo un preventivo entro 24 ore lavorative.",
     },
     {
       question: "Fornite campioni prima dell'ordine?",

@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import ChipPageClient from "./ChipPageClient";
 import { retailFromCatalog } from "@/lib/pricing";
 import { getPricingConfig } from "@/lib/pricing-server";
+import { minQuantityForProduct } from "@/lib/min-quantity";
 import { buildPageMetadata, breadcrumbJsonLd, chipPageJsonLd } from "@/lib/seo";
 import { getChipSeo } from "@/lib/seo-content";
 import JsonLd from "@/components/JsonLd";
@@ -101,7 +102,12 @@ export default async function ChipPage({
     image: imgMap.get(r.id)?.[0]?.image_url ?? null,
     weight: r.weight ? Number(r.weight) : null,
     stockQuantity: r.stockQuantity,
-    minQuantity: r.minQuantity,
+    minQuantity: minQuantityForProduct(r.minQuantity, {
+      sku: r.sku,
+      slug: r.slug,
+      nameIt: r.nameIt,
+      nameEn: r.nameEn,
+    }),
     name_it: r.nameIt ?? undefined,
     name_en: r.nameEn ?? undefined,
     name_fr: r.nameFr ?? undefined,

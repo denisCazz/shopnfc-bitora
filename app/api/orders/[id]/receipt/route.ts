@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
+import { mkdir, writeFile } from "fs/promises";
+import path from "path";
 import { eq } from "drizzle-orm";
 import { auth } from "@/auth";
 import { getDb } from "@/db";
 import { orders } from "@/db/schema";
-import { uploadToR2 } from "@/lib/r2";
 import { verifyPayload } from "@/lib/signed-payload";
 import { sendReceiptUploadedAdminNotification } from "@/lib/email";
 
@@ -94,28 +95,13 @@ export async function POST(
     );
   }
 
-  if (!process.env.R2_ACCOUNT_ID) {
-    return NextResponse.json(
-      { error: "Storage non configurato" },
-      { status: 500 }
-    );
-  }
-
   const ext = EXT_BY_TYPE[file.type] || ".bin";
   const safeName = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}${ext}`;
-  const r2Key = `receipts/${orderId}/${safeName}`;
   const bytes = new Uint8Array(await file.arrayBuffer());
-
-  let receiptUrl: string;
-  try {
-    receiptUrl = await uploadToR2(r2Key, Buffer.from(bytes), file.type);
-  } catch (err) {
-    console.error("Receipt upload to R2 failed:", err);
-    return NextResponse.json(
-      { error: "Errore durante il caricamento" },
-      { status: 500 }
-    );
-  }
+  const receiptDir = path.join(process.cwd(), "public", "uploads", "receipts", String(orderId));
+  await mkdir(receiptDir, { recursive: true });
+  await writeFile(path.join(receiptDir, safeName), bytes);
+  const receiptUrl = `/uploads/receipts/${orderId}/${safeName}`;
 
   await db
     .update(orders)

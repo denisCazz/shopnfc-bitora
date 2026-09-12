@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, CreditCard, Truck, Clock, Shield, Headphones, Package } from "lucide-react";
+import { ArrowLeft, CreditCard, Truck, Clock, Shield, Headphones, Package, BadgeEuro, RotateCcw, Scale } from "lucide-react";
 import { useLocale } from "@/lib/locale-context";
 
 export default function ComeAcquistarePage() {
@@ -23,6 +23,21 @@ export default function ComeAcquistarePage() {
         </h1>
 
         <div className="space-y-8">
+          {/* Prezzi e quantità */}
+          <section className="bg-surface rounded-2xl border border-[var(--color-muted)]/30 p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-lg bg-[var(--color-accent)]/10 flex items-center justify-center">
+                <BadgeEuro className="w-5 h-5 text-[var(--color-accent)]" />
+              </div>
+              <h2 className="text-lg font-semibold text-[var(--color-foreground)]">
+                {t("how_to_buy.prices_title")}
+              </h2>
+            </div>
+            <div className="text-sm text-[var(--color-foreground)]/70 leading-relaxed space-y-2">
+              <p>{t("how_to_buy.prices_text")}</p>
+            </div>
+          </section>
+
           {/* Metodi di pagamento */}
           <section className="bg-surface rounded-2xl border border-[var(--color-muted)]/30 p-6">
             <div className="flex items-center gap-3 mb-4">
@@ -108,6 +123,39 @@ export default function ComeAcquistarePage() {
             </div>
             <div className="text-sm text-[var(--color-foreground)]/70 leading-relaxed space-y-2">
               <p>{t("how_to_buy.warranty_text")}</p>
+            </div>
+          </section>
+
+          {/* Resi e recesso */}
+          <section className="bg-surface rounded-2xl border border-[var(--color-muted)]/30 p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-lg bg-[var(--color-accent)]/10 flex items-center justify-center">
+                <RotateCcw className="w-5 h-5 text-[var(--color-accent)]" />
+              </div>
+              <h2 className="text-lg font-semibold text-[var(--color-foreground)]">
+                {t("how_to_buy.returns_title")}
+              </h2>
+            </div>
+            <div className="text-sm text-[var(--color-foreground)]/70 leading-relaxed space-y-3">
+              <p>{t("how_to_buy.returns_text")}</p>
+              <Link href="/resi" className="inline-flex text-[var(--color-accent)] font-medium hover:underline">
+                {t("assistenza.returns_cta")} →
+              </Link>
+            </div>
+          </section>
+
+          {/* Condizioni essenziali */}
+          <section className="bg-surface rounded-2xl border border-[var(--color-muted)]/30 p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-lg bg-[var(--color-accent)]/10 flex items-center justify-center">
+                <Scale className="w-5 h-5 text-[var(--color-accent)]" />
+              </div>
+              <h2 className="text-lg font-semibold text-[var(--color-foreground)]">
+                {t("how_to_buy.legal_title")}
+              </h2>
+            </div>
+            <div className="text-sm text-[var(--color-foreground)]/70 leading-relaxed space-y-2">
+              <p>{t("how_to_buy.legal_text")}</p>
             </div>
           </section>
 

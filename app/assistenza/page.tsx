@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, Phone, Mail, Clock, MapPin } from "lucide-react";
+import { ArrowLeft, Phone, Mail, Clock, MapPin, RotateCcw } from "lucide-react";
 import { useLocale } from "@/lib/locale-context";
 
 export default function AssistenzaPage() {
@@ -83,6 +83,27 @@ export default function AssistenzaPage() {
             <p className="text-sm text-[var(--color-foreground)]/70 whitespace-pre-line">
               {t("assistenza.hours_text")}
             </p>
+          </section>
+
+          {/* Resi */}
+          <section className="bg-surface rounded-2xl border border-[var(--color-muted)]/30 p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-lg bg-[var(--color-accent)]/10 flex items-center justify-center">
+                <RotateCcw className="w-5 h-5 text-[var(--color-accent)]" />
+              </div>
+              <h2 className="text-lg font-semibold text-[var(--color-foreground)]">
+                {t("assistenza.returns_title")}
+              </h2>
+            </div>
+            <p className="text-sm text-[var(--color-foreground)]/70 mb-3">
+              {t("assistenza.returns_text")}
+            </p>
+            <Link
+              href="/resi"
+              className="inline-flex items-center gap-2 text-[var(--color-accent)] font-semibold hover:underline"
+            >
+              {t("assistenza.returns_cta")}
+            </Link>
           </section>
 
           {/* Vieni a trovarci */}

@@ -1,7 +1,8 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from "react";
-import { DEFAULT_MIN_QUANTITY, normalizeMinQuantity } from "@/lib/min-quantity";
+import { DEFAULT_MIN_QUANTITY, minQuantityForProduct } from "@/lib/min-quantity";
+import { parsePrintOption, type PrintOption } from "@/lib/print-options";
 
 export interface CartItem {
   id: number;
@@ -17,6 +18,9 @@ export interface CartItem {
   lineKey?: string;
   /** Nota ordine (mostrata in checkout e ordine) */
   lineNotes?: string | null;
+  printOption?: PrintOption;
+  /** Sovrapprezzo stampa per pezzo, già incluso in `price`. */
+  printSurcharge?: number;
 }
 
 export function normalizeCartLineKey(lineKey?: string | null): string {
@@ -55,10 +59,20 @@ const CartContext = createContext<CartContextType | null>(null);
 
 const CART_KEY = "shopnfc_cart_v2";
 
+function minForCartItem(item: Pick<CartItem, "minQuantity" | "name" | "slug">): number {
+  return minQuantityForProduct(item.minQuantity ?? DEFAULT_MIN_QUANTITY, {
+    name: item.name,
+    slug: item.slug,
+  });
+}
+
 function normalizeCartItem(item: CartItem): CartItem {
-  const minQuantity = normalizeMinQuantity(item.minQuantity ?? DEFAULT_MIN_QUANTITY);
+  const minQuantity = minForCartItem(item);
   const quantity = Math.max(Math.floor(item.quantity) || minQuantity, minQuantity);
-  return { ...item, minQuantity, quantity };
+  const printOption = parsePrintOption(item.printOption);
+  const printSurcharge =
+    printOption === "none" ? 0 : Math.max(0, Number(item.printSurcharge) || 0);
+  return { ...item, minQuantity, quantity, printOption, printSurcharge };
 }
 
 function loadCart(): CartItem[] {
@@ -96,7 +110,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [items, loaded]);
 
   const addItem = useCallback((product: Omit<CartItem, "quantity">, quantity = 1) => {
-    const minQuantity = normalizeMinQuantity(product.minQuantity);
+    const minQuantity = minForCartItem(product);
     const qty = Math.max(1, Math.floor(quantity) || 1);
     setItems((prev) => {
       const existing = prev.find((i) => sameLine(i, product));
@@ -126,7 +140,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setItems((prev) =>
       prev.flatMap((i) => {
         if (!sameLine(i, { id, lineKey })) return [i];
-        const minQuantity = normalizeMinQuantity(i.minQuantity);
+        const minQuantity = minForCartItem(i);
         if (quantity < minQuantity) return [];
         return [{ ...i, quantity: Math.floor(quantity) }];
       })

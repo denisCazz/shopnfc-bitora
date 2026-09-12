@@ -1,6 +1,6 @@
 ﻿# Shop NFC — PostgreSQL su VPS
 
-Stack: **Next.js** + **Drizzle ORM** + **PostgreSQL 18** + **NextAuth JWT** + **Cloudflare R2**.
+Stack: **Next.js** + **Drizzle ORM** + **PostgreSQL 18** + **NextAuth JWT**.
 
 Il VPS parte da zero: un solo file di schema, poi il seed del catalogo NFC.
 

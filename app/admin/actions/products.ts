@@ -9,7 +9,7 @@ import { products, productChips } from "@/db/schema";
 import { getUser } from "@/lib/auth";
 import { retailFromCatalog } from "@/lib/pricing";
 import { getPricingConfig } from "@/lib/pricing-server";
-import { normalizeMinQuantity } from "@/lib/min-quantity";
+import { minQuantityForProduct } from "@/lib/min-quantity";
 
 async function requireAdmin() {
   const user = await getUser();
@@ -17,6 +17,15 @@ async function requireAdmin() {
     throw new Error("Non autorizzato");
   }
   return user;
+}
+
+function minQuantityFromForm(formData: FormData, slug: string): number {
+  return minQuantityForProduct(formData.get("min_quantity"), {
+    sku: String(formData.get("sku") ?? ""),
+    slug,
+    nameIt: String(formData.get("name_it") ?? ""),
+    nameEn: String(formData.get("name_en") ?? ""),
+  });
 }
 
 function slugify(text: string): string {
@@ -57,7 +66,7 @@ export async function createProduct(formData: FormData) {
       catalogPrice,
       price,
       stockQuantity: parseInt(formData.get("stock_quantity") as string, 10) || 0,
-      minQuantity: normalizeMinQuantity(formData.get("min_quantity")),
+      minQuantity: minQuantityFromForm(formData, slug),
       sku: (formData.get("sku") as string) || null,
       ean13: (formData.get("ean13") as string) || null,
       brand: (formData.get("brand") as string) || null,
@@ -133,7 +142,7 @@ export async function updateProduct(id: number, formData: FormData) {
         catalogPrice,
         price,
         stockQuantity: parseInt(formData.get("stock_quantity") as string, 10) || 0,
-        minQuantity: normalizeMinQuantity(formData.get("min_quantity")),
+        minQuantity: minQuantityFromForm(formData, slug),
         sku: (formData.get("sku") as string) || null,
         ean13: (formData.get("ean13") as string) || null,
         brand: (formData.get("brand") as string) || null,

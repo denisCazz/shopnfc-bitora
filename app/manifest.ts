@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Shop NFC — Bitora",
-    short_name: "Shop NFC",
+    name: "Shop NFC Bitora",
+    short_name: "Shop NFC Bitora",
     description: "Tag, tessere, braccialetti e lettori NFC. Programmazione inclusa.",
     start_url: "/",
     display: "standalone",

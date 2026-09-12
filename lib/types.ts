@@ -25,3 +25,4 @@ export type PaymentMethod =
 export type AnnouncementSeverity = "info" | "warning" | "critical";
 export type AnnouncementAudience = "users" | "admin" | "both";
 export type AnnouncementScheduleMode = "always" | "range";
+export type DiscountType = "percent" | "fixed";

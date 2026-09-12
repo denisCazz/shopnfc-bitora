@@ -1,15 +1,17 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { Database, Mail, UserPlus, CheckCircle, XCircle, Loader2, Wallet, Percent } from "lucide-react";
+import { Database, Mail, UserPlus, CheckCircle, XCircle, Loader2, Wallet, Percent, Printer } from "lucide-react";
 import {
   testDbConnection,
   testEmail,
   testStripeConnection,
   createUser,
   savePricingMarkup,
+  savePrintPrices,
 } from "@/app/admin/actions/settings";
 import { DEFAULT_MARKUP, MAX_MARKUP, MIN_MARKUP } from "@/lib/pricing";
+import { DEFAULT_PRINT_PRICES, type PrintPrices } from "@/lib/print-options";
 
 type Result = { ok: boolean; message: string; markup?: number } | null;
 
@@ -80,11 +82,23 @@ const roleLabels: Record<string, string> = {
   admin: "Admin",
 };
 
-export default function SettingsClient({ initialMarkup = DEFAULT_MARKUP }: { initialMarkup?: number }) {
+export default function SettingsClient({
+  initialMarkup = DEFAULT_MARKUP,
+  initialPrintPrices = DEFAULT_PRINT_PRICES,
+}: {
+  initialMarkup?: number;
+  initialPrintPrices?: PrintPrices;
+}) {
   const [createResult, setCreateResult] = useState<Result>(null);
   const [pending, startTransition] = useTransition();
   const [markup, setMarkup] = useState(String(initialMarkup));
   const [markupResult, setMarkupResult] = useState<Result>(null);
+  const [printPrices, setPrintPrices] = useState({
+    black: String(initialPrintPrices.black),
+    color1: String(initialPrintPrices.color1),
+    color2: String(initialPrintPrices.color2),
+  });
+  const [printResult, setPrintResult] = useState<Result>(null);
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -163,6 +177,73 @@ export default function SettingsClient({ initialMarkup = DEFAULT_MARKUP }: { ini
           </form>
           <p className="mt-2 text-xs text-muted">Intervallo consentito: {MIN_MARKUP}–{MAX_MARKUP}</p>
           <StatusBadge result={markupResult} />
+        </div>
+
+        <div className="bg-surface border border-border rounded-2xl p-5 max-w-lg mt-4">
+          <div className="flex items-center gap-3 mb-1">
+            <div className="w-9 h-9 rounded-xl bg-sky-50 dark:bg-sky-950/40 flex items-center justify-center">
+              <Printer className="w-4.5 h-4.5 text-accent" />
+            </div>
+            <h3 className="font-semibold text-foreground">Sovrapprezzo stampa tessere</h3>
+          </div>
+          <p className="text-sm text-muted mb-4">
+            Importi IVA inclusa, per pezzo, aggiunti al prezzo della tessera quando il cliente sceglie la stampa.
+          </p>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              startTransition(async () => {
+                const r = await savePrintPrices({
+                  black: parseFloat(printPrices.black),
+                  color1: parseFloat(printPrices.color1),
+                  color2: parseFloat(printPrices.color2),
+                });
+                setPrintResult(r);
+                if (r.ok && r.prices) {
+                  setPrintPrices({
+                    black: String(r.prices.black),
+                    color1: String(r.prices.color1),
+                    color2: String(r.prices.color2),
+                  });
+                }
+              });
+            }}
+            className="space-y-3"
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {(
+                [
+                  ["black", "Nero"],
+                  ["color1", "Colori 1 lato"],
+                  ["color2", "Colori 2 lati"],
+                ] as const
+              ).map(([key, label]) => (
+                <div key={key}>
+                  <label className="block text-xs font-medium text-muted mb-1">{label} (€/pz)</label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    max="50"
+                    value={printPrices[key]}
+                    onChange={(e) =>
+                      setPrintPrices((p) => ({ ...p, [key]: e.target.value }))
+                    }
+                    className={inputClass}
+                  />
+                </div>
+              ))}
+            </div>
+            <button
+              type="submit"
+              disabled={pending}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-foreground text-background text-sm font-medium disabled:opacity-60"
+            >
+              {pending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Printer className="w-4 h-4" />}
+              {pending ? "Salvataggio..." : "Salva prezzi stampa"}
+            </button>
+          </form>
+          <StatusBadge result={printResult} />
         </div>
       </section>
 

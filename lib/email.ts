@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import { formatOrderNumber } from "@/lib/order-number";
+import { SITE } from "@/lib/site";
 
 function getResend(): Resend | null {
   const key = process.env.RESEND_API_KEY;
@@ -32,6 +33,11 @@ function escapeHtml(unsafe: string): string {
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+function absoluteUrl(path: string): string {
+  if (path.startsWith("http://") || path.startsWith("https://")) return path;
+  return `${SITE.url}${path}`;
+}
+
 function parseEmailList(env: string | undefined): string[] {
   if (!env?.trim()) return [];
   return env
@@ -61,9 +67,13 @@ interface OrderEmailData {
   customerEmail: string;
   customerName: string;
   receiptUploadUrl?: string;
+  customGraphicUrl?: string | null;
+  customGraphicOriginalName?: string | null;
   items: OrderItem[];
   subtotal: number;
   shippingCost: number;
+  discountCode?: string | null;
+  discountAmount?: number;
   total: number;
   paymentMethod: string;
   shippingAddress: {
@@ -185,6 +195,11 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
 
             <table style="width: 100%; margin-top: 8px;">
               <tr><td style="padding: 4px 12px; font-size: 14px; color: #6b7280;">Subtotale</td><td style="padding: 4px 12px; text-align: right; font-size: 14px;">${formatEur(data.subtotal)}</td></tr>
+              ${
+                data.discountAmount && data.discountAmount > 0
+                  ? `<tr><td style="padding: 4px 12px; font-size: 14px; color: #16a34a;">Sconto${data.discountCode ? ` (${escapeHtml(data.discountCode)})` : ""}</td><td style="padding: 4px 12px; text-align: right; font-size: 14px; color: #16a34a;">-${formatEur(data.discountAmount)}</td></tr>`
+                  : ""
+              }
               <tr><td style="padding: 4px 12px; font-size: 14px; color: #6b7280;">Spedizione</td><td style="padding: 4px 12px; text-align: right; font-size: 14px;">${formatEur(data.shippingCost)}</td></tr>
               <tr><td style="padding: 8px 12px; font-size: 16px; font-weight: 700; border-top: 2px solid #e5e7eb;">Totale</td><td style="padding: 8px 12px; text-align: right; font-size: 16px; font-weight: 700; border-top: 2px solid #e5e7eb; color: #0369a1;">${formatEur(data.total)}</td></tr>
             </table>
@@ -196,6 +211,12 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
             </div>
 
             ${paymentNote}
+
+            ${
+              data.customGraphicUrl
+                ? `<p style="margin: 16px 0 0; font-size: 13px; color: #6b7280;">Grafica di stampa allegata${data.customGraphicOriginalName ? ` (${escapeHtml(data.customGraphicOriginalName)})` : ""}. Ricordiamo che la stampa segue il file fornito: non ci assumiamo responsabilità per grafiche di bassa qualità.</p>`
+                : ""
+            }
 
             <p style="margin-top: 24px; font-size: 13px; color: #6b7280;">
               Riceverai un'email con il numero di tracking non appena il pacco sarà spedito.
@@ -309,6 +330,11 @@ export async function sendNewOrderAdminNotification(data: OrderEmailData) {
             <tr><td style="padding: 6px 0; font-weight: 600; font-size: 14px;">Cliente</td><td style="padding: 6px 0; font-size: 14px;">${escapeHtml(data.customerName)} (${escapeHtml(data.customerEmail)})</td></tr>
             <tr><td style="padding: 6px 0; font-weight: 600; font-size: 14px;">Pagamento</td><td style="padding: 6px 0; font-size: 14px;">${paymentLabel}</td></tr>
             <tr><td style="padding: 6px 0; font-weight: 600; font-size: 14px;">Totale</td><td style="padding: 6px 0; font-size: 14px; font-weight: 700; color: #0369a1;">${formatEur(data.total)}</td></tr>
+            ${
+              data.customGraphicUrl
+                ? `<tr><td style="padding: 6px 0; font-weight: 600; font-size: 14px;">Grafica</td><td style="padding: 6px 0; font-size: 14px;"><a href="${escapeHtml(absoluteUrl(data.customGraphicUrl))}">${escapeHtml(data.customGraphicOriginalName || "Apri file")}</a></td></tr>`
+                : ""
+            }
           </table>
 
           ${buildItemsTable(data.items)}
@@ -351,6 +377,40 @@ export async function sendReceiptUploadedAdminNotification({
     });
   } catch (error) {
     console.error("Failed to send receipt uploaded notification:", error);
+  }
+}
+
+/** Notify admin that a customer uploaded print artwork */
+export async function sendCustomGraphicUploadedAdminNotification({
+  orderId,
+  customerName,
+  graphicUrl,
+  originalName,
+}: {
+  orderId: number;
+  customerName: string;
+  graphicUrl: string;
+  originalName: string;
+}) {
+  try {
+    await sendEmail({
+      from: FROM_EMAIL,
+      to: ORDERS_EMAIL,
+      ...(EMAIL_BCC.length ? { bcc: EMAIL_BCC } : {}),
+      subject: `Grafica caricata — Ordine #${formatOrderNumber(orderId)}`,
+      html: `
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #0369a1;">Grafica di stampa ricevuta</h2>
+          <p style="font-size: 14px;">Il cliente <strong>${escapeHtml(customerName)}</strong> ha caricato la grafica per l'ordine <strong>#${formatOrderNumber(orderId)}</strong>${originalName ? ` (${escapeHtml(originalName)})` : ""}.</p>
+          <p style="margin: 20px 0;">
+            <a href="${escapeHtml(graphicUrl)}" style="display: inline-block; padding: 10px 20px; background: #0369a1; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px;">Apri grafica</a>
+          </p>
+          <p style="margin-top: 16px;"><a href="https://shopnfc.bitora.it/admin/orders" style="color: #0369a1; font-size: 14px;">Gestisci ordini</a></p>
+        </div>
+      `,
+    });
+  } catch (error) {
+    console.error("Failed to send custom graphic uploaded notification:", error);
   }
 }
 

@@ -39,8 +39,8 @@ export function buildPageMetadata({
 }: PageMetadataInput): Metadata {
   const url = absoluteUrl(path);
   const ogImage = image || DEFAULT_OG_IMAGE;
-  const baseTitle = title.replace(/\s*\|\s*Shop NFC\s*$/i, "").trim();
-  const fullTitle = `${baseTitle} | Shop NFC`;
+  const baseTitle = title.replace(/\s*\|\s*(Shop NFC Bitora|Shop NFC)\s*$/i, "").trim();
+  const fullTitle = `${baseTitle} | ${SITE.name}`;
 
   return {
     title: { absolute: fullTitle },
@@ -141,7 +141,7 @@ export function productJsonLd(input: ProductSchemaInput) {
     gtin13: gtin && gtin.length === 13 ? gtin : undefined,
     brand: input.brand
       ? { "@type": "Brand", name: input.brand }
-      : { "@type": "Brand", name: "Shop NFC" },
+      : { "@type": "Brand", name: SITE.name },
     category: input.categoryName,
     offers: {
       "@type": "Offer",

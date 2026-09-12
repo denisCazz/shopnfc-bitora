@@ -73,7 +73,13 @@ export async function POST(req: NextRequest) {
           : fragileNet
         : 0;
 
-    return NextResponse.json({ shippingCost, zone, codSurcharge: config.codSurcharge, fragileShippingCost });
+    return NextResponse.json({
+      shippingCost,
+      zone,
+      codSurcharge: config.codSurcharge,
+      fragileShippingCost,
+      includesIva: zoneConfig.includesIva,
+    });
   } catch (e) {
     console.error(e);
     return NextResponse.json(

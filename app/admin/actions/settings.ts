@@ -8,6 +8,8 @@ import { appSettings, appUsers, dealerProfiles, profiles } from "@/db/schema";
 import { getUser } from "@/lib/auth";
 import { clampMarkup } from "@/lib/pricing";
 import { invalidatePricingCache } from "@/lib/pricing-server";
+import { normalizePrintPrices, type PrintPrices } from "@/lib/print-options";
+import { invalidatePrintConfigCache } from "@/lib/print-options-server";
 import { revalidateCatalog } from "@/lib/revalidate-catalog";
 import { isValidItalianPartitaIva } from "@/lib/italian-vat";
 import { verifyStripeCredentials } from "@/lib/stripe";
@@ -242,6 +244,41 @@ export async function savePricingMarkup(
       ok: true,
       message: `Ricarico salvato: ×${markup.toFixed(2)} su tutti i prodotti`,
       markup,
+    };
+  } catch (e) {
+    return { ok: false, message: e instanceof Error ? e.message : "Errore durante il salvataggio" };
+  }
+}
+
+export async function savePrintPrices(
+  raw: PrintPrices
+): Promise<{ ok: boolean; message: string; prices?: PrintPrices }> {
+  await requireAdmin();
+  const prices = normalizePrintPrices(raw);
+
+  try {
+    const db = getDb();
+    await db
+      .insert(appSettings)
+      .values({
+        key: "print",
+        value: prices as Record<string, unknown>,
+        updatedAt: sql`NOW()`,
+      })
+      .onConflictDoUpdate({
+        target: appSettings.key,
+        set: {
+          value: prices as Record<string, unknown>,
+          updatedAt: sql`NOW()`,
+        },
+      });
+
+    invalidatePrintConfigCache();
+    revalidatePath("/admin/settings");
+    return {
+      ok: true,
+      message: `Sovrapprezzi stampa salvati: nero €${prices.black.toFixed(2)}, 1 lato €${prices.color1.toFixed(2)}, 2 lati €${prices.color2.toFixed(2)}`,
+      prices,
     };
   } catch (e) {
     return { ok: false, message: e instanceof Error ? e.message : "Errore durante il salvataggio" };

@@ -1,6 +1,6 @@
 export const SITE = {
-  name: "Shop NFC",
-  shortName: "Shop NFC",
+  name: "Shop NFC Bitora",
+  shortName: "Shop NFC Bitora",
   tagline: "Tag, card, braccialetti e lettori NFC",
   url: process.env.NEXT_PUBLIC_APP_URL || "https://shopnfc.bitora.it",
   legalName: "Bitora di Denis Cazzulo",

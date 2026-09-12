@@ -9,10 +9,11 @@ import { SITE } from "@/lib/site";
 
 const infoLinkKeys = [
   { key: "footer.info_how_to_buy", href: "/come-acquistare" },
+  { key: "footer.info_terms", href: "/come-acquistare" },
+  { key: "footer.info_returns", href: "/resi" },
   { key: "footer.info_privacy", href: "/privacy" },
   { key: "footer.info_cookie_policy", href: "/cookie-policy" },
   { key: "footer.info_contact", href: "#contatti" },
-  { key: "footer.info_terms", href: "/come-acquistare" },
 ];
 
 const catalogLinks = [
@@ -45,9 +46,9 @@ export default function Footer() {
                 height={40}
                 className="h-10 w-10 rounded-full object-cover"
               />
-              <span className="flex items-baseline tracking-tight">
-                <span className="text-[15px] font-semibold">shopnfc</span>
-                <span className="text-[15px] font-medium text-slate-300">.bitora.it</span>
+              <span className="flex items-baseline gap-1 tracking-tight">
+                <span className="text-[15px] font-semibold">Shop NFC</span>
+                <span className="text-[15px] font-medium text-slate-300">Bitora</span>
               </span>
             </Link>
             <p className="text-sm text-slate-300 leading-relaxed">

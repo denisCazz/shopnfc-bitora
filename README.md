@@ -1,4 +1,4 @@
-﻿# Shop NFC — Bitora
+﻿# Shop NFC Bitora
 
 E-commerce NFC nello stile Bitora, dominio previsto **shopnfc.bitora.it**.
 

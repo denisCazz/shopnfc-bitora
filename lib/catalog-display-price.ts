@@ -45,6 +45,26 @@ export function grossToNetItalianVat(gross: number): number {
   return Math.round((gross / (1 + ITALIAN_VAT_RATE)) * 100) / 100;
 }
 
+/** IVA italiana scorporata da un importo lordo (22%). */
+export function italianVatFromGross(gross: number): number {
+  return Math.round((gross - grossToNetItalianVat(gross)) * 100) / 100;
+}
+
+/** IVA effettivamente addebitata: prodotti (dopo sconto) + spedizione se la tariffa la include. */
+export function chargedItalianVat(opts: {
+  productsGrossAfterDiscount: number;
+  shippingGross: number;
+  italianVatIncluded: boolean;
+  shippingIncludesIva: boolean;
+}): number {
+  if (!opts.italianVatIncluded) return 0;
+  const productVat = italianVatFromGross(opts.productsGrossAfterDiscount);
+  const shippingVat = opts.shippingIncludesIva
+    ? italianVatFromGross(opts.shippingGross)
+    : 0;
+  return Math.round((productVat + shippingVat) * 100) / 100;
+}
+
 /**
  * Catalogo: stessa logica del checkout, così i prezzi mostrati nello shop
  * coincidono con quelli applicati alla cassa.

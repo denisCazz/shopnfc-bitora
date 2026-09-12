@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowLeft, Shield } from "lucide-react";
 import { useLocale } from "@/lib/locale-context";
+import { SITE } from "@/lib/site";
 
 export default function PrivacyPage() {
   const { t } = useLocale();
@@ -33,10 +34,10 @@ export default function PrivacyPage() {
               <h2 className="text-lg font-semibold text-[var(--color-foreground)] mb-2">{t("privacy.controller_title")}</h2>
               <p>{t("privacy.controller_text")}</p>
               <p className="font-medium text-[var(--color-foreground)]">
-                Bitora di Denis Cazzulo<br />
-                Carmagnola, 10022 Carmagnola (TO)<br />
-                P.IVA 03771060260<br />
-                Email: info@bitora.it
+                {SITE.legalName}<br />
+                {SITE.addressCity}<br />
+                P.IVA {SITE.vat}<br />
+                Email: {SITE.email}
               </p>
             </section>
 

@@ -5,8 +5,10 @@ import { orders } from "@/db/schema";
 import { verifyPayload } from "@/lib/signed-payload";
 import ReceiptUploader from "@/components/ReceiptUploader";
 
+import { SITE } from "@/lib/site";
+
 export const metadata = {
-  title: "Carica contabile bonifico | Shop NFC",
+  title: `Carica contabile bonifico | ${SITE.name}`,
 };
 
 interface ReceiptToken {

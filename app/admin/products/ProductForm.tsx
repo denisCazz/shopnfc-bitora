@@ -5,6 +5,7 @@ import { Save } from "lucide-react";
 import ImageUploader from "@/components/admin/ImageUploader";
 import ChipsMultiSelect from "@/components/admin/ChipsMultiSelect";
 import { DEFAULT_MARKUP, retailFromCatalog } from "@/lib/pricing";
+import { isKitProduct } from "@/lib/min-quantity";
 
 interface Category {
   id: number;
@@ -175,6 +176,7 @@ export default function ProductForm({
 }) {
   const [state, formAction, isPending] = useActionState(action, null);
   const p = product || emptyProduct;
+  const kit = isKitProduct({ sku: p.sku, nameIt: p.name_it, nameEn: p.name_en });
   const [catalogInput, setCatalogInput] = useState(
     String(p.catalog_price ?? p.price ?? 0)
   );
@@ -260,12 +262,14 @@ export default function ProductForm({
             <Input
               name="min_quantity"
               type="number"
-              defaultValue={p.min_quantity ?? 10}
+              defaultValue={kit ? 1 : (p.min_quantity ?? 10)}
               required
               min={1}
             />
             <p className="mt-1.5 text-xs text-muted">
-              Quantità minima per ordine, in pezzi. Default 10.
+              {kit
+                ? "I kit non hanno quantità minima: viene sempre salvato 1 pezzo."
+                : "Quantità minima per ordine, in pezzi. Default 10. I kit restano a 1."}
             </p>
           </div>
           <div>

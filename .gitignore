@@ -45,6 +45,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# upload utente (prodotti e contabili)
+/public/uploads/**
+!/public/uploads/.gitkeep
+
 # local dumps (keep db/migrations/*.sql)
 prestashop_dump.sql
 *.sql.gz

@@ -8,9 +8,10 @@ import { type Product } from "@/data/products";
 import { useCart } from "@/lib/cart-context";
 import { useLocale } from "@/lib/locale-context";
 import { useUser } from "@/lib/user-context";
-import { useCatalogDisplayPrice } from "@/lib/use-catalog-display-price";
 import { productNeedsBoardProgrammingOption } from "@/lib/product-board-options";
-import { normalizeMinQuantity } from "@/lib/min-quantity";
+import { productNeedsPrintOption } from "@/lib/print-options";
+import { minQuantityForProduct } from "@/lib/min-quantity";
+import PriceDisplay from "@/components/PriceDisplay";
 
 export default function ProductCard({
   product,
@@ -23,7 +24,6 @@ export default function ProductCard({
   const { addItem } = useCart();
   const { t, locale } = useLocale();
   const { dealerDiscount } = useUser();
-  const { formatCatalogPrice } = useCatalogDisplayPrice();
   const [showBoardModal, setShowBoardModal] = useState(false);
   const [boardVariant, setBoardVariant] = useState<"programmed" | "virgin">("programmed");
   const [boardStoveText, setBoardStoveText] = useState("");
@@ -31,7 +31,7 @@ export default function ProductCard({
   const [boardStovesLoading, setBoardStovesLoading] = useState(false);
   const [boardStoveId, setBoardStoveId] = useState<number | "">("");
   const [boardDisplayText, setBoardDisplayText] = useState("");
-  const minQuantity = normalizeMinQuantity(product.minQuantity);
+  const minQuantity = minQuantityForProduct(product.minQuantity, product);
 
   // Locale-aware name & description
   const localizedName = (locale !== "it" && product[`name_${locale}` as keyof typeof product] as string) || product.name;
@@ -47,6 +47,9 @@ export default function ProductCard({
   const needsBoardOption = productNeedsBoardProgrammingOption({
     categorySlug: product.categorySlug,
     name_it: product.name,
+  });
+  const needsPrintOption = productNeedsPrintOption({
+    categorySlug: product.categorySlug,
   });
 
   function doAddToCart(quantity = minQuantity, lineKey?: string, lineNotes?: string) {
@@ -182,20 +185,15 @@ export default function ProductCard({
       </Link>
 
       <div className="px-4 pb-4 flex items-center justify-between gap-2">
-        <div className="flex flex-col">
-          {dealerDiscount ? (
-            <>
-              <span className="text-xs text-muted line-through">
-                {formatCatalogPrice(product.price)}
-              </span>
-              <span className="text-lg font-bold text-green-600 tabular-nums">
-                {formatCatalogPrice(discountedPrice)}
-              </span>
-            </>
-          ) : (
-            <span className="text-lg font-bold text-accent tabular-nums">
-              {formatCatalogPrice(product.price)}
-            </span>
+        <div className="flex flex-col min-w-0">
+          <PriceDisplay
+            price={product.price}
+            className={`tabular-nums ${
+              dealerDiscount ? "text-lg font-bold" : "text-lg font-bold text-accent"
+            }`}
+          />
+          {needsPrintOption && (
+            <span className="text-[11px] text-muted">{t("print.option_title")}</span>
           )}
         </div>
         <button

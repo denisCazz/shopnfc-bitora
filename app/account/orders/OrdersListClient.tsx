@@ -11,6 +11,8 @@ import {
   ExternalLink,
 } from "lucide-react";
 import ReceiptUploader from "@/components/ReceiptUploader";
+import CustomGraphicUploader from "@/components/CustomGraphicUploader";
+import PrintConditionsAcceptance from "@/components/PrintConditionsAcceptance";
 import { formatOrderNumber } from "@/lib/order-number";
 
 interface OrderItem {
@@ -31,10 +33,14 @@ interface Order {
   payment_status: string;
   subtotal: number;
   shipping_cost: number;
+  discount_code: string | null;
+  discount_amount: number;
   total: number;
   shipping_address: Record<string, string>;
   tracking_number: string | null;
   bank_transfer_receipt_url: string | null;
+  custom_graphic_url: string | null;
+  custom_graphic_original_name: string | null;
   order_items: OrderItem[];
 }
 
@@ -101,6 +107,7 @@ function formatEur(amount: number) {
 
 export default function OrdersListClient({ orders }: { orders: Order[] }) {
   const [expandedId, setExpandedId] = useState<number | null>(null);
+  const [printTermsByOrder, setPrintTermsByOrder] = useState<Record<number, boolean>>({});
 
   return (
     <div className="min-h-screen bg-[var(--color-background)]">
@@ -264,6 +271,16 @@ export default function OrdersListClient({ orders }: { orders: Order[] }) {
                             {formatEur(order.subtotal)}
                           </span>
                         </div>
+                        {order.discount_amount > 0 && (
+                          <div className="flex justify-between text-green-600">
+                            <span>
+                              Sconto{order.discount_code ? ` ${order.discount_code}` : ""}
+                            </span>
+                            <span className="tabular-nums">
+                              −{formatEur(order.discount_amount)}
+                            </span>
+                          </div>
+                        )}
                         <div className="flex justify-between text-[var(--color-foreground)]/60">
                           <span>Spedizione</span>
                           <span className="tabular-nums">
@@ -320,6 +337,44 @@ export default function OrdersListClient({ orders }: { orders: Order[] }) {
                           />
                         </div>
                       )}
+
+                      <div className="mt-3 pt-3 border-t border-[var(--color-muted)]/20">
+                        <p className="text-xs font-medium text-[var(--color-foreground)]/50 uppercase mb-2">
+                          Grafica personalizzata
+                        </p>
+                        <p className="text-sm text-[var(--color-foreground)]/60 mb-3">
+                          Puoi allegare o sostituire la grafica (PNG o PDF) finché
+                          l&apos;ordine non è spedito.
+                        </p>
+                        {!["shipped", "delivered", "cancelled"].includes(order.status) &&
+                          !order.custom_graphic_url && (
+                            <div className="mb-3">
+                              <PrintConditionsAcceptance
+                                id={`print-terms-${order.id}`}
+                                checked={!!printTermsByOrder[order.id]}
+                                onChange={(v) =>
+                                  setPrintTermsByOrder((prev) => ({
+                                    ...prev,
+                                    [order.id]: v,
+                                  }))
+                                }
+                              />
+                            </div>
+                          )}
+                        <CustomGraphicUploader
+                          mode="order"
+                          orderId={order.id}
+                          existingUrl={order.custom_graphic_url}
+                          existingName={order.custom_graphic_original_name}
+                          locked={["shipped", "delivered", "cancelled"].includes(
+                            order.status
+                          )}
+                          disclaimerAccepted={
+                            !!order.custom_graphic_url ||
+                            !!printTermsByOrder[order.id]
+                          }
+                        />
+                      </div>
                     </div>
                   )}
                 </div>

@@ -8,6 +8,7 @@ import {
   Truck,
   XCircle,
   FileText,
+  ImageIcon,
 } from "lucide-react";
 import ExportExcelButton from "@/components/admin/ExportExcelButton";
 import {
@@ -35,6 +36,8 @@ interface Order {
   payment_status: string;
   subtotal: number;
   shipping_cost: number;
+  discount_code: string | null;
+  discount_amount: number;
   total: number;
   shipping_address: {
     name?: string;
@@ -51,6 +54,8 @@ interface Order {
   notes: string | null;
   tracking_number: string | null;
   bank_transfer_receipt_url: string | null;
+  custom_graphic_url: string | null;
+  custom_graphic_original_name: string | null;
   order_items: OrderItem[];
 }
 
@@ -217,6 +222,14 @@ export default function OrdersClient({
                       >
                         {st.label}
                       </span>
+                      {order.custom_graphic_url && (
+                        <span
+                          title="Grafica allegata"
+                          className="inline-flex items-center text-accent"
+                        >
+                          <ImageIcon className="w-4 h-4" />
+                        </span>
+                      )}
                     </div>
                   </div>
                   {isExpanded ? (
@@ -316,6 +329,25 @@ export default function OrdersClient({
                           </a>
                         </p>
                       )}
+                      {order.custom_graphic_url ? (
+                        <p className="mt-1">
+                          <a
+                            href={order.custom_graphic_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            download={order.custom_graphic_original_name || undefined}
+                            className="inline-flex items-center gap-1.5 text-accent font-medium hover:underline"
+                          >
+                            <ImageIcon className="w-4 h-4" />
+                            Grafica
+                            {order.custom_graphic_original_name
+                              ? `: ${order.custom_graphic_original_name}`
+                              : ""}
+                          </a>
+                        </p>
+                      ) : (
+                        <p className="text-xs text-muted mt-1">Nessuna grafica allegata</p>
+                      )}
                     </div>
                   </div>
 
@@ -376,6 +408,12 @@ export default function OrdersClient({
                           </tbody>
                         </table>
                       </div>
+                      {(order.discount_amount > 0 || order.discount_code) && (
+                        <p className="mt-2 text-sm text-green-700 dark:text-green-400">
+                          Sconto{order.discount_code ? ` ${order.discount_code}` : ""}: −€
+                          {order.discount_amount.toFixed(2)}
+                        </p>
+                      )}
                     </div>
                   )}
 

@@ -8,6 +8,7 @@ import {
   sendOrderConfirmationEmail,
 } from "@/lib/email";
 import { formatOrderNumber } from "@/lib/order-number";
+import { redeemDiscountCode } from "@/lib/discount-codes";
 
 export class StripeError extends Error {
   constructor(
@@ -140,6 +141,7 @@ export async function createStripeCheckoutSession(opts: {
     image?: string | null;
   }[];
   shippingCost: number;
+  discountAmount?: number;
 }): Promise<{ sessionId: string; url: string }> {
   const stripe = getStripe();
   const totalCents = toCents(opts.totalEur);
@@ -206,7 +208,12 @@ export async function createStripeCheckoutSession(opts: {
       mode: "payment",
       customer_email: opts.customerEmail,
       client_reference_id: String(opts.orderId),
-      metadata: { orderId: String(opts.orderId) },
+      metadata: {
+        orderId: String(opts.orderId),
+        ...(opts.discountAmount
+          ? { discountAmount: String(opts.discountAmount) }
+          : {}),
+      },
       payment_intent_data: {
         metadata: { orderId: String(opts.orderId) },
       },
@@ -324,6 +331,8 @@ export async function fulfillStripeCheckoutSession(
     return { outcome: "already_confirmed", orderId: order.id };
   }
 
+  await redeemDiscountCode(order.id);
+
   const items = await db
     .select()
     .from(orderItems)
@@ -346,10 +355,14 @@ export async function fulfillStripeCheckoutSession(
     })),
     subtotal: Number(order.subtotal),
     shippingCost: Number(order.shippingCost),
+    discountCode: order.discountCode,
+    discountAmount: Number(order.discountAmount),
     total: Number(order.total),
     paymentMethod: "stripe" as const,
     shippingAddress: shipping,
     billingInfo: billing,
+    customGraphicUrl: order.customGraphicUrl,
+    customGraphicOriginalName: order.customGraphicOriginalName,
   };
 
   await Promise.allSettled([

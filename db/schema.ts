@@ -20,6 +20,7 @@ import type {
   AnnouncementSeverity,
   AnnouncementAudience,
   AnnouncementScheduleMode,
+  DiscountType,
 } from "@/lib/types";
 
 export const userRoleEnum = pgEnum("user_role", [
@@ -61,6 +62,7 @@ export const announcementScheduleModeEnum = pgEnum("announcement_schedule_mode",
   "always",
   "range",
 ]);
+export const discountTypeEnum = pgEnum("discount_type", ["percent", "fixed"]);
 
 export const appUsers = pgTable("app_users", {
   id: uuid("id").defaultRandom().primaryKey(),
@@ -166,6 +168,26 @@ export const dealerProfiles = pgTable("dealer_profiles", {
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
+export const discountCodes = pgTable(
+  "discount_codes",
+  {
+    id: serial("id").primaryKey(),
+    code: text("code").notNull().unique(),
+    type: discountTypeEnum("type").notNull().$type<DiscountType>(),
+    value: decimal("value", { precision: 10, scale: 2 }).notNull(),
+    minOrderAmount: decimal("min_order_amount", { precision: 10, scale: 2 }),
+    maxUses: integer("max_uses"),
+    usedCount: integer("used_count").notNull().default(0),
+    startsAt: timestamp("starts_at", { withTimezone: true }),
+    endsAt: timestamp("ends_at", { withTimezone: true }),
+    active: boolean("active").notNull().default(true),
+    note: text("note"),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("idx_discount_codes_active").on(t.active)]
+);
+
 export const orders = pgTable(
   "orders",
   {
@@ -179,6 +201,14 @@ export const orders = pgTable(
     shippingCost: decimal("shipping_cost", { precision: 10, scale: 2 }).notNull().default("0"),
     taxAmount: decimal("tax_amount", { precision: 10, scale: 2 }).notNull(),
     total: decimal("total", { precision: 10, scale: 2 }).notNull(),
+    discountCodeId: integer("discount_code_id").references(() => discountCodes.id, {
+      onDelete: "set null",
+    }),
+    discountCode: text("discount_code"),
+    discountAmount: decimal("discount_amount", { precision: 10, scale: 2 })
+      .notNull()
+      .default("0"),
+    discountRedeemed: boolean("discount_redeemed").notNull().default(false),
     shippingAddress: jsonb("shipping_address")
       .notNull()
       .default(sql`'{}'`)
@@ -189,6 +219,12 @@ export const orders = pgTable(
       .$type<Record<string, unknown>>(),
     trackingNumber: text("tracking_number"),
     bankTransferReceiptUrl: text("bank_transfer_receipt_url"),
+    customGraphicUrl: text("custom_graphic_url"),
+    customGraphicOriginalName: text("custom_graphic_original_name"),
+    customGraphicDisclaimerAcceptedAt: timestamp(
+      "custom_graphic_disclaimer_accepted_at",
+      { withTimezone: true }
+    ),
     notes: text("notes"),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),

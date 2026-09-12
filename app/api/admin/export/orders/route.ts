@@ -55,6 +55,8 @@ export async function GET(request: Request) {
       "Pagamento": o.paymentMethod ?? "",
       "Stato pagamento": o.paymentStatus,
       "Subtotale (€)": Number(o.subtotal),
+      "Sconto codice": o.discountCode ?? "",
+      "Sconto (€)": Number(o.discountAmount),
       "Spedizione (€)": Number(o.shippingCost),
       "IVA (€)": Number(o.taxAmount),
       "Totale (€)": Number(o.total),
@@ -64,6 +66,7 @@ export async function GET(request: Request) {
         .filter(Boolean)
         .join(", "),
       "Note": o.notes ?? "",
+      "Grafica": o.customGraphicUrl ?? "",
     };
   });
 

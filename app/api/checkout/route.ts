@@ -7,7 +7,8 @@ import {
   pendingStatus,
   StripeError,
 } from "@/lib/stripe";
-import { products, orders, orderItems, profiles, dealerProfiles } from "@/db/schema";
+import { products, orders, orderItems, profiles, dealerProfiles, categories } from "@/db/schema";
+import { claimPendingGraphic } from "@/lib/custom-graphic";
 import { eq, inArray } from "drizzle-orm";
 import {
   calculateShippingCost,
@@ -21,10 +22,22 @@ import {
   isValidItalianPartitaIva,
   italianVatIncludedOnProducts,
 } from "@/lib/italian-vat";
-import { grossToNetItalianVat } from "@/lib/catalog-display-price";
+import { chargedItalianVat, grossToNetItalianVat } from "@/lib/catalog-display-price";
 import { applyDealerDiscount } from "@/lib/products";
-import { retailFromCatalog } from "@/lib/pricing";
+import { retailFromCatalog, roundMoney } from "@/lib/pricing";
 import { getPricingConfig } from "@/lib/pricing-server";
+import { minQuantityForProduct } from "@/lib/min-quantity";
+import {
+  discountErrorMessage,
+  resolveCheckoutDiscount,
+} from "@/lib/discount-codes";
+import {
+  parsePrintOption,
+  printSurcharge,
+  productNeedsPrintOption,
+  type PrintOption,
+} from "@/lib/print-options";
+import { getPrintConfig } from "@/lib/print-options-server";
 
 interface LineItem {
   id: number;
@@ -34,6 +47,7 @@ interface LineItem {
   image: string | null;
   lineKey?: string;
   lineNotes?: string | null;
+  printOption?: PrintOption | string | null;
 }
 
 interface BillingInfo {
@@ -54,7 +68,17 @@ function lineItemDisplayName(item: LineItem, nameIt: string): string {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    let { items, shippingInfo, billingInfo, europeShippingMethod } = body as {
+    let {
+      items,
+      shippingInfo,
+      billingInfo,
+      europeShippingMethod,
+      acceptedTerms,
+      customGraphicToken,
+      customGraphicDisclaimerAccepted,
+      printTermsAccepted,
+      discountCode: rawDiscountCode,
+    } = body as {
       items: LineItem[];
       shippingInfo: {
         name: string;
@@ -69,11 +93,28 @@ export async function POST(req: NextRequest) {
       };
       billingInfo?: BillingInfo;
       europeShippingMethod?: EuropeShippingMethod;
+      acceptedTerms?: boolean;
+      customGraphicToken?: string;
+      customGraphicDisclaimerAccepted?: boolean;
+      printTermsAccepted?: boolean;
+      discountCode?: string;
     };
 
     if (!items?.length) {
       return NextResponse.json({ error: "Carrello vuoto" }, { status: 400 });
     }
+
+    if (acceptedTerms !== true) {
+      return NextResponse.json(
+        { error: "Devi accettare le Condizioni di vendita e la Politica resi e recesso." },
+        { status: 400 }
+      );
+    }
+
+    const graphicToken =
+      typeof customGraphicToken === "string" && customGraphicToken.trim()
+        ? customGraphicToken.trim()
+        : null;
 
     // Check if user is logged in for dealer discount
     const session = await auth();
@@ -126,8 +167,10 @@ export async function POST(req: NextRequest) {
         fragileShippingCost: products.fragileShippingCost,
         catalogPrice: products.catalogPrice,
         price: products.price,
+        categorySlug: categories.slug,
       })
       .from(products)
+      .innerJoin(categories, eq(products.categoryId, categories.id))
       .where(inArray(products.id, productIds));
 
     if (dbProducts.length !== new Set(productIds).size) {
@@ -135,16 +178,45 @@ export async function POST(req: NextRequest) {
     }
 
     const { markup } = await getPricingConfig();
+    const printConfig = await getPrintConfig();
     const retailMap = new Map(
       dbProducts.map((p) => [
         p.id,
         retailFromCatalog(Number(p.catalogPrice ?? p.price), markup),
       ])
     );
-    items = items.map((item) => ({
-      ...item,
-      price: applyDealerDiscount(retailMap.get(item.id) ?? 0, dealerDiscount),
-    }));
+    const printableMap = new Map(
+      dbProducts.map((p) => [p.id, productNeedsPrintOption({ categorySlug: p.categorySlug })])
+    );
+    items = items.map((item) => {
+      const base = applyDealerDiscount(retailMap.get(item.id) ?? 0, dealerDiscount);
+      const option = printableMap.get(item.id)
+        ? parsePrintOption(item.printOption)
+        : "none";
+      const extra = printSurcharge(option, printConfig.prices);
+      return {
+        ...item,
+        printOption: option,
+        price: roundMoney(base + extra),
+      };
+    });
+
+    const hasPrint = items.some((item) => parsePrintOption(item.printOption) !== "none");
+    if (hasPrint && printTermsAccepted !== true) {
+      return NextResponse.json(
+        { error: "Per la stampa personalizzata devi accettare le condizioni di stampa." },
+        { status: 400 }
+      );
+    }
+    if (graphicToken && printTermsAccepted !== true && customGraphicDisclaimerAccepted !== true) {
+      return NextResponse.json(
+        {
+          error:
+            "Per allegare una grafica devi accettare le condizioni di stampa.",
+        },
+        { status: 400 }
+      );
+    }
 
     const weightMap = new Map(
       dbProducts.map((p) => [p.id, p.weight != null ? Number(p.weight) : 0.5])
@@ -161,6 +233,8 @@ export async function POST(req: NextRequest) {
         id: products.id,
         stockQuantity: products.stockQuantity,
         minQuantity: products.minQuantity,
+        sku: products.sku,
+        slug: products.slug,
         nameIt: products.nameIt,
       })
       .from(products)
@@ -176,11 +250,12 @@ export async function POST(req: NextRequest) {
       }
       const belowMin = stockProducts.filter((p) => {
         const requested = requestedByProduct.get(p.id) ?? 0;
-        return requested > 0 && requested < p.minQuantity;
+        const minQuantity = minQuantityForProduct(p.minQuantity, p);
+        return requested > 0 && requested < minQuantity;
       });
       if (belowMin.length > 0) {
         const details = belowMin
-          .map((p) => `${p.nameIt} (min. ${p.minQuantity})`)
+          .map((p) => `${p.nameIt} (min. ${minQuantityForProduct(p.minQuantity, p)})`)
           .join(", ");
         return NextResponse.json(
           { error: `Quantità minima non raggiunta per: ${details}` },
@@ -285,11 +360,6 @@ export async function POST(req: NextRequest) {
         : 0;
     const totalShippingCost = Math.round((shippingCost + fragileShippingCost) * 100) / 100;
 
-    // Calculate totals (prices in cart are already discounted)
-    const subtotal = items.reduce((sum, item) => {
-      return sum + item.price * item.quantity;
-    }, 0);
-
     const companyName = billingInfo?.company?.trim();
     if (companyName && shippingInfo.country === "Italia") {
       const vat = billingInfo?.vatNumber?.trim() || "";
@@ -323,19 +393,31 @@ export async function POST(req: NextRequest) {
 
     // Subtotale calcolato dalla somma delle righe effettivamente salvate, così
     // che l'ordine quadri sempre: somma(lineTotal) === subtotal e
-    // total === subtotal + spedizione. Per gli ordini esenti
-    // tax_amount riporta l'IVA scorporata a titolo informativo.
+    // total === subtotal + spedizione. tax_amount è l'IVA italiana addebitata
+    // (0 se cessione esente / reverse charge).
     const persistedSubtotal = round2(
       items.reduce(
         (sum, item) => sum + round2(netUnitPrice(item.price) * item.quantity),
         0
       )
     );
-    const persistedTaxAmount = excludeItalianProductVat
-      ? round2(subtotal - persistedSubtotal)
-      : 0;
 
-    const total = round2(persistedSubtotal + totalShippingCost);
+    const discount = await resolveCheckoutDiscount(rawDiscountCode, persistedSubtotal);
+    if ("error" in discount) {
+      return NextResponse.json(
+        { error: discountErrorMessage(discount.error, discount.minOrderAmount) },
+        { status: 400 }
+      );
+    }
+    const discountAmount = discount.applied ? discount.amount : 0;
+
+    const total = round2(persistedSubtotal - discountAmount + totalShippingCost);
+    const persistedTaxAmount = chargedItalianVat({
+      productsGrossAfterDiscount: round2(persistedSubtotal - discountAmount),
+      shippingGross: totalShippingCost,
+      italianVatIncluded: italianVatOnProducts,
+      shippingIncludesIva: zoneConfig.includesIva,
+    });
 
     // Build shipping & billing address objects
     const shippingAddress = {
@@ -360,6 +442,7 @@ export async function POST(req: NextRequest) {
         ? { fiscal_code: billingInfo.fiscalCode }
         : {}),
       ...(excludeItalianProductVat ? { vies_exempt: true } : {}),
+      terms_accepted_at: new Date().toISOString(),
     };
 
     await cancelStalePendingStripeOrders({
@@ -387,9 +470,17 @@ export async function POST(req: NextRequest) {
           shippingCost: String(totalShippingCost),
           taxAmount: String(persistedTaxAmount),
           total: String(total),
+          discountCodeId: discount.applied ? discount.id : null,
+          discountCode: discount.applied ? discount.code : null,
+          discountAmount: String(discountAmount),
+          discountRedeemed: false,
           shippingAddress,
           billingAddress,
           notes: shippingInfo.notes || null,
+          customGraphicDisclaimerAcceptedAt:
+            printTermsAccepted === true || customGraphicDisclaimerAccepted === true
+              ? new Date()
+              : null,
         })
         .returning({ id: orders.id });
       if (!o) throw new Error("no id");
@@ -423,12 +514,33 @@ export async function POST(req: NextRequest) {
       console.error("Failed to save Stripe order items:", itemsErr);
     }
 
+    if (graphicToken) {
+      const claimed = await claimPendingGraphic(graphicToken, orderId);
+      if (!claimed.ok) {
+        await db
+          .update(orders)
+          .set({ status: "cancelled", updatedAt: new Date() })
+          .where(eq(orders.id, orderId));
+        return NextResponse.json({ error: claimed.error }, { status: claimed.status });
+      }
+      await db
+        .update(orders)
+        .set({
+          customGraphicUrl: claimed.url,
+          customGraphicOriginalName: claimed.originalName,
+          customGraphicDisclaimerAcceptedAt: new Date(),
+          updatedAt: new Date(),
+        })
+        .where(eq(orders.id, orderId));
+    }
+
     try {
       const { sessionId, url } = await createStripeCheckoutSession({
         orderId,
         totalEur: total,
         customerEmail: shippingInfo.email,
         shippingCost: totalShippingCost,
+        discountAmount,
         items: rows.map((r, i) => ({
           name: r.productName,
           quantity: r.quantity,

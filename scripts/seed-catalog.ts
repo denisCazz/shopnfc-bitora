@@ -11,6 +11,7 @@ import {
   productChips,
   productImages,
 } from "../db/schema";
+import { minQuantityForProduct } from "../lib/min-quantity";
 
 const ADMIN_EMAIL = "admin@bitora.it";
 const ADMIN_PASSWORD = "BitoraNfc2026!";
@@ -363,6 +364,12 @@ async function main() {
           wholesalePrice: p.wholesale,
           weight: p.weight,
           stockQuantity: p.stock,
+          minQuantity: minQuantityForProduct(10, {
+            sku: p.sku,
+            slug: p.slug,
+            name: p.it,
+            nameEn: p.en,
+          }),
           active: true,
           brand: p.brand,
           imageUrl,

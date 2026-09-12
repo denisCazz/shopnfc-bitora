@@ -5,7 +5,6 @@ import { asc, eq } from "drizzle-orm";
 import { getUser } from "@/lib/auth";
 import { getDb } from "@/db";
 import { productImages, products } from "@/db/schema";
-import { deleteFromR2, getR2KeyFromUrl } from "@/lib/r2";
 
 export async function POST(req: NextRequest) {
   const user = await getUser();
@@ -40,10 +39,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const r2Key = getR2KeyFromUrl(image.imageUrl);
-    if (r2Key) {
-      await deleteFromR2(r2Key);
-    } else if (image.imageUrl.startsWith("/uploads/")) {
+    if (image.imageUrl.startsWith("/uploads/")) {
       const filePath = path.join(process.cwd(), "public", image.imageUrl);
       await unlink(filePath);
     }
