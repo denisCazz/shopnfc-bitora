@@ -1,5 +1,5 @@
 /**
- * Shipping cost calculation for Shop NFC.
+ * Shipping cost calculation for Shop NFC Bitora.
  *
  * Rates are stored in the `app_settings` table (key = "shipping").
  * Falls back to hardcoded defaults if the DB record is missing.

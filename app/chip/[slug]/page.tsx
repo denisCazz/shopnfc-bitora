@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: seo?.title || `Prodotti con chip ${chip.nameIt}`,
     description:
       seo?.metaDescription ||
-      `Tag, card e gadget NFC con chip ${chip.nameIt}. Catalogo B2B Shop NFC.`,
+      `Tag, card e gadget NFC con chip ${chip.nameIt}. Catalogo B2B Shop NFC Bitora.`,
     path: `/chip/${slug}`,
   });
 }

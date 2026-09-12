@@ -1,9 +1,7 @@
 import ForgotPasswordClient from "./ForgotPasswordClient";
 
-import { SITE } from "@/lib/site";
-
 export const metadata = {
-  title: `Recupera password | ${SITE.name}`,
+  title: "Recupera password",
 };
 
 export default function ForgotPasswordPage() {

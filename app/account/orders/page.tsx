@@ -5,10 +5,8 @@ import { getDb } from "@/db";
 import { orders, orderItems } from "@/db/schema";
 import OrdersListClient from "./OrdersListClient";
 
-import { SITE } from "@/lib/site";
-
 export const metadata = {
-  title: `I miei ordini | ${SITE.name}`,
+  title: "I miei ordini",
 };
 
 export default async function MyOrdersPage() {

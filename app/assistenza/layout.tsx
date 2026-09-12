@@ -3,7 +3,7 @@ import { buildPageMetadata } from "@/lib/seo";
 export const metadata = buildPageMetadata({
   title: "Assistenza clienti",
   description:
-    "Assistenza Shop NFC: telefono, email e orari per ordini, programmazione tag e supporto tecnico. Bitora, Carmagnola (TO).",
+    "Assistenza Shop NFC Bitora: telefono, email e orari per ordini, programmazione tag e supporto tecnico. Bitora, Carmagnola (TO).",
   path: "/assistenza",
 });
 

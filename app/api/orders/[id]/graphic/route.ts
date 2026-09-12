@@ -55,7 +55,7 @@ export async function POST(
     return NextResponse.json(
       {
         error:
-          "Devi confermare che la grafica è di alta qualità e che Shop NFC non è responsabile per file di bassa qualità.",
+          "Devi confermare che la grafica è di alta qualità e che Shop NFC Bitora non è responsabile per file di bassa qualità.",
       },
       { status: 400 }
     );

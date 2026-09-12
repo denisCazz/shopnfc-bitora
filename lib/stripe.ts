@@ -9,6 +9,7 @@ import {
 } from "@/lib/email";
 import { formatOrderNumber } from "@/lib/order-number";
 import { redeemDiscountCode } from "@/lib/discount-codes";
+import { SITE } from "@/lib/site";
 
 export class StripeError extends Error {
   constructor(
@@ -196,7 +197,7 @@ export async function createStripeCheckoutSession(opts: {
               currency: "eur" as const,
               unit_amount: totalCents,
               product_data: {
-                name: `Ordine ${formatOrderNumber(opts.orderId)} — Shop NFC`,
+                name: `Ordine ${formatOrderNumber(opts.orderId)} — ${SITE.name}`,
               },
             },
           },

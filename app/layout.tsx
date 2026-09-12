@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   description:
     "Catalogo NFC Bitora: sticker, tessere, braccialetti, tag industriali, gadget e lettori. Programmazione inclusa. Spedizione soggetta a disponibilità, solitamente entro 7 giorni.",
   keywords:
-    "shop nfc, tag nfc, tessere nfc, sticker nfc, braccialetti nfc, lettori nfc, ntag213, mifare, bitora",
+    "shop nfc bitora, shop nfc, tag nfc, tessere nfc, sticker nfc, braccialetti nfc, lettori nfc, ntag213, mifare, bitora",
   authors: [{ name: SITE.legalName }],
   creator: "Bitora.it",
   icons: {

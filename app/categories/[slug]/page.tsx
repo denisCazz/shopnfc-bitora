@@ -95,7 +95,7 @@ export default async function CategoryPage({
           ]),
           collectionPageJsonLd({
             name: categoryName,
-            description: seo?.metaDescription || `${categoryName} — catalogo Shop NFC`,
+            description: seo?.metaDescription || `${categoryName} — catalogo Shop NFC Bitora`,
             path: `/categories/${slug}`,
             products: products.map((p) => ({ name: p.name, slug: p.slug, image: p.image })),
           }),

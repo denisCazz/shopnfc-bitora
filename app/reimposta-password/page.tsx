@@ -1,10 +1,8 @@
 import { Suspense } from "react";
 import ResetPasswordClient from "./ResetPasswordClient";
 
-import { SITE } from "@/lib/site";
-
 export const metadata = {
-  title: `Reimposta password | ${SITE.name}`,
+  title: "Reimposta password",
 };
 
 export default function ResetPasswordPage() {

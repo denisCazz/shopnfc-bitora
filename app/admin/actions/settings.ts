@@ -16,6 +16,7 @@ import { verifyStripeCredentials } from "@/lib/stripe";
 import { validateVAT } from "@/lib/vies";
 import { Resend } from "resend";
 import type { UserRole } from "@/lib/types";
+import { SITE } from "@/lib/site";
 
 export type VatCheckResult = {
   status: "valid" | "invalid" | "unverifiable" | "error";
@@ -103,12 +104,12 @@ export async function testEmail(): Promise<{ ok: boolean; message: string }> {
   }
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
-    const from = process.env.RESEND_FROM_EMAIL || "Shop NFC <onboarding@resend.dev>";
+    const from = process.env.RESEND_FROM_EMAIL || `${SITE.name} <onboarding@resend.dev>`;
     const { error } = await resend.emails.send({
       from,
       to: adminEmail,
-      subject: "Test email — Shop NFC",
-      html: `<p>Questa è un'email di prova inviata dal pannello admin di <strong>Shop NFC</strong>.</p><p>Se stai leggendo questo messaggio, la configurazione email funziona correttamente.</p>`,
+      subject: `Test email — ${SITE.name}`,
+      html: `<p>Questa è un'email di prova inviata dal pannello admin di <strong>${SITE.name}</strong>.</p><p>Se stai leggendo questo messaggio, la configurazione email funziona correttamente.</p>`,
     });
     if (error) return { ok: false, message: error.message };
     return { ok: true, message: `Email inviata con successo a ${adminEmail}` };

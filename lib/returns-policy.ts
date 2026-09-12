@@ -39,7 +39,7 @@ const content: Record<Locale, ReturnsPolicyContent> = {
     title: "Politica resi, recesso e garanzia",
     updated: UPDATED.it,
     intro:
-      "Questa policy regola resi, diritto di recesso, rimborsi e garanzia per gli acquisti su Shop NFC ({url}), gestito da {legalName}, P.IVA {vat}, {city}. Integra le condizioni di vendita. Completando l’ordine dichiari di averla letta e accettata.",
+      "Questa policy regola resi, diritto di recesso, rimborsi e garanzia per gli acquisti su Shop NFC Bitora ({url}), gestito da {legalName}, P.IVA {vat}, {city}. Integra le condizioni di vendita. Completando l’ordine dichiari di averla letta e accettata.",
     highlightTitle: "In sintesi, per tutelare entrambe le parti",
     highlight: [
       "Aziende, professionisti e chi richiede fattura con P.IVA: nessun diritto di recesso. I prodotti conformi non si restituiscono.",
@@ -51,7 +51,7 @@ const content: Record<Locale, ReturnsPolicyContent> = {
       {
         title: "1. Ambito e prodotti",
         paragraphs: [
-          "Shop NFC vende beni fisici NFC (sticker, tessere, braccialetti, tag industriali e schermati, gadget, lettori/scrittori) e servizi accessori (programmazione, stampa, encoding, confezionamento). La quantità minima d’ordine e i lotti custom sono parte del modello B2B del Venditore.",
+          "Shop NFC Bitora vende beni fisici NFC (sticker, tessere, braccialetti, tag industriali e schermati, gadget, lettori/scrittori) e servizi accessori (programmazione, stampa, encoding, confezionamento). La quantità minima d’ordine e i lotti custom sono parte del modello B2B del Venditore.",
           "Le presenti regole si applicano a ogni ordine concluso sul sito, anche da ospite, e prevalgono su richieste informali (chat, telefono, WhatsApp) se contrastanti, salvo accordo scritto del Venditore.",
         ],
       },
@@ -185,7 +185,7 @@ const content: Record<Locale, ReturnsPolicyContent> = {
     title: "Returns, withdrawal and warranty policy",
     updated: UPDATED.en,
     intro:
-      "This policy governs returns, withdrawal, refunds and warranty for purchases on Shop NFC ({url}), operated by {legalName}, VAT {vat}, {city}. It forms part of the terms of sale. By completing an order you confirm that you have read and accepted it.",
+      "This policy governs returns, withdrawal, refunds and warranty for purchases on Shop NFC Bitora ({url}), operated by {legalName}, VAT {vat}, {city}. It forms part of the terms of sale. By completing an order you confirm that you have read and accepted it.",
     highlightTitle: "In short, to protect both parties",
     highlight: [
       "Businesses, professionals and anyone requesting a VAT invoice: no withdrawal right. Conforming goods cannot be returned.",
@@ -197,7 +197,7 @@ const content: Record<Locale, ReturnsPolicyContent> = {
       {
         title: "1. Scope and products",
         paragraphs: [
-          "Shop NFC sells physical NFC goods (stickers, cards, wristbands, industrial and on-metal tags, gadgets, readers/writers) and related services (encoding, printing, packaging). Minimum order quantities and custom lots are part of the Seller’s B2B model.",
+          "Shop NFC Bitora sells physical NFC goods (stickers, cards, wristbands, industrial and on-metal tags, gadgets, readers/writers) and related services (encoding, printing, packaging). Minimum order quantities and custom lots are part of the Seller’s B2B model.",
           "These rules apply to every order placed on the site, including guest checkout, and prevail over informal requests (chat, phone, WhatsApp) if inconsistent, unless the Seller agrees in writing.",
         ],
       },
@@ -329,7 +329,7 @@ const content: Record<Locale, ReturnsPolicyContent> = {
     title: "Politique de retours, rétractation et garantie",
     updated: UPDATED.fr,
     intro:
-      "Cette politique régit les retours, le droit de rétractation, les remboursements et la garantie pour les achats sur Shop NFC ({url}), exploité par {legalName}, TVA {vat}, {city}. Elle complète les conditions de vente. En finalisant une commande, vous déclarez l’avoir lue et acceptée.",
+      "Cette politique régit les retours, le droit de rétractation, les remboursements et la garantie pour les achats sur Shop NFC Bitora ({url}), exploité par {legalName}, TVA {vat}, {city}. Elle complète les conditions de vente. En finalisant une commande, vous déclarez l’avoir lue et acceptée.",
     highlightTitle: "En résumé, pour protéger les deux parties",
     highlight: [
       "Entreprises, professionnels et quiconque demande une facture avec n° de TVA : pas de droit de rétractation. Les produits conformes ne sont pas repris.",
@@ -341,7 +341,7 @@ const content: Record<Locale, ReturnsPolicyContent> = {
       {
         title: "1. Champ d’application et produits",
         paragraphs: [
-          "Shop NFC vend des biens NFC physiques (stickers, cartes, bracelets, tags industriels et blindés, gadgets, lecteurs/encodeurs) et des services associés (encodage, impression, conditionnement). Les quantités minimales et les lots personnalisés font partie du modèle B2B du Vendeur.",
+          "Shop NFC Bitora vend des biens NFC physiques (stickers, cartes, bracelets, tags industriels et blindés, gadgets, lecteurs/encodeurs) et des services associés (encodage, impression, conditionnement). Les quantités minimales et les lots personnalisés font partie du modèle B2B du Vendeur.",
           "Ces règles s’appliquent à toute commande conclue sur le site, y compris en invité, et prévalent sur les demandes informelles (chat, téléphone, WhatsApp) en cas de contradiction, sauf accord écrit du Vendeur.",
         ],
       },
@@ -473,7 +473,7 @@ const content: Record<Locale, ReturnsPolicyContent> = {
     title: "Política de devoluciones, desistimiento y garantía",
     updated: UPDATED.es,
     intro:
-      "Esta política regula devoluciones, desistimiento, reembolsos y garantía de las compras en Shop NFC ({url}), gestionado por {legalName}, NIF-IVA {vat}, {city}. Integra las condiciones de venta. Al completar el pedido declaras haberla leído y aceptado.",
+      "Esta política regula devoluciones, desistimiento, reembolsos y garantía de las compras en Shop NFC Bitora ({url}), gestionado por {legalName}, NIF-IVA {vat}, {city}. Integra las condiciones de venta. Al completar el pedido declaras haberla leído y aceptado.",
     highlightTitle: "En síntesis, para proteger a ambas partes",
     highlight: [
       "Empresas, profesionales y quien pida factura con NIF-IVA: no hay derecho de desistimiento. Los productos conformes no se devuelven.",
@@ -485,7 +485,7 @@ const content: Record<Locale, ReturnsPolicyContent> = {
       {
         title: "1. Ámbito y productos",
         paragraphs: [
-          "Shop NFC vende bienes NFC físicos (stickers, tarjetas, pulseras, tags industriales y apantallados, gadgets, lectores/grabadores) y servicios accesorios (programación, impresión, embalaje). Las cantidades mínimas y los lotes a medida forman parte del modelo B2B del Vendedor.",
+          "Shop NFC Bitora vende bienes NFC físicos (stickers, tarjetas, pulseras, tags industriales y apantallados, gadgets, lectores/grabadores) y servicios accesorios (programación, impresión, embalaje). Las cantidades mínimas y los lotes a medida forman parte del modelo B2B del Vendedor.",
           "Estas reglas se aplican a todo pedido celebrado en el sitio, también como invitado, y prevalecen sobre solicitudes informales (chat, teléfono, WhatsApp) si hay contradicción, salvo acuerdo escrito del Vendedor.",
         ],
       },

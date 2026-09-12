@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     product.metaDescription?.trim() ||
     product.descriptionShort ||
     product.description ||
-    `${product.name} — tag NFC per aziende su Shop NFC.`;
+    `${product.name} — tag NFC per aziende su Shop NFC Bitora.`;
   return buildPageMetadata({
     title,
     description,

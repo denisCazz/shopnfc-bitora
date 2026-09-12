@@ -17,7 +17,7 @@ async function sendEmail(payload: Parameters<Resend["emails"]["send"]>[0]) {
   await resend.emails.send(payload);
 }
 
-const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "Shop NFC <onboarding@resend.dev>";
+const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || `${SITE.name} <onboarding@resend.dev>`;
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "info@bitora.it";
 /** Recipient for order and dealer notifications (business operational email) */
 const ORDERS_EMAIL = process.env.ORDERS_EMAIL || ADMIN_EMAIL;
@@ -142,7 +142,7 @@ function bankTransferNote(): string {
       <p style="margin: 0 0 8px; font-weight: 600; color: #92400e;">Coordinate per il bonifico:</p>
       <p style="margin: 0; font-size: 14px; color: #78350f;">
         IBAN: <strong>IT76S0708461620000000920491</strong><br/>
-        Intestatario: Shop NFC<br/>
+        Intestatario: ${SITE.bankHolder}<br/>
         Causale: Ordine #[orderId]
       </p>
     </div>`;
@@ -179,7 +179,7 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
       to: data.customerEmail,
       ...(EMAIL_CC.length ? { cc: EMAIL_CC } : {}),
       ...(EMAIL_BCC.length ? { bcc: EMAIL_BCC } : {}),
-      subject: `📬 Ordine ricevuto #${formatOrderNumber(data.orderId)} — Shop NFC`,
+      subject: `📬 Ordine ricevuto #${formatOrderNumber(data.orderId)} — ${SITE.name}`,
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; color: #1f2937;">
           <div style="background: linear-gradient(135deg, #0ea5e9, #dc2626); padding: 24px; border-radius: 12px 12px 0 0;">
@@ -222,7 +222,7 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
               Riceverai un'email con il numero di tracking non appena il pacco sarà spedito.
             </p>
 
-            <p style="margin-top: 30px; color: #6b7280; font-size: 13px;">— Il team Shop NFC</p>
+            <p style="margin-top: 30px; color: #6b7280; font-size: 13px;">— Il team ${SITE.name}</p>
           </div>
         </div>
       `,
@@ -241,7 +241,7 @@ const STATUS_CONFIG: Record<string, { emoji: string; label: string; color: strin
   confirmed:  { emoji: "✅", label: "Confermato",      color: "#2563eb", message: "Il tuo ordine è stato confermato e sarà messo in lavorazione." },
   processing: { emoji: "🔧", label: "In lavorazione",  color: "#4f46e5", message: "Il tuo ordine è in fase di preparazione nel nostro magazzino." },
   shipped:    { emoji: "🚚", label: "Spedito",         color: "#7c3aed", message: "Il tuo pacco è stato affidato al corriere e sta per arrivare!" },
-  delivered:  { emoji: "📦", label: "Consegnato",      color: "#16a34a", message: "Il tuo pacco risulta consegnato. Grazie per aver scelto Shop NFC!" },
+  delivered:  { emoji: "📦", label: "Consegnato",      color: "#16a34a", message: `Il tuo pacco risulta consegnato. Grazie per aver scelto ${SITE.name}!` },
   cancelled:  { emoji: "❌", label: "Annullato",       color: "#dc2626", message: "Il tuo ordine è stato annullato. Contattaci per qualsiasi chiarimento." },
 };
 
@@ -276,7 +276,7 @@ export async function sendOrderStatusUpdateEmail({
       to: customerEmail,
       ...(EMAIL_CC.length ? { cc: EMAIL_CC } : {}),
       ...(EMAIL_BCC.length ? { bcc: EMAIL_BCC } : {}),
-      subject: `${cfg.emoji} Ordine #${formatOrderNumber(orderId)}: ${cfg.label} — Shop NFC`,
+      subject: `${cfg.emoji} Ordine #${formatOrderNumber(orderId)}: ${cfg.label} — ${SITE.name}`,
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; color: #1f2937;">
           <div style="background: linear-gradient(135deg, #0ea5e9, #dc2626); padding: 24px; border-radius: 12px 12px 0 0;">
@@ -302,7 +302,7 @@ export async function sendOrderStatusUpdateEmail({
 
             <p style="margin-top: 30px; color: #6b7280; font-size: 13px;">
               Per assistenza rispondi a questa email o scrivici a <a href="mailto:${ADMIN_EMAIL}" style="color: #0369a1;">${ADMIN_EMAIL}</a>.<br/>
-              — Il team Shop NFC
+              — Il team ${SITE.name}
             </p>
           </div>
         </div>
@@ -484,7 +484,7 @@ export async function sendDealerApprovedEmail({
           <p style="margin-top: 30px;">
             <a href="https://shopnfc.bitora.it/login" style="display: inline-block; padding: 12px 24px; background: #0369a1; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Accedi al tuo account</a>
           </p>
-          <p style="margin-top: 30px; color: #6b7280; font-size: 13px;">— Il team Shop NFC</p>
+          <p style="margin-top: 30px; color: #6b7280; font-size: 13px;">— Il team ${SITE.name}</p>
         </div>
       `,
     });
@@ -510,7 +510,7 @@ export async function sendEmailVerificationEmail({
     await sendEmail({
       from: FROM_EMAIL,
       to,
-      subject: "Conferma il tuo indirizzo email — Shop NFC",
+      subject: `Conferma il tuo indirizzo email — ${SITE.name}`,
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; color: #1f2937;">
           <div style="background: linear-gradient(135deg, #0ea5e9, #dc2626); padding: 24px; border-radius: 12px 12px 0 0;">
@@ -518,13 +518,13 @@ export async function sendEmailVerificationEmail({
           </div>
           <div style="padding: 24px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 12px 12px;">
             <p>Ciao${name ? ` <strong>${escapeHtml(name)}</strong>` : ""},</p>
-            <p>Grazie per esserti registrato su Shop NFC! Clicca il pulsante qui sotto per confermare il tuo indirizzo email e attivare il tuo account.</p>
+            <p>Grazie per esserti registrato su ${SITE.name}! Clicca il pulsante qui sotto per confermare il tuo indirizzo email e attivare il tuo account.</p>
             <p style="text-align: center; margin: 32px 0;">
               <a href="${verificationUrl}" style="display: inline-block; padding: 14px 28px; background: #0369a1; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 15px;">Conferma email</a>
             </p>
             <p style="font-size: 13px; color: #6b7280;">Il link è valido per 24 ore. Se non hai creato un account, ignora questa email.</p>
             <p style="font-size: 12px; color: #9ca3af; word-break: break-all;">Oppure copia questo link nel browser: ${verificationUrl}</p>
-            <p style="margin-top: 30px; color: #6b7280; font-size: 13px;">— Il team Shop NFC</p>
+            <p style="margin-top: 30px; color: #6b7280; font-size: 13px;">— Il team ${SITE.name}</p>
           </div>
         </div>
       `,
@@ -558,7 +558,7 @@ export async function sendDealerRejectedEmail({
           <p>La tua richiesta come rivenditore per <strong>${escapeHtml(companyName)}</strong> non è stata approvata.</p>
           ${reason ? `<div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; padding: 16px; margin: 20px 0;"><p style="margin: 0; color: #991b1b;"><strong>Motivo:</strong> ${escapeHtml(reason)}</p></div>` : ""}
           <p>Per qualsiasi domanda, contattaci a <a href="mailto:info@bitora.it" style="color: #0369a1;">info@bitora.it</a> o al numero <strong>351 497 9670</strong>.</p>
-          <p style="margin-top: 30px; color: #6b7280; font-size: 13px;">— Il team Shop NFC</p>
+          <p style="margin-top: 30px; color: #6b7280; font-size: 13px;">— Il team ${SITE.name}</p>
         </div>
       `,
     });
@@ -584,7 +584,7 @@ export async function sendPasswordResetEmail({
     await sendEmail({
       from: FROM_EMAIL,
       to,
-      subject: "Reimposta la tua password — Shop NFC",
+      subject: `Reimposta la tua password — ${SITE.name}`,
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; color: #1f2937;">
           <div style="background: linear-gradient(135deg, #0ea5e9, #dc2626); padding: 24px; border-radius: 12px 12px 0 0;">
@@ -592,13 +592,13 @@ export async function sendPasswordResetEmail({
           </div>
           <div style="padding: 24px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 12px 12px;">
             <p>Ciao${name ? ` <strong>${escapeHtml(name)}</strong>` : ""},</p>
-            <p>Hai richiesto di reimpostare la password del tuo account Shop NFC. Clicca il pulsante qui sotto per procedere.</p>
+            <p>Hai richiesto di reimpostare la password del tuo account ${SITE.name}. Clicca il pulsante qui sotto per procedere.</p>
             <p style="text-align: center; margin: 32px 0;">
               <a href="${resetUrl}" style="display: inline-block; padding: 14px 28px; background: #0369a1; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 15px;">Reimposta password</a>
             </p>
             <p style="font-size: 13px; color: #6b7280;">Il link è valido per 1 ora. Se non hai richiesto il reset, ignora questa email — la tua password rimane invariata.</p>
             <p style="font-size: 12px; color: #9ca3af; word-break: break-all;">Oppure copia questo link nel browser: ${resetUrl}</p>
-            <p style="margin-top: 30px; color: #6b7280; font-size: 13px;">— Il team Shop NFC</p>
+            <p style="margin-top: 30px; color: #6b7280; font-size: 13px;">— Il team ${SITE.name}</p>
           </div>
         </div>
       `,

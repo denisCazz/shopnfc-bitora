@@ -14,7 +14,7 @@ export const CATEGORY_SEO: Record<string, CategorySeoContent> = {
     metaDescription:
       "Sticker NFC adesivi per aziende: NTAG213 e NTAG216, programmazione inclusa. Ideali per marketing, check-in eventi e identificazione prodotti.",
     intro:
-      "Gli sticker NFC sono la soluzione più versatile per portare l'interazione contactless su packaging, volantini, espositori e materiali promozionali. Su Shop NFC trovi tag adesivi in diversi formati, con chip NXP NTAG pronti per la programmazione URL, vCard o payload personalizzati.",
+      "Gli sticker NFC sono la soluzione più versatile per portare l'interazione contactless su packaging, volantini, espositori e materiali promozionali. Su Shop NFC Bitora trovi tag adesivi in diversi formati, con chip NXP NTAG pronti per la programmazione URL, vCard o payload personalizzati.",
     guideTitle: "Come scegliere lo sticker NFC giusto",
     guide:
       "Per campagne marketing e link rapidi scegli NTAG213 (144 byte, ottimo rapporto costo/prestazioni). Per contenuti più ricchi o più riscritture usa NTAG216 (888 byte). Valuta il diametro in base alla distanza di lettura richiesta: 22–25 mm per uso ravvicinato, 38 mm per maggiore area di accoppiamento. Tutti i tag sono compatibili con smartphone Android e iPhone aggiornati.",
@@ -411,7 +411,7 @@ export const TAG_NFC_LANDING = {
   metaDescription:
     "Tag NFC per aziende: sticker, tessere, braccialetti, tag industriali e schermati. Programmazione inclusa, spedizione in Italia.",
   intro:
-    "Shop NFC è il catalogo B2B di Bitora per tag NFC professionali: adesivi, tessere, braccialetti, tag industriali e soluzioni on-metal. Ogni prodotto è selezionato per affidabilità e compatibilità con smartphone e lettori standard.",
+    "Shop NFC Bitora è il catalogo B2B di Bitora per tag NFC professionali: adesivi, tessere, braccialetti, tag industriali e soluzioni on-metal. Ogni prodotto è selezionato per affidabilità e compatibilità con smartphone e lettori standard.",
   sections: [
     {
       title: "Sticker e tag adesivi NFC",

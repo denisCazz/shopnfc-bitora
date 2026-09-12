@@ -1,4 +1,4 @@
-﻿# Shop NFC — PostgreSQL su VPS
+﻿# Shop NFC Bitora — PostgreSQL su VPS
 
 Stack: **Next.js** + **Drizzle ORM** + **PostgreSQL 18** + **NextAuth JWT**.
 
@@ -28,7 +28,7 @@ AUTH_URL=https://shopnfc.bitora.it
 NEXT_PUBLIC_APP_URL=https://shopnfc.bitora.it
 
 RESEND_API_KEY=re_...
-RESEND_FROM_EMAIL=Shop NFC <info@bitora.it>
+RESEND_FROM_EMAIL=Shop NFC Bitora <info@bitora.it>
 ADMIN_EMAIL=info@bitora.it
 ```
 

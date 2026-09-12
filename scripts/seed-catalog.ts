@@ -373,7 +373,7 @@ async function main() {
           active: true,
           brand: p.brand,
           imageUrl,
-          metaTitle: `${p.it} | Shop NFC`,
+          metaTitle: `${p.it} | Shop NFC Bitora`,
           metaDescription: p.shortIt,
         })
         .returning({ id: products.id });
