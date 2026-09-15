@@ -8,6 +8,7 @@ import { UserProvider } from "@/lib/user-context";
 import CartDrawer from "@/components/CartDrawer";
 import CookieBanner from "@/components/CookieBanner";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import UmamiAnalytics from "@/components/UmamiAnalytics";
 import ScrollToTop from "@/components/ScrollToTop";
 import AnnouncementPopup from "@/components/AnnouncementPopup";
 
@@ -24,6 +25,7 @@ export default function AppProviders({ children }: { children: ReactNode }) {
             <CookieBanner />
             <AnnouncementPopup />
             <GoogleAnalytics />
+            <UmamiAnalytics />
           </CartProvider>
         </UserProvider>
       </LocaleProvider>
