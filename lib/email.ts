@@ -369,7 +369,7 @@ export async function sendReceiptUploadedAdminNotification({
           <h2 style="color: #0369a1;">Contabile bonifico ricevuta</h2>
           <p style="font-size: 14px;">Il cliente <strong>${escapeHtml(customerName)}</strong> ha caricato la contabile del bonifico per l'ordine <strong>#${orderId}</strong>.</p>
           <p style="margin: 20px 0;">
-            <a href="${escapeHtml(receiptUrl)}" style="display: inline-block; padding: 10px 20px; background: #0369a1; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px;">Visualizza contabile</a>
+            <a href="${escapeHtml(absoluteUrl(receiptUrl))}" style="display: inline-block; padding: 10px 20px; background: #0369a1; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px;">Visualizza contabile</a>
           </p>
           <p style="margin-top: 16px;"><a href="https://shopnfc.bitora.it/admin/orders" style="color: #0369a1; font-size: 14px;">Gestisci ordini</a></p>
         </div>
@@ -412,6 +412,117 @@ export async function sendCustomGraphicUploadedAdminNotification({
   } catch (error) {
     console.error("Failed to send custom graphic uploaded notification:", error);
   }
+}
+
+// ============================================================
+// QUOTE REQUESTS
+// ============================================================
+
+export interface QuoteRequestEmailData {
+  quoteId: string;
+  name: string;
+  email: string;
+  phone: string;
+  company: string;
+  format: string;
+  quantity: number;
+  programming: string;
+  programmingValue: string;
+  notes: string;
+  productName: string;
+  locale: string;
+  attachments: { filename: string; content: Buffer; contentType: string }[];
+}
+
+function quoteRow(label: string, value: string) {
+  return `<tr><td style="padding: 8px; border-bottom: 1px solid #e5e7eb; font-weight: 600; width: 38%; vertical-align: top;">${label}</td><td style="padding: 8px; border-bottom: 1px solid #e5e7eb; white-space: pre-line;">${value ? escapeHtml(value) : "—"}</td></tr>`;
+}
+
+/** Returns false when the admin notification could not be delivered. */
+export async function sendQuoteRequestEmails(data: QuoteRequestEmailData): Promise<boolean> {
+  const resend = getResend();
+  if (!resend) {
+    console.warn("RESEND_API_KEY mancante: preventivo non inviato", data.quoteId);
+    return process.env.NODE_ENV !== "production";
+  }
+
+  const waText = encodeURIComponent(
+    `Ciao ${data.name}, sono Denis di Shop NFC Bitora: ho ricevuto la tua richiesta di preventivo ${data.quoteId}.`
+  );
+  const digits = data.phone.replace(/\D/g, "").replace(/^00/, "");
+  const waPhone = digits.length > 0 && digits.length <= 10 ? `39${digits}` : digits;
+  const waLink = waPhone ? `https://wa.me/${waPhone}?text=${waText}` : "";
+
+  const adminHtml = `
+    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 640px; margin: 0 auto; color: #1f2937;">
+      <h2 style="color: #0369a1; margin-bottom: 4px;">Nuova richiesta di preventivo</h2>
+      <p style="margin-top: 0; color: #6b7280; font-size: 13px;">Rif. ${escapeHtml(data.quoteId)} · lingua ${escapeHtml(data.locale)}</p>
+      <table style="width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px;">
+        ${quoteRow("Nome", data.name)}
+        ${quoteRow("Azienda", data.company)}
+        ${quoteRow("Email", data.email)}
+        ${quoteRow("Telefono", data.phone)}
+        ${quoteRow("Prodotto di partenza", data.productName)}
+        ${quoteRow("Formato", data.format)}
+        ${quoteRow("Quantità", `${data.quantity} pz`)}
+        ${quoteRow("Programmazione", data.programming)}
+        ${quoteRow("Dati da programmare", data.programmingValue)}
+        ${quoteRow("Note", data.notes)}
+      </table>
+      <p style="font-size: 14px;">Allegati: <strong>${data.attachments.length}</strong>.</p>
+      <p style="margin: 20px 0;">
+        <a href="mailto:${escapeHtml(data.email)}?subject=${encodeURIComponent(`Preventivo ${data.quoteId} — Shop NFC Bitora`)}" style="display: inline-block; padding: 10px 18px; background: #0369a1; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px; margin-right: 8px;">Rispondi via email</a>
+        ${waLink ? `<a href="${escapeHtml(waLink)}" style="display: inline-block; padding: 10px 18px; background: #1f8f4e; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px;">Scrivi su WhatsApp</a>` : ""}
+      </p>
+    </div>
+  `;
+
+  const adminResult = await resend.emails.send({
+    from: FROM_EMAIL,
+    to: ORDERS_EMAIL,
+    replyTo: data.email,
+    ...(EMAIL_BCC.length ? { bcc: EMAIL_BCC } : {}),
+    subject: `Preventivo ${data.quoteId} — ${data.quantity} pz ${data.format}${data.company ? ` · ${data.company}` : ""}`,
+    html: adminHtml,
+    attachments: data.attachments,
+  });
+  if (adminResult.error) {
+    console.error("Quote admin email failed:", adminResult.error);
+    return false;
+  }
+
+  try {
+    await resend.emails.send({
+      from: FROM_EMAIL,
+      to: data.email,
+      replyTo: ORDERS_EMAIL,
+      subject: `Abbiamo ricevuto la tua richiesta — ${SITE.name}`,
+      html: `
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; color: #1f2937;">
+          <div style="background: #0f172a; padding: 24px; border-radius: 12px 12px 0 0;">
+            <h1 style="margin: 0; color: white; font-size: 20px;">Richiesta ricevuta</h1>
+            <p style="margin: 6px 0 0; color: #7dd3fc; font-size: 13px;">Rif. ${escapeHtml(data.quoteId)}</p>
+          </div>
+          <div style="padding: 24px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 12px 12px;">
+            <p>Ciao <strong>${escapeHtml(data.name)}</strong>,</p>
+            <p>grazie! Abbiamo ricevuto la tua richiesta per <strong>${data.quantity} pz — ${escapeHtml(data.format)}</strong>.</p>
+            <p><strong>Cosa succede ora:</strong></p>
+            <ol style="padding-left: 18px; line-height: 1.6;">
+              <li>Controlliamo grafica e quantità.</li>
+              <li>Entro 24 ore lavorative ti mandiamo prezzo, tempi e, se serve, una bozza.</li>
+              <li>Approvi e procedi: realizziamo, programmiamo e spediamo.</li>
+            </ol>
+            <p>Hai fretta? Scrivici su <a href="https://wa.me/${SITE.whatsapp}" style="color: #0369a1;">WhatsApp</a> o chiama il <strong>${SITE.phone}</strong> citando il riferimento.</p>
+            <p style="margin-top: 30px; color: #6b7280; font-size: 13px;">— Il team ${SITE.name}</p>
+          </div>
+        </div>
+      `,
+    });
+  } catch (error) {
+    console.error("Quote confirmation email failed:", error);
+  }
+
+  return true;
 }
 
 /** Notify admin that a new dealer has registered and needs approval */

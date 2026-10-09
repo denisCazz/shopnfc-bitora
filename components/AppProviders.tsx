@@ -10,6 +10,7 @@ import CookieBanner from "@/components/CookieBanner";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import UmamiAnalytics from "@/components/UmamiAnalytics";
 import ScrollToTop from "@/components/ScrollToTop";
+import QuoteFab from "@/components/QuoteFab";
 import AnnouncementPopup from "@/components/AnnouncementPopup";
 
 /** Single client boundary so context providers share one module graph / React tree reliably. */
@@ -22,6 +23,7 @@ export default function AppProviders({ children }: { children: ReactNode }) {
             {children}
             <CartDrawer />
             <ScrollToTop />
+            <QuoteFab />
             <CookieBanner />
             <AnnouncementPopup />
             <GoogleAnalytics />

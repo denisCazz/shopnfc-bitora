@@ -31,6 +31,7 @@ import { chargedItalianVat, grossToNetItalianVat } from "@/lib/catalog-display-p
 import type { EuropeShippingMethod } from "@/lib/shipping";
 import AddressAutocomplete from "@/components/AddressAutocomplete";
 import CustomGraphicUploader from "@/components/CustomGraphicUploader";
+import CheckoutProgress from "@/components/CheckoutProgress";
 import PrintConditionsAcceptance from "@/components/PrintConditionsAcceptance";
 import type { AddressSuggestion } from "@/lib/address-search";
 import { parsePrintOption } from "@/lib/print-options";
@@ -640,6 +641,8 @@ export default function CheckoutClient() {
         <ArrowLeft className="w-4 h-4" />
         {t("checkout.back")}
       </Link>
+
+      <CheckoutProgress current={1} />
 
       <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
         {t("checkout.title")}

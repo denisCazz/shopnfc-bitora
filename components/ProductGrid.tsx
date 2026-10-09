@@ -6,7 +6,7 @@ import type { Product } from "@/data/products";
 import { PackageOpen, ChevronDown } from "lucide-react";
 import { useLocale } from "@/lib/locale-context";
 
-const PAGE_SIZE = 9;
+const PAGE_SIZE = 12;
 
 export default function ProductGrid({
   activeCategory,
@@ -38,18 +38,7 @@ export default function ProductGrid({
 
   return (
     <div className="flex-1 min-w-0">
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h2 className="text-xl font-bold text-foreground">{t("grid.title")}</h2>
-          <p className="text-sm text-muted mt-1">
-            {filtered.length} {filtered.length === 1 ? t("cart.item") : t("cart.items")}{" "}
-            {activeCategory ? t("grid.in_category") : t("grid.available")}
-          </p>
-          <p className="text-xs text-muted mt-1">{t("grid.price_note")}</p>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 xl:grid-cols-4">
         {visible.map((product, i) => (
           <ProductCard key={product.id} product={product} index={i} />
         ))}
@@ -65,6 +54,10 @@ export default function ProductGrid({
             {t("grid.load_more")}
           </button>
         </div>
+      )}
+
+      {filtered.length > 0 && (
+        <p className="mt-6 text-center text-xs text-muted">{t("grid.price_note")}</p>
       )}
 
       {filtered.length === 0 && (

@@ -1,7 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ShoppingCart, Check, Zap, AlertCircle } from "lucide-react";
+import Link from "next/link";
+import { ShoppingCart, Check, Zap, AlertCircle, FileText } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/lib/cart-context";
 import { useLocale } from "@/lib/locale-context";
@@ -138,7 +139,10 @@ export default function PrintOptionsCartSection({
   return (
     <div className="w-full space-y-4">
       <div className="w-full p-4 rounded-xl border border-border bg-surface/70 space-y-3">
-        <p className="text-sm font-semibold text-foreground">{t("print.option_title")}</p>
+        <p className="text-sm font-semibold text-foreground flex items-center gap-2">
+          <StepBadge n={1} />
+          {t("print.option_title")}
+        </p>
         <div className="space-y-2">
           {OPTION_KEYS.map((opt) => {
             const extra = printSurcharge(opt.value, printPrices);
@@ -182,6 +186,15 @@ export default function PrintOptionsCartSection({
           })}
         </div>
         {needsPrint && (
+          <Link
+            href={`/preventivo?prodotto=${encodeURIComponent(product.slug)}&formato=card`}
+            className="flex items-center gap-2 rounded-xl bg-sky-50 dark:bg-sky-950/30 border border-sky-200/60 dark:border-sky-800/40 px-3 py-2.5 text-sm font-medium text-accent hover:underline"
+          >
+            <FileText className="w-4 h-4 shrink-0" />
+            {t("print.preview_link")}
+          </Link>
+        )}
+        {needsPrint && (
           <PrintConditionsAcceptance
             checked={printTermsAccepted}
             onChange={(v) => {
@@ -193,13 +206,16 @@ export default function PrintOptionsCartSection({
       </div>
 
       <div className="w-full p-3 rounded-xl border border-border bg-surface/70 space-y-1">
+        <p className="text-sm font-semibold text-foreground flex items-center gap-2 mb-1">
+          <StepBadge n={2} />
+          {t("product.qty_label")}
+        </p>
         <QuantityStepper
           value={quantity}
           min={minQuantity}
           max={maxQuantity}
           onChange={setQuantity}
           unit="pz"
-          label={t("product.qty_label")}
         />
       </div>
 
@@ -220,6 +236,10 @@ export default function PrintOptionsCartSection({
         </p>
       )}
 
+      <p className="text-sm font-semibold text-foreground flex items-center gap-2 px-1">
+        <StepBadge n={3} />
+        {t("print.step_order")}
+      </p>
       <div className="flex flex-col sm:flex-row gap-3">
         <button
           type="button"
@@ -254,5 +274,13 @@ export default function PrintOptionsCartSection({
         )}
       </div>
     </div>
+  );
+}
+
+function StepBadge({ n }: { n: number }) {
+  return (
+    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground text-xs font-bold">
+      {n}
+    </span>
   );
 }

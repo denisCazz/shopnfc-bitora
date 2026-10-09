@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import LandingHeader from "@/components/LandingHeader";
 import { getUser } from "@/lib/auth";
 import { SITE } from "@/lib/site";
+import { whatsappUrl } from "@/lib/whatsapp";
 import { buildPageMetadata, breadcrumbJsonLd, faqPageJsonLd } from "@/lib/seo";
 import { TAG_NFC_PERSONALIZZATI_LANDING } from "@/lib/seo-content";
 import JsonLd from "@/components/JsonLd";
@@ -40,7 +41,13 @@ export default async function TagNfcPersonalizzatiPage() {
         </nav>
 
         <h1 className="text-3xl font-bold text-foreground mb-4">{landing.title}</h1>
-        <p className="text-muted leading-relaxed mb-10">{landing.intro}</p>
+        <p className="text-muted leading-relaxed mb-6">{landing.intro}</p>
+        <Link
+          href="/preventivo"
+          className="mb-10 inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground hover:opacity-90"
+        >
+          Richiedi un preventivo →
+        </Link>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
           {landing.services.map((service) => (
@@ -63,22 +70,35 @@ export default async function TagNfcPersonalizzatiPage() {
           </dl>
         </section>
 
-        <section className="p-6 bg-slate-700 text-slate-100 rounded-2xl">
-          <h2 className="text-lg font-semibold mb-2">Richiedi un preventivo</h2>
-          <p className="text-sm text-slate-300 mb-4">
-            Contattaci con quantità, formato e tipo di programmazione desiderata.
-            La spedizione è soggetta a disponibilità; in genere entro 7 giorni lavorativi.
+        <section className="p-6 md:p-8 bg-slate-950 text-slate-100 rounded-3xl">
+          <h2 className="text-2xl font-bold mb-2">Mandaci il logo, ti diamo il preventivo</h2>
+          <p className="text-sm text-slate-300 mb-6 max-w-2xl">
+            Indica formato, quantità e programmazione, allega logo e foto: ti rispondiamo entro 24 ore
+            lavorative con prezzo, tempi e bozza.
           </p>
-          <div className="flex flex-wrap gap-4 text-sm">
-            <a href={`tel:${SITE.phoneTel}`} className="font-medium text-white hover:underline">
+          <div className="flex flex-col sm:flex-row gap-3 mb-6">
+            <Link
+              href="/preventivo"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-sky-500 px-6 py-3.5 font-bold text-white hover:bg-sky-400"
+            >
+              Richiedi preventivo →
+            </Link>
+            <a
+              href={whatsappUrl("Ciao, vorrei un preventivo per tag NFC personalizzati.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#1f8f4e] px-6 py-3.5 font-semibold text-white hover:bg-[#22a358]"
+            >
+              WhatsApp
+            </a>
+          </div>
+          <div className="flex flex-wrap gap-4 text-sm text-slate-400">
+            <a href={`tel:${SITE.phoneTel}`} className="hover:text-white">
               {SITE.phone}
             </a>
-            <a href={`mailto:${SITE.email}`} className="font-medium text-white hover:underline">
+            <a href={`mailto:${SITE.email}`} className="hover:text-white">
               {SITE.email}
             </a>
-            <Link href="/assistenza" className="font-medium text-sky-300 hover:underline">
-              Assistenza →
-            </Link>
           </div>
         </section>
       </main>

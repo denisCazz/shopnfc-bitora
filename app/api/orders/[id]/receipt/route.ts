@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { mkdir, writeFile } from "fs/promises";
-import path from "path";
 import { eq } from "drizzle-orm";
 import { auth } from "@/auth";
 import { getDb } from "@/db";
 import { orders } from "@/db/schema";
 import { verifyPayload } from "@/lib/signed-payload";
 import { sendReceiptUploadedAdminNotification } from "@/lib/email";
+import { privateDir, privateOrderFileUrl } from "@/lib/private-storage";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
 const ALLOWED_TYPES = [
@@ -98,10 +98,10 @@ export async function POST(
   const ext = EXT_BY_TYPE[file.type] || ".bin";
   const safeName = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}${ext}`;
   const bytes = new Uint8Array(await file.arrayBuffer());
-  const receiptDir = path.join(process.cwd(), "public", "uploads", "receipts", String(orderId));
+  const receiptDir = privateDir("receipts", String(orderId));
   await mkdir(receiptDir, { recursive: true });
-  await writeFile(path.join(receiptDir, safeName), bytes);
-  const receiptUrl = `/uploads/receipts/${orderId}/${safeName}`;
+  await writeFile(`${receiptDir}/${safeName}`, bytes);
+  const receiptUrl = privateOrderFileUrl("receipts", orderId, safeName);
 
   await db
     .update(orders)

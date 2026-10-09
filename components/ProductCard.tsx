@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ShoppingCart, Eye, X } from "lucide-react";
+import { ShoppingCart, Palette, X } from "lucide-react";
 import { type Product } from "@/data/products";
 import { useCart } from "@/lib/cart-context";
 import { useLocale } from "@/lib/locale-context";
@@ -35,8 +35,6 @@ export default function ProductCard({
 
   // Locale-aware name & description
   const localizedName = (locale !== "it" && product[`name_${locale}` as keyof typeof product] as string) || product.name;
-  const localizedDescription = (locale !== "it" && product[`description_${locale}` as keyof typeof product] as string) || product.description;
-
   const discountedPrice = dealerDiscount
     ? product.price * (1 - dealerDiscount / 100)
     : product.price;
@@ -124,103 +122,78 @@ export default function ProductCard({
     setBoardDisplayText("");
   }
 
+  const cardButtonClass = `mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl px-3 py-2.5 text-xs font-bold transition-all duration-200 sm:text-sm ${
+    outOfStock
+      ? "cursor-not-allowed bg-stone-200 text-stone-500"
+      : "bg-sky-500 text-white hover:bg-sky-600 hover:shadow-lg hover:shadow-sky-500/25 active:scale-[0.98]"
+  }`;
+
   return (
     <div
-      className="product-card-in group relative bg-surface border border-border rounded-2xl overflow-hidden transition-all duration-300 hover:border-accent/30 hover:shadow-lg hover:shadow-sky-500/10"
-      style={{ animationDelay: `${Math.min(index * 50, 300)}ms` }}
+      className="product-card-in group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:border-accent/30 hover:shadow-xl hover:shadow-sky-500/10"
+      style={{ animationDelay: `${Math.min(index * 40, 240)}ms` }}
     >
-      <Link href={`/products/${product.slug}`} className="block">
-        <div className="relative aspect-[4/3] bg-gradient-to-br from-stone-50 to-sky-50/30 overflow-hidden">
+      <Link href={`/products/${product.slug}`} className="flex flex-1 flex-col">
+        <div className="relative aspect-square overflow-hidden bg-white">
           {product.image && !imgError ? (
             <Image
               src={product.image}
               alt={localizedName}
               fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              sizes="(max-width: 640px) 50vw, (max-width: 1280px) 33vw, 280px"
               quality={85}
-              className="object-contain p-4 transition-transform duration-500 group-hover:scale-110"
+              className="object-contain p-3 transition-transform duration-500 group-hover:scale-105"
               onError={() => setImgError(true)}
             />
           ) : (
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center p-6">
-                <div className="w-14 h-14 mx-auto mb-2 rounded-2xl bg-stone-100 dark:bg-stone-800 border border-border flex items-center justify-center">
-                  <span className="text-xl font-bold text-muted/40">
-                    {localizedName.charAt(0)}
-                  </span>
-                </div>
-                <p className="text-[11px] text-muted/50">{t("product.image_na")}</p>
-              </div>
+              <span className="text-3xl font-bold text-muted/30">{localizedName.charAt(0)}</span>
             </div>
           )}
 
-          <span className="absolute top-3 left-3 px-2.5 py-1 rounded-lg bg-surface/90 backdrop-blur-md text-[11px] font-medium text-muted border border-border/50 shadow-sm z-10">
-            {t(`cat.${product.categorySlug}`) || product.category}
-          </span>
-
-          {/* Out of stock badge */}
-          {product.stockQuantity !== undefined && product.stockQuantity <= 0 && (
-            <span className="absolute top-3 right-3 px-2.5 py-1 rounded-lg bg-red-600 text-white text-[11px] font-bold uppercase shadow-sm z-10">
+          {outOfStock && (
+            <span className="absolute left-2.5 top-2.5 z-10 rounded-md bg-red-600 px-2 py-0.5 text-[10px] font-bold uppercase text-white">
               {t("product.out_of_stock")}
             </span>
           )}
-
-          {/* Desktop hover overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:flex items-end justify-center pb-5 z-10">
-            <span className="flex items-center gap-2 px-4 py-2 rounded-xl bg-surface/90 backdrop-blur-md text-sm font-medium text-foreground border border-surface/50 shadow-sm">
-              <Eye className="w-4 h-4" />
-              {t("product.details")}
+          {!outOfStock && needsPrintOption && (
+            <span className="absolute left-2.5 top-2.5 z-10 rounded-md bg-slate-950 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
+              {t("card.printable")}
             </span>
-          </div>
+          )}
         </div>
 
-        <div className="p-4">
-          <h3 className="font-semibold text-sm leading-snug mb-1.5 line-clamp-2 text-foreground group-hover:text-accent transition-colors duration-200">
+        <div className="flex flex-1 flex-col px-3 pt-3 sm:px-4">
+          <p className="mb-1 truncate text-[10px] font-semibold uppercase tracking-wider text-muted">
+            {t(`cat.${product.categorySlug}`) || product.category}
+          </p>
+          <h3 className="line-clamp-2 text-sm font-semibold leading-snug text-foreground transition-colors group-hover:text-accent">
             {localizedName}
           </h3>
-          <p className="text-xs text-muted line-clamp-2 mb-4 leading-relaxed">
-            {localizedDescription}
-          </p>
+          <div className="mt-auto pt-2">
+            <PriceDisplay
+              price={product.price}
+              className={`text-lg font-bold tabular-nums ${dealerDiscount ? "" : "text-foreground"}`}
+            />
+            <p className="text-[11px] text-muted">
+              {t("card.min_qty").replace("{n}", String(minQuantity))}
+            </p>
+          </div>
         </div>
       </Link>
 
-      <div className="px-4 pb-4 flex items-center justify-between gap-2">
-        <div className="flex flex-col min-w-0">
-          <PriceDisplay
-            price={product.price}
-            className={`tabular-nums ${
-              dealerDiscount ? "text-lg font-bold" : "text-lg font-bold text-accent"
-            }`}
-          />
-          {needsPrintOption && (
-            <span className="text-[11px] text-muted">{t("print.option_title")}</span>
-          )}
-        </div>
-        <button
-          onClick={handleAddToCart}
-          disabled={outOfStock}
-          className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-white text-xs font-semibold transition-all duration-200 shrink-0 ${
-            outOfStock
-              ? "bg-stone-400 cursor-not-allowed opacity-60"
-              : "bg-gradient-to-r from-sky-400 to-sky-600 hover:shadow-lg hover:shadow-sky-500/25 hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
-          }`}
-        >
-          <ShoppingCart className="w-3.5 h-3.5" />
-          <span className="hidden sm:inline">
+      <div className="px-3 pb-3 sm:px-4 sm:pb-4">
+        {needsPrintOption && !outOfStock ? (
+          <Link href={`/products/${product.slug}`} className={cardButtonClass}>
+            <Palette className="h-4 w-4" />
+            {t("card.customize")}
+          </Link>
+        ) : (
+          <button onClick={handleAddToCart} disabled={outOfStock} className={cardButtonClass}>
+            <ShoppingCart className="h-4 w-4" />
             {outOfStock ? t("product.out_of_stock") : t("product.add")}
-          </span>
-        </button>
-      </div>
-
-      {/* Mobile: view details button */}
-      <div className="px-4 pb-4 md:hidden">
-        <Link
-          href={`/products/${product.slug}`}
-          className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl border border-accent/30 text-accent text-xs font-semibold hover:bg-accent/5 transition-colors duration-200"
-        >
-          <Eye className="w-3.5 h-3.5" />
-          {t("product.details")}
-        </Link>
+          </button>
+        )}
       </div>
 
       {/* Board programming modal */}

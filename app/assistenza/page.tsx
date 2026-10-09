@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, Phone, Mail, Clock, MapPin, RotateCcw } from "lucide-react";
+import { ArrowLeft, Phone, Mail, Clock, MapPin, RotateCcw, MessageCircle, FileText } from "lucide-react";
 import { useLocale } from "@/lib/locale-context";
+import { SITE } from "@/lib/site";
+import { whatsappUrl } from "@/lib/whatsapp";
 
 export default function AssistenzaPage() {
   const { t } = useLocale();
@@ -26,6 +28,29 @@ export default function AssistenzaPage() {
         </p>
 
         <div className="space-y-6">
+          <section className="rounded-2xl bg-slate-950 text-white p-6">
+            <h2 className="text-lg font-semibold mb-1">{t("assistenza.quick_title")}</h2>
+            <p className="text-sm text-slate-300 mb-4">{t("assistenza.quick_text")}</p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <a
+                href={whatsappUrl(t("fab.wa_text"))}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#1f8f4e] px-5 py-3 text-sm font-semibold hover:bg-[#22a358]"
+              >
+                <MessageCircle className="w-4 h-4" />
+                WhatsApp
+              </a>
+              <Link
+                href="/preventivo"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-sky-500 px-5 py-3 text-sm font-semibold hover:bg-sky-400"
+              >
+                <FileText className="w-4 h-4" />
+                {t("fab.quote")}
+              </Link>
+            </div>
+          </section>
+
           {/* Telefono */}
           <section className="bg-surface rounded-2xl border border-[var(--color-muted)]/30 p-6">
             <div className="flex items-center gap-3 mb-4">
@@ -123,7 +148,7 @@ export default function AssistenzaPage() {
               Bitora di Denis Cazzulo — Carmagnola, 10022 Carmagnola (TO)
             </p>
             <a
-              href="https://www.google.com/maps/search/?api=1&query=Bitora+snc+Viale+Istria+1+Conegliano+TV"
+              href={`https://www.google.com/maps/search/?api=1&query=${SITE.mapsQuery}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 mt-3 px-4 py-2.5 rounded-xl bg-gradient-to-r from-sky-400 to-sky-600 text-white text-xs font-semibold hover:shadow-lg hover:shadow-sky-500/25 transition-all duration-200 hover:-translate-y-0.5 active:scale-95"

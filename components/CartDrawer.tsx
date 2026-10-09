@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { X, Plus, Minus, Trash2, ShoppingBag } from "lucide-react";
+import { X, Plus, Minus, Trash2, ShoppingBag, ShieldCheck, Cpu, Headphones } from "lucide-react";
 import { useCart, cartLineId } from "@/lib/cart-context";
 import { useLocale } from "@/lib/locale-context";
 import { useCatalogDisplayPrice } from "@/lib/use-catalog-display-price";
@@ -164,6 +164,23 @@ export default function CartDrawer() {
                 <span className="text-lg font-bold text-foreground">{formatCatalogPrice(totalPrice)}</span>
               </div>
               <p className="text-xs text-muted">{t("cart.shipping_note")}</p>
+              <ul className="grid grid-cols-3 gap-2 text-[11px] text-muted">
+                {[
+                  { icon: ShieldCheck, k: "cart.trust_secure" },
+                  { icon: Cpu, k: "cart.trust_programming" },
+                  { icon: Headphones, k: "cart.trust_support" },
+                ].map(({ icon: Icon, k }) => (
+                  <li key={k} className="flex flex-col items-center gap-1 text-center rounded-lg bg-background border border-border/60 px-1.5 py-2">
+                    <Icon className="w-4 h-4 text-accent" />
+                    {t(k)}
+                  </li>
+                ))}
+              </ul>
+              {items.some((i) => i.printOption && i.printOption !== "none") && (
+                <p className="text-xs rounded-lg bg-sky-50 dark:bg-sky-950/30 border border-sky-200/60 dark:border-sky-800/40 px-3 py-2 text-foreground">
+                  {t("cart.print_next")}
+                </p>
+              )}
               <Link
                 href="/checkout"
                 onClick={closeCart}

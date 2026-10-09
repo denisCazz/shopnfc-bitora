@@ -21,6 +21,8 @@ import TranslatedText from "@/components/TranslatedText";
 import LocalizedText from "@/components/LocalizedText";
 import ProductImageCarousel from "@/components/ProductImageCarousel";
 import { SITE } from "@/lib/site";
+import { quoteFormatForCategory } from "@/lib/quote-request";
+import { FileText } from "lucide-react";
 import { buildPageMetadata, breadcrumbJsonLd, productJsonLd } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
 
@@ -73,6 +75,7 @@ export default async function ProductDetailPage({
   ]);
 
   const productName = product.name_it || product.name;
+  const quoteFormat = quoteFormatForCategory(product.categorySlug);
   const productDescription = product.descriptionShort || product.description;
 
   return (
@@ -259,6 +262,21 @@ export default async function ProductDetailPage({
                   />
                 )}
               </div>
+
+              {quoteFormat && !productNeedsPrintOption({ categorySlug: product.categorySlug }) && (
+                <Link
+                  href={`/preventivo?prodotto=${encodeURIComponent(product.slug)}&formato=${quoteFormat}`}
+                  className="mt-6 group flex items-center gap-4 rounded-2xl border border-sky-200/70 dark:border-sky-800/50 bg-gradient-to-r from-sky-50 to-white dark:from-sky-950/40 dark:to-transparent p-4 hover:border-accent/50 transition-colors"
+                >
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-foreground">
+                    <FileText className="h-5 w-5" />
+                  </span>
+                  <span className="min-w-0">
+                    <TranslatedText k="product.custom_title" as="span" className="block font-semibold text-foreground group-hover:text-accent" />
+                    <TranslatedText k="product.custom_text" as="span" className="block text-sm text-muted" />
+                  </span>
+                </Link>
+              )}
 
               <div className="mt-8 space-y-3">
                 <div className="flex items-center gap-3 text-sm text-muted">

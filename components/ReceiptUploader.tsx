@@ -79,7 +79,7 @@ export default function ReceiptUploader({
             Contabile caricata
           </span>
           <a
-            href={uploadedUrl}
+            href={token ? `${uploadedUrl}?t=${encodeURIComponent(token)}` : uploadedUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1 text-sm font-medium text-green-700 dark:text-green-300 underline ml-1"

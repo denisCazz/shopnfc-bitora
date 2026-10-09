@@ -32,3 +32,5 @@ prestashop_dump.sql
 *.sql.gz
 *.pem
 *.log
+
+storage

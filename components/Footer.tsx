@@ -6,6 +6,7 @@ import { Mail, Phone, MapPin } from "lucide-react";
 import { useLocale } from "@/lib/locale-context";
 import ThemeToggle from "@/components/ThemeToggle";
 import { SITE } from "@/lib/site";
+import { whatsappUrl } from "@/lib/whatsapp";
 
 const infoLinkKeys = [
   { key: "footer.info_how_to_buy", href: "/come-acquistare" },
@@ -27,6 +28,7 @@ const catalogLinks = [
   { href: "/categories/soluzioni-nfc", label: "Soluzioni NFC" },
   { href: "/tag-nfc", label: "Tag NFC per aziende" },
   { href: "/tag-nfc-personalizzati", label: "Tag NFC personalizzati" },
+  { href: "/preventivo", label: "Richiedi preventivo" },
   { href: "/assistenza", label: "Assistenza" },
 ];
 
@@ -84,7 +86,7 @@ export default function Footer() {
                 </a>
               </div>
               <a
-                href={`https://wa.me/${SITE.whatsapp}`}
+                href={whatsappUrl("Ciao, vorrei un preventivo per tag NFC.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 mt-2 px-4 py-2 rounded-full bg-[#1f8f4e] text-white text-xs font-semibold hover:bg-[#22a358] transition-colors"

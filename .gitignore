@@ -47,6 +47,7 @@ next-env.d.ts
 
 # upload utente (prodotti e contabili)
 /public/uploads/**
+/storage/
 !/public/uploads/.gitkeep
 
 # local dumps (keep db/migrations/*.sql)

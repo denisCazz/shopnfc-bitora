@@ -39,6 +39,7 @@ RUN apk add --no-cache libc6-compat && \
 COPY --from=build /app/.next/standalone ./
 COPY --from=build /app/.next/static ./.next/static
 COPY --from=build /app/public ./public
+RUN mkdir -p /app/storage/quotes /app/storage/graphics /app/storage/receipts && chown -R nextjs:nodejs /app/storage
 
 USER nextjs
 EXPOSE 3000

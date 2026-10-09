@@ -1,4 +1,6 @@
-﻿export const locales = ["it", "en", "fr", "es"] as const;
+﻿import { QUOTE_TRANSLATIONS } from "@/lib/i18n-quote";
+
+export const locales = ["it", "en", "fr", "es"] as const;
 export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = "it";
 
@@ -1800,6 +1802,10 @@ const translations: Record<Locale, Record<string, string>> = {
     "common.loading": "Cargando...",
   },
 };
+
+for (const locale of locales) {
+  Object.assign(translations[locale], QUOTE_TRANSLATIONS[locale]);
+}
 
 export function t(key: string, locale: Locale = defaultLocale): string {
   return translations[locale]?.[key] ?? translations[defaultLocale][key] ?? key;

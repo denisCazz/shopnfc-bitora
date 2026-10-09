@@ -2,6 +2,7 @@ import { mkdir, readdir, rename, unlink, writeFile } from "fs/promises";
 import path from "path";
 import sharp from "sharp";
 import { verifyPayload } from "@/lib/signed-payload";
+import { privateDir, privateOrderFileUrl } from "@/lib/private-storage";
 
 export const CUSTOM_GRAPHIC_MAX_BYTES = 10 * 1024 * 1024;
 export const CUSTOM_GRAPHIC_MIN_LONG_SIDE = 1000;
@@ -10,7 +11,7 @@ export const CUSTOM_GRAPHIC_PENDING_TTL_MS = 2 * 60 * 60 * 1000;
 const PNG_MAGIC = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
 const PDF_MAGIC = [0x25, 0x50, 0x44, 0x46]; // %PDF
 
-const GRAPHICS_ROOT = path.join(process.cwd(), "public", "uploads", "graphics");
+const GRAPHICS_ROOT = privateDir("graphics");
 const PENDING_DIR = path.join(GRAPHICS_ROOT, "pending");
 
 export type CustomGraphicKind = "png" | "pdf";
@@ -56,7 +57,7 @@ export function isSafeGraphicFileName(name: string): boolean {
 }
 
 export function publicGraphicUrl(orderId: number, fileName: string): string {
-  return `/uploads/graphics/${orderId}/${fileName}`;
+  return privateOrderFileUrl("graphics", orderId, fileName);
 }
 
 function orderGraphicDir(orderId: number): string {
