@@ -25,7 +25,8 @@ docs
 nginx
 ex_supabase
 supabase
-scripts
+scripts/*
+!scripts/migrate-deploy.mjs
 
 # dumps
 prestashop_dump.sql

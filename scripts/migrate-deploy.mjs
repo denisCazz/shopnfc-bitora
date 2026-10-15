@@ -252,5 +252,9 @@ async function runMigrations() {
 
 runMigrations().catch((err) => {
   console.error("[db:migrate] Errore durante la migrazione database:", err);
+  if (skipIfNoDb) {
+    console.warn("[db:migrate] Proseguo poiché è stato passato --if-db.");
+    process.exit(0);
+  }
   process.exit(1);
 });
