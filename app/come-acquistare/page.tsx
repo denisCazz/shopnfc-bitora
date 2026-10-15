@@ -52,8 +52,12 @@ export default function ComeAcquistarePage() {
               <p>{t("how_to_buy.payment_intro")}</p>
               <ul className="list-disc list-inside space-y-1 ml-2">
                 <li>{t("how_to_buy.payment_card")}</li>
+                <li>Bonifico Bancario Anticipato (con caricamento contabile online per velocizzare l&apos;evasione)</li>
               </ul>
               <p>{t("how_to_buy.payment_note")}</p>
+              <p className="pt-2 text-xs text-amber-800 dark:text-amber-300 font-medium">
+                Nota per prodotti con stampa personalizzata: l&apos;accettazione definitiva dell&apos;ordine è subordinata alla verifica e all&apos;approvazione della grafica da parte del nostro fornitore. Dopo che ci avrai inviato la grafica e avremo inoltrato l&apos;ordine, il fornitore ci fornirà una preview di stampa che ti invieremo: se la accetti si prosegue in produzione, altrimenti l&apos;ordine viene messo in stop e si rifà la grafica.
+              </p>
             </div>
           </section>
 

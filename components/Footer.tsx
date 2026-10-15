@@ -29,6 +29,7 @@ const catalogLinks = [
   { href: "/tag-nfc", label: "Tag NFC per aziende" },
   { href: "/tag-nfc-personalizzati", label: "Tag NFC personalizzati" },
   { href: "/preventivo", label: "Richiedi preventivo" },
+  { href: "/tracking", label: "Traccia il tuo ordine" },
   { href: "/assistenza", label: "Assistenza" },
 ];
 
@@ -131,7 +132,11 @@ export default function Footer() {
               {t("footer.payments")}
             </h4>
             <div className="flex flex-col gap-1.5 mb-6">
-              {["Stripe", "Carta di credito e debito"].map((m) => (
+              {[
+                "Carta di credito e debito (Stripe)",
+                "Apple Pay & Google Pay",
+                "Bonifico Bancario Anticipato",
+              ].map((m) => (
                 <span key={m} className="inline-flex items-center gap-1.5 text-sm text-slate-300">
                   <span className="w-1.5 h-1.5 rounded-full bg-sky-400/70 shrink-0" />
                   {m}

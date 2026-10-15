@@ -21,7 +21,7 @@ export default function ProductCard({
   index?: number;
 }) {
   const [imgError, setImgError] = useState(false);
-  const { addItem } = useCart();
+  const { addItem, openCart } = useCart();
   const { t, locale } = useLocale();
   const { dealerDiscount } = useUser();
   const [showBoardModal, setShowBoardModal] = useState(false);
@@ -62,6 +62,7 @@ export default function ProductCard({
       lineKey,
       lineNotes,
     }, quantity);
+    openCart();
   }
 
   function handleAddToCart(e: React.MouseEvent) {

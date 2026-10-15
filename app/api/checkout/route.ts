@@ -29,6 +29,7 @@ import { getPricingConfig } from "@/lib/pricing-server";
 import { minQuantityForProduct } from "@/lib/min-quantity";
 import {
   discountErrorMessage,
+  redeemDiscountCode,
   resolveCheckoutDiscount,
 } from "@/lib/discount-codes";
 import {
@@ -38,6 +39,9 @@ import {
   type PrintOption,
 } from "@/lib/print-options";
 import { getPrintConfig } from "@/lib/print-options-server";
+import { signPayload } from "@/lib/signed-payload";
+import { sendOrderConfirmationEmail, sendNewOrderAdminNotification } from "@/lib/email";
+import { SITE } from "@/lib/site";
 
 interface LineItem {
   id: number;
@@ -72,6 +76,7 @@ export async function POST(req: NextRequest) {
       items,
       shippingInfo,
       billingInfo,
+      paymentMethod: rawPaymentMethod,
       europeShippingMethod,
       acceptedTerms,
       customGraphicToken,
@@ -92,6 +97,7 @@ export async function POST(req: NextRequest) {
         notes?: string;
       };
       billingInfo?: BillingInfo;
+      paymentMethod?: "stripe" | "bank_transfer";
       europeShippingMethod?: EuropeShippingMethod;
       acceptedTerms?: boolean;
       customGraphicToken?: string;
@@ -99,6 +105,8 @@ export async function POST(req: NextRequest) {
       printTermsAccepted?: boolean;
       discountCode?: string;
     };
+    const chosenPaymentMethod: "stripe" | "bank_transfer" =
+      rawPaymentMethod === "bank_transfer" ? "bank_transfer" : "stripe";
 
     if (!items?.length) {
       return NextResponse.json({ error: "Carrello vuoto" }, { status: 400 });
@@ -321,16 +329,9 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Clienti registrati con indirizzo di riferimento: zona e tariffa forzate dal
-    // profilo, senza possibilità di scelta (incluso il metodo Europa). I guest e
-    // gli utenti senza indirizzo salvato usano i dati inseriti nel form.
-    const useReferenceAddress = !!(user?.id && profileCountry);
-    const shippingCountryCode = useReferenceAddress
-      ? profileCountry!
-      : formCountryCode;
-    const shippingProvince = useReferenceAddress
-      ? profileProvince
-      : shippingInfo.province;
+    // Usa il paese e la provincia indicati nel form di spedizione (con fallback al profilo)
+    const shippingCountryCode = formCountryCode || profileCountry || "IT";
+    const shippingProvince = shippingInfo.province || profileProvince;
 
     const zone = getShippingZone(
       shippingCountryCode,
@@ -338,7 +339,7 @@ export async function POST(req: NextRequest) {
       shippingConfig
     );
     const shippingCost =
-      zone === "europe" && europeShippingMethod && !useReferenceAddress
+      zone === "europe" && europeShippingMethod
         ? calculateEuropeShippingCost(europeShippingMethod, shippingConfig)
         : calculateShippingCost(totalWeight, zone, shippingConfig);
 
@@ -464,8 +465,8 @@ export async function POST(req: NextRequest) {
           userId: user?.id || null,
           guestEmail: !user ? shippingInfo.email : null,
           status: "pending",
-          paymentMethod: "stripe",
-          paymentStatus: "stripe_pending",
+          paymentMethod: chosenPaymentMethod,
+          paymentStatus: chosenPaymentMethod === "bank_transfer" ? "pending" : "stripe_pending",
           subtotal: String(persistedSubtotal),
           shippingCost: String(totalShippingCost),
           taxAmount: String(persistedTaxAmount),
@@ -486,7 +487,7 @@ export async function POST(req: NextRequest) {
       if (!o) throw new Error("no id");
       orderId = o.id;
     } catch (orderError) {
-      console.error("Failed to create Stripe order:", orderError);
+      console.error("Failed to create order:", orderError);
       return NextResponse.json(
         { error: "Errore nella creazione dell'ordine" },
         { status: 500 }
@@ -511,9 +512,11 @@ export async function POST(req: NextRequest) {
     try {
       await db.insert(orderItems).values(rows);
     } catch (itemsErr) {
-      console.error("Failed to save Stripe order items:", itemsErr);
+      console.error("Failed to save order items:", itemsErr);
     }
 
+    let claimedGraphicUrl: string | null = null;
+    let claimedGraphicName: string | null = null;
     if (graphicToken) {
       const claimed = await claimPendingGraphic(graphicToken, orderId);
       if (!claimed.ok) {
@@ -523,6 +526,8 @@ export async function POST(req: NextRequest) {
           .where(eq(orders.id, orderId));
         return NextResponse.json({ error: claimed.error }, { status: claimed.status });
       }
+      claimedGraphicUrl = claimed.url;
+      claimedGraphicName = claimed.originalName;
       await db
         .update(orders)
         .set({
@@ -532,6 +537,53 @@ export async function POST(req: NextRequest) {
           updatedAt: new Date(),
         })
         .where(eq(orders.id, orderId));
+    }
+
+    if (chosenPaymentMethod === "bank_transfer") {
+      await redeemDiscountCode(orderId);
+      let receiptToken = "";
+      let receiptUploadUrl: string | undefined;
+      try {
+        receiptToken = signPayload({ orderId, scope: "receipt" });
+        receiptUploadUrl = `${SITE.url}/ordine/${orderId}/contabile?t=${encodeURIComponent(receiptToken)}`;
+      } catch {
+        // Fallback if AUTH_SECRET is not set in local dev
+      }
+
+      const emailData = {
+        orderId,
+        customerEmail: shippingInfo.email,
+        customerName: shippingInfo.name,
+        receiptUploadUrl,
+        customGraphicUrl: claimedGraphicUrl,
+        customGraphicOriginalName: claimedGraphicName,
+        items: rows.map((r) => ({
+          product_name: r.productName,
+          product_sku: r.productSku,
+          quantity: r.quantity,
+          unit_price: Number(r.unitPrice),
+          discount_percent: r.discountPercent,
+          line_total: Number(r.lineTotal),
+        })),
+        subtotal: persistedSubtotal,
+        shippingCost: totalShippingCost,
+        discountCode: discount.applied ? discount.code : null,
+        discountAmount,
+        total,
+        paymentMethod: "bank_transfer",
+        shippingAddress,
+        billingInfo: billingAddress,
+      };
+
+      await Promise.allSettled([
+        sendOrderConfirmationEmail(emailData),
+        sendNewOrderAdminNotification(emailData),
+      ]);
+
+      const successUrl = `/checkout/success?order=${orderId}&method=bank_transfer${
+        receiptToken ? `&t=${encodeURIComponent(receiptToken)}` : ""
+      }`;
+      return NextResponse.json({ url: successUrl, orderId });
     }
 
     try {

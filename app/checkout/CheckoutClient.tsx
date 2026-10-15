@@ -180,6 +180,8 @@ export default function CheckoutClient() {
   const [city, setCity] = useState("");
   const [zip, setZip] = useState("");
   const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState<"stripe" | "bank_transfer">("stripe");
+  const [graphicUploadChoice, setGraphicUploadChoice] = useState<"now" | "later">("now");
   const [graphicToken, setGraphicToken] = useState<string | null>(null);
   const [graphicDisclaimer, setGraphicDisclaimer] = useState(false);
   const [graphicBusy, setGraphicBusy] = useState(false);
@@ -200,11 +202,9 @@ export default function CheckoutClient() {
     setError(key ? t(key) : `Errore pagamento: ${code}`);
   }, [searchParams, t]);
 
-  // Clienti registrati con indirizzo di riferimento: la spedizione è determinata
-  // automaticamente dall'indirizzo salvato (paese/provincia), senza scelta di
-  // zona né di metodo. Così un cliente estero non può finire sulla tariffa
-  // italiana e un cliente sulle isole vede solo la tariffa Isole/Calabria.
-  const lockShipping = profileLoaded && !!profile?.country;
+  // I dati del profilo vengono precompilati ma restano liberamente modificabili
+  // (es. spedizione presso sede secondaria, cliente finale o fiera/evento).
+  const lockShipping = false;
 
   // Fetch user profile for pre-fill
   useEffect(() => {
@@ -556,11 +556,12 @@ export default function CheckoutClient() {
           })),
           shippingInfo,
           billingInfo,
+          paymentMethod,
           acceptedTerms: true,
           ...(hasPrint || graphicToken
             ? { printTermsAccepted: graphicDisclaimer }
             : {}),
-          ...(graphicToken
+          ...(graphicToken && graphicUploadChoice === "now"
             ? {
                 customGraphicToken: graphicToken,
                 customGraphicDisclaimerAccepted: graphicDisclaimer,
@@ -899,19 +900,69 @@ export default function CheckoutClient() {
               </h2>
             </div>
             <p className="text-sm text-muted mb-4">{t("checkout.graphic_later")}</p>
+
+            {/* Scelta modalità invio grafica */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-4">
+              <button
+                type="button"
+                onClick={() => setGraphicUploadChoice("now")}
+                className={`p-3 rounded-xl border text-left transition-all ${
+                  graphicUploadChoice === "now"
+                    ? "border-accent bg-sky-50/70 dark:bg-sky-950/30"
+                    : "border-border hover:border-accent/40"
+                }`}
+              >
+                <span className="block text-sm font-semibold text-foreground">
+                  Carica ora il file di stampa
+                </span>
+                <span className="block text-xs text-muted mt-0.5">
+                  Allega subito PNG o PDF definitivo (max 10 MB)
+                </span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setGraphicUploadChoice("later");
+                  setGraphicToken(null);
+                }}
+                className={`p-3 rounded-xl border text-left transition-all ${
+                  graphicUploadChoice === "later"
+                    ? "border-accent bg-sky-50/70 dark:bg-sky-950/30"
+                    : "border-border hover:border-accent/40"
+                }`}
+              >
+                <span className="block text-sm font-semibold text-foreground">
+                  Invia la grafica dopo l&apos;ordine
+                </span>
+                <span className="block text-xs text-muted mt-0.5">
+                  Concludi ora e carica il file da «I miei ordini» o via email
+                </span>
+              </button>
+            </div>
+
             <PrintConditionsAcceptance
               checked={graphicDisclaimer}
               onChange={setGraphicDisclaimer}
               id="checkout-print-terms"
             />
-            <div className="mt-4">
-              <CustomGraphicUploader
-                mode="pending"
-                disclaimerAccepted={graphicDisclaimer}
-                onTokenChange={setGraphicToken}
-                onBusyChange={setGraphicBusy}
-              />
-            </div>
+            {graphicUploadChoice === "now" ? (
+              <div className="mt-4">
+                <CustomGraphicUploader
+                  mode="pending"
+                  disclaimerAccepted={graphicDisclaimer}
+                  onTokenChange={setGraphicToken}
+                  onBusyChange={setGraphicBusy}
+                />
+              </div>
+            ) : (
+              <div className="mt-4 rounded-xl border border-sky-200 dark:border-sky-800/60 bg-sky-50/60 dark:bg-sky-950/25 px-4 py-3 text-xs text-foreground">
+                Potrai caricare il file PNG/PDF definitivo in qualsiasi momento dalla sezione{" "}
+                <strong>I miei ordini</strong> oppure inviarlo a{" "}
+                <span className="font-semibold text-accent">info@bitora.it</span> citando il numero
+                d&apos;ordine. La produzione partirà dopo la verifica e l&apos;accettazione della
+                grafica da parte del nostro fornitore.
+              </div>
+            )}
           </div>
           )}
 
@@ -1047,14 +1098,97 @@ export default function CheckoutClient() {
                 {t("checkout.payment")}
               </h2>
             </div>
-            <div className="flex items-start gap-3 p-4 rounded-xl border border-accent bg-sky-50/50 dark:bg-sky-950/20">
-              <Lock className="w-4 h-4 text-accent mt-0.5 shrink-0" />
-              <div>
-                <p className="font-semibold text-foreground text-sm">Stripe</p>
-                <p className="text-xs text-muted mt-1">
-                  {t("checkout.payment.stripe_description")}
-                </p>
-              </div>
+
+            <div className="space-y-3">
+              {/* Option 1: Stripe (Card, Apple Pay, Google Pay) */}
+              <label
+                className={`flex items-start justify-between gap-3 p-4 rounded-xl border cursor-pointer transition-all ${
+                  paymentMethod === "stripe"
+                    ? "border-accent bg-sky-50/50 dark:bg-sky-950/20 ring-1 ring-accent/20"
+                    : "border-border hover:border-accent/40"
+                }`}
+              >
+                <div className="flex items-start gap-3">
+                  <input
+                    type="radio"
+                    name="paymentMethodRadio"
+                    checked={paymentMethod === "stripe"}
+                    onChange={() => setPaymentMethod("stripe")}
+                    className="mt-1 text-accent focus:ring-accent/30"
+                  />
+                  <div>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <p className="font-semibold text-foreground text-sm">
+                        Carta di Credito / Debito, Apple Pay, Google Pay
+                      </p>
+                      <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-emerald-100 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300">
+                        Immediato
+                      </span>
+                    </div>
+                    <p className="text-xs text-muted mt-1">
+                      {t("checkout.payment.stripe_description")}
+                    </p>
+                    <div className="flex flex-wrap items-center gap-1.5 mt-2.5">
+                      {["VISA", "Mastercard", "Amex", "Apple Pay", "Google Pay"].map((badge) => (
+                        <span
+                          key={badge}
+                          className="px-2 py-0.5 rounded border border-border bg-background text-[10px] font-semibold text-foreground/80"
+                        >
+                          {badge}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <Lock className="w-4 h-4 text-accent mt-0.5 shrink-0" />
+              </label>
+
+              {/* Option 2: Bank Transfer */}
+              <label
+                className={`flex items-start justify-between gap-3 p-4 rounded-xl border cursor-pointer transition-all ${
+                  paymentMethod === "bank_transfer"
+                    ? "border-accent bg-sky-50/50 dark:bg-sky-950/20 ring-1 ring-accent/20"
+                    : "border-border hover:border-accent/40"
+                }`}
+              >
+                <div className="flex items-start gap-3">
+                  <input
+                    type="radio"
+                    name="paymentMethodRadio"
+                    checked={paymentMethod === "bank_transfer"}
+                    onChange={() => setPaymentMethod("bank_transfer")}
+                    className="mt-1 text-accent focus:ring-accent/30"
+                  />
+                  <div>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <p className="font-semibold text-foreground text-sm">
+                        Bonifico Bancario Anticipato
+                      </p>
+                      <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-stone-200 dark:bg-stone-800 text-foreground/80">
+                        B2B / Aziende
+                      </span>
+                    </div>
+                    <p className="text-xs text-muted mt-1">
+                      Ricevi subito via email le coordinate IBAN e il link per allegare la contabile e velocizzare l&apos;evasione.
+                    </p>
+                    {paymentMethod === "bank_transfer" && (
+                      <div className="mt-2.5 p-3 rounded-lg bg-amber-50/90 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/60 text-xs text-amber-950 dark:text-amber-100 space-y-0.5">
+                        <p>
+                          <strong>Intestatario:</strong> Bitora di Denis Cazzulo
+                        </p>
+                        <p>
+                          <strong>IBAN:</strong>{" "}
+                          <span className="font-mono font-semibold">IT76S0708461620000000920491</span>
+                        </p>
+                        <p className="text-[11px] opacity-85 pt-0.5">
+                          Dopo la conferma potrai caricare la contabile direttamente online.
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <Building2 className="w-4 h-4 text-accent mt-0.5 shrink-0" />
+              </label>
             </div>
           </div>
 
@@ -1106,12 +1240,16 @@ export default function CheckoutClient() {
             {paying ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin" />
-                {t("checkout.submitting_stripe")}
+                {paymentMethod === "bank_transfer"
+                  ? t("checkout.submitting")
+                  : t("checkout.submitting_stripe")}
               </>
             ) : (
               <>
                 <Lock className="w-4 h-4" />
-                {t("checkout.pay_with_stripe").replace("{total}", formatPrice(grandTotal))}
+                {paymentMethod === "bank_transfer"
+                  ? t("checkout.confirm_order_total").replace("{total}", formatPrice(grandTotal))
+                  : t("checkout.pay_with_stripe").replace("{total}", formatPrice(grandTotal))}
               </>
             )}
           </button>
@@ -1171,19 +1309,30 @@ export default function CheckoutClient() {
                       <span className="text-[11px] font-semibold text-muted">{t("product.price_each")}</span>
                     </p>
                     <div className="flex items-center justify-between mt-1.5">
-                      <div className="flex items-center gap-0 border border-border rounded-lg overflow-hidden">
+                      <div className="flex items-center gap-0 border border-border rounded-lg overflow-hidden bg-surface">
                         <button
                           type="button"
+                          disabled={item.quantity <= (item.minQuantity ?? 10)}
                           onClick={() =>
                             updateQuantity(item.id, item.quantity - 1, item.lineKey)
                           }
-                          className="w-7 h-7 flex items-center justify-center hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors"
+                          className="w-7 h-7 flex items-center justify-center hover:bg-stone-100 dark:hover:bg-stone-800 disabled:opacity-35 disabled:cursor-not-allowed transition-colors"
                         >
                           <Minus className="w-3 h-3" />
                         </button>
-                        <span className="w-14 h-7 flex items-center justify-center text-xs font-medium border-x border-border bg-surface">
-                          {item.quantity}
-                        </span>
+                        <input
+                          type="number"
+                          min={item.minQuantity ?? 1}
+                          step={1}
+                          value={item.quantity}
+                          onChange={(e) => {
+                            const val = Number.parseInt(e.target.value, 10);
+                            if (Number.isFinite(val) && val >= (item.minQuantity ?? 1)) {
+                              updateQuantity(item.id, val, item.lineKey);
+                            }
+                          }}
+                          className="w-14 h-7 text-center text-xs font-semibold border-x border-border bg-surface text-foreground focus:outline-none"
+                        />
                         <button
                           type="button"
                           onClick={() =>

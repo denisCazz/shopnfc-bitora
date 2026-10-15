@@ -8,7 +8,7 @@ import type { ChipFilter } from "@/lib/types";
 import {
   Cog, Wind, Fan, Zap, Monitor, Cpu, Flame,
   Thermometer, CircleDot, RotateCw, Home, Package, Gauge, Wrench, X,
-  Globe, ChevronDown, Headphones, Search, CreditCard, StickyNote, Watch, Radio, Shield,
+  Globe, ChevronDown, Headphones, Search, CreditCard, StickyNote, Watch, Radio, Shield, Truck,
 } from "lucide-react";
 import { useLocale } from "@/lib/locale-context";
 import { locales, type Locale } from "@/lib/i18n";
@@ -225,7 +225,15 @@ export default function Sidebar({
                 {/* Divider */}
                 <div className="border-t border-border/60 my-4" />
 
-                {/* Assistenza link */}
+                {/* Assistenza & Tracking links */}
+                <Link
+                  href="/tracking"
+                  onClick={onClose}
+                  className="flex items-center gap-3 px-3 py-3 rounded-xl text-sm text-muted hover:bg-surface-hover hover:text-foreground transition-all duration-200"
+                >
+                  <Truck className="w-4 h-4 text-accent/70" />
+                  <span>Traccia ordine</span>
+                </Link>
                 <Link
                   href="/assistenza"
                   onClick={onClose}

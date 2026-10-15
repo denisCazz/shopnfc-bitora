@@ -1,7 +1,11 @@
--- Codici sconto gestiti da admin e applicati al checkout.
-CREATE TYPE discount_type AS ENUM ('percent', 'fixed');
+-- Codici sconto gestiti da admin e applicati al checkout (idempotente).
+DO $$ BEGIN
+  CREATE TYPE discount_type AS ENUM ('percent', 'fixed');
+EXCEPTION
+  WHEN duplicate_object THEN NULL;
+END $$;
 
-CREATE TABLE discount_codes (
+CREATE TABLE IF NOT EXISTS discount_codes (
   id SERIAL PRIMARY KEY,
   code TEXT NOT NULL UNIQUE,
   type discount_type NOT NULL,
@@ -17,8 +21,9 @@ CREATE TABLE discount_codes (
   updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE INDEX idx_discount_codes_active ON discount_codes (active);
+CREATE INDEX IF NOT EXISTS idx_discount_codes_active ON discount_codes (active);
 
+DROP TRIGGER IF EXISTS discount_codes_updated_at ON discount_codes;
 CREATE TRIGGER discount_codes_updated_at
   BEFORE UPDATE ON discount_codes
   FOR EACH ROW

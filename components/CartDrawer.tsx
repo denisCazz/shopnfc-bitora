@@ -117,24 +117,43 @@ export default function CartDrawer() {
                     {item.lineNotes && (
                       <p className="text-xs text-muted mt-0.5 line-clamp-2">{item.lineNotes}</p>
                     )}
-                    <div className="text-accent font-bold text-sm mt-1">
-                      {formatCatalogPrice(item.price)}{" "}
-                      <span className="text-[11px] font-semibold text-muted">{t("product.price_each")}</span>
+                    <div className="flex items-baseline justify-between gap-2 mt-1">
+                      <div className="text-accent font-bold text-sm">
+                        {formatCatalogPrice(item.price)}{" "}
+                        <span className="text-[11px] font-semibold text-muted">{t("product.price_each")}</span>
+                      </div>
+                      {item.quantity > 1 && (
+                        <span className="text-xs font-semibold text-foreground tabular-nums">
+                          Tot: {formatCatalogPrice(item.price * item.quantity)}
+                        </span>
+                      )}
                     </div>
 
                     {/* Quantity controls */}
                     <div className="flex items-center justify-between mt-2">
-                      <div className="flex items-center gap-0 border border-border rounded-lg overflow-hidden">
+                      <div className="flex items-center gap-0 border border-border rounded-lg overflow-hidden bg-surface">
                         <button
                           onClick={() => updateQuantity(item.id, item.quantity - 1, item.lineKey)}
-                          className="w-8 h-8 flex items-center justify-center hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors"
+                          disabled={item.quantity <= (item.minQuantity ?? 10)}
+                          className="w-8 h-8 flex items-center justify-center hover:bg-stone-100 dark:hover:bg-stone-800 disabled:opacity-35 disabled:cursor-not-allowed transition-colors"
                           aria-label="Diminuisci quantità"
                         >
                           <Minus className="w-3.5 h-3.5" />
                         </button>
-                        <span className="w-14 h-8 flex items-center justify-center text-sm font-medium border-x border-border bg-surface">
-                          {item.quantity}
-                        </span>
+                        <input
+                          type="number"
+                          min={item.minQuantity ?? 1}
+                          step={1}
+                          value={item.quantity}
+                          onChange={(e) => {
+                            const val = Number.parseInt(e.target.value, 10);
+                            if (Number.isFinite(val) && val >= (item.minQuantity ?? 1)) {
+                              updateQuantity(item.id, val, item.lineKey);
+                            }
+                          }}
+                          aria-label="Quantità"
+                          className="w-14 h-8 text-center text-sm font-semibold border-x border-border bg-surface text-foreground focus:outline-none focus:bg-sky-50/40 dark:focus:bg-sky-950/30"
+                        />
                         <button
                           onClick={() => updateQuantity(item.id, item.quantity + 1, item.lineKey)}
                           className="w-8 h-8 flex items-center justify-center hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors"

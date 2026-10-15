@@ -214,12 +214,18 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
 
             ${
               data.customGraphicUrl
-                ? `<p style="margin: 16px 0 0; font-size: 13px; color: #6b7280;">Grafica di stampa allegata${data.customGraphicOriginalName ? ` (${escapeHtml(data.customGraphicOriginalName)})` : ""}. Ricordiamo che la stampa segue il file fornito: non ci assumiamo responsabilità per grafiche di bassa qualità.</p>`
+                ? `<p style="margin: 16px 0 0; font-size: 13px; color: #6b7280;">Grafica di stampa allegata${data.customGraphicOriginalName ? ` (${escapeHtml(data.customGraphicOriginalName)})` : ""}. Ricordiamo che l'accettazione definitiva dell'ordine è subordinata alla verifica della grafica da parte del nostro fornitore: dopo l'inoltro dell'ordine, il fornitore ci fornirà una preview di stampa che ti invieremo per conferma. Se la accetti si prosegue in produzione, altrimenti l'ordine viene messo in stop e si rifà la grafica.</p>`
                 : ""
             }
 
             <p style="margin-top: 24px; font-size: 13px; color: #6b7280;">
-              Riceverai un'email con il numero di tracking non appena il pacco sarà spedito.
+              Puoi consultare lo stato di avanzamento, la revisione grafica del fornitore e la spedizione in qualsiasi momento:
+            </p>
+            <p style="margin: 12px 0 0;">
+              <a href="${SITE.url}/tracking?code=${encodeURIComponent(formatOrderNumber(data.orderId))}"
+                 style="display: inline-block; padding: 11px 22px; background: #0369a1; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px;">
+                🚚 Traccia il tuo ordine #${formatOrderNumber(data.orderId)}
+              </a>
             </p>
 
             <p style="margin-top: 30px; color: #6b7280; font-size: 13px;">— Il team ${SITE.name}</p>
@@ -237,12 +243,23 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
 // ============================================================
 
 const STATUS_CONFIG: Record<string, { emoji: string; label: string; color: string; message: string }> = {
-  pending:    { emoji: "⏳", label: "In attesa",       color: "#d97706", message: "Il tuo ordine è in attesa di conferma. Ti aggiorneremo a breve." },
-  confirmed:  { emoji: "✅", label: "Confermato",      color: "#2563eb", message: "Il tuo ordine è stato confermato e sarà messo in lavorazione." },
-  processing: { emoji: "🔧", label: "In lavorazione",  color: "#4f46e5", message: "Il tuo ordine è in fase di preparazione nel nostro magazzino." },
-  shipped:    { emoji: "🚚", label: "Spedito",         color: "#7c3aed", message: "Il tuo pacco è stato affidato al corriere e sta per arrivare!" },
-  delivered:  { emoji: "📦", label: "Consegnato",      color: "#16a34a", message: `Il tuo pacco risulta consegnato. Grazie per aver scelto ${SITE.name}!` },
-  cancelled:  { emoji: "❌", label: "Annullato",       color: "#dc2626", message: "Il tuo ordine è stato annullato. Contattaci per qualsiasi chiarimento." },
+  pending:          { emoji: "⏳", label: "In attesa",                        color: "#d97706", message: "Il tuo ordine è in attesa di conferma. Ti aggiorneremo a breve." },
+  order_received:   { emoji: "📥", label: "Ordine ricevuto",                  color: "#0284c7", message: "Abbiamo ricevuto il tuo ordine e preso in carico la pratica." },
+  awaiting_payment: { emoji: "🏦", label: "In attesa di pagamento / bonifico", color: "#d97706", message: "Ordine registrato. Siamo in attesa dell'accredito o della contabile del bonifico bancario." },
+  confirmed:        { emoji: "✅", label: "Confermato",                       color: "#2563eb", message: "Il tuo ordine è stato confermato e sarà messo in lavorazione." },
+  graphic_review:   { emoji: "🎨", label: "Grafica in revisione dal fornitore", color: "#d97706", message: "Abbiamo ricevuto la tua grafica e inoltrato l'ordine al nostro fornitore, che sta elaborando la preview ufficiale di stampa da sottoporti." },
+  preview_sent:     { emoji: "🖼️", label: "Preview del fornitore inviata — In attesa di tua conferma", color: "#0284c7", message: "Il nostro fornitore ha fornito la preview di stampa del tuo ordine! Controllala e facci sapere: se la accetti si prosegue in produzione, altrimenti l'ordine viene messo in stop e si rifà la grafica." },
+  graphic_accepted: { emoji: "✅", label: "Preview / Grafica accettata — Si prosegue!",  color: "#16a34a", message: "Ottime notizie! La preview grafica del fornitore è stata accettata. L'ordine prosegue ora in fase di stampa e programmazione NFC." },
+  graphic_rejected: { emoji: "🛑", label: "Ordine in STOP — Si rifà la grafica", color: "#dc2626", message: "La grafica o la preview non è stata accettata: l'ordine è temporaneamente in STOP. Carica il nuovo file grafico corretto nella tua area ordini o inviacelo su WhatsApp così potremo richiedere una nuova preview al fornitore." },
+  processing:       { emoji: "🔧", label: "In produzione (Stampa & NFC)",     color: "#4f46e5", message: "Il tuo ordine è in fase di stampa e programmazione/codifica dei chip NFC nel nostro laboratorio." },
+  quality_check:    { emoji: "🔍", label: "Controllo qualità e collaudo NFC", color: "#4f46e5", message: "Stiamo effettuando il test di lettura/scrittura sui chip NFC e la verifica finale prima dell'imballaggio." },
+  ready_to_ship:    { emoji: "📦", label: "Pronto per la spedizione",         color: "#7c3aed", message: "Il tuo ordine è imballato ed etichettato, pronto per il ritiro da parte del corriere espresso." },
+  shipped:          { emoji: "🚚", label: "Spedito / Affidato al corriere",   color: "#7c3aed", message: "Il tuo pacco è stato affidato al corriere espresso e sta viaggiando verso di te!" },
+  in_transit:       { emoji: "🚚", label: "In transito presso il corriere",   color: "#7c3aed", message: "La spedizione è in transito attraverso gli hub del corriere verso la filiale di destinazione." },
+  out_for_delivery: { emoji: "🛵", label: "In consegna oggi",                 color: "#059669", message: "Il corriere ha messo in consegna la tua spedizione nella giornata di oggi." },
+  delivered:        { emoji: "📦", label: "Consegnato",                       color: "#16a34a", message: `Il tuo pacco risulta consegnato. Grazie per aver scelto ${SITE.name}!` },
+  exception:        { emoji: "⚠️", label: "Eccezione corriere / Giacenza",    color: "#dc2626", message: "Il corriere ha segnalato un imprevisto o un'eccezione sulla consegna. Controlla i dettagli sul tracking." },
+  cancelled:        { emoji: "❌", label: "Annullato",                        color: "#dc2626", message: "Il tuo ordine è stato annullato. Contattaci per qualsiasi chiarimento." },
 };
 
 export async function sendOrderStatusUpdateEmail({
@@ -262,11 +279,11 @@ export async function sendOrderStatusUpdateEmail({
   if (!cfg) return; // unknown status, skip
 
   const trackingHtml =
-    status === "shipped" && trackingNumber
+    ["shipped", "in_transit", "out_for_delivery", "ready_to_ship"].includes(status) && trackingNumber
       ? `<div style="background: #f5f3ff; border: 1px solid #ddd6fe; border-radius: 10px; padding: 16px; margin: 16px 0;">
-          <p style="margin: 0; font-size: 14px; color: #5b21b6; font-weight: 600;">📬 Numero di tracking</p>
+          <p style="margin: 0; font-size: 14px; color: #5b21b6; font-weight: 600;">📬 Numero di tracking corriere</p>
           <p style="margin: 8px 0 0; font-size: 20px; font-weight: 700; color: #4c1d95; letter-spacing: 1px;">${escapeHtml(trackingNumber)}</p>
-          <p style="margin: 6px 0 0; font-size: 12px; color: #7c3aed;">Usa questo codice sul sito del corriere per seguire la spedizione.</p>
+          <p style="margin: 6px 0 0; font-size: 12px; color: #7c3aed;">Usa questo codice nella nostra pagina di tracking o sul sito del corriere per seguire la spedizione.</p>
         </div>`
       : "";
 
@@ -294,9 +311,13 @@ export async function sendOrderStatusUpdateEmail({
             ${trackingHtml}
 
             <p style="margin-top: 24px;">
-              <a href="https://shopnfc.bitora.it/account/orders"
-                 style="display: inline-block; padding: 11px 22px; background: linear-gradient(135deg, #0ea5e9, #dc2626); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px;">
-                Visualizza i tuoi ordini
+              <a href="${SITE.url}/tracking?code=${encodeURIComponent(formatOrderNumber(orderId))}"
+                 style="display: inline-block; padding: 11px 22px; background: linear-gradient(135deg, #0ea5e9, #dc2626); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px; margin-right: 8px;">
+                🚚 Traccia il tuo ordine
+              </a>
+              <a href="${SITE.url}/account/orders"
+                 style="display: inline-block; padding: 11px 18px; background: #f3f4f6; color: #374151; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px;">
+                Area ordini
               </a>
             </p>
 
@@ -508,8 +529,8 @@ export async function sendQuoteRequestEmails(data: QuoteRequestEmailData): Promi
             <p>grazie! Abbiamo ricevuto la tua richiesta per <strong>${data.quantity} pz — ${escapeHtml(data.format)}</strong>.</p>
             <p><strong>Cosa succede ora:</strong></p>
             <ol style="padding-left: 18px; line-height: 1.6;">
-              <li>Controlliamo grafica e quantità.</li>
-              <li>Entro 24 ore lavorative ti mandiamo prezzo, tempi e, se serve, una bozza.</li>
+              <li>Controlliamo grafica e quantità con il nostro fornitore di produzione.</li>
+              <li>Entro 24 ore lavorative ti mandiamo prezzo, tempi e l'esito della verifica di idoneità grafica (non viene inviata anteprima di stampa; l'accettazione dell'ordine è subordinata all'approvazione della grafica da parte del fornitore).</li>
               <li>Approvi e procedi: realizziamo, programmiamo e spediamo.</li>
             </ol>
             <p>Hai fretta? Scrivici su <a href="https://wa.me/${SITE.whatsapp}" style="color: #0369a1;">WhatsApp</a> o chiama il <strong>${SITE.phone}</strong> citando il riferimento.</p>

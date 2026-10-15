@@ -372,7 +372,48 @@ ALTER TABLE orders
   ADD COLUMN discount_code_id INT REFERENCES discount_codes(id) ON DELETE SET NULL,
   ADD COLUMN discount_code TEXT,
   ADD COLUMN discount_amount DECIMAL(10,2) NOT NULL DEFAULT 0,
-  ADD COLUMN discount_redeemed BOOLEAN NOT NULL DEFAULT false;
+  ADD COLUMN discount_redeemed BOOLEAN NOT NULL DEFAULT false,
+  ADD COLUMN tracking_status TEXT DEFAULT 'order_received',
+  ADD COLUMN tracking_carrier TEXT DEFAULT 'auto',
+  ADD COLUMN graphic_status TEXT DEFAULT 'not_required',
+  ADD COLUMN graphic_note TEXT,
+  ADD COLUMN supplier_preview_url TEXT,
+  ADD COLUMN estimated_delivery TEXT,
+  ADD COLUMN public_tracking_note TEXT,
+  ADD COLUMN tracking_history JSONB NOT NULL DEFAULT '[]'::jsonb;
+
+CREATE TABLE IF NOT EXISTS custom_trackings (
+  code TEXT PRIMARY KEY,
+  customer_name TEXT NOT NULL,
+  customer_email TEXT,
+  customer_phone TEXT,
+  customer_company TEXT,
+  channel TEXT NOT NULL DEFAULT 'whatsapp',
+  items_summary TEXT NOT NULL,
+  total_amount DECIMAL(10,2),
+  has_custom_print BOOLEAN NOT NULL DEFAULT true,
+  tracking_status TEXT NOT NULL DEFAULT 'order_received',
+  graphic_status TEXT NOT NULL DEFAULT 'in_review',
+  graphic_note TEXT,
+  supplier_preview_url TEXT,
+  carrier TEXT NOT NULL DEFAULT 'auto',
+  carrier_tracking_number TEXT,
+  estimated_delivery TEXT,
+  shipping_city TEXT,
+  shipping_country TEXT DEFAULT 'Italia',
+  public_note TEXT,
+  internal_note TEXT,
+  history JSONB NOT NULL DEFAULT '[]'::jsonb,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS idx_custom_trackings_carrier_num ON custom_trackings (carrier_tracking_number);
+
+CREATE TRIGGER custom_trackings_updated_at
+  BEFORE UPDATE ON custom_trackings
+  FOR EACH ROW
+  EXECUTE FUNCTION update_updated_at();
 
 CREATE OR REPLACE FUNCTION decrement_stock_on_order()
 RETURNS TRIGGER AS $$

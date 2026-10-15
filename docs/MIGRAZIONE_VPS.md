@@ -36,14 +36,21 @@ In produzione `DATABASE_URL` usa l'host Docker interno `db:5432`.
 
 ---
 
-## 3. Schema e catalogo
+## 3. Schema, Migrazioni Automatiche e Catalogo
+
+Il database si aggiorna **automaticamente in fase di deploy** tramite tre livelli di sicurezza:
+1. **Avvio Container Docker (`Dockerfile`)**: esegue `node scripts/migrate-deploy.mjs --if-db` prima di avviare `node server.js`.
+2. **Build & Start (`package.json`)**: `npm run build` e `npm run start` eseguono automaticamente le migrazioni idempotenti se `DATABASE_URL` è configurata.
+3. **Bootstrap Server Next.js (`instrumentation.ts` + `db/migrate.ts`)**: al primo avvio del processo Node verifica e applica eventuali migrazioni o nuove colonne mancanti in modo idempotente (con `pg_advisory_lock`).
+
+Per eseguire manualmente le migrazioni o il seed:
 
 ```bash
-psql "$DATABASE_URL" -f db/migrations/0000_vps_standalone.sql
+npm run db:migrate
 npm run db:seed
 ```
 
-Tabelle: `app_users`, `profiles`, `dealer_profiles`, `categories`, `products`, `product_images`, `chips`, `product_chips`, `orders`, `order_items`, `cart_items`, `app_settings`, `announcements`.
+Tabelle: `app_users`, `profiles`, `dealer_profiles`, `categories`, `products`, `product_images`, `chips`, `product_chips`, `orders`, `order_items`, `cart_items`, `app_settings`, `announcements`, `discount_codes`, `custom_trackings`, `_schema_migrations`.
 
 Admin seed: `admin@bitora.it` / `BitoraNfc2026!`
 
@@ -54,10 +61,11 @@ Admin seed: `admin@bitora.it` / `BitoraNfc2026!`
 ```bash
 git pull
 docker compose --profile prod up -d --build
-docker compose exec db psql -U shopnfc shopnfc -f /migrations/0000_vps_standalone.sql
 ```
 
-Poi dal host (con `DATABASE_URL` verso il container):
+> All'avvio del container `app`, tutte le migrazioni in `db/migrations/*.sql` vengono applicate automaticamente sul database PostgreSQL prima dell'apertura della porta `3000`.
+
+Per il primo popolamento catalogo (solo al primo deploy):
 
 ```bash
 npm run db:seed

@@ -28,6 +28,7 @@ import type { AuthUser } from "@/lib/auth";
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/orders", label: "Ordini", icon: ShoppingCart },
+  { href: "/admin/tracking", label: "Tracking & Clienti Diretti", icon: Truck },
   { href: "/admin/products", label: "Prodotti", icon: Package },
   { href: "/admin/categories", label: "Categorie", icon: LayoutList },
   { href: "/admin/chip", label: "Chip", icon: Cpu },
