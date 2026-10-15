@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { ShoppingCart, Check, Zap, AlertCircle, FileText } from "lucide-react";
+import { ShoppingCart, Check, Zap, AlertCircle, FileText, Cpu } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/lib/cart-context";
 import { useLocale } from "@/lib/locale-context";
@@ -60,6 +60,8 @@ export default function PrintOptionsCartSection({
   const [error, setError] = useState<string | null>(null);
   const minQuantity = minQuantityForProduct(product.minQuantity, product);
   const [quantity, setQuantity] = useState(minQuantity);
+  const [nfcMode, setNfcMode] = useState<"virgin" | "programmed">("virgin");
+  const [nfcPayload, setNfcPayload] = useState("");
 
   const outOfStock = product.stockQuantity !== undefined && product.stockQuantity <= 0;
   const needsPrint = printOption !== "none";
@@ -87,9 +89,16 @@ export default function PrintOptionsCartSection({
       : undefined;
 
   const lineNotes = useMemo(() => {
-    if (printOption === "none") return null;
-    return t(OPTION_KEYS.find((o) => o.value === printOption)?.label ?? "print.option_none");
-  }, [printOption, t]);
+    const parts: string[] = [];
+    if (printOption !== "none") {
+      parts.push(t(OPTION_KEYS.find((o) => o.value === printOption)?.label ?? "print.option_none"));
+    }
+    if (nfcMode === "programmed") {
+      const trimmed = nfcPayload.trim();
+      parts.push(trimmed ? `Programmazione NFC: ${trimmed}` : "Programmazione NFC richiesta");
+    }
+    return parts.length > 0 ? parts.join(" · ") : null;
+  }, [printOption, nfcMode, nfcPayload, t]);
 
   function addToCart() {
     if (outOfStock) return false;
@@ -98,13 +107,15 @@ export default function PrintOptionsCartSection({
       return false;
     }
     setError(null);
+    const nfcKey =
+      nfcMode === "programmed" ? `:nfc:${nfcPayload.trim().slice(0, 30) || "tbd"}` : "";
     addItem(
       {
         ...product,
         name: localizedName,
         price: unitPrice,
         minQuantity,
-        lineKey: printOptionLineKey(printOption),
+        lineKey: `${printOptionLineKey(printOption)}${nfcKey}`,
         lineNotes,
         printOption,
         printSurcharge: surcharge,
@@ -205,6 +216,53 @@ export default function PrintOptionsCartSection({
         )}
       </div>
 
+      <div className="w-full p-3.5 rounded-xl border border-border bg-surface/70 space-y-2.5">
+        <div className="flex items-center justify-between">
+          <span className="text-xs font-semibold text-foreground flex items-center gap-1.5">
+            <Cpu className="w-3.5 h-3.5 text-accent" />
+            Programmazione chip NFC
+          </span>
+          <span className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
+            Inclusa nel prezzo
+          </span>
+        </div>
+        <div className="grid grid-cols-2 gap-2">
+          <button
+            type="button"
+            onClick={() => setNfcMode("virgin")}
+            className={`px-3 py-2 rounded-lg border text-xs font-semibold text-left transition-all ${
+              nfcMode === "virgin"
+                ? "border-accent bg-sky-50/70 dark:bg-sky-950/30 text-accent"
+                : "border-border text-muted hover:text-foreground"
+            }`}
+          >
+            <span className="block">Card vergini</span>
+            <span className="block text-[10px] font-normal opacity-80">Pronte da codificare</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setNfcMode("programmed")}
+            className={`px-3 py-2 rounded-lg border text-xs font-semibold text-left transition-all ${
+              nfcMode === "programmed"
+                ? "border-accent bg-sky-50/70 dark:bg-sky-950/30 text-accent"
+                : "border-border text-muted hover:text-foreground"
+            }`}
+          >
+            <span className="block">Già programmate</span>
+            <span className="block text-[10px] font-normal opacity-80">Link, vCard o testo</span>
+          </button>
+        </div>
+        {nfcMode === "programmed" && (
+          <input
+            type="text"
+            value={nfcPayload}
+            onChange={(e) => setNfcPayload(e.target.value)}
+            placeholder="Inserisci link (https://...), vCard o nota (oppure invia CSV dopo l'ordine)"
+            className="w-full px-3 py-2 rounded-lg border border-border bg-background text-xs text-foreground placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent"
+          />
+        )}
+      </div>
+
       <div className="w-full p-3 rounded-xl border border-border bg-surface/70 space-y-1">
         <p className="text-sm font-semibold text-foreground flex items-center gap-2 mb-1">
           <StepBadge n={2} />
@@ -219,15 +277,27 @@ export default function PrintOptionsCartSection({
         />
       </div>
 
-      <div className="flex items-baseline justify-between gap-3 px-1">
-        <span className="text-sm text-muted">{t("print.unit_total")}</span>
-        <span className="text-2xl font-bold text-accent tabular-nums">{formatPrice(unitPrice)}</span>
+      <div className="rounded-xl border border-border bg-surface/70 p-3.5 space-y-1.5">
+        <div className="flex items-baseline justify-between gap-3">
+          <span className="text-sm text-muted">{t("print.unit_total")}</span>
+          <span className="text-xl font-bold text-foreground tabular-nums">
+            {formatPrice(unitPrice)} <span className="text-xs font-normal text-muted">/ pz</span>
+          </span>
+        </div>
+        {surcharge > 0 && (
+          <p className="text-xs text-muted">
+            {t("print.surcharge_included").replace("{amount}", formatPrice(surcharge))}
+          </p>
+        )}
+        <div className="flex items-baseline justify-between gap-3 pt-1.5 border-t border-border/60">
+          <span className="text-sm font-medium text-foreground">
+            Totale fornitura ({quantity} pz)
+          </span>
+          <span className="text-2xl font-bold text-accent tabular-nums">
+            {formatPrice(roundMoney(unitPrice * quantity))}
+          </span>
+        </div>
       </div>
-      {surcharge > 0 && (
-        <p className="text-xs text-muted px-1">
-          {t("print.surcharge_included").replace("{amount}", formatPrice(surcharge))}
-        </p>
-      )}
 
       {error && (
         <p className="text-sm text-red-600 flex items-start gap-1.5">

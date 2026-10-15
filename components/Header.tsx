@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Search, User, ShoppingCart, Menu, X, LogOut, Shield, Loader2, Headphones, ChevronDown, Cpu } from "lucide-react";
+import { Search, User, ShoppingCart, Menu, X, LogOut, Shield, Loader2, Headphones, ChevronDown, Cpu, Truck } from "lucide-react";
 import type { AuthUser } from "@/lib/auth";
 import { logout } from "@/app/(auth)/actions";
 import { useCart } from "@/lib/cart-context";
@@ -225,6 +225,13 @@ export default function Header({
             >
               <Headphones className="w-4 h-4" />
               {t("nav.assistenza")}
+            </Link>
+            <Link
+              href="/tracking"
+              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-muted hover:text-accent hover:bg-surface-hover transition-colors"
+            >
+              <Truck className="w-4 h-4" />
+              Traccia ordine
             </Link>
 
             {/* Language selector */}

@@ -10,12 +10,13 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const { outcome } = await fulfillStripeSessionById(sessionId);
+    const { outcome, orderId } = await fulfillStripeSessionById(sessionId);
+    const orderQuery = orderId ? `?order=${orderId}` : "";
     if (outcome === "confirmed" || outcome === "already_confirmed") {
-      return NextResponse.redirect(`${origin}/checkout/success`);
+      return NextResponse.redirect(`${origin}/checkout/success${orderQuery}`);
     }
     if (outcome === "pending") {
-      return NextResponse.redirect(`${origin}/checkout/success`);
+      return NextResponse.redirect(`${origin}/checkout/success${orderQuery}`);
     }
     if (outcome === "canceled") {
       return NextResponse.redirect(`${origin}/checkout?error=stripe_cancelled`);

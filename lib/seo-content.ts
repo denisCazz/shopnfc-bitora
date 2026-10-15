@@ -471,9 +471,9 @@ export const TAG_NFC_PERSONALIZZATI_LANDING = {
         "I prezzi indicati sono cad. (al pezzo). La quantità minima è 10 pezzi o soggetta a revisione, in base al formato e alla stampa. I kit si possono ordinare anche singoli. Contattaci con la quantità indicativa e ti inviamo un preventivo entro 24 ore lavorative.",
     },
     {
-      question: "Fornite campioni prima dell'ordine?",
+      question: "Fornite campioni o anteprime prima dell'ordine?",
       answer:
-        "Sì, su richiesta possiamo fornire campioni non personalizzati o con bozza grafica per validare il progetto.",
+        "Su richiesta possiamo fornire campioni fisici non personalizzati per testare il chip NFC. Non viene fornita alcuna bozza o anteprima grafica prima della stampa: il file caricato deve essere definitivo e l'accettazione dell'ordine è subordinata alla verifica e all'approvazione della grafica da parte del nostro fornitore.",
     },
     {
       question: "Quali tempi di consegna per lotti personalizzati?",

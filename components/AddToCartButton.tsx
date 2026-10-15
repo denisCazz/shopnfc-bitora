@@ -1,12 +1,14 @@
 "use client";
 
-import { ShoppingCart, Check, Zap } from "lucide-react";
+import { ShoppingCart, Check, Zap, Cpu, Sparkles } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/lib/cart-context";
 import { useLocale } from "@/lib/locale-context";
 import { useUser } from "@/lib/user-context";
 import { minQuantityForProduct } from "@/lib/min-quantity";
+import { useCatalogDisplayPrice } from "@/lib/use-catalog-display-price";
 import QuantityStepper from "@/components/QuantityStepper";
 
 export default function AddToCartButton({
@@ -31,15 +33,19 @@ export default function AddToCartButton({
   };
   showBuyNow?: boolean;
 }) {
-  const { addItem } = useCart();
+  const { addItem, openCart } = useCart();
   const { t, locale } = useLocale();
   const { dealerDiscount } = useUser();
+  const { formatCatalogPrice } = useCatalogDisplayPrice();
   const router = useRouter();
   const [added, setAdded] = useState(false);
   const minQuantity = minQuantityForProduct(product.minQuantity, product);
   const [quantity, setQuantity] = useState(minQuantity);
+  const [nfcMode, setNfcMode] = useState<"virgin" | "programmed">("virgin");
+  const [nfcPayload, setNfcPayload] = useState("");
 
   const outOfStock = product.stockQuantity !== undefined && product.stockQuantity <= 0;
+  const isReaderCategory = product.categorySlug === "lettori-nfc";
 
   const localizedName =
     (locale !== "it" &&
@@ -62,28 +68,46 @@ export default function AddToCartButton({
       : undefined;
 
   function addToCart() {
-    if (outOfStock) return;
+    if (outOfStock) return false;
+    const trimmedPayload = nfcPayload.trim();
+    const lineKey =
+      !isReaderCategory && nfcMode === "programmed"
+        ? `nfc:prog:${trimmedPayload.slice(0, 40) || "tbd"}`
+        : undefined;
+    const lineNotes =
+      !isReaderCategory && nfcMode === "programmed"
+        ? trimmedPayload
+          ? `Programmazione NFC: ${trimmedPayload}`
+          : "Programmazione NFC richiesta (dati da inviare)"
+        : null;
+
     addItem(
       {
         ...product,
         name: localizedName,
         price: finalPrice,
         minQuantity,
+        lineKey,
+        lineNotes,
       },
       quantity
     );
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
+    return true;
   }
 
   function handleAddToCart() {
-    addToCart();
+    if (addToCart()) {
+      openCart();
+    }
   }
 
   function handleBuyNow() {
     if (outOfStock) return;
-    addToCart();
-    router.push("/checkout");
+    if (addToCart()) {
+      router.push("/checkout");
+    }
   }
 
   if (outOfStock) {
@@ -99,7 +123,58 @@ export default function AddToCartButton({
 
   return (
     <div className="w-full space-y-3">
-      <div className="w-full p-3 rounded-xl border border-border bg-surface/70 space-y-1">
+      {!isReaderCategory && (
+        <div className="w-full p-3.5 rounded-xl border border-border bg-surface/70 space-y-2.5">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-foreground flex items-center gap-1.5">
+              <Cpu className="w-3.5 h-3.5 text-accent" />
+              Programmazione chip NFC
+            </span>
+            <span className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
+              Inclusa nel prezzo
+            </span>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <button
+              type="button"
+              onClick={() => setNfcMode("virgin")}
+              className={`px-3 py-2 rounded-lg border text-xs font-semibold text-left transition-all ${
+                nfcMode === "virgin"
+                  ? "border-accent bg-sky-50/70 dark:bg-sky-950/30 text-accent"
+                  : "border-border text-muted hover:text-foreground"
+              }`}
+            >
+              <span className="block">Chip vergini</span>
+              <span className="block text-[10px] font-normal opacity-80">Pronti da codificare</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setNfcMode("programmed")}
+              className={`px-3 py-2 rounded-lg border text-xs font-semibold text-left transition-all ${
+                nfcMode === "programmed"
+                  ? "border-accent bg-sky-50/70 dark:bg-sky-950/30 text-accent"
+                  : "border-border text-muted hover:text-foreground"
+              }`}
+            >
+              <span className="block">Già programmati</span>
+              <span className="block text-[10px] font-normal opacity-80">Link, vCard o testo</span>
+            </button>
+          </div>
+          {nfcMode === "programmed" && (
+            <div className="pt-1">
+              <input
+                type="text"
+                value={nfcPayload}
+                onChange={(e) => setNfcPayload(e.target.value)}
+                placeholder="Inserisci link (https://...), vCard o nota (oppure invia CSV dopo l'ordine)"
+                className="w-full px-3 py-2 rounded-lg border border-border bg-background text-xs text-foreground placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent"
+              />
+            </div>
+          )}
+        </div>
+      )}
+
+      <div className="w-full p-3.5 rounded-xl border border-border bg-surface/70 space-y-2">
         <QuantityStepper
           value={quantity}
           min={minQuantity}
@@ -108,7 +183,31 @@ export default function AddToCartButton({
           unit="pz"
           label={t("product.qty_label")}
         />
+        <div className="flex items-center justify-between pt-2 border-t border-border/60 text-sm">
+          <span className="text-xs text-muted">
+            Totale per <strong className="text-foreground">{quantity} pz</strong>:
+          </span>
+          <span className="text-base font-bold text-accent tabular-nums">
+            {formatCatalogPrice(finalPrice * quantity)}
+          </span>
+        </div>
       </div>
+
+      {minQuantity >= 10 && (
+        <div className="flex items-center justify-between gap-2 px-3 py-2 rounded-xl bg-sky-50/60 dark:bg-sky-950/20 border border-sky-200/60 dark:border-sky-800/40 text-xs">
+          <span className="text-muted flex items-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-accent shrink-0" />
+            Ti servono <strong className="text-foreground">100, 500 o 1.000+ pezzi</strong>? Scaglioni dedicati B2B.
+          </span>
+          <Link
+            href={`/preventivo?prodotto=${encodeURIComponent(product.slug)}`}
+            className="font-semibold text-accent hover:underline shrink-0"
+          >
+            Chiedi sconto volume →
+          </Link>
+        </div>
+      )}
+
       <div className="flex flex-col sm:flex-row gap-3">
         <button
           onClick={handleAddToCart}

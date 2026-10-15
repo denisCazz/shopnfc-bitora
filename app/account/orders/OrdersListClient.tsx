@@ -196,24 +196,31 @@ export default function OrdersListClient({ orders }: { orders: Order[] }) {
                   {/* Expanded details */}
                   {isExpanded && (
                     <div className="px-4 pb-4 border-t border-[var(--color-muted)]/20">
-                      {/* Tracking */}
-                      {order.tracking_number && (
-                        <div className="mt-3 p-3 rounded-xl bg-purple-50 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-800 flex items-center gap-2">
-                          <Truck className="w-4 h-4 text-purple-600 shrink-0" />
-                          <span className="text-sm text-purple-700 dark:text-purple-300">
-                            Tracking:{" "}
-                            <strong>{order.tracking_number}</strong>
-                          </span>
-                          <a
-                            href={`https://www.google.com/search?q=${encodeURIComponent(order.tracking_number)}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="ml-auto text-purple-600 hover:text-purple-800"
-                          >
-                            <ExternalLink className="w-4 h-4" />
-                          </a>
+                      {/* Tracking & Live Status Button */}
+                      <div className="mt-3 p-3.5 rounded-xl bg-sky-50/80 dark:bg-sky-950/30 border border-sky-200 dark:border-sky-800/70 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                        <div className="flex items-center gap-2.5">
+                          <Truck className="w-4 h-4 text-accent shrink-0" />
+                          <div className="text-xs sm:text-sm text-[var(--color-foreground)]">
+                            {order.tracking_number ? (
+                              <>
+                                Spedizione corriere:{" "}
+                                <strong className="font-mono">{order.tracking_number}</strong>
+                              </>
+                            ) : (
+                              <span>
+                                Segui avanzamento ordine, revisione grafica fornitore e corriere
+                              </span>
+                            )}
+                          </div>
                         </div>
-                      )}
+                        <Link
+                          href={`/tracking?code=${encodeURIComponent(formatOrderNumber(order.id))}`}
+                          className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-[var(--color-accent)] px-3.5 py-1.5 text-xs font-semibold text-white hover:opacity-90 transition shrink-0"
+                        >
+                          Traccia ordine #{formatOrderNumber(order.id)}
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </Link>
+                      </div>
 
                       {/* Items */}
                       <div className="mt-3">

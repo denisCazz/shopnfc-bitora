@@ -138,11 +138,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const updateQuantity = useCallback((id: number, quantity: number, lineKey?: string) => {
     setItems((prev) =>
-      prev.flatMap((i) => {
-        if (!sameLine(i, { id, lineKey })) return [i];
+      prev.map((i) => {
+        if (!sameLine(i, { id, lineKey })) return i;
         const minQuantity = minForCartItem(i);
-        if (quantity < minQuantity) return [];
-        return [{ ...i, quantity: Math.floor(quantity) }];
+        const clamped = Math.max(Math.floor(quantity) || minQuantity, minQuantity);
+        return { ...i, minQuantity, quantity: clamped };
       })
     );
   }, []);

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import Link from "next/link";
 import {
   Package,
   ChevronDown,
@@ -9,6 +10,7 @@ import {
   XCircle,
   FileText,
   ImageIcon,
+  ExternalLink,
 } from "lucide-react";
 import ExportExcelButton from "@/components/admin/ExportExcelButton";
 import {
@@ -154,6 +156,13 @@ export default function OrdersClient({
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
+          <Link
+            href="/admin/tracking"
+            className="inline-flex items-center gap-2 rounded-lg bg-accent px-3.5 py-2 text-sm font-semibold text-white hover:bg-accent-hover transition"
+          >
+            <Truck className="w-4 h-4" />
+            Tracking &amp; Revisione Grafica / Clienti Diretti
+          </Link>
           <ExportExcelButton
             href={`/api/admin/export/orders${filterStatus !== "all" ? `?status=${filterStatus}` : ""}`}
             label="Scarica Excel"
@@ -444,6 +453,22 @@ export default function OrdersClient({
                       onSave={(t) => handleTrackingSave(order.id, t)}
                       disabled={isPending}
                     />
+
+                    <Link
+                      href={`/tracking?code=${encodeURIComponent(formatOrderNumber(order.id))}`}
+                      target="_blank"
+                      className="inline-flex items-center gap-1.5 text-sm text-accent font-medium hover:underline"
+                    >
+                      Pagina Tracking Cliente
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </Link>
+
+                    <Link
+                      href="/admin/tracking"
+                      className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-foreground font-medium"
+                    >
+                      Stati grafica &amp; corriere &rarr;
+                    </Link>
                   </div>
                 </div>
               )}
