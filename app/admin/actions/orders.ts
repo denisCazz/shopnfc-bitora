@@ -2,12 +2,74 @@
 
 import { desc, eq, and, inArray, sql, type SQL } from "drizzle-orm";
 import { getDb } from "@/db";
-import { orders, orderItems, profiles, products } from "@/db/schema";
+import { orders, orderItems, profiles, products, appUsers } from "@/db/schema";
 import { getUser } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 import type { OrderStatus } from "@/lib/types";
 import { sendOrderStatusUpdateEmail } from "@/lib/email";
 import { unredeemDiscountCode } from "@/lib/discount-codes";
+
+export type OrderEmailActionResult = {
+  ok: boolean;
+  emailSent: boolean;
+  emailTo?: string;
+  emailError?: string;
+};
+
+async function resolveOrderCustomer(
+  db: ReturnType<typeof getDb>,
+  order: typeof orders.$inferSelect
+): Promise<{ customerEmail: string; customerName: string }> {
+  let customerEmail = order.guestEmail?.trim() ?? "";
+  let customerName = "";
+
+  const billing = order.billingAddress as Record<string, string> | null;
+  const shipping = order.shippingAddress as Record<string, string> | null;
+
+  if (order.userId) {
+    const [prof] = await db
+      .select()
+      .from(profiles)
+      .where(eq(profiles.id, order.userId))
+      .limit(1);
+    if (prof) {
+      if (prof.email?.trim()) customerEmail = prof.email.trim();
+      customerName = [prof.firstName, prof.lastName]
+        .filter(Boolean)
+        .join(" ")
+        .trim();
+    }
+    if (!customerEmail || !customerName) {
+      const [u] = await db
+        .select({ email: appUsers.email, name: appUsers.name })
+        .from(appUsers)
+        .where(eq(appUsers.id, order.userId))
+        .limit(1);
+      if (u) {
+        if (!customerEmail && u.email?.trim()) customerEmail = u.email.trim();
+        if (!customerName && u.name?.trim()) customerName = u.name.trim();
+      }
+    }
+  }
+
+  if (!customerEmail && billing?.email?.trim()) {
+    customerEmail = billing.email.trim();
+  }
+  if (!customerEmail && shipping?.email?.trim()) {
+    customerEmail = shipping.email.trim();
+  }
+  if (!customerName && shipping?.name?.trim()) {
+    customerName = shipping.name.trim();
+  }
+  if (!customerName && billing?.company?.trim()) {
+    customerName = billing.company.trim();
+  }
+
+  return {
+    customerEmail,
+    customerName: customerName || "Cliente",
+  };
+}
 
 export async function getOrders(filters?: {
   status?: string;
@@ -111,7 +173,10 @@ export async function getOrders(filters?: {
   return { orders: data, profileMap };
 }
 
-export async function updateOrderStatus(orderId: number, status: string) {
+export async function updateOrderStatus(
+  orderId: number,
+  status: string
+): Promise<OrderEmailActionResult> {
   const user = await getUser();
   if (!user || user.role !== "admin") throw new Error("Unauthorized");
 
@@ -140,52 +205,91 @@ export async function updateOrderStatus(orderId: number, status: string) {
     .set({ status: status as OrderStatus, updatedAt: new Date() })
     .where(eq(orders.id, orderId));
 
-  // Resolve customer email and name
+  let emailResult: OrderEmailActionResult = {
+    ok: true,
+    emailSent: false,
+    emailError: "Ordine non trovato",
+  };
+
   if (order) {
-    let customerEmail = order.guestEmail ?? "";
-    let customerName = "";
-
-    const billing = order.billingAddress as Record<string, string> | null;
-    const shipping = order.shippingAddress as Record<string, string> | null;
-
-    if (order.userId) {
-      const [prof] = await db.select().from(profiles).where(eq(profiles.id, order.userId)).limit(1);
-      if (prof) {
-        customerEmail = prof.email ?? customerEmail;
-        customerName = [prof.firstName, prof.lastName].filter(Boolean).join(" ");
-      }
-    }
-
-    if (!customerEmail && billing?.email) customerEmail = billing.email;
-    if (!customerName && shipping?.name) customerName = shipping.name;
+    const { customerEmail, customerName } = await resolveOrderCustomer(db, order);
 
     if (customerEmail) {
-      await sendOrderStatusUpdateEmail({
+      const sendRes = await sendOrderStatusUpdateEmail({
         orderId,
         customerEmail,
-        customerName: customerName || "Cliente",
+        customerName,
         status,
         trackingNumber: order.trackingNumber,
       });
+      emailResult = {
+        ok: true,
+        emailSent: sendRes.ok,
+        emailTo: customerEmail,
+        emailError: sendRes.error,
+      };
+    } else {
+      emailResult = {
+        ok: true,
+        emailSent: false,
+        emailError: "Nessuna email cliente associata all'ordine",
+      };
     }
   }
 
   revalidatePath("/admin/orders");
+  return emailResult;
 }
 
 export async function updateTrackingNumber(
   orderId: number,
   trackingNumber: string
-) {
+): Promise<OrderEmailActionResult> {
   const user = await getUser();
   if (!user || user.role !== "admin") throw new Error("Unauthorized");
 
   const db = getDb();
+  const [order] = await db.select().from(orders).where(eq(orders.id, orderId)).limit(1);
+  const trimmed = trackingNumber.trim();
+  const previousTracking = (order?.trackingNumber ?? "").trim();
+
   await db
     .update(orders)
-    .set({ trackingNumber, updatedAt: new Date() })
+    .set({ trackingNumber: trimmed || null, updatedAt: new Date() })
     .where(eq(orders.id, orderId));
+
+  let emailResult: OrderEmailActionResult = {
+    ok: true,
+    emailSent: false,
+  };
+
+  if (order && trimmed && trimmed !== previousTracking && order.status !== "cancelled") {
+    const { customerEmail, customerName } = await resolveOrderCustomer(db, order);
+    if (customerEmail) {
+      const sendRes = await sendOrderStatusUpdateEmail({
+        orderId,
+        customerEmail,
+        customerName,
+        status: order.status,
+        trackingNumber: trimmed,
+      });
+      emailResult = {
+        ok: true,
+        emailSent: sendRes.ok,
+        emailTo: customerEmail,
+        emailError: sendRes.error,
+      };
+    } else {
+      emailResult = {
+        ok: true,
+        emailSent: false,
+        emailError: "Nessuna email cliente associata all'ordine",
+      };
+    }
+  }
+
   revalidatePath("/admin/orders");
+  return emailResult;
 }
 
 export async function deleteOrder(orderId: number) {

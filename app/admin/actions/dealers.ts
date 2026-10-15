@@ -46,7 +46,7 @@ export async function approveDealer(dealerId: string, discountPercent: number) {
     .then((r) => r[0]);
 
   if (p?.email && d?.companyName) {
-    sendDealerApprovedEmail({
+    await sendDealerApprovedEmail({
       dealerEmail: p.email,
       companyName: d.companyName,
       discountPercent,
@@ -86,7 +86,7 @@ export async function rejectDealer(dealerId: string, reason: string) {
     .then((r) => r[0]);
 
   if (p?.email && d?.companyName) {
-    sendDealerRejectedEmail({
+    await sendDealerRejectedEmail({
       dealerEmail: p.email,
       companyName: d.companyName,
       reason: reason || null,

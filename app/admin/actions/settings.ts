@@ -98,13 +98,14 @@ export async function testDbConnection(): Promise<{ ok: boolean; message: string
 
 export async function testEmail(): Promise<{ ok: boolean; message: string }> {
   await requireAdmin();
-  const adminEmail = process.env.ADMIN_EMAIL;
-  if (!adminEmail) {
-    return { ok: false, message: "ADMIN_EMAIL non configurata nelle variabili d'ambiente" };
+  const adminEmail = process.env.ADMIN_EMAIL?.trim() || "info@bitora.it";
+  const apiKey = process.env.RESEND_API_KEY?.trim();
+  if (!apiKey) {
+    return { ok: false, message: "RESEND_API_KEY non configurata nelle variabili d'ambiente" };
   }
   try {
-    const resend = new Resend(process.env.RESEND_API_KEY);
-    const from = process.env.RESEND_FROM_EMAIL || `${SITE.name} <onboarding@resend.dev>`;
+    const resend = new Resend(apiKey);
+    const from = process.env.RESEND_FROM_EMAIL?.trim() || `${SITE.name} <info@bitora.it>`;
     const { error } = await resend.emails.send({
       from,
       to: adminEmail,

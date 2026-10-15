@@ -90,7 +90,7 @@ export async function register(formData: FormData) {
       role: "customer",
     });
     const verificationUrl = buildVerificationUrl(u.id);
-    sendEmailVerificationEmail({
+    await sendEmailVerificationEmail({
       to: email,
       verificationUrl,
       name: `${firstName} ${lastName}`.trim() || null,
@@ -158,14 +158,14 @@ export async function registerDealer(formData: FormData): Promise<{ error: strin
       vatNumber,
     });
     const verificationUrl = buildVerificationUrl(u.id);
-    sendEmailVerificationEmail({
+    await sendEmailVerificationEmail({
       to: email,
       verificationUrl,
       name: `${firstName} ${lastName}`.trim() || null,
     });
   });
 
-  sendDealerRegistrationNotification({
+  await sendDealerRegistrationNotification({
     companyName,
     vatNumber,
     dealerName: `${firstName} ${lastName}`.trim(),
@@ -224,7 +224,7 @@ export async function requestPasswordReset(formData: FormData): Promise<{ succes
   const token = signPayload({ email, exp: Date.now() + 60 * 60 * 1000, hint, purpose: "password-reset" });
   const resetUrl = `${APP_URL}/reimposta-password?token=${token}`;
 
-  sendPasswordResetEmail({ to: email, resetUrl, name: user.name });
+  await sendPasswordResetEmail({ to: email, resetUrl, name: user.name });
 
   return { success: true };
 }

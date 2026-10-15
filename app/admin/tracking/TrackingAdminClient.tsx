@@ -21,6 +21,7 @@ import {
   ImageIcon,
   Save,
   X,
+  Mail,
 } from "lucide-react";
 import {
   CARRIERS,
@@ -35,6 +36,7 @@ import {
 import {
   createOrUpdateCustomTracking,
   deleteCustomTracking,
+  sendCustomTrackingEmail,
   updateWebsiteOrderTracking,
 } from "@/app/admin/actions/tracking";
 import { formatOrderNumber } from "@/lib/order-number";
@@ -142,6 +144,7 @@ export default function TrackingAdminClient({
     useState<Record<string, OrderTrackingMeta>>(initialMetaMap);
   const [search, setSearch] = useState("");
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
+  const [emailSentCode, setEmailSentCode] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
   // Form state for creating/editing off-site custom tracking
@@ -301,6 +304,18 @@ export default function TrackingAdminClient({
     startTransition(async () => {
       await deleteCustomTracking(code);
       setCustomList((prev) => prev.filter((c) => c.code !== code));
+    });
+  }
+
+  function handleSendCustomEmail(code: string) {
+    startTransition(async () => {
+      const res = await sendCustomTrackingEmail(code);
+      if (res.ok) {
+        setEmailSentCode(code);
+        setTimeout(() => setEmailSentCode(null), 2500);
+      } else {
+        window.alert(res.error || "Errore durante l'invio dell'email");
+      }
     });
   }
 
@@ -878,6 +893,28 @@ export default function TrackingAdminClient({
                         <MessageCircle className="w-3.5 h-3.5" />
                         Invia su WhatsApp
                       </a>
+
+                      {item.customerEmail && (
+                        <button
+                          type="button"
+                          disabled={isPending}
+                          onClick={() => handleSendCustomEmail(item.code)}
+                          className="inline-flex items-center gap-1.5 rounded-xl bg-accent px-3 py-1.5 text-xs font-semibold text-white hover:bg-accent-hover transition disabled:opacity-50"
+                          title={`Invia email stato a ${item.customerEmail}`}
+                        >
+                          {emailSentCode === item.code ? (
+                            <>
+                              <Check className="w-3.5 h-3.5" />
+                              Email inviata!
+                            </>
+                          ) : (
+                            <>
+                              <Mail className="w-3.5 h-3.5" />
+                              Invia Email
+                            </>
+                          )}
+                        </button>
+                      )}
 
                       <button
                         type="button"

@@ -2,25 +2,53 @@ import { Resend } from "resend";
 import { formatOrderNumber } from "@/lib/order-number";
 import { SITE } from "@/lib/site";
 
+export type SendEmailResult = { ok: boolean; error?: string };
+
 function getResend(): Resend | null {
-  const key = process.env.RESEND_API_KEY;
+  const key = process.env.RESEND_API_KEY?.trim();
   if (!key) return null;
   return new Resend(key);
 }
 
-async function sendEmail(payload: Parameters<Resend["emails"]["send"]>[0]) {
-  const resend = getResend();
-  if (!resend) {
-    console.warn("RESEND_API_KEY mancante: email non inviata", payload.subject);
-    return;
-  }
-  await resend.emails.send(payload);
+function getFromEmail(): string {
+  return process.env.RESEND_FROM_EMAIL?.trim() || `${SITE.name} <info@bitora.it>`;
 }
 
-const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || `${SITE.name} <onboarding@resend.dev>`;
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "info@bitora.it";
+function getAdminEmail(): string {
+  return process.env.ADMIN_EMAIL?.trim() || "info@bitora.it";
+}
+
 /** Recipient for order and dealer notifications (business operational email) */
-const ORDERS_EMAIL = process.env.ORDERS_EMAIL || ADMIN_EMAIL;
+function getOrdersEmail(): string {
+  return process.env.ORDERS_EMAIL?.trim() || getAdminEmail();
+}
+
+async function sendEmail(
+  payload: Parameters<Resend["emails"]["send"]>[0]
+): Promise<SendEmailResult> {
+  const resend = getResend();
+  if (!resend) {
+    const msg = "RESEND_API_KEY mancante: email non inviata";
+    console.warn(msg, payload.subject);
+    return { ok: false, error: msg };
+  }
+  try {
+    const { error } = await resend.emails.send(payload);
+    if (error) {
+      console.error("Resend email error:", error, {
+        from: payload.from,
+        to: payload.to,
+        subject: payload.subject,
+      });
+      return { ok: false, error: error.message || "Errore invio email Resend" };
+    }
+    return { ok: true };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error("Resend send exception:", err);
+    return { ok: false, error: message };
+  }
+}
 
 function escapeHtml(unsafe: string): string {
   return unsafe
@@ -46,8 +74,13 @@ function parseEmailList(env: string | undefined): string[] {
     .filter((e) => e && EMAIL_RE.test(e));
 }
 
-const EMAIL_CC = parseEmailList(process.env.EMAIL_CC);
-const EMAIL_BCC = parseEmailList(process.env.EMAIL_BCC);
+function getEmailCc(): string[] {
+  return parseEmailList(process.env.EMAIL_CC);
+}
+
+function getEmailBcc(): string[] {
+  return parseEmailList(process.env.EMAIL_BCC);
+}
 
 // ============================================================
 // ORDER EMAILS
@@ -173,14 +206,16 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
       </p>`
     : "";
 
-  try {
-    await sendEmail({
-      from: FROM_EMAIL,
-      to: data.customerEmail,
-      ...(EMAIL_CC.length ? { cc: EMAIL_CC } : {}),
-      ...(EMAIL_BCC.length ? { bcc: EMAIL_BCC } : {}),
-      subject: `📬 Ordine ricevuto #${formatOrderNumber(data.orderId)} — ${SITE.name}`,
-      html: `
+  const cc = getEmailCc();
+  const bcc = getEmailBcc();
+
+  return sendEmail({
+    from: getFromEmail(),
+    to: data.customerEmail,
+    ...(cc.length ? { cc } : {}),
+    ...(bcc.length ? { bcc } : {}),
+    subject: `📬 Ordine ricevuto #${formatOrderNumber(data.orderId)} — ${SITE.name}`,
+    html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; color: #1f2937;">
           <div style="background: linear-gradient(135deg, #0ea5e9, #dc2626); padding: 24px; border-radius: 12px 12px 0 0;">
             <h1 style="margin: 0; color: white; font-size: 20px;">📬 Ordine ricevuto!</h1>
@@ -232,10 +267,7 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
           </div>
         </div>
       `,
-    });
-  } catch (error) {
-    console.error("Failed to send order confirmation email:", error);
-  }
+  });
 }
 
 // ============================================================
@@ -264,87 +296,156 @@ const STATUS_CONFIG: Record<string, { emoji: string; label: string; color: strin
 
 export async function sendOrderStatusUpdateEmail({
   orderId,
+  trackingCode,
   customerEmail,
   customerName,
+  customerCompany,
   status,
   trackingNumber,
+  itemsSummary,
+  totalAmount,
+  supplierPreviewUrl,
+  graphicNote,
+  publicNote,
+  estimatedDelivery,
 }: {
-  orderId: number;
+  orderId?: number;
+  trackingCode?: string | null;
   customerEmail: string;
   customerName: string;
+  customerCompany?: string | null;
   status: string;
   trackingNumber?: string | null;
-}) {
+  itemsSummary?: string | null;
+  totalAmount?: number | null;
+  supplierPreviewUrl?: string | null;
+  graphicNote?: string | null;
+  publicNote?: string | null;
+  estimatedDelivery?: string | null;
+}): Promise<SendEmailResult> {
   const cfg = STATUS_CONFIG[status];
-  if (!cfg) return; // unknown status, skip
+  if (!cfg) return { ok: false, error: `Stato non valido: ${status}` };
 
+  const codeDisplay = trackingCode?.trim()
+    ? trackingCode.trim()
+    : orderId != null
+      ? formatOrderNumber(orderId)
+      : "";
+  const orderRefLabel = trackingCode?.trim()
+    ? `Ordine ${trackingCode.trim()}`
+    : `Ordine #${codeDisplay}`;
+
+  const cleanTracking = trackingNumber?.trim() || "";
   const trackingHtml =
-    ["shipped", "in_transit", "out_for_delivery", "ready_to_ship"].includes(status) && trackingNumber
+    status !== "cancelled" && cleanTracking
       ? `<div style="background: #f5f3ff; border: 1px solid #ddd6fe; border-radius: 10px; padding: 16px; margin: 16px 0;">
           <p style="margin: 0; font-size: 14px; color: #5b21b6; font-weight: 600;">📬 Numero di tracking corriere</p>
-          <p style="margin: 8px 0 0; font-size: 20px; font-weight: 700; color: #4c1d95; letter-spacing: 1px;">${escapeHtml(trackingNumber)}</p>
+          <p style="margin: 8px 0 0; font-size: 20px; font-weight: 700; color: #4c1d95; letter-spacing: 1px;">${escapeHtml(cleanTracking)}</p>
           <p style="margin: 6px 0 0; font-size: 12px; color: #7c3aed;">Usa questo codice nella nostra pagina di tracking o sul sito del corriere per seguire la spedizione.</p>
         </div>`
       : "";
 
-  try {
-    await sendEmail({
-      from: FROM_EMAIL,
-      to: customerEmail,
-      ...(EMAIL_CC.length ? { cc: EMAIL_CC } : {}),
-      ...(EMAIL_BCC.length ? { bcc: EMAIL_BCC } : {}),
-      subject: `${cfg.emoji} Ordine #${formatOrderNumber(orderId)}: ${cfg.label} — ${SITE.name}`,
-      html: `
+  const summaryHtml =
+    itemsSummary?.trim()
+      ? `<div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px 16px; margin: 16px 0;">
+          <p style="margin: 0; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: #64748b; font-weight: 600;">Riepilogo fornitura</p>
+          <p style="margin: 6px 0 0; font-size: 15px; font-weight: 600; color: #0f172a;">
+            ${escapeHtml(itemsSummary.trim())}${totalAmount != null ? ` <span style="color: #0284c7;">(€ ${formatEur(totalAmount)})</span>` : ""}
+          </p>
+          ${codeDisplay ? `<p style="margin: 6px 0 0; font-size: 12px; color: #475569;">Codice Tracking: <strong style="font-family: monospace;">${escapeHtml(codeDisplay)}</strong></p>` : ""}
+        </div>`
+      : "";
+
+  const previewOrGraphicHtml =
+    supplierPreviewUrl?.trim() || graphicNote?.trim()
+      ? `<div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 14px 16px; margin: 16px 0;">
+          <p style="margin: 0; font-size: 14px; color: #92400e; font-weight: 600;">🎨 Revisione grafica / Preview fornitore</p>
+          ${graphicNote?.trim() ? `<p style="margin: 6px 0 0; font-size: 14px; color: #78350f;">${escapeHtml(graphicNote.trim())}</p>` : ""}
+          ${
+            supplierPreviewUrl?.trim()
+              ? `<p style="margin: 10px 0 0;">
+                  <a href="${escapeHtml(supplierPreviewUrl.trim())}" style="display: inline-block; padding: 8px 14px; background: #d97706; color: white; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 13px;">
+                    Visualizza Preview di Stampa
+                  </a>
+                </p>`
+              : ""
+          }
+        </div>`
+      : "";
+
+  const publicNoteHtml =
+    publicNote?.trim() || estimatedDelivery?.trim()
+      ? `<div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 10px; padding: 12px 16px; margin: 16px 0;">
+          ${publicNote?.trim() ? `<p style="margin: 0; font-size: 14px; color: #0369a1;"><strong>Nota aggiornamento:</strong> ${escapeHtml(publicNote.trim())}</p>` : ""}
+          ${estimatedDelivery?.trim() ? `<p style="margin: ${publicNote?.trim() ? "6px" : "0"} 0 0; font-size: 13px; color: #0284c7;"><strong>Consegna stimata:</strong> ${escapeHtml(estimatedDelivery.trim())}</p>` : ""}
+        </div>`
+      : "";
+
+  const cc = getEmailCc();
+  const bcc = getEmailBcc();
+  const adminEmail = getAdminEmail();
+
+  return sendEmail({
+    from: getFromEmail(),
+    to: customerEmail,
+    ...(cc.length ? { cc } : {}),
+    ...(bcc.length ? { bcc } : {}),
+    subject: `${cfg.emoji} ${orderRefLabel}: ${cfg.label} — ${SITE.name}`,
+    html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; color: #1f2937;">
           <div style="background: linear-gradient(135deg, #0ea5e9, #dc2626); padding: 24px; border-radius: 12px 12px 0 0;">
             <h1 style="margin: 0; color: white; font-size: 22px;">${cfg.emoji} ${cfg.label}</h1>
-            <p style="margin: 4px 0 0; color: rgba(255,255,255,0.85); font-size: 14px;">Ordine #${formatOrderNumber(orderId)}</p>
+            <p style="margin: 4px 0 0; color: rgba(255,255,255,0.85); font-size: 14px;">${escapeHtml(orderRefLabel)}</p>
           </div>
 
           <div style="padding: 24px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 12px 12px;">
-            <p style="margin: 0 0 12px;">Ciao <strong>${escapeHtml(customerName)}</strong>,</p>
+            <p style="margin: 0 0 12px;">Ciao <strong>${escapeHtml(customerName)}</strong>${customerCompany?.trim() ? ` (${escapeHtml(customerCompany.trim())})` : ""},</p>
 
             <div style="background: #f9fafb; border-left: 4px solid ${cfg.color}; border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 16px 0;">
               <p style="margin: 0; font-size: 15px; color: #374151;">${cfg.message}</p>
             </div>
 
+            ${summaryHtml}
+            ${previewOrGraphicHtml}
+            ${publicNoteHtml}
             ${trackingHtml}
 
             <p style="margin-top: 24px;">
-              <a href="${SITE.url}/tracking?code=${encodeURIComponent(formatOrderNumber(orderId))}"
+              <a href="${SITE.url}/tracking?code=${encodeURIComponent(codeDisplay)}"
                  style="display: inline-block; padding: 11px 22px; background: linear-gradient(135deg, #0ea5e9, #dc2626); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px; margin-right: 8px;">
                 🚚 Traccia il tuo ordine
               </a>
-              <a href="${SITE.url}/account/orders"
+              ${
+                orderId != null
+                  ? `<a href="${SITE.url}/account/orders"
                  style="display: inline-block; padding: 11px 18px; background: #f3f4f6; color: #374151; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px;">
                 Area ordini
-              </a>
+              </a>`
+                  : ""
+              }
             </p>
 
             <p style="margin-top: 30px; color: #6b7280; font-size: 13px;">
-              Per assistenza rispondi a questa email o scrivici a <a href="mailto:${ADMIN_EMAIL}" style="color: #0369a1;">${ADMIN_EMAIL}</a>.<br/>
+              Per assistenza rispondi a questa email o scrivici a <a href="mailto:${adminEmail}" style="color: #0369a1;">${adminEmail}</a>.<br/>
               — Il team ${SITE.name}
             </p>
           </div>
         </div>
       `,
-    });
-  } catch (error) {
-    console.error("Failed to send order status update email:", error);
-  }
+  });
 }
 
 /** Notify admin about a new order */
 export async function sendNewOrderAdminNotification(data: OrderEmailData) {
   const paymentLabel = getPaymentLabel(data.paymentMethod);
+  const bcc = getEmailBcc();
 
-  try {
-    await sendEmail({
-      from: FROM_EMAIL,
-      to: ORDERS_EMAIL,
-      ...(EMAIL_BCC.length ? { bcc: EMAIL_BCC } : {}),
-      subject: `Nuovo ordine #${formatOrderNumber(data.orderId)} — ${formatEur(data.total)}`,
-      html: `
+  return sendEmail({
+    from: getFromEmail(),
+    to: getOrdersEmail(),
+    ...(bcc.length ? { bcc } : {}),
+    subject: `Nuovo ordine #${formatOrderNumber(data.orderId)} — ${formatEur(data.total)}`,
+    html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #0369a1;">Nuovo ordine #${formatOrderNumber(data.orderId)}</h2>
           <table style="width: 100%; border-collapse: collapse; margin: 12px 0;">
@@ -360,13 +461,10 @@ export async function sendNewOrderAdminNotification(data: OrderEmailData) {
 
           ${buildItemsTable(data.items)}
 
-          <p style="margin-top: 16px;"><a href="https://shopnfc.bitora.it/admin/orders" style="display: inline-block; padding: 10px 20px; background: #0369a1; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px;">Gestisci ordini</a></p>
+          <p style="margin-top: 16px;"><a href="${SITE.url}/admin/orders" style="display: inline-block; padding: 10px 20px; background: #0369a1; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px;">Gestisci ordini</a></p>
         </div>
       `,
-    });
-  } catch (error) {
-    console.error("Failed to send admin order notification:", error);
-  }
+  });
 }
 
 /** Notify admin that a customer uploaded a bank transfer receipt */
@@ -379,26 +477,24 @@ export async function sendReceiptUploadedAdminNotification({
   customerName: string;
   receiptUrl: string;
 }) {
-  try {
-    await sendEmail({
-      from: FROM_EMAIL,
-      to: ORDERS_EMAIL,
-      ...(EMAIL_BCC.length ? { bcc: EMAIL_BCC } : {}),
-      subject: `Contabile bonifico caricata — Ordine #${orderId}`,
-      html: `
+  const bcc = getEmailBcc();
+
+  return sendEmail({
+    from: getFromEmail(),
+    to: getOrdersEmail(),
+    ...(bcc.length ? { bcc } : {}),
+    subject: `Contabile bonifico caricata — Ordine #${orderId}`,
+    html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #0369a1;">Contabile bonifico ricevuta</h2>
           <p style="font-size: 14px;">Il cliente <strong>${escapeHtml(customerName)}</strong> ha caricato la contabile del bonifico per l'ordine <strong>#${orderId}</strong>.</p>
           <p style="margin: 20px 0;">
             <a href="${escapeHtml(absoluteUrl(receiptUrl))}" style="display: inline-block; padding: 10px 20px; background: #0369a1; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px;">Visualizza contabile</a>
           </p>
-          <p style="margin-top: 16px;"><a href="https://shopnfc.bitora.it/admin/orders" style="color: #0369a1; font-size: 14px;">Gestisci ordini</a></p>
+          <p style="margin-top: 16px;"><a href="${SITE.url}/admin/orders" style="color: #0369a1; font-size: 14px;">Gestisci ordini</a></p>
         </div>
       `,
-    });
-  } catch (error) {
-    console.error("Failed to send receipt uploaded notification:", error);
-  }
+  });
 }
 
 /** Notify admin that a customer uploaded print artwork */
@@ -413,26 +509,24 @@ export async function sendCustomGraphicUploadedAdminNotification({
   graphicUrl: string;
   originalName: string;
 }) {
-  try {
-    await sendEmail({
-      from: FROM_EMAIL,
-      to: ORDERS_EMAIL,
-      ...(EMAIL_BCC.length ? { bcc: EMAIL_BCC } : {}),
-      subject: `Grafica caricata — Ordine #${formatOrderNumber(orderId)}`,
-      html: `
+  const bcc = getEmailBcc();
+
+  return sendEmail({
+    from: getFromEmail(),
+    to: getOrdersEmail(),
+    ...(bcc.length ? { bcc } : {}),
+    subject: `Grafica caricata — Ordine #${formatOrderNumber(orderId)}`,
+    html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #0369a1;">Grafica di stampa ricevuta</h2>
           <p style="font-size: 14px;">Il cliente <strong>${escapeHtml(customerName)}</strong> ha caricato la grafica per l'ordine <strong>#${formatOrderNumber(orderId)}</strong>${originalName ? ` (${escapeHtml(originalName)})` : ""}.</p>
           <p style="margin: 20px 0;">
             <a href="${escapeHtml(graphicUrl)}" style="display: inline-block; padding: 10px 20px; background: #0369a1; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px;">Apri grafica</a>
           </p>
-          <p style="margin-top: 16px;"><a href="https://shopnfc.bitora.it/admin/orders" style="color: #0369a1; font-size: 14px;">Gestisci ordini</a></p>
+          <p style="margin-top: 16px;"><a href="${SITE.url}/admin/orders" style="color: #0369a1; font-size: 14px;">Gestisci ordini</a></p>
         </div>
       `,
-    });
-  } catch (error) {
-    console.error("Failed to send custom graphic uploaded notification:", error);
-  }
+  });
 }
 
 // ============================================================
@@ -498,11 +592,15 @@ export async function sendQuoteRequestEmails(data: QuoteRequestEmailData): Promi
     </div>
   `;
 
+  const fromEmail = getFromEmail();
+  const ordersEmail = getOrdersEmail();
+  const bcc = getEmailBcc();
+
   const adminResult = await resend.emails.send({
-    from: FROM_EMAIL,
-    to: ORDERS_EMAIL,
+    from: fromEmail,
+    to: ordersEmail,
     replyTo: data.email,
-    ...(EMAIL_BCC.length ? { bcc: EMAIL_BCC } : {}),
+    ...(bcc.length ? { bcc } : {}),
     subject: `Preventivo ${data.quoteId} — ${data.quantity} pz ${data.format}${data.company ? ` · ${data.company}` : ""}`,
     html: adminHtml,
     attachments: data.attachments,
@@ -514,9 +612,9 @@ export async function sendQuoteRequestEmails(data: QuoteRequestEmailData): Promi
 
   try {
     await resend.emails.send({
-      from: FROM_EMAIL,
+      from: fromEmail,
       to: data.email,
-      replyTo: ORDERS_EMAIL,
+      replyTo: ordersEmail,
       subject: `Abbiamo ricevuto la tua richiesta — ${SITE.name}`,
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; color: #1f2937;">
@@ -560,13 +658,14 @@ export async function sendDealerRegistrationNotification({
   dealerEmail: string;
   phone: string;
 }) {
-  try {
-    await sendEmail({
-      from: FROM_EMAIL,
-      to: ORDERS_EMAIL,
-      ...(EMAIL_BCC.length ? { bcc: EMAIL_BCC } : {}),
-      subject: `Nuova richiesta dealer: ${companyName}`,
-      html: `
+  const bcc = getEmailBcc();
+
+  return sendEmail({
+    from: getFromEmail(),
+    to: getOrdersEmail(),
+    ...(bcc.length ? { bcc } : {}),
+    subject: `Nuova richiesta dealer: ${companyName}`,
+    html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #0369a1;">Nuova richiesta dealer</h2>
           <p>Un nuovo rivenditore si è registrato e attende approvazione.</p>
@@ -577,13 +676,10 @@ export async function sendDealerRegistrationNotification({
             <tr><td style="padding: 8px; border-bottom: 1px solid #e5e7eb; font-weight: 600;">Email</td><td style="padding: 8px; border-bottom: 1px solid #e5e7eb;">${escapeHtml(dealerEmail)}</td></tr>
             <tr><td style="padding: 8px; border-bottom: 1px solid #e5e7eb; font-weight: 600;">Telefono</td><td style="padding: 8px; border-bottom: 1px solid #e5e7eb;">${phone ? escapeHtml(phone) : "—"}</td></tr>
           </table>
-          <p>Accedi al <a href="https://shopnfc.bitora.it/admin/dealers" style="color: #0369a1;">pannello admin</a> per approvare o rifiutare la richiesta.</p>
+          <p>Accedi al <a href="${SITE.url}/admin/dealers" style="color: #0369a1;">pannello admin</a> per approvare o rifiutare la richiesta.</p>
         </div>
       `,
-    });
-  } catch (error) {
-    console.error("Failed to send dealer registration email:", error);
-  }
+  });
 }
 
 /** Notify dealer that their request has been approved */
@@ -596,14 +692,16 @@ export async function sendDealerApprovedEmail({
   companyName: string;
   discountPercent: number;
 }) {
-  try {
-    await sendEmail({
-      from: FROM_EMAIL,
-      to: dealerEmail,
-      ...(EMAIL_CC.length ? { cc: EMAIL_CC } : {}),
-      ...(EMAIL_BCC.length ? { bcc: EMAIL_BCC } : {}),
-      subject: `Richiesta approvata — ${companyName}`,
-      html: `
+  const cc = getEmailCc();
+  const bcc = getEmailBcc();
+
+  return sendEmail({
+    from: getFromEmail(),
+    to: dealerEmail,
+    ...(cc.length ? { cc } : {}),
+    ...(bcc.length ? { bcc } : {}),
+    subject: `Richiesta approvata — ${companyName}`,
+    html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #16a34a;">Richiesta approvata! ✓</h2>
           <p>Ciao,</p>
@@ -614,15 +712,12 @@ export async function sendDealerApprovedEmail({
           </div>
           <p>Lo sconto verrà applicato automaticamente al tuo account. Accedi al sito per iniziare ad acquistare con i prezzi riservati.</p>
           <p style="margin-top: 30px;">
-            <a href="https://shopnfc.bitora.it/login" style="display: inline-block; padding: 12px 24px; background: #0369a1; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Accedi al tuo account</a>
+            <a href="${SITE.url}/login" style="display: inline-block; padding: 12px 24px; background: #0369a1; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Accedi al tuo account</a>
           </p>
           <p style="margin-top: 30px; color: #6b7280; font-size: 13px;">— Il team ${SITE.name}</p>
         </div>
       `,
-    });
-  } catch (error) {
-    console.error("Failed to send dealer approved email:", error);
-  }
+  });
 }
 
 // ============================================================
@@ -638,12 +733,11 @@ export async function sendEmailVerificationEmail({
   verificationUrl: string;
   name?: string | null;
 }) {
-  try {
-    await sendEmail({
-      from: FROM_EMAIL,
-      to,
-      subject: `Conferma il tuo indirizzo email — ${SITE.name}`,
-      html: `
+  return sendEmail({
+    from: getFromEmail(),
+    to,
+    subject: `Conferma il tuo indirizzo email — ${SITE.name}`,
+    html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; color: #1f2937;">
           <div style="background: linear-gradient(135deg, #0ea5e9, #dc2626); padding: 24px; border-radius: 12px 12px 0 0;">
             <h1 style="margin: 0; color: white; font-size: 20px;">✉️ Conferma la tua email</h1>
@@ -660,10 +754,7 @@ export async function sendEmailVerificationEmail({
           </div>
         </div>
       `,
-    });
-  } catch (error) {
-    console.error("Failed to send email verification email:", error);
-  }
+  });
 }
 
 /** Notify dealer that their request has been rejected */
@@ -676,14 +767,16 @@ export async function sendDealerRejectedEmail({
   companyName: string;
   reason: string | null;
 }) {
-  try {
-    await sendEmail({
-      from: FROM_EMAIL,
-      to: dealerEmail,
-      ...(EMAIL_CC.length ? { cc: EMAIL_CC } : {}),
-      ...(EMAIL_BCC.length ? { bcc: EMAIL_BCC } : {}),
-      subject: `Richiesta rivenditore — ${companyName}`,
-      html: `
+  const cc = getEmailCc();
+  const bcc = getEmailBcc();
+
+  return sendEmail({
+    from: getFromEmail(),
+    to: dealerEmail,
+    ...(cc.length ? { cc } : {}),
+    ...(bcc.length ? { bcc } : {}),
+    subject: `Richiesta rivenditore — ${companyName}`,
+    html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #dc2626;">Richiesta non approvata</h2>
           <p>Ciao,</p>
@@ -693,10 +786,7 @@ export async function sendDealerRejectedEmail({
           <p style="margin-top: 30px; color: #6b7280; font-size: 13px;">— Il team ${SITE.name}</p>
         </div>
       `,
-    });
-  } catch (error) {
-    console.error("Failed to send dealer rejected email:", error);
-  }
+  });
 }
 
 // ============================================================
@@ -712,12 +802,11 @@ export async function sendPasswordResetEmail({
   resetUrl: string;
   name?: string | null;
 }) {
-  try {
-    await sendEmail({
-      from: FROM_EMAIL,
-      to,
-      subject: `Reimposta la tua password — ${SITE.name}`,
-      html: `
+  return sendEmail({
+    from: getFromEmail(),
+    to,
+    subject: `Reimposta la tua password — ${SITE.name}`,
+    html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; color: #1f2937;">
           <div style="background: linear-gradient(135deg, #0ea5e9, #dc2626); padding: 24px; border-radius: 12px 12px 0 0;">
             <h1 style="margin: 0; color: white; font-size: 20px;">🔑 Reimposta password</h1>
@@ -734,8 +823,5 @@ export async function sendPasswordResetEmail({
           </div>
         </div>
       `,
-    });
-  } catch (error) {
-    console.error("Failed to send password reset email:", error);
-  }
+  });
 }

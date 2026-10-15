@@ -97,6 +97,11 @@ export default function OrdersClient({
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [filterStatus, setFilterStatus] = useState("all");
   const [isPending, startTransition] = useTransition();
+  const [feedback, setFeedback] = useState<{
+    orderId: number;
+    ok: boolean;
+    message: string;
+  } | null>(null);
 
   const filtered = orders.filter((o) => {
     if (filterStatus !== "all" && o.status !== filterStatus) return false;
@@ -105,10 +110,23 @@ export default function OrdersClient({
 
   function handleStatusChange(orderId: number, newStatus: string) {
     startTransition(async () => {
-      await updateOrderStatus(orderId, newStatus);
+      const res = await updateOrderStatus(orderId, newStatus);
       setOrders((prev) =>
         prev.map((o) => (o.id === orderId ? { ...o, status: newStatus } : o))
       );
+      if (res?.emailSent) {
+        setFeedback({
+          orderId,
+          ok: true,
+          message: `Stato aggiornato — email inviata a ${res.emailTo}`,
+        });
+      } else if (res?.emailError) {
+        setFeedback({
+          orderId,
+          ok: false,
+          message: `Stato aggiornato, ma email non inviata: ${res.emailError}`,
+        });
+      }
     });
   }
 
@@ -121,12 +139,31 @@ export default function OrdersClient({
 
   function handleTrackingSave(orderId: number, tracking: string) {
     startTransition(async () => {
-      await updateTrackingNumber(orderId, tracking);
+      const res = await updateTrackingNumber(orderId, tracking);
       setOrders((prev) =>
         prev.map((o) =>
-          o.id === orderId ? { ...o, tracking_number: tracking } : o
+          o.id === orderId ? { ...o, tracking_number: tracking.trim() || null } : o
         )
       );
+      if (res?.emailSent) {
+        setFeedback({
+          orderId,
+          ok: true,
+          message: `Tracking salvato — email inviata a ${res.emailTo}`,
+        });
+      } else if (res?.emailError) {
+        setFeedback({
+          orderId,
+          ok: false,
+          message: `Tracking salvato, ma email non inviata: ${res.emailError}`,
+        });
+      } else {
+        setFeedback({
+          orderId,
+          ok: true,
+          message: "Tracking aggiornato",
+        });
+      }
     });
   }
 
@@ -470,6 +507,17 @@ export default function OrdersClient({
                       Stati grafica &amp; corriere &rarr;
                     </Link>
                   </div>
+                  {feedback?.orderId === order.id && (
+                    <div
+                      className={`text-xs px-3 py-2 rounded-lg border ${
+                        feedback.ok
+                          ? "bg-green-50 border-green-200 text-green-800 dark:bg-green-950/30 dark:border-green-800 dark:text-green-300"
+                          : "bg-red-50 border-red-200 text-red-800 dark:bg-red-950/30 dark:border-red-800 dark:text-red-300"
+                      }`}
+                    >
+                      {feedback.message}
+                    </div>
+                  )}
                 </div>
               )}
             </div>

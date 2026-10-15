@@ -130,7 +130,7 @@ export async function updateWebsiteOrderTracking(input: {
     })
     .where(eq(orders.id, input.orderId));
 
-  if (input.notifyCustomer !== false && statusChanged) {
+  if (input.notifyCustomer !== false) {
     let customerEmail = order.guestEmail ?? "";
     let customerName = "";
     const billing = order.billingAddress as Record<string, string> | null;
@@ -148,7 +148,9 @@ export async function updateWebsiteOrderTracking(input: {
       }
     }
     if (!customerEmail && billing?.email) customerEmail = billing.email;
+    if (!customerEmail && shipping?.email) customerEmail = shipping.email;
     if (!customerName && shipping?.name) customerName = shipping.name;
+    if (!customerName && billing?.name) customerName = billing.name;
 
     if (customerEmail) {
       await sendOrderStatusUpdateEmail({
@@ -157,6 +159,10 @@ export async function updateWebsiteOrderTracking(input: {
         customerName: customerName || "Cliente",
         status: input.trackingStatus,
         trackingNumber: input.carrierTrackingNumber?.trim() || order.trackingNumber,
+        supplierPreviewUrl: updatedMeta.supplierPreviewUrl,
+        graphicNote: updatedMeta.graphicNote,
+        publicNote: updatedMeta.publicNote,
+        estimatedDelivery: updatedMeta.estimatedDelivery,
       });
     }
   }
@@ -188,6 +194,7 @@ export async function createOrUpdateCustomTracking(input: {
   shippingCountry?: string | null;
   publicNote?: string | null;
   internalNote?: string | null;
+  notifyCustomer?: boolean;
 }) {
   const user = await getUser();
   if (!user || user.role !== "admin") throw new Error("Unauthorized");
@@ -209,6 +216,8 @@ export async function createOrUpdateCustomTracking(input: {
             ? "rejected"
             : input.graphicStatus ||
               (input.hasCustomPrint ? "in_review" : "not_required");
+
+  let savedRecord: CustomTrackingRecord;
 
   if (existingIdx >= 0) {
     const prev = list[existingIdx];
@@ -261,54 +270,96 @@ export async function createOrUpdateCustomTracking(input: {
     };
 
     list[existingIdx] = updated;
-    await saveCustomTrackingsList(list);
-    revalidatePath("/admin/tracking");
-    revalidatePath("/tracking");
-    return updated;
+    savedRecord = updated;
+  } else {
+    const created: CustomTrackingRecord = {
+      code: cleanCode,
+      customerName: input.customerName.trim(),
+      customerEmail: input.customerEmail?.trim() || null,
+      customerPhone: input.customerPhone?.trim() || null,
+      customerCompany: input.customerCompany?.trim() || null,
+      channel: input.channel,
+      itemsSummary: input.itemsSummary.trim() || "Fornitura Tag / Tessere NFC",
+      totalAmount: input.totalAmount ?? null,
+      hasCustomPrint: input.hasCustomPrint,
+      trackingStatus: input.trackingStatus,
+      graphicStatus: autoGraphicStatus,
+      graphicNote: input.graphicNote?.trim() || null,
+      supplierPreviewUrl: input.supplierPreviewUrl?.trim() || null,
+      carrier: input.carrier,
+      carrierTrackingNumber: input.carrierTrackingNumber?.trim() || null,
+      estimatedDelivery: input.estimatedDelivery?.trim() || null,
+      shippingCity: input.shippingCity?.trim() || null,
+      shippingCountry: input.shippingCountry?.trim() || "Italia",
+      publicNote: input.publicNote?.trim() || null,
+      internalNote: input.internalNote?.trim() || null,
+      createdAt: nowIso,
+      updatedAt: nowIso,
+      history: [
+        {
+          id: `ev-${Date.now()}`,
+          status: input.trackingStatus,
+          title: statusDef.label,
+          description:
+            input.publicNote?.trim() ||
+            input.graphicNote?.trim() ||
+            statusDef.description,
+          timestamp: nowIso,
+        },
+      ],
+    };
+
+    list.unshift(created);
+    savedRecord = created;
   }
 
-  const created: CustomTrackingRecord = {
-    code: cleanCode,
-    customerName: input.customerName.trim(),
-    customerEmail: input.customerEmail?.trim() || null,
-    customerPhone: input.customerPhone?.trim() || null,
-    customerCompany: input.customerCompany?.trim() || null,
-    channel: input.channel,
-    itemsSummary: input.itemsSummary.trim() || "Fornitura Tag / Tessere NFC",
-    totalAmount: input.totalAmount ?? null,
-    hasCustomPrint: input.hasCustomPrint,
-    trackingStatus: input.trackingStatus,
-    graphicStatus: autoGraphicStatus,
-    graphicNote: input.graphicNote?.trim() || null,
-    supplierPreviewUrl: input.supplierPreviewUrl?.trim() || null,
-    carrier: input.carrier,
-    carrierTrackingNumber: input.carrierTrackingNumber?.trim() || null,
-    estimatedDelivery: input.estimatedDelivery?.trim() || null,
-    shippingCity: input.shippingCity?.trim() || null,
-    shippingCountry: input.shippingCountry?.trim() || "Italia",
-    publicNote: input.publicNote?.trim() || null,
-    internalNote: input.internalNote?.trim() || null,
-    createdAt: nowIso,
-    updatedAt: nowIso,
-    history: [
-      {
-        id: `ev-${Date.now()}`,
-        status: input.trackingStatus,
-        title: statusDef.label,
-        description:
-          input.publicNote?.trim() ||
-          input.graphicNote?.trim() ||
-          statusDef.description,
-        timestamp: nowIso,
-      },
-    ],
-  };
-
-  list.unshift(created);
   await saveCustomTrackingsList(list);
+
+  if (input.notifyCustomer !== false && savedRecord.customerEmail) {
+    await sendOrderStatusUpdateEmail({
+      trackingCode: savedRecord.code,
+      customerEmail: savedRecord.customerEmail,
+      customerName: savedRecord.customerName,
+      customerCompany: savedRecord.customerCompany,
+      status: savedRecord.trackingStatus,
+      trackingNumber: savedRecord.carrierTrackingNumber,
+      itemsSummary: savedRecord.itemsSummary,
+      totalAmount: savedRecord.totalAmount,
+      supplierPreviewUrl: savedRecord.supplierPreviewUrl,
+      graphicNote: savedRecord.graphicNote,
+      publicNote: savedRecord.publicNote,
+      estimatedDelivery: savedRecord.estimatedDelivery,
+    });
+  }
+
   revalidatePath("/admin/tracking");
   revalidatePath("/tracking");
-  return created;
+  return savedRecord;
+}
+
+export async function sendCustomTrackingEmail(code: string) {
+  const user = await getUser();
+  if (!user || user.role !== "admin") throw new Error("Unauthorized");
+
+  const list = await getCustomTrackingsList();
+  const record = list.find((c) => c.code.toUpperCase() === code.trim().toUpperCase());
+  if (!record) return { ok: false, error: "Tracking non trovato" };
+  if (!record.customerEmail) return { ok: false, error: "Nessuna email associata al cliente" };
+
+  return sendOrderStatusUpdateEmail({
+    trackingCode: record.code,
+    customerEmail: record.customerEmail,
+    customerName: record.customerName,
+    customerCompany: record.customerCompany,
+    status: record.trackingStatus,
+    trackingNumber: record.carrierTrackingNumber,
+    itemsSummary: record.itemsSummary,
+    totalAmount: record.totalAmount,
+    supplierPreviewUrl: record.supplierPreviewUrl,
+    graphicNote: record.graphicNote,
+    publicNote: record.publicNote,
+    estimatedDelivery: record.estimatedDelivery,
+  });
 }
 
 export async function deleteCustomTracking(code: string) {
