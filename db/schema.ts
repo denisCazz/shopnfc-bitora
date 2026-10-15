@@ -225,11 +225,55 @@ export const orders = pgTable(
       "custom_graphic_disclaimer_accepted_at",
       { withTimezone: true }
     ),
+    trackingStatus: text("tracking_status").default("order_received"),
+    trackingCarrier: text("tracking_carrier").default("auto"),
+    graphicStatus: text("graphic_status").default("not_required"),
+    graphicNote: text("graphic_note"),
+    supplierPreviewUrl: text("supplier_preview_url"),
+    estimatedDelivery: text("estimated_delivery"),
+    publicTrackingNote: text("public_tracking_note"),
+    trackingHistory: jsonb("tracking_history")
+      .notNull()
+      .default(sql`'[]'::jsonb`)
+      .$type<Record<string, unknown>[]>(),
     notes: text("notes"),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [index("idx_orders_user_vps").on(t.userId)]
+);
+
+export const customTrackings = pgTable(
+  "custom_trackings",
+  {
+    code: text("code").primaryKey(),
+    customerName: text("customer_name").notNull(),
+    customerEmail: text("customer_email"),
+    customerPhone: text("customer_phone"),
+    customerCompany: text("customer_company"),
+    channel: text("channel").notNull().default("whatsapp"),
+    itemsSummary: text("items_summary").notNull(),
+    totalAmount: decimal("total_amount", { precision: 10, scale: 2 }),
+    hasCustomPrint: boolean("has_custom_print").notNull().default(true),
+    trackingStatus: text("tracking_status").notNull().default("order_received"),
+    graphicStatus: text("graphic_status").notNull().default("in_review"),
+    graphicNote: text("graphic_note"),
+    supplierPreviewUrl: text("supplier_preview_url"),
+    carrier: text("carrier").notNull().default("auto"),
+    carrierTrackingNumber: text("carrier_tracking_number"),
+    estimatedDelivery: text("estimated_delivery"),
+    shippingCity: text("shipping_city"),
+    shippingCountry: text("shipping_country").default("Italia"),
+    publicNote: text("public_note"),
+    internalNote: text("internal_note"),
+    history: jsonb("history")
+      .notNull()
+      .default(sql`'[]'::jsonb`)
+      .$type<Record<string, unknown>[]>(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("idx_custom_trackings_carrier_num").on(t.carrierTrackingNumber)]
 );
 
 export const orderItems = pgTable("order_items", {

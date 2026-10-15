@@ -13,8 +13,8 @@ export const metadata: Metadata = {
 
 const NEXT_STEPS = [
   "Ricevi subito l'email di conferma con il riepilogo dell'ordine.",
-  "Se hai scelto la stampa personalizzata, puoi caricare o sostituire la grafica da «I miei ordini». Ricorda che non viene inviata anteprima e l'accettazione dell'ordine è subordinata all'approvazione della grafica da parte del nostro fornitore.",
-  "Segui in tempo reale la revisione grafica, la produzione NFC e la spedizione nella pagina Tracking Ordini.",
+  "Se hai scelto la stampa personalizzata, dopo la ricezione del file e l'invio dell'ordine il nostro fornitore ci fornirà una preview di stampa che ti invieremo: se la accetti si prosegue, altrimenti l'ordine viene messo in stop e si rifà la grafica.",
+  "Segui in tempo reale la revisione grafica del fornitore, la conferma preview, la produzione NFC e la spedizione nella pagina Tracking Ordini.",
 ];
 
 export default async function CheckoutSuccessPage({
@@ -93,9 +93,10 @@ export default async function CheckoutSuccessPage({
         <div className="mb-6 rounded-2xl border border-amber-200 dark:border-amber-800/60 bg-amber-50/60 dark:bg-amber-950/20 px-4 py-3 text-xs text-amber-950 dark:text-amber-100 flex items-start gap-2.5">
           <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
           <span>
-            <strong>Nota stampa personalizzata:</strong> non viene inviata anteprima o bozza grafica.
-            L&apos;accettazione definitiva dell&apos;ordine è subordinata alla verifica e all&apos;accettazione
-            della grafica da parte del nostro fornitore.
+            <strong>Nota stampa personalizzata:</strong> l&apos;accettazione dell&apos;ordine è subordinata
+            all&apos;accettazione della grafica da parte del nostro fornitore. Dopo che ci avrai inviato
+            la grafica e avremo inoltrato l&apos;ordine, il fornitore ci fornirà una preview che ti
+            invieremo: se la accetti si prosegue, altrimenti l&apos;ordine si stoppa e si rifà la grafica.
           </span>
         </div>
 

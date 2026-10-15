@@ -26,11 +26,18 @@ else
 fi
 
 if psql -d "$DB_NAME" -tAc "SELECT to_regclass('public.app_users')" | grep -q app_users; then
-  echo "→ Schema già presente, nessuna migrazione da applicare"
+  echo "→ Schema base già presente, applico migrazioni incrementali..."
 else
-  echo "→ Applico schema completo"
+  echo "→ Applico schema base (0000_vps_standalone.sql)"
   psql -d "$DB_NAME" -v ON_ERROR_STOP=1 -f "$SCHEMA"
 fi
+
+for mig in "$ROOT"/db/migrations/000[1-9]_*.sql; do
+  if [ -f "$mig" ]; then
+    echo "→ Applico migrazione $(basename "$mig")"
+    psql -d "$DB_NAME" -v ON_ERROR_STOP=1 -f "$mig"
+  fi
+done
 
 echo "OK  DATABASE_URL=postgresql://${DB_USER}@${DB_HOST}:${DB_PORT}/${DB_NAME}"
 echo "    Poi: npm run db:seed"

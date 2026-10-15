@@ -27,8 +27,9 @@ export async function updateWebsiteOrderTracking(input: {
   trackingStatus: DetailedTrackingStatus;
   carrier: CarrierCode;
   carrierTrackingNumber?: string | null;
-  graphicStatus?: "not_required" | "pending_upload" | "in_review" | "accepted" | "rejected";
+  graphicStatus?: "not_required" | "pending_upload" | "in_review" | "preview_sent" | "accepted" | "rejected";
   graphicNote?: string | null;
+  supplierPreviewUrl?: string | null;
   estimatedDelivery?: string | null;
   publicNote?: string | null;
   notifyCustomer?: boolean;
@@ -63,7 +64,8 @@ export async function updateWebsiteOrderTracking(input: {
   const statusChanged = !prevMeta || prevMeta.trackingStatus !== input.trackingStatus;
   const noteChanged =
     (input.publicNote && input.publicNote !== prevMeta?.publicNote) ||
-    (input.graphicNote && input.graphicNote !== prevMeta?.graphicNote);
+    (input.graphicNote && input.graphicNote !== prevMeta?.graphicNote) ||
+    (input.supplierPreviewUrl && input.supplierPreviewUrl !== prevMeta?.supplierPreviewUrl);
 
   const nextHistory =
     statusChanged || noteChanged
@@ -85,11 +87,13 @@ export async function updateWebsiteOrderTracking(input: {
   const autoGraphicStatus: OrderTrackingMeta["graphicStatus"] =
     input.trackingStatus === "graphic_review"
       ? "in_review"
-      : input.trackingStatus === "graphic_accepted"
-        ? "accepted"
-        : input.trackingStatus === "graphic_rejected"
-          ? "rejected"
-          : input.graphicStatus || prevMeta?.graphicStatus || "not_required";
+      : input.trackingStatus === "preview_sent"
+        ? "preview_sent"
+        : input.trackingStatus === "graphic_accepted"
+          ? "accepted"
+          : input.trackingStatus === "graphic_rejected"
+            ? "rejected"
+            : input.graphicStatus || prevMeta?.graphicStatus || "not_required";
 
   const updatedMeta: OrderTrackingMeta = {
     orderId: input.orderId,
@@ -98,6 +102,7 @@ export async function updateWebsiteOrderTracking(input: {
     carrierTrackingNumber: input.carrierTrackingNumber?.trim() || null,
     graphicStatus: autoGraphicStatus,
     graphicNote: input.graphicNote?.trim() || null,
+    supplierPreviewUrl: input.supplierPreviewUrl?.trim() || prevMeta?.supplierPreviewUrl || null,
     estimatedDelivery: input.estimatedDelivery?.trim() || null,
     publicNote: input.publicNote?.trim() || null,
     updatedAt: nowIso,
@@ -113,6 +118,14 @@ export async function updateWebsiteOrderTracking(input: {
     .set({
       status: baseOrderStatus,
       trackingNumber: input.carrierTrackingNumber?.trim() || order.trackingNumber,
+      trackingStatus: input.trackingStatus,
+      trackingCarrier: input.carrier,
+      graphicStatus: autoGraphicStatus,
+      graphicNote: updatedMeta.graphicNote,
+      supplierPreviewUrl: updatedMeta.supplierPreviewUrl,
+      estimatedDelivery: updatedMeta.estimatedDelivery,
+      publicTrackingNote: updatedMeta.publicNote,
+      trackingHistory: nextHistory as unknown as Record<string, unknown>[],
       updatedAt: new Date(),
     })
     .where(eq(orders.id, input.orderId));
@@ -165,8 +178,9 @@ export async function createOrUpdateCustomTracking(input: {
   totalAmount?: number | null;
   hasCustomPrint: boolean;
   trackingStatus: DetailedTrackingStatus;
-  graphicStatus?: "not_required" | "pending_upload" | "in_review" | "accepted" | "rejected";
+  graphicStatus?: "not_required" | "pending_upload" | "in_review" | "preview_sent" | "accepted" | "rejected";
   graphicNote?: string | null;
+  supplierPreviewUrl?: string | null;
   carrier: CarrierCode;
   carrierTrackingNumber?: string | null;
   estimatedDelivery?: string | null;
@@ -187,19 +201,22 @@ export async function createOrUpdateCustomTracking(input: {
   const autoGraphicStatus: CustomTrackingRecord["graphicStatus"] =
     input.trackingStatus === "graphic_review"
       ? "in_review"
-      : input.trackingStatus === "graphic_accepted"
-        ? "accepted"
-        : input.trackingStatus === "graphic_rejected"
-          ? "rejected"
-          : input.graphicStatus ||
-            (input.hasCustomPrint ? "in_review" : "not_required");
+      : input.trackingStatus === "preview_sent"
+        ? "preview_sent"
+        : input.trackingStatus === "graphic_accepted"
+          ? "accepted"
+          : input.trackingStatus === "graphic_rejected"
+            ? "rejected"
+            : input.graphicStatus ||
+              (input.hasCustomPrint ? "in_review" : "not_required");
 
   if (existingIdx >= 0) {
     const prev = list[existingIdx];
     const statusChanged = prev.trackingStatus !== input.trackingStatus;
     const noteChanged =
       (input.publicNote && input.publicNote !== prev.publicNote) ||
-      (input.graphicNote && input.graphicNote !== prev.graphicNote);
+      (input.graphicNote && input.graphicNote !== prev.graphicNote) ||
+      (input.supplierPreviewUrl && input.supplierPreviewUrl !== prev.supplierPreviewUrl);
 
     const nextHistory =
       statusChanged || noteChanged
@@ -231,6 +248,7 @@ export async function createOrUpdateCustomTracking(input: {
       trackingStatus: input.trackingStatus,
       graphicStatus: autoGraphicStatus,
       graphicNote: input.graphicNote?.trim() || null,
+      supplierPreviewUrl: input.supplierPreviewUrl?.trim() || null,
       carrier: input.carrier,
       carrierTrackingNumber: input.carrierTrackingNumber?.trim() || null,
       estimatedDelivery: input.estimatedDelivery?.trim() || null,
@@ -262,6 +280,7 @@ export async function createOrUpdateCustomTracking(input: {
     trackingStatus: input.trackingStatus,
     graphicStatus: autoGraphicStatus,
     graphicNote: input.graphicNote?.trim() || null,
+    supplierPreviewUrl: input.supplierPreviewUrl?.trim() || null,
     carrier: input.carrier,
     carrierTrackingNumber: input.carrierTrackingNumber?.trim() || null,
     estimatedDelivery: input.estimatedDelivery?.trim() || null,

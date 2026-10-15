@@ -56,7 +56,7 @@ export default function ComeAcquistarePage() {
               </ul>
               <p>{t("how_to_buy.payment_note")}</p>
               <p className="pt-2 text-xs text-amber-800 dark:text-amber-300 font-medium">
-                Nota per prodotti con stampa personalizzata: non viene inviata alcuna bozza/anteprima grafica prima della produzione e l&apos;accettazione definitiva dell&apos;ordine è subordinata alla verifica e all&apos;approvazione del file grafico da parte del nostro fornitore.
+                Nota per prodotti con stampa personalizzata: l&apos;accettazione definitiva dell&apos;ordine è subordinata alla verifica e all&apos;approvazione della grafica da parte del nostro fornitore. Dopo che ci avrai inviato la grafica e avremo inoltrato l&apos;ordine, il fornitore ci fornirà una preview di stampa che ti invieremo: se la accetti si prosegue in produzione, altrimenti l&apos;ordine viene messo in stop e si rifà la grafica.
               </p>
             </div>
           </section>

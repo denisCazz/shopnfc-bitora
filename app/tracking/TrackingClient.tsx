@@ -38,8 +38,8 @@ const PIPELINE_STEPS = [
   },
   {
     step: 2,
-    title: "Verifica grafica fornitore",
-    subtitle: "Controllo idoneità stampa",
+    title: "Grafica & Preview Fornitore",
+    subtitle: "Preview di stampa e tua conferma",
     icon: Palette,
   },
   {
@@ -269,15 +269,26 @@ export default function TrackingClient({
                   <XCircle className="w-5 h-5 text-red-600 dark:text-red-400 shrink-0 mt-0.5" />
                   <div className="space-y-1">
                     <p className="font-bold text-base">
-                      Attenzione: Grafica rifiutata dal fornitore — Richiesto nuovo file
+                      Ordine in STOP — Grafica / Preview rifiutata (si rifà la grafica)
                     </p>
                     <p className="text-xs sm:text-sm leading-relaxed">
                       {tracking.graphicNote ||
-                        "Il file grafico inviato non rispetta i requisiti tecnici di stampa (risoluzione min. 300 DPI, margini di sicurezza 2 mm o formato PNG/PDF). L'accettazione dell'ordine è subordinata all'approvazione della grafica da parte del fornitore."}
+                        "La grafica o la preview del fornitore non è stata approvata: la produzione dell'ordine è temporaneamente ferma (STOP) e si rifà la grafica. Carica il nuovo file grafico corretto o scrivici su WhatsApp per ricevere una nuova preview dal fornitore."}
                     </p>
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-2.5 pl-8">
+                  {tracking.supplierPreviewUrl && (
+                    <a
+                      href={tracking.supplierPreviewUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl border border-red-300 dark:border-red-700 bg-white/80 dark:bg-stone-900 text-red-700 dark:text-red-200 text-xs font-bold transition-colors"
+                    >
+                      Vedi preview fornitore precedente
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  )}
                   {tracking.source === "website_order" && (
                     <Link
                       href="/account/orders"
@@ -288,7 +299,7 @@ export default function TrackingClient({
                   )}
                   <a
                     href={whatsappUrl(
-                      `Ciao, vi scrivo per l'ordine #${tracking.code} con grafica rifiutata per inviare il file corretto.`
+                      `Ciao, vi scrivo per l'ordine #${tracking.code} in STOP grafico per inviare la nuova grafica rifatta.`
                     )}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -301,7 +312,7 @@ export default function TrackingClient({
               </div>
             )}
 
-            {/* Graphic Review Status Box (when order has custom print and is not rejected) */}
+            {/* Graphic Review & Supplier Preview Status Box (when order has custom print and is not rejected) */}
             {tracking.hasCustomPrint && !isRejected && (
               <div
                 className={`rounded-2xl border p-4 text-xs sm:text-sm flex items-start gap-3 ${
@@ -309,24 +320,80 @@ export default function TrackingClient({
                   tracking.trackingStatus === "graphic_accepted" ||
                   activeStep >= 3
                     ? "border-emerald-200 dark:border-emerald-800/60 bg-emerald-50/70 dark:bg-emerald-950/25 text-emerald-950 dark:text-emerald-100"
-                    : "border-amber-200 dark:border-amber-800/60 bg-amber-50/80 dark:bg-amber-950/30 text-amber-950 dark:text-amber-100"
+                    : tracking.graphicStatus === "preview_sent" ||
+                        tracking.trackingStatus === "preview_sent"
+                      ? "border-sky-300 dark:border-sky-800/70 bg-sky-50/85 dark:bg-sky-950/35 text-sky-950 dark:text-sky-100"
+                      : "border-amber-200 dark:border-amber-800/60 bg-amber-50/80 dark:bg-amber-950/30 text-amber-950 dark:text-amber-100"
                 }`}
               >
                 <Palette className="w-5 h-5 shrink-0 mt-0.5 text-current opacity-80" />
-                <div className="space-y-1">
-                  <p className="font-bold">
-                    {tracking.graphicStatus === "accepted" ||
-                    tracking.trackingStatus === "graphic_accepted" ||
-                    activeStep >= 3
-                      ? "Stato Grafica Fornitore: Grafica Accettata ✓"
-                      : tracking.graphicStatus === "pending_upload"
-                        ? "Stato Grafica Fornitore: In attesa del file grafico definitivo"
-                        : "Stato Grafica Fornitore: Grafica in revisione tecnica"}
-                  </p>
-                  <p className="text-xs opacity-90 leading-relaxed">
-                    {tracking.graphicNote ||
-                      "Ricordiamo che non viene fornita anteprima grafica prima della produzione e che l'accettazione definitiva dell'ordine è subordinata all'accettazione della grafica da parte del nostro fornitore."}
-                  </p>
+                <div className="space-y-2.5 flex-1">
+                  <div className="space-y-1">
+                    <p className="font-bold">
+                      {tracking.graphicStatus === "accepted" ||
+                      tracking.trackingStatus === "graphic_accepted" ||
+                      activeStep >= 3
+                        ? "Stato Grafica & Preview Fornitore: Preview Accettata — Si prosegue ✓"
+                        : tracking.graphicStatus === "preview_sent" ||
+                            tracking.trackingStatus === "preview_sent"
+                          ? "Stato Grafica & Preview Fornitore: Preview inviata al cliente — In attesa di tua conferma"
+                          : tracking.graphicStatus === "pending_upload"
+                            ? "Stato Grafica & Preview Fornitore: In attesa del file grafico del cliente"
+                            : "Stato Grafica & Preview Fornitore: Grafica inviata al fornitore (in attesa della preview)"}
+                    </p>
+                    <p className="text-xs opacity-90 leading-relaxed">
+                      {tracking.graphicNote ||
+                        (tracking.graphicStatus === "preview_sent" ||
+                        tracking.trackingStatus === "preview_sent"
+                          ? "Il fornitore ci ha fornito la preview di stampa della tua grafica. Controllala: se la accetti si prosegue con la produzione NFC, altrimenti l'ordine viene messo in STOP e si rifà la grafica."
+                          : "Dopo che ci invii la grafica e inoltriamo l'ordine, il fornitore ci fornisce una preview che ti invieremo. Se la accetti si prosegue, altrimenti l'ordine si stoppa e si rifà la grafica.")}
+                    </p>
+                  </div>
+
+                  {(tracking.supplierPreviewUrl ||
+                    tracking.graphicStatus === "preview_sent" ||
+                    tracking.trackingStatus === "preview_sent") && (
+                    <div className="flex flex-wrap gap-2 pt-1">
+                      {tracking.supplierPreviewUrl && (
+                        <a
+                          href={tracking.supplierPreviewUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-accent text-white text-xs font-bold hover:opacity-95 transition-opacity"
+                        >
+                          Visualizza Preview del Fornitore
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                      )}
+                      {(tracking.graphicStatus === "preview_sent" ||
+                        tracking.trackingStatus === "preview_sent") && (
+                        <>
+                          <a
+                            href={whatsappUrl(
+                              `Ciao! Per l'ordine #${tracking.code} CONFERMO e ACCETTO la preview del fornitore: potete procedere con la produzione.`
+                            )}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-colors"
+                          >
+                            <Check className="w-3.5 h-3.5" />
+                            Accetto la preview (prosegui)
+                          </a>
+                          <a
+                            href={whatsappUrl(
+                              `Ciao! Per l'ordine #${tracking.code} NON accetto la preview del fornitore: fermate l'ordine (STOP), dobbiamo rifare la grafica.`
+                            )}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold transition-colors"
+                          >
+                            <XCircle className="w-3.5 h-3.5" />
+                            Rifiuta preview (stop e rifai grafica)
+                          </a>
+                        </>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
             )}
@@ -597,12 +664,12 @@ export default function TrackingClient({
               <Palette className="w-5 h-5" />
             </div>
             <h3 className="text-sm font-bold text-foreground">
-              1. Revisione grafica del fornitore
+              1. Grafica &amp; Preview del fornitore
             </h3>
             <p className="text-xs text-muted leading-relaxed">
-              Per gli ordini con stampa personalizzata non viene inviata anteprima: il file definitivo
-              viene verificato direttamente dal nostro fornitore. L&apos;accettazione dell&apos;ordine è
-              subordinata all&apos;idoneità tecnica della grafica.
+              Dopo che ci invii la grafica e inoltriamo l&apos;ordine, il fornitore ci fornisce una
+              preview di stampa che ti invieremo. Se la accetti si prosegue, altrimenti l&apos;ordine
+              si stoppa e si rifà la grafica.
             </p>
           </div>
 

@@ -214,7 +214,7 @@ export async function sendOrderConfirmationEmail(data: OrderEmailData) {
 
             ${
               data.customGraphicUrl
-                ? `<p style="margin: 16px 0 0; font-size: 13px; color: #6b7280;">Grafica di stampa allegata${data.customGraphicOriginalName ? ` (${escapeHtml(data.customGraphicOriginalName)})` : ""}. Ricordiamo che non viene fornita anteprima grafica e che l'accettazione definitiva dell'ordine è subordinata alla verifica e all'accettazione della grafica da parte del nostro fornitore. La stampa segue il file fornito: non ci assumiamo responsabilità per grafiche di bassa qualità.</p>`
+                ? `<p style="margin: 16px 0 0; font-size: 13px; color: #6b7280;">Grafica di stampa allegata${data.customGraphicOriginalName ? ` (${escapeHtml(data.customGraphicOriginalName)})` : ""}. Ricordiamo che l'accettazione definitiva dell'ordine è subordinata alla verifica della grafica da parte del nostro fornitore: dopo l'inoltro dell'ordine, il fornitore ci fornirà una preview di stampa che ti invieremo per conferma. Se la accetti si prosegue in produzione, altrimenti l'ordine viene messo in stop e si rifà la grafica.</p>`
                 : ""
             }
 
@@ -247,9 +247,10 @@ const STATUS_CONFIG: Record<string, { emoji: string; label: string; color: strin
   order_received:   { emoji: "📥", label: "Ordine ricevuto",                  color: "#0284c7", message: "Abbiamo ricevuto il tuo ordine e preso in carico la pratica." },
   awaiting_payment: { emoji: "🏦", label: "In attesa di pagamento / bonifico", color: "#d97706", message: "Ordine registrato. Siamo in attesa dell'accredito o della contabile del bonifico bancario." },
   confirmed:        { emoji: "✅", label: "Confermato",                       color: "#2563eb", message: "Il tuo ordine è stato confermato e sarà messo in lavorazione." },
-  graphic_review:   { emoji: "🎨", label: "Grafica in revisione dal fornitore", color: "#d97706", message: "Il file grafico è attualmente in fase di verifica tecnica presso il reparto prestampa del nostro fornitore. L'accettazione definitiva dell'ordine è subordinata all'approvazione del file." },
-  graphic_accepted: { emoji: "✅", label: "Grafica accettata dal fornitore",  color: "#16a34a", message: "Ottime notizie! Il nostro fornitore ha verificato e approvato la grafica di stampa. L'ordine è stato accettato e passa in produzione." },
-  graphic_rejected: { emoji: "⚠️", label: "Grafica rifiutata — modifica richiesta", color: "#dc2626", message: "Il reparto prestampa del fornitore ha rilevato anomalie tecniche sul file grafico (es. risoluzione, margini o formato). Carica un nuovo file corretto nella tua area ordini o contattaci su WhatsApp." },
+  graphic_review:   { emoji: "🎨", label: "Grafica in revisione dal fornitore", color: "#d97706", message: "Abbiamo ricevuto la tua grafica e inoltrato l'ordine al nostro fornitore, che sta elaborando la preview ufficiale di stampa da sottoporti." },
+  preview_sent:     { emoji: "🖼️", label: "Preview del fornitore inviata — In attesa di tua conferma", color: "#0284c7", message: "Il nostro fornitore ha fornito la preview di stampa del tuo ordine! Controllala e facci sapere: se la accetti si prosegue in produzione, altrimenti l'ordine viene messo in stop e si rifà la grafica." },
+  graphic_accepted: { emoji: "✅", label: "Preview / Grafica accettata — Si prosegue!",  color: "#16a34a", message: "Ottime notizie! La preview grafica del fornitore è stata accettata. L'ordine prosegue ora in fase di stampa e programmazione NFC." },
+  graphic_rejected: { emoji: "🛑", label: "Ordine in STOP — Si rifà la grafica", color: "#dc2626", message: "La grafica o la preview non è stata accettata: l'ordine è temporaneamente in STOP. Carica il nuovo file grafico corretto nella tua area ordini o inviacelo su WhatsApp così potremo richiedere una nuova preview al fornitore." },
   processing:       { emoji: "🔧", label: "In produzione (Stampa & NFC)",     color: "#4f46e5", message: "Il tuo ordine è in fase di stampa e programmazione/codifica dei chip NFC nel nostro laboratorio." },
   quality_check:    { emoji: "🔍", label: "Controllo qualità e collaudo NFC", color: "#4f46e5", message: "Stiamo effettuando il test di lettura/scrittura sui chip NFC e la verifica finale prima dell'imballaggio." },
   ready_to_ship:    { emoji: "📦", label: "Pronto per la spedizione",         color: "#7c3aed", message: "Il tuo ordine è imballato ed etichettato, pronto per il ritiro da parte del corriere espresso." },

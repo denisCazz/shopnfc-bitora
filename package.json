@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "db:setup": "bash scripts/setup-db.sh",
+    "db:migrate": "node scripts/migrate-deploy.mjs",
     "db:seed": "npx tsx scripts/seed-catalog.ts",
     "db:clone-qa": "bash scripts/clone-db-to-qa-docker.sh",
     "db:recreate-qa": "FORCE_RECREATE=1 bash scripts/clone-db-to-qa-docker.sh",
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "node scripts/migrate-deploy.mjs --if-db && next build",
+    "start": "node scripts/migrate-deploy.mjs --if-db && next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "analyze": "cross-env ANALYZE=true npm run build"

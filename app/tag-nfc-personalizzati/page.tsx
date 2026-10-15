@@ -74,9 +74,10 @@ export default async function TagNfcPersonalizzatiPage() {
           <h2 className="text-2xl font-bold mb-2">Mandaci il logo, ti diamo il preventivo</h2>
           <p className="text-sm text-slate-300 mb-6 max-w-2xl">
             Indica formato, quantità e programmazione, allega logo e foto: ti rispondiamo entro 24 ore
-            lavorative con prezzo e tempi di produzione. L&apos;accettazione dell&apos;ordine per prodotti stampati è
-            subordinata all&apos;approvazione della grafica da parte del nostro fornitore (non viene inviata
-            anteprima grafica prima della stampa).
+            lavorative con prezzo e tempi di produzione. L&apos;accettazione dell&apos;ordine è subordinata
+            all&apos;accettazione della grafica da parte del nostro fornitore: dopo l&apos;invio della grafica
+            e dell&apos;ordine, il fornitore ci fornisce una preview che ti invieremo. Se la accetti si
+            prosegue, altrimenti si stoppa e si rifà la grafica.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 mb-6">
             <Link

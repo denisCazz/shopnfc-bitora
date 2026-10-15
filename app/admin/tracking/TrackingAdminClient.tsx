@@ -77,13 +77,18 @@ const QUICK_STATUSES: {
     className: "border-amber-300 bg-amber-50 text-amber-800 hover:bg-amber-100",
   },
   {
+    key: "preview_sent",
+    shortLabel: "Preview inviata al cliente",
+    className: "border-sky-300 bg-sky-50 text-sky-800 hover:bg-sky-100",
+  },
+  {
     key: "graphic_accepted",
-    shortLabel: "Grafica accettata ✓",
+    shortLabel: "Preview accettata ✓",
     className: "border-emerald-300 bg-emerald-50 text-emerald-800 hover:bg-emerald-100",
   },
   {
     key: "graphic_rejected",
-    shortLabel: "Grafica rifiutata ✕",
+    shortLabel: "STOP · Rifare grafica ✕",
     className: "border-red-300 bg-red-50 text-red-800 hover:bg-red-100",
   },
   {
@@ -156,6 +161,7 @@ export default function TrackingAdminClient({
   const [formStatus, setFormStatus] =
     useState<DetailedTrackingStatus>("order_received");
   const [formGraphicNote, setFormGraphicNote] = useState("");
+  const [formSupplierPreviewUrl, setFormSupplierPreviewUrl] = useState("");
   const [formCarrier, setFormCarrier] = useState<CarrierCode>("auto");
   const [formCarrierNumber, setFormCarrierNumber] = useState("");
   const [formEstimatedDelivery, setFormEstimatedDelivery] = useState("");
@@ -177,6 +183,7 @@ export default function TrackingAdminClient({
     setFormHasCustomPrint(true);
     setFormStatus("order_received");
     setFormGraphicNote("");
+    setFormSupplierPreviewUrl("");
     setFormCarrier("auto");
     setFormCarrierNumber("");
     setFormEstimatedDelivery("");
@@ -206,6 +213,7 @@ export default function TrackingAdminClient({
     setFormHasCustomPrint(item.hasCustomPrint);
     setFormStatus(item.trackingStatus);
     setFormGraphicNote(item.graphicNote || "");
+    setFormSupplierPreviewUrl(item.supplierPreviewUrl || "");
     setFormCarrier(item.carrier || "auto");
     setFormCarrierNumber(item.carrierTrackingNumber || "");
     setFormEstimatedDelivery(item.estimatedDelivery || "");
@@ -234,6 +242,7 @@ export default function TrackingAdminClient({
         hasCustomPrint: formHasCustomPrint,
         trackingStatus: formStatus,
         graphicNote: formGraphicNote || null,
+        supplierPreviewUrl: formSupplierPreviewUrl || null,
         carrier: formCarrier,
         carrierTrackingNumber: formCarrierNumber || null,
         estimatedDelivery: formEstimatedDelivery || null,
@@ -272,6 +281,7 @@ export default function TrackingAdminClient({
         hasCustomPrint: item.hasCustomPrint,
         trackingStatus: newStatus,
         graphicNote: item.graphicNote,
+        supplierPreviewUrl: item.supplierPreviewUrl,
         carrier: item.carrier,
         carrierTrackingNumber: item.carrierTrackingNumber,
         estimatedDelivery: item.estimatedDelivery,
@@ -630,8 +640,8 @@ export default function TrackingAdminClient({
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className=" flex items-center gap-2.5 pt-2">
+            <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+              <div className="flex items-center gap-2.5 pt-2">
                 <input
                   id="has-custom-print"
                   type="checkbox"
@@ -643,19 +653,32 @@ export default function TrackingAdminClient({
                   htmlFor="has-custom-print"
                   className="text-sm font-medium text-foreground cursor-pointer"
                 >
-                  Include stampa grafica personalizzata (soggetta a verifica fornitore)
+                  Include stampa grafica (con preview fornitore)
                 </label>
               </div>
 
               <div>
                 <label className="block text-xs font-semibold text-muted uppercase mb-1">
-                  Nota Revisione Grafica Fornitore (visibile al cliente)
+                  Link Preview Fornitore (URL opzionale)
+                </label>
+                <input
+                  type="url"
+                  value={formSupplierPreviewUrl}
+                  onChange={(e) => setFormSupplierPreviewUrl(e.target.value)}
+                  placeholder="https://... (PDF/immagine preview)"
+                  className="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-muted uppercase mb-1">
+                  Nota Grafica / Preview Fornitore
                 </label>
                 <input
                   type="text"
                   value={formGraphicNote}
                   onChange={(e) => setFormGraphicNote(e.target.value)}
-                  placeholder="Es. File PDF verificato e approvato / Richiesto file vettoriale 300 DPI"
+                  placeholder="Es. Preview inviata: attendiamo conferma / STOP: rifare grafica"
                   className="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm"
                 />
               </div>
@@ -797,8 +820,19 @@ export default function TrackingAdminClient({
                       </p>
                       {item.graphicNote && (
                         <p className="text-xs text-amber-700 dark:text-amber-300 font-medium">
-                          Nota grafica fornitore: {item.graphicNote}
+                          Nota grafica / preview fornitore: {item.graphicNote}
                         </p>
+                      )}
+                      {item.supplierPreviewUrl && (
+                        <a
+                          href={item.supplierPreviewUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-xs font-semibold text-accent hover:underline"
+                        >
+                          <ImageIcon className="w-3.5 h-3.5" />
+                          Apri Preview Fornitore
+                        </a>
                       )}
                     </div>
 
@@ -1021,6 +1055,9 @@ function WebsiteOrderTrackingCard({
     meta?.carrierTrackingNumber || order.tracking_number || ""
   );
   const [graphicNote, setGraphicNote] = useState(meta?.graphicNote || "");
+  const [supplierPreviewUrl, setSupplierPreviewUrl] = useState(
+    meta?.supplierPreviewUrl || ""
+  );
   const [publicNote, setPublicNote] = useState(meta?.publicNote || "");
   const [notifyCustomer, setNotifyCustomer] = useState(true);
   const [savedToast, setSavedToast] = useState(false);
@@ -1040,6 +1077,7 @@ function WebsiteOrderTrackingCard({
         carrier,
         carrierTrackingNumber: carrierTracking.trim() || null,
         graphicNote: graphicNote.trim() || null,
+        supplierPreviewUrl: supplierPreviewUrl.trim() || null,
         publicNote: publicNote.trim() || null,
         notifyCustomer,
       });
@@ -1112,7 +1150,7 @@ function WebsiteOrderTrackingCard({
         })}
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 pt-2 border-t border-border/60">
+      <div className="grid grid-cols-1 sm:grid-cols-5 gap-3 pt-2 border-t border-border/60">
         <div>
           <label className="block text-[11px] font-semibold uppercase text-muted mb-1">
             Stato completo
@@ -1164,13 +1202,26 @@ function WebsiteOrderTrackingCard({
 
         <div>
           <label className="block text-[11px] font-semibold uppercase text-muted mb-1">
-            Nota Grafica Fornitore / Cliente
+            Link Preview Fornitore
+          </label>
+          <input
+            type="url"
+            value={supplierPreviewUrl}
+            onChange={(e) => setSupplierPreviewUrl(e.target.value)}
+            placeholder="https://... (URL preview)"
+            className="w-full rounded-xl border border-border bg-background px-2.5 py-2 text-xs"
+          />
+        </div>
+
+        <div>
+          <label className="block text-[11px] font-semibold uppercase text-muted mb-1">
+            Nota Grafica / Preview
           </label>
           <input
             type="text"
             value={graphicNote}
             onChange={(e) => setGraphicNote(e.target.value)}
-            placeholder="Es. Grafica approvata dal fornitore"
+            placeholder="Es. Preview inviata: in attesa conferma"
             className="w-full rounded-xl border border-border bg-background px-2.5 py-2 text-xs"
           />
         </div>

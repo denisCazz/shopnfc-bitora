@@ -39,6 +39,8 @@ RUN apk add --no-cache libc6-compat && \
 COPY --from=build /app/.next/standalone ./
 COPY --from=build /app/.next/static ./.next/static
 COPY --from=build /app/public ./public
+COPY --from=build /app/db/migrations ./db/migrations
+COPY --from=build /app/scripts/migrate-deploy.mjs ./scripts/migrate-deploy.mjs
 RUN mkdir -p /app/storage/quotes /app/storage/graphics /app/storage/receipts && chown -R nextjs:nodejs /app/storage
 
 USER nextjs
@@ -47,4 +49,4 @@ EXPOSE 3000
 HEALTHCHECK --interval=10s --timeout=5s --retries=3 --start-period=20s \
   CMD node -e "fetch('http://127.0.0.1:'+(process.env.PORT||3000)+'/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
 
-CMD ["node", "server.js"]
+CMD ["sh", "-c", "node scripts/migrate-deploy.mjs --if-db && node server.js"]

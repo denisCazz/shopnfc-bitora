@@ -12,9 +12,10 @@
 export type DetailedTrackingStatus =
   | "order_received"        // Ordine ricevuto
   | "awaiting_payment"      // In attesa di pagamento / verifica bonifico
-  | "graphic_review"        // Grafica in revisione presso il fornitore
-  | "graphic_accepted"      // Grafica accettata dal fornitore
-  | "graphic_rejected"      // Grafica rifiutata (richiesto nuovo file)
+  | "graphic_review"        // Grafica inviata al fornitore (in elaborazione preview)
+  | "preview_sent"          // Preview del fornitore inviata al cliente (in attesa di conferma)
+  | "graphic_accepted"      // Preview/Grafica accettata — si prosegue in produzione
+  | "graphic_rejected"      // Ordine in STOP — Preview/Grafica rifiutata, si rifà la grafica
   | "processing"            // In produzione / Stampa e programmazione NFC
   | "quality_check"         // Controllo qualità e collaudo chip NFC
   | "ready_to_ship"         // Pronto per la spedizione
@@ -52,8 +53,9 @@ export interface OrderTrackingMeta {
   trackingStatus: DetailedTrackingStatus;
   carrier: CarrierCode;
   carrierTrackingNumber?: string | null;
-  graphicStatus?: "not_required" | "pending_upload" | "in_review" | "accepted" | "rejected";
+  graphicStatus?: "not_required" | "pending_upload" | "in_review" | "preview_sent" | "accepted" | "rejected";
   graphicNote?: string | null;
+  supplierPreviewUrl?: string | null;
   estimatedDelivery?: string | null;
   publicNote?: string | null;
   updatedAt: string;
@@ -73,8 +75,9 @@ export interface CustomTrackingRecord {
   totalAmount?: number | null;
   hasCustomPrint: boolean;
   trackingStatus: DetailedTrackingStatus;
-  graphicStatus: "not_required" | "pending_upload" | "in_review" | "accepted" | "rejected";
+  graphicStatus: "not_required" | "pending_upload" | "in_review" | "preview_sent" | "accepted" | "rejected";
   graphicNote?: string | null;
+  supplierPreviewUrl?: string | null;
   carrier: CarrierCode;
   carrierTrackingNumber?: string | null;
   estimatedDelivery?: string | null;
@@ -96,8 +99,9 @@ export interface UnifiedTrackingView {
   createdAt: string;
   updatedAt: string;
   trackingStatus: DetailedTrackingStatus;
-  graphicStatus: "not_required" | "pending_upload" | "in_review" | "accepted" | "rejected";
+  graphicStatus: "not_required" | "pending_upload" | "in_review" | "preview_sent" | "accepted" | "rejected";
   graphicNote?: string | null;
+  supplierPreviewUrl?: string | null;
   hasCustomPrint: boolean;
   carrier: CarrierCode;
   carrierName: string;
@@ -150,30 +154,40 @@ export const TRACKING_STATUSES: TrackingStatusDefinition[] = [
   },
   {
     value: "graphic_review",
-    label: "Grafica in revisione (verifica fornitore)",
+    label: "Grafica in revisione dal fornitore (in elaborazione preview)",
     shortLabel: "Grafica in revisione",
     description:
-      "Il file grafico è in fase di verifica tecnica presso il nostro fornitore di stampa. Ricordiamo che l'accettazione definitiva dell'ordine è subordinata all'approvazione della grafica da parte del fornitore.",
+      "Abbiamo ricevuto il tuo file grafico e inoltrato l'ordine al nostro fornitore di stampa per la verifica tecnica e la generazione della preview ufficiale che ti invieremo.",
     category: "graphic",
     badgeColor: "bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300",
     stepIndex: 2,
   },
   {
-    value: "graphic_accepted",
-    label: "Grafica accettata dal fornitore",
-    shortLabel: "Grafica accettata",
+    value: "preview_sent",
+    label: "Preview del fornitore inviata al cliente (in attesa di tua conferma)",
+    shortLabel: "Preview inviata al cliente",
     description:
-      "Il nostro fornitore ha verificato e accettato il file grafico definitivo. L'ordine è confermato e pronto per la stampa.",
+      "Il nostro fornitore ha generato la preview di stampa e te l'abbiamo inviata. Se la accetti si prosegue subito in produzione; altrimenti l'ordine viene messo in stop e si rifà la grafica.",
+    category: "graphic",
+    badgeColor: "bg-sky-100 text-sky-800 dark:bg-sky-900/40 dark:text-sky-300",
+    stepIndex: 2,
+  },
+  {
+    value: "graphic_accepted",
+    label: "Preview / Grafica accettata — si prosegue con l'ordine",
+    shortLabel: "Grafica accettata ✓",
+    description:
+      "La preview del fornitore è stata accettata! L'ordine è confermato e prosegue nella fase di stampa e programmazione NFC.",
     category: "graphic",
     badgeColor: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300",
     stepIndex: 2,
   },
   {
     value: "graphic_rejected",
-    label: "Grafica rifiutata — richiesta modifica",
-    shortLabel: "Grafica rifiutata",
+    label: "Ordine in STOP — Grafica / Preview rifiutata (si rifà la grafica)",
+    shortLabel: "STOP · Rifare grafica",
     description:
-      "Il fornitore di stampa ha riscontrato problemi tecnici sul file grafico (es. risoluzione insufficiente, margini o formato non idoneo). Invia un nuovo file conforme per sbloccare l'ordine.",
+      "La grafica o la preview del fornitore non è stata accettata. La produzione è momentaneamente in STOP: invia il nuovo file grafico corretto per generare una nuova preview del fornitore e sbloccare l'ordine.",
     category: "issue",
     badgeColor: "bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300",
     stepIndex: 2,
@@ -290,6 +304,7 @@ export function mapDetailedToBaseOrderStatus(
     case "order_received":
     case "awaiting_payment":
     case "graphic_review":
+    case "preview_sent":
     case "graphic_rejected":
       return "pending";
     case "graphic_accepted":

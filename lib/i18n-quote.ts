@@ -42,7 +42,7 @@ export const QUOTE_TRANSLATIONS = {
     "cart.trust_secure": "Pagamento sicuro Stripe",
     "cart.trust_programming": "Programmazione inclusa",
     "cart.trust_support": "Assistenza diretta",
-    "cart.print_next": "Hai scelto la stampa: al checkout potrai caricare la grafica (o farlo dopo dai tuoi ordini). L'accettazione dell'ordine è subordinata all'approvazione della grafica da parte del nostro fornitore.",
+    "cart.print_next": "Hai scelto la stampa: al checkout potrai caricare la grafica (o farlo dopo dai tuoi ordini). L'accettazione dell'ordine è subordinata al fornitore: dopo l'ordine ti invieremo la preview del fornitore (se la accetti si prosegue, altrimenti si stoppa e si rifà la grafica).",
     "print.preview_link": "Lotto speciale o grandi quantità? Chiedi un preventivo",
     "print.step_order": "Aggiungi al carrello e paga",
     "product.custom_title": "Lo vuoi con il tuo logo?",
