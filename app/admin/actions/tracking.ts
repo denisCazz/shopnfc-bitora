@@ -5,7 +5,11 @@ import { revalidatePath } from "next/cache";
 import { getDb } from "@/db";
 import { orders, profiles } from "@/db/schema";
 import { getUser } from "@/lib/auth";
-import { sendOrderStatusUpdateEmail } from "@/lib/email";
+import {
+  claimStatusEmail,
+  releaseStatusEmail,
+  sendOrderStatusUpdateEmail,
+} from "@/lib/email";
 import {
   type CarrierCode,
   type CustomTrackingRecord,
@@ -21,6 +25,24 @@ import {
   saveCustomTrackingsList,
   saveOrderTrackingMetaMap,
 } from "@/lib/tracking-server";
+
+function customerEmailFingerprint(parts: {
+  status: string;
+  trackingNumber?: string | null;
+  supplierPreviewUrl?: string | null;
+  graphicNote?: string | null;
+  publicNote?: string | null;
+  estimatedDelivery?: string | null;
+}): string {
+  return [
+    parts.status,
+    parts.trackingNumber?.trim() || "",
+    parts.supplierPreviewUrl?.trim() || "",
+    parts.graphicNote?.trim() || "",
+    parts.publicNote?.trim() || "",
+    parts.estimatedDelivery?.trim() || "",
+  ].join("\u001f");
+}
 
 export async function updateWebsiteOrderTracking(input: {
   orderId: number;
@@ -109,6 +131,58 @@ export async function updateWebsiteOrderTracking(input: {
     history: nextHistory,
   };
 
+  let customerEmail = order.guestEmail ?? "";
+  let customerName = "";
+  const billing = order.billingAddress as Record<string, string> | null;
+  const shipping = order.shippingAddress as Record<string, string> | null;
+
+  if (order.userId) {
+    const [prof] = await db
+      .select()
+      .from(profiles)
+      .where(eq(profiles.id, order.userId))
+      .limit(1);
+    if (prof) {
+      customerEmail = prof.email ?? customerEmail;
+      customerName = [prof.firstName, prof.lastName].filter(Boolean).join(" ");
+    }
+  }
+  if (!customerEmail && billing?.email) customerEmail = billing.email;
+  if (!customerEmail && shipping?.email) customerEmail = shipping.email;
+  if (!customerName && shipping?.name) customerName = shipping.name;
+  if (!customerName && billing?.name) customerName = billing.name;
+
+  const fingerprint = customerEmailFingerprint({
+    status: updatedMeta.trackingStatus,
+    trackingNumber: updatedMeta.carrierTrackingNumber || order.trackingNumber,
+    supplierPreviewUrl: updatedMeta.supplierPreviewUrl,
+    graphicNote: updatedMeta.graphicNote,
+    publicNote: updatedMeta.publicNote,
+    estimatedDelivery: updatedMeta.estimatedDelivery,
+  });
+  const previousFingerprint = prevMeta
+    ? customerEmailFingerprint({
+        status: prevMeta.trackingStatus,
+        trackingNumber: prevMeta.carrierTrackingNumber || order.trackingNumber,
+        supplierPreviewUrl: prevMeta.supplierPreviewUrl,
+        graphicNote: prevMeta.graphicNote,
+        publicNote: prevMeta.publicNote,
+        estimatedDelivery: prevMeta.estimatedDelivery,
+      })
+    : null;
+  const claimKey = `website:${input.orderId}:${fingerprint}`;
+  const willEmail =
+    input.notifyCustomer !== false &&
+    !!customerEmail &&
+    fingerprint !== previousFingerprint &&
+    prevMeta?.lastEmailFingerprint !== fingerprint &&
+    claimStatusEmail(claimKey);
+
+  updatedMeta.lastEmailFingerprint = willEmail
+    ? fingerprint
+    : (prevMeta?.lastEmailFingerprint ?? null);
+  updatedMeta.lastEmailedAt = willEmail ? nowIso : (prevMeta?.lastEmailedAt ?? null);
+
   metaMap[String(input.orderId)] = updatedMeta;
   await saveOrderTrackingMetaMap(metaMap);
 
@@ -130,40 +204,24 @@ export async function updateWebsiteOrderTracking(input: {
     })
     .where(eq(orders.id, input.orderId));
 
-  if (input.notifyCustomer !== false) {
-    let customerEmail = order.guestEmail ?? "";
-    let customerName = "";
-    const billing = order.billingAddress as Record<string, string> | null;
-    const shipping = order.shippingAddress as Record<string, string> | null;
-
-    if (order.userId) {
-      const [prof] = await db
-        .select()
-        .from(profiles)
-        .where(eq(profiles.id, order.userId))
-        .limit(1);
-      if (prof) {
-        customerEmail = prof.email ?? customerEmail;
-        customerName = [prof.firstName, prof.lastName].filter(Boolean).join(" ");
-      }
-    }
-    if (!customerEmail && billing?.email) customerEmail = billing.email;
-    if (!customerEmail && shipping?.email) customerEmail = shipping.email;
-    if (!customerName && shipping?.name) customerName = shipping.name;
-    if (!customerName && billing?.name) customerName = billing.name;
-
-    if (customerEmail) {
-      await sendOrderStatusUpdateEmail({
-        orderId: input.orderId,
-        customerEmail,
-        customerName: customerName || "Cliente",
-        status: input.trackingStatus,
-        trackingNumber: input.carrierTrackingNumber?.trim() || order.trackingNumber,
-        supplierPreviewUrl: updatedMeta.supplierPreviewUrl,
-        graphicNote: updatedMeta.graphicNote,
-        publicNote: updatedMeta.publicNote,
-        estimatedDelivery: updatedMeta.estimatedDelivery,
-      });
+  if (willEmail) {
+    const sendRes = await sendOrderStatusUpdateEmail({
+      orderId: input.orderId,
+      customerEmail,
+      customerName: customerName || "Cliente",
+      status: input.trackingStatus,
+      trackingNumber: input.carrierTrackingNumber?.trim() || order.trackingNumber,
+      supplierPreviewUrl: updatedMeta.supplierPreviewUrl,
+      graphicNote: updatedMeta.graphicNote,
+      publicNote: updatedMeta.publicNote,
+      estimatedDelivery: updatedMeta.estimatedDelivery,
+    });
+    if (!sendRes.ok) {
+      releaseStatusEmail(claimKey);
+      updatedMeta.lastEmailFingerprint = prevMeta?.lastEmailFingerprint ?? null;
+      updatedMeta.lastEmailedAt = prevMeta?.lastEmailedAt ?? null;
+      metaMap[String(input.orderId)] = updatedMeta;
+      await saveOrderTrackingMetaMap(metaMap);
     }
   }
 
@@ -203,6 +261,7 @@ export async function createOrUpdateCustomTracking(input: {
   const nowIso = new Date().toISOString();
   const cleanCode = input.code?.trim().toUpperCase() || generateCustomTrackingCode();
   const existingIdx = list.findIndex((c) => c.code.toUpperCase() === cleanCode);
+  const previousSnapshot = existingIdx >= 0 ? list[existingIdx] : null;
   const statusDef = getTrackingStatusDef(input.trackingStatus);
 
   const autoGraphicStatus: CustomTrackingRecord["graphicStatus"] =
@@ -313,10 +372,41 @@ export async function createOrUpdateCustomTracking(input: {
     savedRecord = created;
   }
 
+  const fingerprint = customerEmailFingerprint({
+    status: savedRecord.trackingStatus,
+    trackingNumber: savedRecord.carrierTrackingNumber,
+    supplierPreviewUrl: savedRecord.supplierPreviewUrl,
+    graphicNote: savedRecord.graphicNote,
+    publicNote: savedRecord.publicNote,
+    estimatedDelivery: savedRecord.estimatedDelivery,
+  });
+  const previousFingerprint = previousSnapshot
+    ? customerEmailFingerprint({
+        status: previousSnapshot.trackingStatus,
+        trackingNumber: previousSnapshot.carrierTrackingNumber,
+        supplierPreviewUrl: previousSnapshot.supplierPreviewUrl,
+        graphicNote: previousSnapshot.graphicNote,
+        publicNote: previousSnapshot.publicNote,
+        estimatedDelivery: previousSnapshot.estimatedDelivery,
+      })
+    : null;
+  const claimKey = `custom:${savedRecord.code}:${fingerprint}`;
+  const willEmail =
+    input.notifyCustomer !== false &&
+    !!savedRecord.customerEmail &&
+    fingerprint !== previousFingerprint &&
+    previousSnapshot?.lastEmailFingerprint !== fingerprint &&
+    claimStatusEmail(claimKey);
+
+  if (willEmail) {
+    savedRecord.lastEmailFingerprint = fingerprint;
+    savedRecord.lastEmailedAt = nowIso;
+  }
+
   await saveCustomTrackingsList(list);
 
-  if (input.notifyCustomer !== false && savedRecord.customerEmail) {
-    await sendOrderStatusUpdateEmail({
+  if (willEmail && savedRecord.customerEmail) {
+    const sendRes = await sendOrderStatusUpdateEmail({
       trackingCode: savedRecord.code,
       customerEmail: savedRecord.customerEmail,
       customerName: savedRecord.customerName,
@@ -330,6 +420,12 @@ export async function createOrUpdateCustomTracking(input: {
       publicNote: savedRecord.publicNote,
       estimatedDelivery: savedRecord.estimatedDelivery,
     });
+    if (!sendRes.ok) {
+      releaseStatusEmail(claimKey);
+      savedRecord.lastEmailFingerprint = previousSnapshot?.lastEmailFingerprint ?? null;
+      savedRecord.lastEmailedAt = previousSnapshot?.lastEmailedAt ?? null;
+      await saveCustomTrackingsList(list);
+    }
   }
 
   revalidatePath("/admin/tracking");

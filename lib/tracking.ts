@@ -60,6 +60,9 @@ export interface OrderTrackingMeta {
   publicNote?: string | null;
   updatedAt: string;
   history: TrackingHistoryEvent[];
+  /** Impronta dell'ultimo aggiornamento già notificato al cliente. */
+  lastEmailFingerprint?: string | null;
+  lastEmailedAt?: string | null;
 }
 
 export interface CustomTrackingRecord {
@@ -88,6 +91,9 @@ export interface CustomTrackingRecord {
   createdAt: string;
   updatedAt: string;
   history: TrackingHistoryEvent[];
+  /** Impronta dell'ultimo aggiornamento già notificato al cliente. */
+  lastEmailFingerprint?: string | null;
+  lastEmailedAt?: string | null;
 }
 
 export interface UnifiedTrackingView {

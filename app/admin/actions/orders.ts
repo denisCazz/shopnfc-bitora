@@ -6,7 +6,11 @@ import { orders, orderItems, profiles, products, appUsers } from "@/db/schema";
 import { getUser } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 import type { OrderStatus } from "@/lib/types";
-import { sendOrderStatusUpdateEmail } from "@/lib/email";
+import {
+  claimStatusEmail,
+  releaseStatusEmail,
+  sendOrderStatusUpdateEmail,
+} from "@/lib/email";
 import { unredeemDiscountCode } from "@/lib/discount-codes";
 
 export type OrderEmailActionResult = {
@@ -211,10 +215,11 @@ export async function updateOrderStatus(
     emailError: "Ordine non trovato",
   };
 
-  if (order) {
+  if (order && order.status !== status) {
     const { customerEmail, customerName } = await resolveOrderCustomer(db, order);
+    const claimKey = `order-status:${orderId}:${status}:${order.trackingNumber || ""}`;
 
-    if (customerEmail) {
+    if (customerEmail && claimStatusEmail(claimKey)) {
       const sendRes = await sendOrderStatusUpdateEmail({
         orderId,
         customerEmail,
@@ -222,19 +227,24 @@ export async function updateOrderStatus(
         status,
         trackingNumber: order.trackingNumber,
       });
+      if (!sendRes.ok) releaseStatusEmail(claimKey);
       emailResult = {
         ok: true,
         emailSent: sendRes.ok,
         emailTo: customerEmail,
         emailError: sendRes.error,
       };
-    } else {
+    } else if (!customerEmail) {
       emailResult = {
         ok: true,
         emailSent: false,
         emailError: "Nessuna email cliente associata all'ordine",
       };
+    } else {
+      emailResult = { ok: true, emailSent: false };
     }
+  } else if (order) {
+    emailResult = { ok: true, emailSent: false };
   }
 
   revalidatePath("/admin/orders");
@@ -265,7 +275,8 @@ export async function updateTrackingNumber(
 
   if (order && trimmed && trimmed !== previousTracking && order.status !== "cancelled") {
     const { customerEmail, customerName } = await resolveOrderCustomer(db, order);
-    if (customerEmail) {
+    const claimKey = `order-tracking:${orderId}:${trimmed}`;
+    if (customerEmail && claimStatusEmail(claimKey)) {
       const sendRes = await sendOrderStatusUpdateEmail({
         orderId,
         customerEmail,
@@ -273,13 +284,14 @@ export async function updateTrackingNumber(
         status: order.status,
         trackingNumber: trimmed,
       });
+      if (!sendRes.ok) releaseStatusEmail(claimKey);
       emailResult = {
         ok: true,
         emailSent: sendRes.ok,
         emailTo: customerEmail,
         emailError: sendRes.error,
       };
-    } else {
+    } else if (!customerEmail) {
       emailResult = {
         ok: true,
         emailSent: false,

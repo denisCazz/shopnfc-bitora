@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useRef, useState, useTransition } from "react";
 import Link from "next/link";
 import {
   Truck,
@@ -146,6 +146,7 @@ export default function TrackingAdminClient({
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
   const [emailSentCode, setEmailSentCode] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
+  const notifyLock = useRef(false);
 
   // Form state for creating/editing off-site custom tracking
   const [showForm, setShowForm] = useState(false);
@@ -271,7 +272,10 @@ export default function TrackingAdminClient({
     item: CustomTrackingRecord,
     newStatus: DetailedTrackingStatus
   ) {
+    if (item.trackingStatus === newStatus || notifyLock.current) return;
+    notifyLock.current = true;
     startTransition(async () => {
+      try {
       const saved = await createOrUpdateCustomTracking({
         code: item.code,
         customerName: item.customerName,
@@ -296,6 +300,9 @@ export default function TrackingAdminClient({
       setCustomList((prev) =>
         prev.map((c) => (c.code === saved.code ? saved : c))
       );
+      } finally {
+        notifyLock.current = false;
+      }
     });
   }
 
@@ -1099,15 +1106,22 @@ function WebsiteOrderTrackingCard({
   const [notifyCustomer, setNotifyCustomer] = useState(true);
   const [savedToast, setSavedToast] = useState(false);
   const [isPending, startTransition] = useTransition();
+  const notifyLock = useRef(false);
 
   const stDef = getTrackingStatusDef(status);
   const carrierInfo = resolveCarrierInfo(carrier, carrierTracking);
 
   function saveChanges(overrideStatus?: DetailedTrackingStatus) {
     const nextStatus = overrideStatus || status;
+    if (notifyLock.current) return;
+    if (overrideStatus && overrideStatus === (meta?.trackingStatus || status) && overrideStatus === status) {
+      return;
+    }
     if (overrideStatus) setStatus(overrideStatus);
+    notifyLock.current = true;
 
     startTransition(async () => {
+      try {
       const updated = await updateWebsiteOrderTracking({
         orderId: order.id,
         trackingStatus: nextStatus,
@@ -1121,6 +1135,9 @@ function WebsiteOrderTrackingCard({
       onSaved(updated, carrierTracking.trim() || null);
       setSavedToast(true);
       setTimeout(() => setSavedToast(false), 2000);
+      } finally {
+        notifyLock.current = false;
+      }
     });
   }
 

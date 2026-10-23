@@ -4,6 +4,22 @@ import { SITE } from "@/lib/site";
 
 export type SendEmailResult = { ok: boolean; error?: string };
 
+/** Evita il secondo invio dello stesso aggiornamento se l'azione parte due volte. */
+const statusEmailClaims = new Map<string, number>();
+const STATUS_EMAIL_CLAIM_MS = 60_000;
+
+export function claimStatusEmail(key: string): boolean {
+  const now = Date.now();
+  const previous = statusEmailClaims.get(key);
+  if (previous != null && now - previous < STATUS_EMAIL_CLAIM_MS) return false;
+  statusEmailClaims.set(key, now);
+  return true;
+}
+
+export function releaseStatusEmail(key: string) {
+  statusEmailClaims.delete(key);
+}
+
 function getResend(): Resend | null {
   const key = process.env.RESEND_API_KEY?.trim();
   if (!key) return null;
