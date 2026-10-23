@@ -7,7 +7,7 @@ import { categories } from "@/db/schema";
 import { getUser } from "@/lib/auth";
 import Footer from "@/components/Footer";
 import CategoryPageClient from "./CategoryPageClient";
-import { buildPageMetadata, breadcrumbJsonLd, collectionPageJsonLd } from "@/lib/seo";
+import { buildPageMetadata, breadcrumbJsonLd, collectionPageJsonLd, faqPageJsonLd } from "@/lib/seo";
 import { getCategorySeo } from "@/lib/seo-content";
 import JsonLd from "@/components/JsonLd";
 
@@ -99,6 +99,7 @@ export default async function CategoryPage({
             path: `/categories/${slug}`,
             products: products.map((p) => ({ name: p.name, slug: p.slug, image: p.image })),
           }),
+          ...(seo?.faq?.length ? [faqPageJsonLd(seo.faq)] : []),
         ]}
       />
       <CategoryPageClient
