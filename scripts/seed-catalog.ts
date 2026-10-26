@@ -66,6 +66,7 @@ type ProductSeed = {
   en: string;
   shortIt: string;
   descIt: string;
+  min?: number;
 };
 
 const PRODUCTS: ProductSeed[] = [
@@ -245,6 +246,62 @@ const PRODUCTS: ProductSeed[] = [
     descIt: "Portachiavi con chip NTAG213. Per recensioni Google, Wi-Fi guest e accessi.",
   },
   {
+    sku: "GD-KEY-BIC", slug: "portachiavi-nfc-bicolor-ip68", category: "gadget-nfc", chips: ["ntag213"],
+    price: "1.85", wholesale: "1.35", stock: 800, brand: "NXP", weight: "0.010",
+    it: "Portachiavi NFC bicolor IP68", en: "Bicolor IP68 NFC keyfobs",
+    shortIt: "Corpo bicolore, tenuta IP68, personalizzabile con stampa UV.",
+    descIt: "Portachiavi NFC con corpo bicolore e classificazione IP68, pensato per l'uso quotidiano. Chip NTAG213. La grafica si applica con stampa UV.",
+  },
+  {
+    sku: "GD-KEY-DROP", slug: "portachiavi-nfc-goccia-ip68", category: "gadget-nfc", chips: ["ntag213"],
+    price: "2.40", wholesale: "1.06", stock: 700, brand: "NXP", weight: "0.004", min: 5,
+    it: "Portachiavi NFC a goccia IP68", en: "IP68 teardrop NFC keyfobs",
+    shortIt: "Spessore 2,2 mm, impermeabile IP68, incisione laser.",
+    descIt: "Portachiavi a goccia sottili (2,2 mm), resistenti e impermeabili IP68. Chip NTAG213. Personalizzabili con incisione laser.",
+  },
+  {
+    sku: "GD-KEY-DLX", slug: "portachiavi-nfc-deluxe", category: "gadget-nfc", chips: ["ntag213"],
+    price: "2.19", wholesale: "1.75", stock: 2000, brand: "NXP", weight: "0.012", min: 500,
+    it: "Portachiavi NFC Deluxe", en: "Deluxe NFC keyfobs",
+    shortIt: "Gadget contactless elegante. Minimo 500 pezzi.",
+    descIt: "Portachiavi NFC Deluxe, compatto e curato, adatto come gadget aziendale. Chip NTAG213. Ordine minimo 500 pezzi.",
+  },
+  {
+    sku: "GD-KEY-LOCK", slug: "portachiavi-nfc-locket", category: "gadget-nfc", chips: ["ntag216", "ntag213"],
+    price: "5.09", wholesale: "3.56", stock: 400, brand: "NXP", weight: "0.018",
+    it: "Portachiavi NFC Locket", en: "NFC locket keyfob",
+    shortIt: "Acciaio inox lucidato, per accessi e sicurezza.",
+    descIt: "Portachiavi rotondo con cornice in acciaio inossidabile lucidato. Usato spesso per controllo accessi. Chip NTAG216, con NTAG213 in alternativa.",
+  },
+  {
+    sku: "GD-PEND", slug: "ciondoli-ntag213-logo-nfc", category: "gadget-nfc", chips: ["ntag213"],
+    price: "1.99", wholesale: "0.95", stock: 1000, brand: "NXP", weight: "0.006", min: 5,
+    it: "Ciondoli NTAG213 con logo NFC", en: "NTAG213 NFC logo pendants",
+    shortIt: "Ciondoli resinati impermeabili con simbolo NFC.",
+    descIt: "Ciondoli tondi resinati con chip NTAG213 e simbolo NFC in vista. Impermeabili, compatibili con gli smartphone NFC e personalizzabili con la propria grafica.",
+  },
+  {
+    sku: "GD-KEY-PREM", slug: "portachiavi-nfc-premium", category: "gadget-nfc", chips: ["ntag213"],
+    price: "1.99", wholesale: "0.79", stock: 800, brand: "NXP", weight: "0.009", min: 5,
+    it: "Portachiavi NFC Premium", en: "Premium NFC keyfobs",
+    shortIt: "ABS IP66 con grafica sotto resina epossidica.",
+    descIt: "Portachiavi in ABS, impermeabile IP66, con grafica a colori protetta da resina epossidica anti-ingiallimento. Chip NTAG213.",
+  },
+  {
+    sku: "GD-KEY-OCEAN", slug: "portachiavi-nfc-ocean", category: "gadget-nfc", chips: ["ntag213"],
+    price: "1.70", wholesale: "1.19", stock: 600, brand: "NXP", weight: "0.008",
+    it: "Portachiavi NFC Ocean in plastica riciclata", en: "Ocean recycled-plastic NFC keyfobs",
+    shortIt: "Plastica riciclata dagli oceani, stampa o incisione laser.",
+    descIt: "Portachiavi in plastica riciclata recuperata dagli oceani, con chip NTAG213. Personalizzazione con stampa o incisione laser.",
+  },
+  {
+    sku: "GD-KEY-BAMBOO", slug: "portachiavi-nfc-bambu-ntag213", category: "gadget-nfc", chips: ["ntag213"],
+    price: "1.99", wholesale: "1.39", stock: 500, brand: "NXP", weight: "0.008",
+    it: "Portachiavi NFC in bambù NTAG213", en: "Bamboo NTAG213 NFC keyfobs",
+    shortIt: "Bambù, da -40 °C a 80 °C, per accessi e gadget.",
+    descIt: "Portachiavi tondo in bambù con chip NTAG213. Adatto a controllo accessi e gadget sostenibili. Temperatura operativa da -40 °C a 80 °C.",
+  },
+  {
     sku: "GD-PIN", slug: "spillette-nfc-ntag213", category: "gadget-nfc", chips: ["ntag213"],
     price: "2.20", wholesale: "1.40", stock: 600, brand: "NXP", weight: "0.007",
     it: "Spillette NTAG213 metalliche", en: "Metal NTAG213 NFC pins",
@@ -364,7 +421,7 @@ async function main() {
           wholesalePrice: p.wholesale,
           weight: p.weight,
           stockQuantity: p.stock,
-          minQuantity: minQuantityForProduct(10, {
+          minQuantity: minQuantityForProduct(p.min ?? 10, {
             sku: p.sku,
             slug: p.slug,
             name: p.it,
