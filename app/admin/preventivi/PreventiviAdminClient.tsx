@@ -262,6 +262,7 @@ export default function PreventiviAdminClient({
   const [logoDataUrl, setLogoDataUrl] = useState<string | null>(null);
   const [generating, setGenerating] = useState(false);
   const [generatedSuccess, setGeneratedSuccess] = useState(false);
+  const [pdfError, setPdfError] = useState<string | null>(null);
 
   useEffect(() => {
     loadImageAsDataUrl("/bitora.png").then((url) => {
@@ -634,30 +635,79 @@ export default function PreventiviAdminClient({
   async function handleDownloadPdf(mode: "download" | "preview") {
     setGenerating(true);
     setGeneratedSuccess(false);
+    setPdfError(null);
+
+    const payload = buildPdfData();
+    const safeQuote = (payload.quoteNumber || "PREVENTIVO").replace(
+      /[^a-zA-Z0-9_-]+/g,
+      "_"
+    );
+    const safeCustomer = `${firstName.trim()}_${lastName.trim()}`
+      .replace(/[^a-zA-Z0-9_-]+/g, "_")
+      .replace(/^_+|_+$/g, "");
+    const fileName = `Preventivo_Bitora_${safeQuote}${
+      safeCustomer ? `_${safeCustomer}` : ""
+    }.pdf`;
+
+    function triggerBlobAction(blob: Blob) {
+      const url = URL.createObjectURL(blob);
+      if (mode === "preview") {
+        const win = window.open(url, "_blank");
+        if (!win) {
+          const a = document.createElement("a");
+          a.href = url;
+          a.target = "_blank";
+          a.rel = "noopener noreferrer";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        }
+      } else {
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      }
+      setTimeout(() => URL.revokeObjectURL(url), 60_000);
+    }
+
     try {
+      const res = await fetch("/api/admin/preventivo-pdf", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...payload, inline: mode === "preview" }),
+      });
+
+      if (res.ok) {
+        const rawBlob = await res.blob();
+        const pdfBlob = new Blob([rawBlob], { type: "application/pdf" });
+        triggerBlobAction(pdfBlob);
+        setGeneratedSuccess(true);
+        setTimeout(() => setGeneratedSuccess(false), 3500);
+        return;
+      }
+
+      // Fallback client-side generation if API fails
       let currentLogo = logoDataUrl;
       if (!currentLogo) {
         currentLogo = await loadImageAsDataUrl("/bitora.png");
         if (currentLogo) setLogoDataUrl(currentLogo);
       }
-      const data = { ...buildPdfData(), logoDataUrl: currentLogo };
-      const doc = buildQuotePdfDocument(data);
-
-      const safeCustomer = `${firstName.trim()}_${lastName.trim()}`
-        .replace(/[^a-zA-Z0-9_-]+/g, "_")
-        .replace(/^_+|_+$/g, "");
-      const fileName = `Preventivo_Bitora_${data.quoteNumber}${
-        safeCustomer ? `_${safeCustomer}` : ""
-      }.pdf`;
-
-      if (mode === "preview") {
-        const blobUrl = doc.output("bloburl");
-        window.open(blobUrl, "_blank", "noopener,noreferrer");
-      } else {
-        doc.save(fileName);
-      }
+      const doc = buildQuotePdfDocument({ ...payload, logoDataUrl: currentLogo });
+      const arrayBuffer = doc.output("arraybuffer");
+      const pdfBlob = new Blob([arrayBuffer], { type: "application/pdf" });
+      triggerBlobAction(pdfBlob);
       setGeneratedSuccess(true);
       setTimeout(() => setGeneratedSuccess(false), 3500);
+    } catch (err) {
+      console.error("PDF download error:", err);
+      setPdfError(
+        err instanceof Error
+          ? `Errore generazione PDF: ${err.message}`
+          : "Errore durante il download del PDF."
+      );
     } finally {
       setGenerating(false);
     }
@@ -727,7 +777,13 @@ export default function PreventiviAdminClient({
       {generatedSuccess && (
         <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 text-sm font-medium">
           <CheckCircle2 className="w-4 h-4 shrink-0" />
-          Preventivo PDF generato con successo!
+          Preventivo PDF generato e scaricato con successo!
+        </div>
+      )}
+
+      {pdfError && (
+        <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 text-sm font-medium">
+          {pdfError}
         </div>
       )}
 
