@@ -107,7 +107,7 @@ interface QuoteFormLine {
   productId: number | "custom";
   customModelName: string;
   customSku: string;
-  quantity: number;
+  quantity: string;
   hasGraphic: boolean;
   printSides: PrintSidesKey;
   customPrintLabel: string;
@@ -199,7 +199,7 @@ export default function PreventiviAdminClient({
   // Metadata
   const [quoteNumber, setQuoteNumber] = useState(makeDefaultQuoteNumber);
   const [issueDate, setIssueDate] = useState(() => formatDateIt(new Date()));
-  const [validDays, setValidDays] = useState(15);
+  const [validDays, setValidDays] = useState("15");
 
   // Customer info
   const [firstName, setFirstName] = useState("");
@@ -221,7 +221,7 @@ export default function PreventiviAdminClient({
       productId: defaultProduct?.id ?? "custom",
       customModelName: "",
       customSku: "",
-      quantity: defaultProduct?.minQuantity ?? 50,
+      quantity: "50",
       hasGraphic: true,
       printSides: "color1",
       customPrintLabel: "1 lato (Fronte)",
@@ -271,7 +271,8 @@ export default function PreventiviAdminClient({
 
   const validUntilDate = useMemo(() => {
     const d = new Date();
-    d.setDate(d.getDate() + (Number.isFinite(validDays) ? validDays : 15));
+    const parsedDays = parseInt(validDays, 10);
+    d.setDate(d.getDate() + (Number.isFinite(parsedDays) && parsedDays > 0 ? parsedDays : 15));
     return formatDateIt(d);
   }, [validDays]);
 
@@ -314,7 +315,8 @@ export default function PreventiviAdminClient({
           ? productMap.get(line.productId)
           : undefined;
 
-      const qty = Math.max(1, Math.floor(Number(line.quantity) || 1));
+      const parsedQty = parseInt(String(line.quantity).trim(), 10);
+      const qty = Number.isFinite(parsedQty) && parsedQty >= 1 ? parsedQty : 1;
 
       const defaultBase = getDefaultBasePrice(prod);
       const parsedBaseOverride = parseFloat(
@@ -548,7 +550,7 @@ export default function PreventiviAdminClient({
         productId: defaultProduct?.id ?? "custom",
         customModelName: "",
         customSku: "",
-        quantity: defaultProduct?.minQuantity ?? 50,
+        quantity: "50",
         hasGraphic: true,
         printSides: "color1",
         customPrintLabel: "1 lato (Fronte)",
@@ -586,7 +588,7 @@ export default function PreventiviAdminClient({
         productId: defaultProduct?.id ?? "custom",
         customModelName: "",
         customSku: "",
-        quantity: defaultProduct?.minQuantity ?? 50,
+        quantity: "50",
         hasGraphic: true,
         printSides: "color1",
         customPrintLabel: "1 lato (Fronte)",
@@ -872,12 +874,12 @@ export default function PreventiviAdminClient({
                 </label>
                 <input
                   type="number"
+                  inputMode="numeric"
                   min={1}
                   max={365}
                   value={validDays}
-                  onChange={(e) =>
-                    setValidDays(Math.max(1, parseInt(e.target.value || "15", 10)))
-                  }
+                  onChange={(e) => setValidDays(e.target.value)}
+                  placeholder="15"
                   className={inputClass}
                 />
               </div>
@@ -1008,14 +1010,9 @@ export default function PreventiviAdminClient({
                               });
                             } else {
                               const pid = parseInt(val, 10);
-                              const nextProd = productMap.get(pid);
                               updateLine(line.uid, {
                                 productId: pid,
                                 unitBasePriceOverride: "",
-                                quantity: Math.max(
-                                  line.quantity,
-                                  nextProd?.minQuantity ?? 10
-                                ),
                               });
                             }
                           }}
@@ -1056,17 +1053,16 @@ export default function PreventiviAdminClient({
                         </label>
                         <input
                           type="number"
+                          inputMode="numeric"
                           min={1}
                           step={1}
                           value={line.quantity}
                           onChange={(e) =>
                             updateLine(line.uid, {
-                              quantity: Math.max(
-                                1,
-                                parseInt(e.target.value || "1", 10)
-                              ),
+                              quantity: e.target.value,
                             })
                           }
+                          placeholder="Es. 50"
                           className={`${inputClass} font-semibold tabular-nums`}
                         />
                       </div>
