@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { Package, Users, Briefcase, ShoppingCart, X, Sparkles } from "lucide-react";
+import { Package, Users, Briefcase, ShoppingCart, X, Sparkles, FileText } from "lucide-react";
 
 const DashboardCharts = dynamic(() => import("./DashboardCharts"), {
   ssr: false,
@@ -89,7 +89,16 @@ export default function DashboardClient({
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-        <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
+        <div className="flex flex-wrap items-center gap-3">
+          <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
+          <Link
+            href="/admin/preventivi"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-sky-400 to-sky-600 text-white text-xs font-semibold shadow-sm hover:shadow-md transition"
+          >
+            <FileText className="w-3.5 h-3.5" />
+            Nuovo Preventivo PDF
+          </Link>
+        </div>
         <div className="flex rounded-xl bg-background border border-border overflow-hidden text-xs shrink-0">
           {PERIOD_OPTIONS.map((opt) => (
             <Link
