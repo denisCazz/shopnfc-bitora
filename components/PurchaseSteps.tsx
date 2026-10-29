@@ -5,8 +5,8 @@ import { ArrowRight, Sparkles, CreditCard, Palette, Truck } from "lucide-react";
 import { useLocale } from "@/lib/locale-context";
 
 const STEPS = [
-  { icon: Sparkles, key: "steps.choose", href: "#ai-assistant" },
-  { icon: Palette, key: "steps.customize", href: "#ai-assistant" },
+  { icon: Sparkles, key: "steps.choose", href: "/assistente" },
+  { icon: Palette, key: "steps.customize", href: "/assistente" },
   { icon: CreditCard, key: "steps.order", href: "/checkout" },
   { icon: Truck, key: "steps.ship", href: "/come-acquistare" },
 ];
@@ -23,7 +23,7 @@ export default function PurchaseSteps() {
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight">{t("steps.title")}</h2>
           </div>
           <a
-            href="#ai-assistant"
+            href="/assistente"
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:underline"
           >
             Configura il carrello con l&apos;AI

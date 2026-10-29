@@ -8,7 +8,7 @@ import type { ChipFilter } from "@/lib/types";
 import {
   Cog, Wind, Fan, Zap, Monitor, Cpu, Flame,
   Thermometer, CircleDot, RotateCw, Home, Package, Gauge, Wrench, X,
-  Globe, ChevronDown, Headphones, Search, CreditCard, StickyNote, Watch, Radio, Shield, Truck,
+  Globe, ChevronDown, Headphones, Search, CreditCard, StickyNote, Watch, Radio, Shield, Truck, Sparkles,
 } from "lucide-react";
 import { useLocale } from "@/lib/locale-context";
 import { locales, type Locale } from "@/lib/i18n";
@@ -226,6 +226,14 @@ export default function Sidebar({
                 <div className="border-t border-border/60 my-4" />
 
                 {/* Assistenza & Tracking links */}
+                <Link
+                  href="/assistente"
+                  onClick={onClose}
+                  className="flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-semibold text-accent hover:bg-sky-50 dark:hover:bg-sky-950/40 transition-all duration-200"
+                >
+                  <Sparkles className="w-4 h-4" />
+                  <span>Configura con AI</span>
+                </Link>
                 <Link
                   href="/tracking"
                   onClick={onClose}

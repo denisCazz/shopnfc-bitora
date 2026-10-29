@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Search, User, ShoppingCart, Menu, X, LogOut, Shield, Loader2, Headphones, ChevronDown, Cpu, Truck } from "lucide-react";
+import { Search, User, ShoppingCart, Menu, X, LogOut, Shield, Loader2, Headphones, ChevronDown, Cpu, Truck, Sparkles } from "lucide-react";
 import type { AuthUser } from "@/lib/auth";
 import { logout } from "@/app/(auth)/actions";
 import { useCart } from "@/lib/cart-context";
@@ -218,6 +218,13 @@ export default function Header({
                 <span className="text-[15px] font-semibold text-foreground">Shop NFC</span>
                 <span className="text-[15px] font-medium text-muted">Bitora</span>
               </span>
+            </Link>
+            <Link
+              href="/assistente"
+              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold text-accent hover:bg-sky-50 dark:hover:bg-sky-950/40 transition-colors"
+            >
+              <Sparkles className="w-4 h-4" />
+              Configura con AI
             </Link>
             <Link
               href="/assistenza"
