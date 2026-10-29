@@ -197,13 +197,13 @@ export default function AddToCartButton({
         <div className="flex items-center justify-between gap-2 px-3 py-2 rounded-xl bg-sky-50/60 dark:bg-sky-950/20 border border-sky-200/60 dark:border-sky-800/40 text-xs">
           <span className="text-muted flex items-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5 text-accent shrink-0" />
-            Ti servono <strong className="text-foreground">100, 500 o 1.000+ pezzi</strong>? Scaglioni dedicati B2B.
+            Non sai quanti pezzi o quale configurazione scegliere?
           </span>
           <Link
             href={`/preventivo?prodotto=${encodeURIComponent(product.slug)}`}
             className="font-semibold text-accent hover:underline shrink-0"
           >
-            Chiedi sconto volume →
+            Configura con AI →
           </Link>
         </div>
       )}
