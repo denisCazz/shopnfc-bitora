@@ -265,7 +265,7 @@ export default async function ProductDetailPage({
 
               {quoteFormat && !productNeedsPrintOption({ categorySlug: product.categorySlug }) && (
                 <Link
-                  href={`/preventivo?prodotto=${encodeURIComponent(product.slug)}&formato=${quoteFormat}`}
+                  href={`/assistente?prodotto=${encodeURIComponent(product.slug)}&formato=${quoteFormat}`}
                   className="mt-6 group flex items-center gap-4 rounded-2xl border border-sky-200/70 dark:border-sky-800/50 bg-gradient-to-r from-sky-50 to-white dark:from-sky-950/40 dark:to-transparent p-4 hover:border-accent/50 transition-colors"
                 >
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-foreground">

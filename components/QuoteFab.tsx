@@ -13,8 +13,7 @@ export default function QuoteFab() {
   const { t } = useLocale();
 
   if (HIDDEN_PREFIXES.some((p) => pathname.startsWith(p))) return null;
-  const onQuotePage = pathname.startsWith("/preventivo");
-  const targetHref = pathname === "/" ? "#ai-assistant" : "/#ai-assistant";
+  const onAssistantPage = pathname.startsWith("/assistente");
 
   const button =
     "group relative flex h-12 w-12 items-center justify-center rounded-full text-white shadow-lg transition hover:-translate-y-0.5";
@@ -23,9 +22,9 @@ export default function QuoteFab() {
 
   return (
     <div className="fixed bottom-24 right-6 z-40 flex flex-col items-end gap-2.5">
-      {!onQuotePage && (
+      {!onAssistantPage && (
         <Link
-          href={targetHref}
+          href="/assistente"
           aria-label="Assistente AI Carrello"
           className={`${button} bg-sky-500 shadow-sky-500/30 hover:bg-sky-400`}
         >

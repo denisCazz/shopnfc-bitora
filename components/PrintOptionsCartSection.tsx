@@ -198,7 +198,7 @@ export default function PrintOptionsCartSection({
         </div>
         {needsPrint && (
           <Link
-            href={`/preventivo?prodotto=${encodeURIComponent(product.slug)}&formato=card`}
+            href={`/assistente?prodotto=${encodeURIComponent(product.slug)}&formato=card`}
             className="flex items-center gap-2 rounded-xl bg-sky-50 dark:bg-sky-950/30 border border-sky-200/60 dark:border-sky-800/40 px-3 py-2.5 text-sm font-medium text-accent hover:underline"
           >
             <FileText className="w-4 h-4 shrink-0" />

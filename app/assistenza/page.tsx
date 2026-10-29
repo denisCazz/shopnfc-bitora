@@ -42,7 +42,7 @@ export default function AssistenzaPage() {
                 WhatsApp
               </a>
               <Link
-                href="/preventivo"
+                href="/assistente"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-sky-500 px-5 py-3 text-sm font-semibold hover:bg-sky-400"
               >
                 <FileText className="w-4 h-4" />

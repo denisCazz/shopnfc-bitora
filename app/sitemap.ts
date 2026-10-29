@@ -13,6 +13,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: siteUrl, lastModified: now, changeFrequency: "daily", priority: 1 },
     { url: `${siteUrl}/tag-nfc`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${siteUrl}/tag-nfc-personalizzati`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${siteUrl}/assistente`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${siteUrl}/preventivo`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${siteUrl}/assistenza`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${siteUrl}/come-acquistare`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },

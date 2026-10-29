@@ -28,7 +28,7 @@ const catalogLinks = [
   { href: "/categories/soluzioni-nfc", label: "Soluzioni NFC" },
   { href: "/tag-nfc", label: "Tag NFC per aziende" },
   { href: "/tag-nfc-personalizzati", label: "Tag NFC personalizzati" },
-  { href: "/#ai-assistant", label: "Assistente AI Carrello" },
+  { href: "/assistente", label: "Assistente AI Carrello" },
   { href: "/tracking", label: "Traccia il tuo ordine" },
   { href: "/assistenza", label: "Assistenza" },
 ];

@@ -5,23 +5,19 @@ import Link from "next/link";
 import {
   ArrowRight,
   CheckCircle2,
-  ChevronDown,
   FileText,
   Loader2,
   MessageCircle,
   Paperclip,
   Phone,
   Send,
-  ShieldCheck,
   Sparkles,
-  Zap,
   X,
 } from "lucide-react";
 import { useLocale } from "@/lib/locale-context";
 import { SITE } from "@/lib/site";
 import type { QuoteFormat } from "@/lib/quote-request";
 import { whatsappUrl } from "@/lib/whatsapp";
-import AiShopAssistant from "@/components/AiShopAssistant";
 
 type Programming = "url" | "vcard" | "text" | "none" | "tbd";
 
@@ -43,7 +39,6 @@ export default function PreventivoClient({
   const { t, locale } = useLocale();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const [showManualQuoteForm, setShowManualQuoteForm] = useState(false);
   const [format, setFormat] = useState<QuoteFormat>(initialFormat);
   const [attachments, setAttachments] = useState<File[]>([]);
   const [quantity, setQuantity] = useState<number>(Math.max(product?.minQuantity ?? 10, 10));
@@ -60,18 +55,13 @@ export default function PreventivoClient({
 
   const formatLabel = t(`quote.format_${format}`);
 
-  const defaultAiPrompt = useMemo(() => {
-    if (product) {
-      return `Vorrei acquistare ${Math.max(product.minQuantity, 20)} pezzi di ${product.name}`;
-    }
-    if (initialFormat === "bracelet") {
-      return "Mi servono 50 braccialetti NFC impermeabili pronti all'uso";
-    }
-    if (initialFormat === "sticker") {
-      return "Mi servono 50 sticker NFC adesivi compatibili con smartphone";
-    }
-    return "Vorrei 30 tessere NFC personalizzate col mio logo pronte all'uso";
-  }, [product, initialFormat]);
+  const assistantHref = useMemo(() => {
+    const params = new URLSearchParams();
+    if (product?.slug) params.set("prodotto", product.slug);
+    if (initialFormat) params.set("formato", initialFormat);
+    const q = params.toString();
+    return q ? `/assistente?${q}` : "/assistente";
+  }, [initialFormat, product]);
 
   const waMessage = useMemo(() => {
     const lines = [
@@ -176,46 +166,33 @@ export default function PreventivoClient({
 
   return (
     <main className="flex-1">
-      <section className="bg-slate-950 text-white">
-        <div className="max-w-[1120px] mx-auto px-5 md:px-8 py-8 md:py-10 space-y-6">
-          <div>
-            <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-sky-400/25 bg-sky-400/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-sky-200">
-              <Sparkles className="h-3.5 w-3.5 text-sky-400" />
-              Configuratore AI Istantaneo · Acquista Subito
-            </p>
-            <h1 className="text-[clamp(1.9rem,4vw,2.9rem)] font-bold leading-[1.04] tracking-[-0.04em] max-w-3xl">
-              Non aspettare il preventivo: descrivi cosa ti serve e l&apos;AI ti prepara subito il carrello
-            </h1>
-            <p className="mt-3 max-w-2xl text-slate-300">
-              Scrivi per cosa userai i tag NFC (es. biglietti da visita, recensioni al tavolo, accessi dipendenti,
-              braccialetti piscina): la nostra AI seleziona i prodotti giusti dal catalogo, calcola il prezzo
-              immediato e ti permette di acquistare in 1 minuto.
-            </p>
-            <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
-              {[
-                { icon: Zap, label: "Prezzo immediato e carrello già pronto" },
-                { icon: CheckCircle2, label: "Programmazione NFC inclusa" },
-                { icon: ShieldCheck, label: "Carichi il tuo logo al checkout o dopo l'ordine" },
-              ].map(({ icon: Icon, label }) => (
-                <div key={label} className="flex items-center gap-2 text-sm text-slate-200">
-                  <Icon className="h-4 w-4 text-sky-400 shrink-0" />
-                  {label}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <AiShopAssistant
-            initialPrompt={defaultAiPrompt}
-            formatHint={initialFormat}
-            productSlugHint={product?.slug ?? null}
-            autoRunOnMount
-            variant="hero"
-          />
-        </div>
-      </section>
-
       <div className="max-w-[1120px] mx-auto w-full px-4 md:px-8 py-8 md:py-10 space-y-10">
+        <div>
+          <p className="eyebrow mb-3">{t("quote.badge")}</p>
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground max-w-3xl">
+            {t("quote.title")}
+          </h1>
+          <p className="mt-3 max-w-2xl text-muted">{t("quote.subtitle")}</p>
+        </div>
+
+        <Link
+          href={assistantHref}
+          className="group flex items-center gap-4 rounded-2xl border border-sky-200/70 dark:border-sky-800/50 bg-gradient-to-r from-sky-50 to-white dark:from-sky-950/40 dark:to-transparent p-4 hover:border-accent/50 transition-colors"
+        >
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-foreground">
+            <Sparkles className="h-5 w-5" />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block font-semibold text-foreground group-hover:text-accent">
+              Vuoi comprare subito? Apri l&apos;assistente AI
+            </span>
+            <span className="block text-sm text-muted">
+              Descrivi il progetto in una pagina dedicata: il carrello si pre-compila con gli articoli del catalogo.
+            </span>
+          </span>
+          <ArrowRight className="h-4 w-4 shrink-0 text-accent" />
+        </Link>
+
         {product && (
           <p className="rounded-xl border border-sky-200/70 dark:border-sky-800/50 bg-sky-50 dark:bg-sky-950/30 px-4 py-3 text-sm text-foreground">
             {t("quote.from_product")}{" "}
@@ -225,32 +202,7 @@ export default function PreventivoClient({
           </p>
         )}
 
-        {/* Secondary Fallback for Special Custom Batches / Manual Quote */}
-        <div className="rounded-2xl border border-border bg-surface p-5 md:p-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <h2 className="text-base md:text-lg font-bold text-foreground">
-                Hai una richiesta fuori catalogo o superi i 1.000 pezzi?
-              </h2>
-              <p className="text-xs md:text-sm text-muted mt-0.5">
-                Per la maggior parte degli ordini puoi acquistare subito qui sopra con l&apos;AI. Se invece ti serve una
-                quotazione manuale dedicata, apri il modulo preventivo tradizionale.
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={() => setShowManualQuoteForm((v) => !v)}
-              className="shrink-0 inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-background px-4 py-2.5 text-xs md:text-sm font-semibold text-foreground hover:border-accent/50 transition cursor-pointer"
-            >
-              {showManualQuoteForm ? "Nascondi modulo preventivo" : "Apri modulo preventivo manuale"}
-              <ChevronDown
-                className={`h-4 w-4 transition-transform ${showManualQuoteForm ? "rotate-180" : ""}`}
-              />
-            </button>
-          </div>
-
-          {showManualQuoteForm && (
-            <form onSubmit={submit} className="space-y-10 pt-8 mt-6 border-t border-border">
+        <form onSubmit={submit} className="space-y-10">
               <section>
                 <StepTitle n={1} title={t("quote.step2_title")} text={t("quote.step2_text")} />
                 <div className="grid gap-5 lg:grid-cols-2">
@@ -424,8 +376,6 @@ export default function PreventivoClient({
                 </a>
               </p>
             </form>
-          )}
-        </div>
 
         <section className="grid gap-4 md:grid-cols-3 pt-4">
           {["quote.faq_1", "quote.faq_2", "quote.faq_3"].map((k) => (

@@ -43,7 +43,7 @@ export default async function TagNfcPersonalizzatiPage() {
         <h1 className="text-3xl font-bold text-foreground mb-4">{landing.title}</h1>
         <p className="text-muted leading-relaxed mb-6">{landing.intro}</p>
         <Link
-          href="/#ai-assistant"
+          href="/assistente"
           className="mb-10 inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground hover:opacity-90"
         >
           Configura e acquista subito con l&apos;AI →
@@ -79,7 +79,7 @@ export default async function TagNfcPersonalizzatiPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 mb-6">
             <Link
-              href="/#ai-assistant"
+              href="/assistente"
               className="inline-flex items-center justify-center gap-2 rounded-full bg-sky-500 px-6 py-3.5 font-bold text-white hover:bg-sky-400"
             >
               Pre-compila il carrello con l&apos;AI →

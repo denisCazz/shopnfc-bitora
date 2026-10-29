@@ -200,7 +200,7 @@ export default function AddToCartButton({
             Non sai quanti pezzi o quale configurazione scegliere?
           </span>
           <Link
-            href={`/preventivo?prodotto=${encodeURIComponent(product.slug)}`}
+            href={`/assistente?prodotto=${encodeURIComponent(product.slug)}`}
             className="font-semibold text-accent hover:underline shrink-0"
           >
             Configura con AI →
