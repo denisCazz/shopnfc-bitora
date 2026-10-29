@@ -43,10 +43,10 @@ export default async function TagNfcPersonalizzatiPage() {
         <h1 className="text-3xl font-bold text-foreground mb-4">{landing.title}</h1>
         <p className="text-muted leading-relaxed mb-6">{landing.intro}</p>
         <Link
-          href="/preventivo"
+          href="/#ai-assistant"
           className="mb-10 inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground hover:opacity-90"
         >
-          Richiedi un preventivo →
+          Configura e acquista subito con l&apos;AI →
         </Link>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
@@ -71,23 +71,21 @@ export default async function TagNfcPersonalizzatiPage() {
         </section>
 
         <section className="p-6 md:p-8 bg-slate-950 text-slate-100 rounded-3xl">
-          <h2 className="text-2xl font-bold mb-2">Mandaci il logo, ti diamo il preventivo</h2>
+          <h2 className="text-2xl font-bold mb-2">Acquista subito senza aspettare il preventivo</h2>
           <p className="text-sm text-slate-300 mb-6 max-w-2xl">
-            Indica formato, quantità e programmazione, allega logo e foto: ti rispondiamo entro 24 ore
-            lavorative con prezzo e tempi di produzione. L&apos;accettazione dell&apos;ordine è subordinata
-            all&apos;accettazione della grafica da parte del nostro fornitore: dopo l&apos;invio della grafica
-            e dell&apos;ordine, il fornitore ci fornisce una preview che ti invieremo. Se la accetti si
-            prosegue, altrimenti si stoppa e si rifà la grafica.
+            Descrivi cosa vuoi realizzare al nostro Assistente AI: ti pre-compila subito il carrello con i prodotti
+            esatti, la stampa personalizzata e la programmazione inclusa. Puoi pagare immediatamente e caricare
+            il tuo logo direttamente al checkout (o dopo l&apos;ordine).
           </p>
           <div className="flex flex-col sm:flex-row gap-3 mb-6">
             <Link
-              href="/preventivo"
+              href="/#ai-assistant"
               className="inline-flex items-center justify-center gap-2 rounded-full bg-sky-500 px-6 py-3.5 font-bold text-white hover:bg-sky-400"
             >
-              Richiedi preventivo →
+              Pre-compila il carrello con l&apos;AI →
             </Link>
             <a
-              href={whatsappUrl("Ciao, vorrei un preventivo per tag NFC personalizzati.")}
+              href={whatsappUrl("Ciao, vorrei informazioni sui tag NFC personalizzati.")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-full bg-[#1f8f4e] px-6 py-3.5 font-semibold text-white hover:bg-[#22a358]"

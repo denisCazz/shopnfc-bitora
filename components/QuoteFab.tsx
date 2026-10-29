@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { MessageCircle, FileText } from "lucide-react";
+import { MessageCircle, Sparkles } from "lucide-react";
 import { useLocale } from "@/lib/locale-context";
 import { whatsappUrl } from "@/lib/whatsapp";
 
@@ -14,6 +14,7 @@ export default function QuoteFab() {
 
   if (HIDDEN_PREFIXES.some((p) => pathname.startsWith(p))) return null;
   const onQuotePage = pathname.startsWith("/preventivo");
+  const targetHref = pathname === "/" ? "#ai-assistant" : "/#ai-assistant";
 
   const button =
     "group relative flex h-12 w-12 items-center justify-center rounded-full text-white shadow-lg transition hover:-translate-y-0.5";
@@ -24,12 +25,12 @@ export default function QuoteFab() {
     <div className="fixed bottom-24 right-6 z-40 flex flex-col items-end gap-2.5">
       {!onQuotePage && (
         <Link
-          href="/preventivo"
-          aria-label={t("fab.quote")}
-          className={`${button} bg-slate-900 shadow-slate-900/25 dark:bg-sky-500`}
+          href={targetHref}
+          aria-label="Assistente AI Carrello"
+          className={`${button} bg-sky-500 shadow-sky-500/30 hover:bg-sky-400`}
         >
-          <FileText className="h-5 w-5" />
-          <span className={tip}>{t("fab.quote")}</span>
+          <Sparkles className="h-5 w-5" />
+          <span className={tip}>Carrello AI Istantaneo</span>
         </Link>
       )}
       <a

@@ -1,13 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Boxes, CreditCard, Palette, Truck } from "lucide-react";
+import { ArrowRight, Sparkles, CreditCard, Palette, Truck } from "lucide-react";
 import { useLocale } from "@/lib/locale-context";
 
 const STEPS = [
-  { icon: Boxes, key: "steps.choose", href: "#prodotti" },
-  { icon: Palette, key: "steps.customize", href: "#prodotti" },
-  { icon: CreditCard, key: "steps.order", href: "/preventivo" },
+  { icon: Sparkles, key: "steps.choose", href: "#ai-assistant" },
+  { icon: Palette, key: "steps.customize", href: "#ai-assistant" },
+  { icon: CreditCard, key: "steps.order", href: "/checkout" },
   { icon: Truck, key: "steps.ship", href: "/come-acquistare" },
 ];
 
@@ -22,13 +22,13 @@ export default function PurchaseSteps() {
             <p className="eyebrow mb-2">{t("steps.eyebrow")}</p>
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight">{t("steps.title")}</h2>
           </div>
-          <Link
-            href="/preventivo"
+          <a
+            href="#ai-assistant"
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:underline"
           >
-            {t("steps.cta")}
+            Configura il carrello con l&apos;AI
             <ArrowRight className="h-4 w-4" />
-          </Link>
+          </a>
         </div>
         <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {STEPS.map(({ icon: Icon, key, href }, i) => (
