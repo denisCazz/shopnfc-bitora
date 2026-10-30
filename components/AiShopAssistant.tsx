@@ -9,7 +9,6 @@ import {
   ShoppingCart,
   Zap,
   Plus,
-  Minus,
   Trash2,
   Check,
   Loader2,
@@ -32,7 +31,9 @@ import {
   type PrintPrices,
 } from "@/lib/print-options";
 import { roundMoney } from "@/lib/pricing";
+import { isBelowMinQuantity } from "@/lib/min-quantity";
 import type { AiCartRecommendation } from "@/lib/ai-shop-assistant";
+import FreeQuantityInput from "@/components/FreeQuantityInput";
 
 const QUICK_PROMPTS = [
   {
@@ -146,7 +147,7 @@ export default function AiShopAssistant({
         price: unitPrice,
         image: item.image,
         weight: item.weight,
-        quantity: Math.max(item.minQuantity, item.quantity),
+        quantity: Math.max(1, Math.floor(item.quantity) || 1),
         minQuantity: item.minQuantity,
         lineKey,
         lineNotes: noteParts.length > 0 ? noteParts.join(" · ") : null,
@@ -205,7 +206,7 @@ export default function AiShopAssistant({
             price: roundMoney(discountedBase + extra),
             image: item.image,
             weight: item.weight,
-            quantity: Math.max(item.minQuantity, item.quantity),
+            quantity: Math.max(1, Math.floor(item.quantity) || 1),
             minQuantity: item.minQuantity,
             lineKey: item.lineKey,
             lineNotes: item.lineNotes ?? null,
@@ -246,8 +247,8 @@ export default function AiShopAssistant({
   function handleQuantityChange(productId: number, nextQty: number) {
     const updated = items.map((item) => {
       if (item.productId !== productId) return item;
-      const clamped = Math.max(item.minQuantity, Math.floor(nextQty) || item.minQuantity);
-      return { ...item, quantity: clamped };
+      const quantity = Math.max(1, Math.floor(nextQty) || 1);
+      return { ...item, quantity };
     });
     syncToGlobalCart(updated);
   }
@@ -278,8 +279,12 @@ export default function AiShopAssistant({
     syncToGlobalCart(next);
   }
 
+  const hasQuantityBelowMin = items.some((item) =>
+    isBelowMinQuantity(item.quantity, item.minQuantity)
+  );
+
   function handleProceedToCheckout() {
-    if (items.length === 0) return;
+    if (items.length === 0 || hasQuantityBelowMin) return;
     replaceCart(buildCartItemsList(items));
     router.push("/checkout");
   }
@@ -518,37 +523,16 @@ export default function AiShopAssistant({
                         <span className="block text-[10px] uppercase tracking-wider text-slate-400 mb-1">
                           Quantità (min. {item.minQuantity} pz)
                         </span>
-                        <div className="inline-flex items-center rounded-xl border border-white/20 bg-slate-900 overflow-hidden">
-                          <button
-                            type="button"
-                            disabled={item.quantity <= item.minQuantity}
-                            onClick={() => handleQuantityChange(item.productId, item.quantity - 5)}
-                            className="h-9 w-9 flex items-center justify-center text-white hover:bg-white/10 disabled:opacity-30 transition"
-                            aria-label="Riduci quantità"
-                          >
-                            <Minus className="h-3.5 w-3.5" />
-                          </button>
-                          <input
-                            type="number"
-                            min={item.minQuantity}
-                            value={item.quantity}
-                            onChange={(e) =>
-                              handleQuantityChange(
-                                item.productId,
-                                Number.parseInt(e.target.value, 10)
-                              )
-                            }
-                            className="h-9 w-16 bg-transparent text-center text-sm font-bold text-white focus:outline-none border-x border-white/15"
-                          />
-                          <button
-                            type="button"
-                            onClick={() => handleQuantityChange(item.productId, item.quantity + 5)}
-                            className="h-9 w-9 flex items-center justify-center text-white hover:bg-white/10 transition"
-                            aria-label="Aumenta quantità"
-                          >
-                            <Plus className="h-3.5 w-3.5" />
-                          </button>
-                        </div>
+                        <FreeQuantityInput
+                          value={item.quantity}
+                          min={item.minQuantity}
+                          step={1}
+                          variant="assistant"
+                          minError={`Quantità minima ${item.minQuantity} pz`}
+                          decreaseLabel="Riduci quantità"
+                          increaseLabel="Aumenta quantità"
+                          onChange={(next) => handleQuantityChange(item.productId, next)}
+                        />
                       </div>
 
                       <div className="text-right min-w-[110px]">
@@ -654,6 +638,11 @@ export default function AiShopAssistant({
                     Spedizione rapida
                   </span>
                 </div>
+                {hasQuantityBelowMin && (
+                  <p className="mt-2 text-xs font-medium text-red-300">
+                    Una o più quantità sono sotto il minimo. Correggile per andare al checkout.
+                  </p>
+                )}
               </div>
 
               <div className="flex flex-col sm:flex-row gap-2.5 shrink-0">
@@ -668,7 +657,8 @@ export default function AiShopAssistant({
                 <button
                   type="button"
                   onClick={handleProceedToCheckout}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-6 py-3 text-sm md:text-base font-extrabold text-white shadow-lg shadow-emerald-500/30 hover:bg-emerald-400 hover:-translate-y-0.5 transition cursor-pointer"
+                  disabled={hasQuantityBelowMin}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-6 py-3 text-sm md:text-base font-extrabold text-white shadow-lg shadow-emerald-500/30 hover:bg-emerald-400 hover:-translate-y-0.5 transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
                 >
                   <Zap className="h-4 w-4" />
                   Acquista Ora al Checkout →

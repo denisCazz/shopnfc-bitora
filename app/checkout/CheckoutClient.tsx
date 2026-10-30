@@ -9,8 +9,6 @@ import {
   ShoppingBag,
   Truck,
   Lock,
-  Minus,
-  Plus,
   Trash2,
   Loader2,
   CreditCard,
@@ -35,6 +33,8 @@ import CheckoutProgress from "@/components/CheckoutProgress";
 import PrintConditionsAcceptance from "@/components/PrintConditionsAcceptance";
 import type { AddressSuggestion } from "@/lib/address-search";
 import { parsePrintOption } from "@/lib/print-options";
+import { isBelowMinQuantity } from "@/lib/min-quantity";
+import FreeQuantityInput from "@/components/FreeQuantityInput";
 import { computeDiscountAmount } from "@/lib/discount";
 import type { DiscountType } from "@/lib/types";
 
@@ -189,6 +189,9 @@ export default function CheckoutClient() {
   const [appliedDiscount, setAppliedDiscount] = useState<AppliedDiscount | null>(null);
   const [discountError, setDiscountError] = useState<string | null>(null);
   const [discountLoading, setDiscountLoading] = useState(false);
+  const belowMinItems = items.filter((item) =>
+    isBelowMinQuantity(item.quantity, item.minQuantity)
+  );
   const hasPrint = items.some((i) => parsePrintOption(i.printOption) !== "none");
   const printTotal = items.reduce(
     (sum, i) => sum + (Number(i.printSurcharge) || 0) * i.quantity,
@@ -497,6 +500,13 @@ export default function CheckoutClient() {
     }
     if ((hasPrint || graphicToken) && !graphicDisclaimer) {
       setError(t("print.conditions_required"));
+      return;
+    }
+    if (belowMinItems.length > 0) {
+      const details = belowMinItems
+        .map((item) => `${item.name} (min. ${item.minQuantity ?? 1})`)
+        .join(", ");
+      setError(t("checkout.min_qty_blocked").replace("{details}", details));
       return;
     }
     payingRef.current = true;
@@ -1225,6 +1235,17 @@ export default function CheckoutClient() {
             </span>
           </label>
 
+          {belowMinItems.length > 0 && (
+            <p className="text-sm font-medium text-red-600 dark:text-red-400">
+              {t("checkout.min_qty_blocked").replace(
+                "{details}",
+                belowMinItems
+                  .map((item) => `${item.name} (min. ${item.minQuantity ?? 1})`)
+                  .join(", ")
+              )}
+            </p>
+          )}
+
           {/* Submit */}
           <button
             type="submit"
@@ -1233,7 +1254,8 @@ export default function CheckoutClient() {
               !profileLoaded ||
               !acceptedTerms ||
               graphicBusy ||
-              (hasPrint && !graphicDisclaimer)
+              (hasPrint && !graphicDisclaimer) ||
+              belowMinItems.length > 0
             }
             className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-sky-400 to-sky-600 text-white font-bold text-base hover:shadow-lg hover:shadow-sky-500/25 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
           >
@@ -1308,41 +1330,19 @@ export default function CheckoutClient() {
                       )}{" "}
                       <span className="text-[11px] font-semibold text-muted">{t("product.price_each")}</span>
                     </p>
-                    <div className="flex items-center justify-between mt-1.5">
-                      <div className="flex items-center gap-0 border border-border rounded-lg overflow-hidden bg-surface">
-                        <button
-                          type="button"
-                          disabled={item.quantity <= (item.minQuantity ?? 10)}
-                          onClick={() =>
-                            updateQuantity(item.id, item.quantity - 1, item.lineKey)
-                          }
-                          className="w-7 h-7 flex items-center justify-center hover:bg-stone-100 dark:hover:bg-stone-800 disabled:opacity-35 disabled:cursor-not-allowed transition-colors"
-                        >
-                          <Minus className="w-3 h-3" />
-                        </button>
-                        <input
-                          type="number"
-                          min={item.minQuantity ?? 1}
-                          step={1}
-                          value={item.quantity}
-                          onChange={(e) => {
-                            const val = Number.parseInt(e.target.value, 10);
-                            if (Number.isFinite(val) && val >= (item.minQuantity ?? 1)) {
-                              updateQuantity(item.id, val, item.lineKey);
-                            }
-                          }}
-                          className="w-14 h-7 text-center text-xs font-semibold border-x border-border bg-surface text-foreground focus:outline-none"
-                        />
-                        <button
-                          type="button"
-                          onClick={() =>
-                            updateQuantity(item.id, item.quantity + 1, item.lineKey)
-                          }
-                          className="w-7 h-7 flex items-center justify-center hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors"
-                        >
-                          <Plus className="w-3 h-3" />
-                        </button>
-                      </div>
+                    <div className="flex items-start justify-between mt-1.5">
+                      <FreeQuantityInput
+                        value={item.quantity}
+                        min={item.minQuantity ?? 1}
+                        variant="checkout"
+                        minError={t("checkout.min_qty").replace(
+                          "{qty}",
+                          String(item.minQuantity ?? 1)
+                        )}
+                        decreaseLabel="Diminuisci quantità"
+                        increaseLabel="Aumenta quantità"
+                        onChange={(next) => updateQuantity(item.id, next, item.lineKey)}
+                      />
                       <button
                         type="button"
                         onClick={() => removeItem(item.id, item.lineKey)}

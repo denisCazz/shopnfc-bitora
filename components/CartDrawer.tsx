@@ -3,10 +3,11 @@
 import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { X, Plus, Minus, Trash2, ShoppingBag, ShieldCheck, Cpu, Headphones } from "lucide-react";
+import { X, Trash2, ShoppingBag, ShieldCheck, Cpu, Headphones } from "lucide-react";
 import { useCart, cartLineId } from "@/lib/cart-context";
 import { useLocale } from "@/lib/locale-context";
 import { useCatalogDisplayPrice } from "@/lib/use-catalog-display-price";
+import FreeQuantityInput from "@/components/FreeQuantityInput";
 
 export default function CartDrawer() {
   const { items, isOpen, closeCart, removeItem, updateQuantity, totalItems, totalPrice } = useCart();
@@ -130,38 +131,19 @@ export default function CartDrawer() {
                     </div>
 
                     {/* Quantity controls */}
-                    <div className="flex items-center justify-between mt-2">
-                      <div className="flex items-center gap-0 border border-border rounded-lg overflow-hidden bg-surface">
-                        <button
-                          onClick={() => updateQuantity(item.id, item.quantity - 1, item.lineKey)}
-                          disabled={item.quantity <= (item.minQuantity ?? 10)}
-                          className="w-8 h-8 flex items-center justify-center hover:bg-stone-100 dark:hover:bg-stone-800 disabled:opacity-35 disabled:cursor-not-allowed transition-colors"
-                          aria-label="Diminuisci quantità"
-                        >
-                          <Minus className="w-3.5 h-3.5" />
-                        </button>
-                        <input
-                          type="number"
-                          min={item.minQuantity ?? 1}
-                          step={1}
-                          value={item.quantity}
-                          onChange={(e) => {
-                            const val = Number.parseInt(e.target.value, 10);
-                            if (Number.isFinite(val) && val >= (item.minQuantity ?? 1)) {
-                              updateQuantity(item.id, val, item.lineKey);
-                            }
-                          }}
-                          aria-label="Quantità"
-                          className="w-14 h-8 text-center text-sm font-semibold border-x border-border bg-surface text-foreground focus:outline-none focus:bg-sky-50/40 dark:focus:bg-sky-950/30"
-                        />
-                        <button
-                          onClick={() => updateQuantity(item.id, item.quantity + 1, item.lineKey)}
-                          className="w-8 h-8 flex items-center justify-center hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors"
-                          aria-label="Aumenta quantità"
-                        >
-                          <Plus className="w-3.5 h-3.5" />
-                        </button>
-                      </div>
+                    <div className="flex items-start justify-between mt-2">
+                      <FreeQuantityInput
+                        value={item.quantity}
+                        min={item.minQuantity ?? 1}
+                        variant="drawer"
+                        minError={t("checkout.min_qty").replace(
+                          "{qty}",
+                          String(item.minQuantity ?? 1)
+                        )}
+                        decreaseLabel="Diminuisci quantità"
+                        increaseLabel="Aumenta quantità"
+                        onChange={(next) => updateQuantity(item.id, next, item.lineKey)}
+                      />
 
                       <button
                         onClick={() => removeItem(item.id, item.lineKey)}

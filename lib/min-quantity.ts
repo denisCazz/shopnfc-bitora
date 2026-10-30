@@ -43,3 +43,26 @@ export function clampOrderQuantity(
   if (maxQuantity === undefined || maxQuantity < min) return next;
   return Math.min(maxQuantity, next);
 }
+
+/** Keep only digits so a quantity field can be cleared and retyped freely. */
+export function sanitizeQuantityDraft(raw: string): string {
+  return raw.replace(/\D/g, "");
+}
+
+/** Positive integer typed in a free quantity field, or null while empty or zero. */
+export function parseFreeQuantity(raw: string): number | null {
+  const digits = sanitizeQuantityDraft(raw);
+  if (!digits) return null;
+  const n = Number.parseInt(digits, 10);
+  if (!Number.isFinite(n) || n < 1) return null;
+  return n;
+}
+
+export function isBelowMinQuantity(
+  quantity: number,
+  minQuantity: number | null | undefined
+): boolean {
+  const min = Math.floor(Number(minQuantity));
+  const floor = Number.isFinite(min) && min >= 1 ? min : 1;
+  return !Number.isFinite(quantity) || Math.floor(quantity) < floor;
+}

@@ -68,7 +68,10 @@ function minForCartItem(item: Pick<CartItem, "minQuantity" | "name" | "slug">): 
 
 function normalizeCartItem(item: CartItem): CartItem {
   const minQuantity = minForCartItem(item);
-  const quantity = Math.max(Math.floor(item.quantity) || minQuantity, minQuantity);
+  const raw = Math.floor(Number(item.quantity));
+  // Keep a typed quantity even when it is under the minimum. Checkout rejects it
+  // explicitly instead of silently raising the number.
+  const quantity = Number.isFinite(raw) && raw >= 1 ? raw : minQuantity;
   const printOption = parsePrintOption(item.printOption);
   const printSurcharge =
     printOption === "none" ? 0 : Math.max(0, Number(item.printSurcharge) || 0);
@@ -141,8 +144,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
       prev.map((i) => {
         if (!sameLine(i, { id, lineKey })) return i;
         const minQuantity = minForCartItem(i);
-        const clamped = Math.max(Math.floor(quantity) || minQuantity, minQuantity);
-        return { ...i, minQuantity, quantity: clamped };
+        const next = Math.floor(quantity);
+        if (!Number.isFinite(next) || next < 1) return i;
+        return { ...i, minQuantity, quantity: next };
       })
     );
   }, []);
